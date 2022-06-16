@@ -1,0 +1,45 @@
+{
+  "name": "my-vue-app",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test:build": "esno scripts/build.ts"
+  },
+  "dependencies": {
+    "vue": "^3.0.5"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "@vitejs/plugin-legacy": "^1.8.2",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue-jsx": "^1.3.10",
+    "@vue/compiler-sfc": "^3.0.5",
+    "autoprefixer": "^10.4.7",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "esno": "^0.16.3",
+    "execa": "^6.1.0",
+    "fast-glob": "^3.2.11",
+    "fs-extra": "^10.1.0",
+    "inquirer": "^8.2.4",
+    "less": "^4.1.3",
+    "magic-string": "^0.26.2",
+    "minimist": "^1.2.6",
+    "picocolors": "^1.0.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.7.0",
+    "prompts": "^2.4.2",
+    "shelljs": "^0.8.5",
+    "typescript": "^4.1.3",
+    "vite": "^2.9.12",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html-template": "^1.1.5"
+  }
+}
