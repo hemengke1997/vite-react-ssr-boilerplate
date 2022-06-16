@@ -6,8 +6,8 @@ import setupVitePlugins from './config/vite/plugins'
 const { resolve } = path
 
 export const Config = {
-  root: resolve(__dirname, './src/pages'),
-  outDir: resolve(__dirname, 'dist'),
+  root: resolve(process.cwd(), './src/pages'),
+  outDir: resolve(process.cwd(), 'dist'),
   assets: 'assets',
 }
 
@@ -19,17 +19,18 @@ export default ({ command }: ConfigEnv): UserConfig => {
     plugins: [setupVitePlugins(isBuild)],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': path.resolve(process.cwd(), './src'),
       },
     },
     publicDir: path.resolve('./public/'),
-    base: './',
     root: Config.root,
     server: {},
+    base: './',
+
     build: {
       assetsDir: Config.assets,
       outDir: Config.outDir,
-      emptyOutDir: false,
+      emptyOutDir: true,
       cssCodeSplit: true,
       rollupOptions: {
         output: {

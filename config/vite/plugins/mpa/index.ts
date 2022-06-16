@@ -18,13 +18,11 @@ export default function mpa(userOptions: UserOptions = {}): Plugin {
     ...userOptions,
   }
   if (!options.scanFile.includes('.')) {
-    console.error(
-      `[vite-plugin-mpa]: scanFile should be something like main.ts/main.{js,ts}/index.js/index{ts,tsx}`,
-    )
+    console.error(`[vite-plugin-mpa]: scanFile should be something like main.ts/main.{js,ts}/index.js/index{ts,tsx}`)
     process.exit(1)
   }
   return {
-    name: "vite:mpa",
+    name: 'vite:mpa',
     enforce: 'pre',
     config(config) {
       config.build = config.build || {}
@@ -33,13 +31,12 @@ export default function mpa(userOptions: UserOptions = {}): Plugin {
       config.server = config.server || {}
       // default '' means first-page and you can customized or disabled.
       config.server.open =
-        options.open === ''
-          ? getFirstPage(config.build.rollupOptions.input as Record<string, any>)
-          : options.open
+        options.open === '' ? getFirstPage(config.build.rollupOptions.input as Record<string, any>) : options.open
     },
     configureServer({ middlewares: app }) {
       app.use(
         // @see https://github.com/vitejs/vite/blob/8733a83d291677b9aff9d7d78797ebb44196596e/packages/vite/src/node/server/index.ts#L433
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         history({
           verbose: Boolean(process.env.DEBUG) && process.env.DEBUG !== 'false',

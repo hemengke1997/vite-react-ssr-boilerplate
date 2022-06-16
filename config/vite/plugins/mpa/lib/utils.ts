@@ -53,18 +53,18 @@ function parseEntryFile(file: string, filters: string[] = []) {
 function parseFiles(files: string[], defaultEntries: string) {
   // support --entry & --file & --page to filter
   const args: string =
-    (argv.entry as string) || (argv.file as string) || (argv.page as string) || ''
+    ((argv as any).entry as string) || ((argv as any).file as string) || ((argv as any).page as string) || ''
   if (args === '') {
     defaultEntries = ''
   }
   const filters = args
     .split(',')
     .concat(defaultEntries.split(','))
-    .filter(_ => _)
-  const ret = files.map(file => parseEntryFile(file, filters))
+    .filter((_) => _)
+  const ret = files.map((file) => parseEntryFile(file, filters))
   return {
     allEntries: ret,
-    entries: ret.filter(e => e.include),
+    entries: ret.filter((e) => e.include),
     args,
   }
 }
@@ -96,7 +96,7 @@ function getPagesInfo({ defaultEntries, scanDir, scanFile, root }: MpaOptions): 
   const pages = {}
   const result = parseFiles(allFiles, defaultEntries)
   const { entries } = result
-  entries.forEach(entry => {
+  entries.forEach((entry) => {
     const { file, pageName, outputPath } = entry
     pages[pageName] = {
       entry: getEntry(file, root),
@@ -110,7 +110,7 @@ export function getMPAIO(root: string, options: MpaOptions) {
   const { scanFile, filename } = options
   const pages = getPagesInfo(options)
   const input: Record<string, string> = {}
-  Object.keys(pages).map(key => {
+  Object.keys(pages).map((key) => {
     input[key] = path.join(root, scanFile2Html(pages[key].entry, scanFile, filename))
   })
 
@@ -128,9 +128,8 @@ export function getHistoryReWriteRuleList(options: MpaOptions): Rewrite[] {
     to: `./${scanDir}/index/${filename}`,
   })
   const pages = getPagesInfo(options)
-  Object.keys(pages).map(pageName => {
+  Object.keys(pages).map((pageName) => {
     const to = `${scanFile2Html(pages[pageName].entry, scanFile, filename)}`
-
 
     list.push({
       from: new RegExp(`^/${pageName}/index.html/*`), // handle html5 history mode fallback
@@ -141,11 +140,11 @@ export function getHistoryReWriteRuleList(options: MpaOptions): Rewrite[] {
       to,
     })
     list.push({
-      from: new RegExp(`^\/${pageName}.html$`), // support pageName.html, not recommended
+      from: new RegExp(`^/${pageName}.html$`), // support pageName.html, not recommended
       to,
     })
     list.push({
-      from: new RegExp(`^\/${pageName}$`), // support pageName, not recommended
+      from: new RegExp(`^/${pageName}$`), // support pageName, not recommended
       to,
     })
     list.push({
@@ -153,7 +152,6 @@ export function getHistoryReWriteRuleList(options: MpaOptions): Rewrite[] {
       to,
     })
   })
-
 
   return list
 }

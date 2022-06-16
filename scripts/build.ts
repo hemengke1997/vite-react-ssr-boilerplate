@@ -5,19 +5,27 @@ import setupVitePlugins from '../config/vite/plugins'
 const { resolve } = path
 
 const Config = {
-  outDir: resolve(__dirname, '../dist'),
+  root: resolve(process.cwd(), 'src/pages'),
+  outDir: resolve(process.cwd(), 'dist'),
   assets: 'assets',
 }
 
 ;(async () => {
   await build({
     plugins: setupVitePlugins(false),
-    root: resolve(__dirname, '../src/pages/index'),
+    resolve: {
+      alias: {
+        '@': path.resolve(process.cwd(), 'src'),
+      },
+    },
     base: './',
+    root: Config.root,
     build: {
+      assetsDir: Config.assets,
       outDir: Config.outDir,
+      emptyOutDir: false,
       rollupOptions: {
-        input: path.resolve(__dirname, '../src/pages/index/index.html'),
+        input: path.join(Config.root, 'index/index.html'),
         output: {
           manualChunks: undefined,
           entryFileNames: (info) => {
@@ -32,7 +40,6 @@ const Config = {
             if (name?.length) {
               return `${name[1]}/[name]-[hash].[ext]`
             }
-
             return `[name]/[name]-[hash].[ext]`
           },
         },
