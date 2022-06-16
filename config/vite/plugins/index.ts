@@ -11,7 +11,7 @@ export default function setupVitePlugins(isBuild: boolean) {
     vue({ reactivityTransform: true }),
     vueJsx(),
     setupName(),
-    // mpa({ root: 'src/pages' }),
+    mpa({ root: 'src/pages' }),
   ]
 
   isBuild &&
