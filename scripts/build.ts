@@ -1,49 +1,14 @@
-import path from 'path'
+import { UserConfig } from 'vite'
 import { build } from 'vite'
-import setupVitePlugins from '../config/vite/plugins'
+import { setConfig } from '../config/vite/utils/config'
+import { deepMerge } from '../config/vite/utils/helper'
 
-const { resolve } = path
-
-const Config = {
-  root: resolve(process.cwd(), 'src/pages'),
-  outDir: resolve(process.cwd(), 'dist'),
-  assets: 'assets',
-}
-
-;(async () => {
-  await build({
-    plugins: setupVitePlugins(false),
-    resolve: {
-      alias: {
-        '@': path.resolve(process.cwd(), 'src'),
+!(async () => {
+  await build(
+    deepMerge<UserConfig>(setConfig({ isBuild: true, spa: true }), {
+      build: {
+        emptyOutDir: false,
       },
-    },
-    base: './',
-    root: Config.root,
-    build: {
-      assetsDir: Config.assets,
-      outDir: Config.outDir,
-      emptyOutDir: false,
-      rollupOptions: {
-        input: path.join(Config.root, 'index/index.html'),
-        output: {
-          manualChunks: undefined,
-          entryFileNames: (info) => {
-            return `${info.name}/${info.name}-entry-[hash].js`
-          },
-          chunkFileNames: (info) => {
-            return `${Config.assets}/chunk/${info.name}/${info.name}-chunk-[hash].js`
-          },
-          assetFileNames: (info) => {
-            const name = info.name?.match(/src\/pages\/(.+)\//) || info.name?.match(/src\/(.+)\//)
-
-            if (name?.length) {
-              return `${name[1]}/[name]-[hash].[ext]`
-            }
-            return `[name]/[name]-[hash].[ext]`
-          },
-        },
-      },
-    },
-  })
+    }),
+  )
 })()

@@ -1,5 +1,7 @@
 <template>
-  <img alt="Vue logo" src="@/assets/logo.png" />
+  <img alt="Vue logo" src="./images/logo.png" />
+  <img alt="Vue xxxx" src="./images/test.png" />
+
   <HelloWorld msg="qewqewq-x!!--" />
 </template>
 

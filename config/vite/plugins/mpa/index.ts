@@ -15,6 +15,7 @@ export default function mpa(userOptions: UserOptions = {}): Plugin {
     filename: 'index.html',
     rewrites: [],
     root: '',
+    mpa: true,
     ...userOptions,
   }
   if (!options.scanFile.includes('.')) {

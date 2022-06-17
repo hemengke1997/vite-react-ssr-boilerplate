@@ -90,8 +90,11 @@ function getEntry(file: string, root: string) {
  * @param usePath
  * @param ext
  */
-function getPagesInfo({ defaultEntries, scanDir, scanFile, root }: MpaOptions): PageInfo {
-  const allFiles = fg.sync(`${scanDir}/**/${scanFile}`.replace('//', '/'))
+function getPagesInfo({ defaultEntries, scanDir, scanFile, root, mpa }: MpaOptions): PageInfo {
+  const allFiles = mpa
+    ? fg.sync(`${scanDir}/**/${scanFile}`.replace('//', '/'))
+    : fg.sync(`${scanDir}/subpage/${scanFile}`.replace('//', '/'))
+
   // Calc
   const pages = {}
   const result = parseFiles(allFiles, defaultEntries)
@@ -152,6 +155,8 @@ export function getHistoryReWriteRuleList(options: MpaOptions): Rewrite[] {
       to,
     })
   })
+
+  console.log(list, 'list')
 
   return list
 }

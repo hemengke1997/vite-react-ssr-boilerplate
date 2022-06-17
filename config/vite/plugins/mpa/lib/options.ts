@@ -36,8 +36,10 @@ export interface MpaOptions {
    * @default []
    */
   rewrites: Rewrite[]
-  
+
   root: string
+
+  mpa: boolean
 }
 
 export type UserOptions = Partial<MpaOptions>
