@@ -2,6 +2,7 @@ import { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
+import ssr from 'vite-plugin-ssr/plugin'
 import mpa from './mpa'
 import setupName from './setupName'
 import shelljs from 'shelljs'
@@ -17,6 +18,7 @@ export default function setupVitePlugins({ isBuild, spa }: { isBuild: boolean; s
     vue(),
     vueJsx(),
     setupName(),
+    ssr(),
     mpa({ root: 'src/pages', mpa: !spa }),
     {
       name: 'vite:deleteFile',

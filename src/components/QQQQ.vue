@@ -1,5 +1,7 @@
 <template>
-  <a>{{ count }}</a>
+  <div class="div">
+    <a>{{ count }}</a>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,8 +16,10 @@
   })
 </script>
 
-<style scoped>
-  a {
-    color: green;
+<style scoped lang="less">
+  .div {
+    a {
+      color: red;
+    }
   }
 </style>
