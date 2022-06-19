@@ -6,7 +6,9 @@
     "build": "vite build",
     "serve": "vite preview",
     "test:build": "ts-node scripts/build.ts",
-    "start": "ts-node scripts/dev.ts"
+    "start": "ts-node scripts/dev.ts",
+    "ssr": "ts-node ./server",
+    "build:ssr": "vite build && vite build --ssr"
   },
   "dependencies": {
     "lodash-es": "^4.17.21",

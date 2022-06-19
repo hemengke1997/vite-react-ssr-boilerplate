@@ -1,8 +1,8 @@
 import { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import ssr from 'vite-plugin-ssr/plugin'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
-import ssr from 'vite-plugin-ssr/plugin'
 import mpa from './mpa'
 import setupName from './setupName'
 import shelljs from 'shelljs'
@@ -19,25 +19,22 @@ export default function setupVitePlugins({ isBuild, spa }: { isBuild: boolean; s
     vueJsx(),
     setupName(),
     ssr(),
-    mpa({ root: 'src/pages', mpa: !spa }),
-    {
-      name: 'vite:deleteFile',
-      apply: 'build',
-      configResolved(resolvedConfig) {
-        config = resolvedConfig
-      },
-      buildStart() {
-        // 如果是spa，先删除打包目标文件夹中的js文件，再打包
-        if (spa) {
-          const dist = `${config.build.outDir || 'dist'}`
-          console.log(dist, 'dist')
-          shelljs.rm('-rf', resolve(`${dist}/subpage/*.js`))
-        }
-      },
-    },
-    {
-      name: 'vite:copyChunkToHtml',
-    },
+    // mpa({ root: 'src/pages', mpa: !spa }),
+    // {
+    //   name: 'vite:deleteFile',
+    //   apply: 'build',
+    //   configResolved(resolvedConfig) {
+    //     config = resolvedConfig
+    //   },
+    //   buildStart() {
+    //     // 如果是spa，先删除打包目标文件夹中的js文件，再打包
+    //     if (spa) {
+    //       const dist = `${config.build.outDir || 'dist'}`
+    //       console.log(dist, 'dist')
+    //       shelljs.rm('-rf', resolve(`${dist}/subpage/*.js`))
+    //     }
+    //   },
+    // },
   ]
 
   isBuild &&

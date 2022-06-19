@@ -27,33 +27,31 @@ export const setConfig = ({ isBuild, spa }: { isBuild: boolean; spa: boolean }):
     server: {},
 
     build: {
-      assetsInlineLimit: 0,
-      target: 'es2015',
-      assetsDir: Config.assets,
-      outDir: Config.outDir,
-      emptyOutDir: true,
-      cssCodeSplit: true,
-      manifest: true,
-      rollupOptions: {
-        output: {
-          manualChunks: {},
-          entryFileNames: (info) => {
-            return `${info.name}/${info.name}-entry-[hash].js`
-          },
-          chunkFileNames: (info) => {
-            return `${Config.assets}/chunk/${info.name}/${info.name}-chunk-[hash].js`
-          },
-          assetFileNames: (info) => {
-            const name = info.name?.match(/src\/pages\/(.+)\//) || info.name?.match(/src\/(.+)\//)
-
-            if (name?.length) {
-              return `${name[1]}/[name]-[hash].[ext]`
-            }
-
-            return `[name]/[name]-[hash].[ext]`
-          },
-        },
-      },
+      // assetsInlineLimit: 0,
+      // target: 'es2015',
+      // assetsDir: Config.assets,
+      // outDir: Config.outDir,
+      // emptyOutDir: true,
+      // cssCodeSplit: true,
+      // manifest: true,
+      // rollupOptions: {
+      //   output: {
+      //     manualChunks: {},
+      //     entryFileNames: (info) => {
+      //       return `${info.name}/${info.name}-entry-[hash].js`
+      //     },
+      //     chunkFileNames: (info) => {
+      //       return `${Config.assets}/chunk/${info.name}/${info.name}-chunk-[hash].js`
+      //     },
+      //     assetFileNames: (info) => {
+      //       const name = info.name?.match(/src\/pages\/(.+)\//) || info.name?.match(/src\/(.+)\//)
+      //       if (name?.length) {
+      //         return `${name[1]}/[name]-[hash].[ext]`
+      //       }
+      //       return `[name]/[name]-[hash].[ext]`
+      //     },
+      //   },
+      // },
     },
   }
 }
