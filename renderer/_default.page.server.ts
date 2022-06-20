@@ -2,29 +2,37 @@ import { renderToString } from 'vue/server-renderer'
 import { escapeInject, dangerouslySkipEscape, PageContextBuiltIn } from 'vite-plugin-ssr'
 import { PageContext } from './types'
 import { createApp } from './createApp'
-import logoUrl from '../public/favicon.ico'
+import logoUrl from '/favicon.ico'
 
-// See https://vite-plugin-ssr.com/data-fetching
-export const passToClient = ['pageProps', 'urlPathname']
+// See https://vite-plugin-ssr.com/passToClient
+export const passToClient = ['pageProps', 'urlPathname', 'documentProps']
 
+// See https://vite-plugin-ssr.com/render
 async function render(pageContext: PageContextBuiltIn & PageContext) {
-  // see https://v3.cn.vuejs.org/guide/ssr/getting-started.html
+  // See https://v3.cn.vuejs.org/guide/ssr/getting-started.html
   const app = createApp(pageContext)
   const appHtml = await renderToString(app)
 
   // See https://vite-plugin-ssr.com/head
   const { documentProps } = pageContext
-  const title = (documentProps && documentProps.title) || 'Vite SSR app'
-  const desc = (documentProps && documentProps.description) || 'App using Vite + vite-plugin-ssr'
+  const title = documentProps?.title || '奇游'
+  const desc = documentProps?.description || '奇游加速器'
+  const keywords = documentProps?.keywords || '加速器'
 
+  const isMobile = documentProps?.isMobile
+
+  // See https://vite-plugin-ssr.com/escapeInject
   const documentHtml = escapeInject`<!DOCTYPE html>
-  <html lang="en">
+  <html lang="zh-CN">
     <head>
       <meta charset="UTF-8" />
       <link rel="icon" href="${logoUrl}" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0${
+        isMobile ? ', maximum-scale=1.0, user-scalable=no' : ''
+      }" />
       <meta name="description" content="${desc}" />
-      <title>${title}</title>
+      <meta name="keywords" content="${keywords}" />
+      <title>${title} | test</title>
     </head>
     <body>
       <div id="app">${dangerouslySkipEscape(appHtml)}</div>
@@ -33,8 +41,10 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
 
   return {
     documentHtml,
+    // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection'
+    // https://vite-plugin-ssr.com/pageContext#custom
     pageContext: {
-      // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection
+      documentProps,
     },
   }
 }

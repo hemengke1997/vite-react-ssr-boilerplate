@@ -8,5 +8,4 @@ module.exports = {
   jsxSingleQuote: true,
   htmlWhitespaceSensitivity: 'strict',
   vueIndentScriptAndStyle: true,
-  endOfLine: 'auto',
 }

@@ -15,4 +15,3 @@ dist
 /dist
 **/dist/**
 **/postcss.config.js
-/template

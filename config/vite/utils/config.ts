@@ -1,9 +1,9 @@
-import path, { resolve } from 'path'
+import path, { resolve } from 'node:path'
 import { UserConfig } from 'vite'
 import setupVitePlugins from '../plugins'
 
 export const Config = {
-  root: resolve(process.cwd(), 'src/pages'),
+  root: process.cwd(),
   outDir: resolve(process.cwd(), 'dist'),
   assets: 'assets',
 }
@@ -20,38 +20,42 @@ export const setConfig = ({ isBuild, spa }: { isBuild: boolean; spa: boolean }):
     resolve: {
       alias: {
         '@': path.resolve(process.cwd(), 'src'),
+        '@root': process.cwd(),
       },
     },
-    publicDir: path.resolve('./public/'),
+    publicDir: path.resolve(process.cwd(), 'public'),
     root: Config.root,
     server: {},
 
     build: {
-      // assetsInlineLimit: 0,
-      // target: 'es2015',
-      // assetsDir: Config.assets,
-      // outDir: Config.outDir,
-      // emptyOutDir: true,
-      // cssCodeSplit: true,
-      // manifest: true,
-      // rollupOptions: {
-      //   output: {
-      //     manualChunks: {},
-      //     entryFileNames: (info) => {
-      //       return `${info.name}/${info.name}-entry-[hash].js`
-      //     },
-      //     chunkFileNames: (info) => {
-      //       return `${Config.assets}/chunk/${info.name}/${info.name}-chunk-[hash].js`
-      //     },
-      //     assetFileNames: (info) => {
-      //       const name = info.name?.match(/src\/pages\/(.+)\//) || info.name?.match(/src\/(.+)\//)
-      //       if (name?.length) {
-      //         return `${name[1]}/[name]-[hash].[ext]`
-      //       }
-      //       return `[name]/[name]-[hash].[ext]`
-      //     },
-      //   },
-      // },
+      assetsInlineLimit: 0,
+      target: 'es2015',
+      assetsDir: Config.assets,
+      outDir: Config.outDir,
+      emptyOutDir: true,
+      cssCodeSplit: true,
+      manifest: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {},
+          assetFileNames: (assetInfo) => {
+            let extType = assetInfo?.name?.split('.').at(1) || ''
+            if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+              extType = 'img'
+            }
+            return `assets/${extType}/[name]-[hash][extname]`
+          },
+          chunkFileNames: () => {
+            return 'assets/js/[name]-[hash]-chunk.js'
+          },
+          entryFileNames: (info) => {
+            if (info.name === 'pageFiles') {
+              return '[name].js'
+            }
+            return 'assets/js/[name]-[hash]-entry.js'
+          },
+        },
+      },
     },
   }
 }

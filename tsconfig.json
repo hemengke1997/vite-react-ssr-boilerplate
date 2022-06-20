@@ -12,7 +12,8 @@
     "lib": ["esnext", "dom"],
     "types": ["vite/client"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@root/*": ["./*"]
     }
   },
   "exclude": ["node_modules", "dist", "**/*.js"],

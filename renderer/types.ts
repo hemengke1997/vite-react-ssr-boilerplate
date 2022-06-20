@@ -7,6 +7,8 @@ export type PageContext = {
   documentProps?: {
     title?: string
     description?: string
+    keywords?: string
+    isMobile?: boolean
   }
   urlPathname?: string
 }

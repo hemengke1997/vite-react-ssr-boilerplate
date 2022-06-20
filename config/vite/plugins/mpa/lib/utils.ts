@@ -156,7 +156,5 @@ export function getHistoryReWriteRuleList(options: MpaOptions): Rewrite[] {
     })
   })
 
-  console.log(list, 'list')
-
   return list
 }

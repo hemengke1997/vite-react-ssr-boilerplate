@@ -2,9 +2,11 @@ import { createSSRApp, defineComponent, h } from 'vue'
 import Layout from './Layout.vue'
 import type { PageContext } from './types'
 import { setPageContext } from './usePageContext'
+import 'modern-normalize/modern-normalize.css'
 
 function createApp(pageContext: PageContext) {
-  const { Page, pageProps } = pageContext
+  const { Page, pageProps, documentProps } = pageContext
+
   const PageWithLayout = defineComponent({
     render() {
       return h(
@@ -12,7 +14,7 @@ function createApp(pageContext: PageContext) {
         {},
         {
           default() {
-            return h(Page, pageProps || {})
+            return h(Page, { ...pageProps, ...documentProps } || {})
           },
         },
       )
