@@ -4,8 +4,7 @@ import colors from 'picocolors'
 import { createPageRenderer } from 'vite-plugin-ssr'
 import { openBrowser } from './openBrowser'
 
-const isProd = process.env.NODE_ENV === 'production'
-
+const isProd = process.env.NODE_ENV === 'production' || true
 const root = `${__dirname}/..`
 
 async function startServer() {
@@ -15,7 +14,7 @@ async function startServer() {
   let viteDevServer
   if (isProd) {
     // See https://expressjs.com/zh-cn/starter/static-files.html
-
+    // app.use(express.static(`${root}/dist/subpage/client`))
     app.use(express.static(`${root}/dist/client`))
   } else {
     // dev
@@ -35,6 +34,8 @@ async function startServer() {
     viteDevServer,
     isProduction: isProd,
     root,
+    // outDir: 'dist/subpage',
+    outDir: 'dist',
   })
 
   app.get('*', async (req, res, next) => {

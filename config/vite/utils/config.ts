@@ -24,17 +24,17 @@ export const setConfig = ({ isBuild, spa }: { isBuild: boolean; spa: boolean }):
       },
     },
     publicDir: path.resolve(process.cwd(), 'public'),
-    root: Config.root,
+    // root: Config.root,
     server: {},
 
     build: {
       assetsInlineLimit: 0,
       target: 'es2015',
       assetsDir: Config.assets,
-      outDir: Config.outDir,
       emptyOutDir: true,
       cssCodeSplit: true,
       manifest: true,
+      outDir: Config.outDir,
       rollupOptions: {
         output: {
           manualChunks: {},

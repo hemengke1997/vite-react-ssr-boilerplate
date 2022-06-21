@@ -1,6 +1,7 @@
 <template>
   <QQQQ />
-  <HelloWorld msg="1111-x!!--" />
+  <HelloWorld msg="this is index" />
+  <div>this is index</div>
 </template>
 
 <script lang="ts">
