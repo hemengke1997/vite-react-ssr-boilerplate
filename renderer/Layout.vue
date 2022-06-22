@@ -7,8 +7,22 @@
   </div>
 </template>
 
-<script>
-  console.log('this is layout')
+<script lang="ts">
+  //
+  const ext = '*([a-zA-Z0-9])'
+
+  const x = 'subpage'
+
+  const n = {
+    xx: () => import(`../src/pages/${x}/index.page.vue`),
+  }
+  console.log(n)
+
+  console.log(
+    import.meta.importGlob(['/**/_default.page.client.*([a-zA-Z0-9])', '/**/subpage/index.page.client.*([a-zA-Z0-9])']),
+  )
+
+  console.log(`this is layout ${Math.random()}`)
 </script>
 
 <style scoped>

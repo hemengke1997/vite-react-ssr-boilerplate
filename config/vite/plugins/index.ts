@@ -3,6 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import ssr from 'vite-plugin-ssr/plugin'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
+import GlobPlugin from 'vite-plugin-glob'
+
 import mpa from './mpa'
 import setupName from './setupName'
 import shelljs from 'shelljs'
@@ -19,7 +21,10 @@ export default function setupVitePlugins({ isBuild, spa }: { isBuild: boolean; s
     vue(),
     vueJsx(),
     setupName(),
-    ssr(),
+    GlobPlugin(),
+    ssr({
+      target: 'subpage',
+    }),
     // mpa({ root: 'src/pages', mpa: !spa }),
     // {
     //   name: 'vite:deleteFile',
@@ -38,35 +43,37 @@ export default function setupVitePlugins({ isBuild, spa }: { isBuild: boolean; s
     // },
 
     // vite-plguin-ssr 在build的时候打了多入口了，这里没办法阻止
-    {
-      name: 'vite:setupInput',
-      apply: 'build',
-      config: (config) => {
-        console.log(config, 'ccc')
-        function entryPoints(): Record<string, string> {
-          return serverEntryPoints()
-        }
-        // https://github.com/brillout/vite-plugin-ssr/blob/HEAD/vite-plugin-ssr/node/plugin/build.ts#L61-L62
-        function serverEntryPoints(): Record<string, string> {
-          const serverEntry = path.resolve(__dirname, '../../../pageFiles.js')
-          const entryName = basename(serverEntry).replace(/\.js$/, '')
-          const entryPoints = {
-            [entryName]: serverEntry,
-          }
-          return entryPoints
-        }
-        const input = {
-          ...entryPoints(),
-        }
-        return {
-          build: {
-            rollupOptions: {
-              input,
-            },
-          },
-        }
-      },
-    },
+    // {
+    //   name: 'vite:setupInput',
+    //   apply: 'build',
+    //   config: (config) => {
+    //     console.log(config.build?.rollupOptions?.input, 'ccc')
+    //     console.log(config.build?.rollupOptions?.output, 'ccc')
+
+    //     function entryPoints(): Record<string, string> {
+    //       return serverEntryPoints()
+    //     }
+    //     // https://github.com/brillout/vite-plugin-ssr/blob/HEAD/vite-plugin-ssr/node/plugin/build.ts#L61-L62
+    //     function serverEntryPoints(): Record<string, string> {
+    //       const serverEntry = path.resolve(__dirname, '../../../pageFiles.js')
+    //       const entryName = basename(serverEntry).replace(/\.js$/, '')
+    //       const entryPoints = {
+    //         [entryName]: serverEntry,
+    //       }
+    //       return entryPoints
+    //     }
+    //     const input = {
+    //       ...entryPoints(),
+    //     }
+    //     return {
+    //       build: {
+    //         rollupOptions: {
+    //           input,
+    //         },
+    //       },
+    //     }
+    //   },
+    // },
   ]
 
   isBuild &&

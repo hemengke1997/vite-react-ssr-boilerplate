@@ -4,7 +4,7 @@ import colors from 'picocolors'
 import { createPageRenderer } from 'vite-plugin-ssr'
 import { openBrowser } from './openBrowser'
 
-const isProd = process.env.NODE_ENV === 'production' || true
+const isProd = process.env.NODE_ENV === 'production'
 const root = `${__dirname}/..`
 
 async function startServer() {
@@ -68,7 +68,7 @@ async function startServer() {
   const page = npm_config_page ? '/' + npm_config_page : ''
 
   console.log(colors.green(`Server running at ${colors.cyan(`http://localhost:${port}${page}`)}`))
-  openBrowser(`http://localhost:${port}${page}`, true)
+  // openBrowser(`http://localhost:${port}${page}`, true)
 }
 
 startServer()

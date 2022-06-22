@@ -21,6 +21,7 @@ export const setConfig = ({ isBuild, spa }: { isBuild: boolean; spa: boolean }):
       alias: {
         '@': path.resolve(process.cwd(), 'src'),
         '@root': process.cwd(),
+        'vite-plugin-ssr': path.resolve(process.cwd(), 'vite-plugin-ssr'),
       },
     },
     publicDir: path.resolve(process.cwd(), 'public'),
