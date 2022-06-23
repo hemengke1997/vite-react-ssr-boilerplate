@@ -2,6 +2,8 @@ import type { Plugin } from 'vite'
 
 export { dev }
 
+// dev server的时候应用插件
+// https://cn.vitejs.dev/config/dep-optimization-options.html#optimizedeps-entries
 function dev(): Plugin {
   return {
     name: 'vite-plugin-ssr:dev',

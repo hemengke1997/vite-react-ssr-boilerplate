@@ -1,5 +1,5 @@
-import { renderToString } from 'vue/server-renderer'
-import { escapeInject, dangerouslySkipEscape, PageContextBuiltIn } from 'vite-plugin-ssr'
+import { renderToNodeStream } from 'vue/server-renderer'
+import { escapeInject, PageContextBuiltIn } from 'vite-plugin-ssr'
 import { PageContext } from './types'
 import { createApp } from './createApp'
 import logoUrl from '../public/favicon.ico'
@@ -11,7 +11,7 @@ export const passToClient = ['pageProps', 'urlPathname', 'documentProps']
 async function render(pageContext: PageContextBuiltIn & PageContext) {
   // See https://v3.cn.vuejs.org/guide/ssr/getting-started.html
   const app = createApp(pageContext)
-  const appHtml = await renderToString(app)
+  const stream = renderToNodeStream(app)
 
   // See https://vite-plugin-ssr.com/head
   const { documentProps } = pageContext
@@ -35,7 +35,7 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
       <title>${title} | test</title>
     </head>
     <body>
-      <div id="app">${dangerouslySkipEscape(appHtml)}</div>
+      <div id="app">${stream}</div>
     </body>
   </html>`
 

@@ -10,7 +10,9 @@ async function hydrate() {
   // instead of `getPage()`, see https://vite-plugin-ssr.com/useClientRouter
   // See https://vite-plugin-ssr.com/getPage
   const pageContext = await getPage<PageContextBuiltInClient & PageContext>()
-  const app = createApp(pageContext)
+  const app = createApp({
+    ...pageContext,
+  })
   app.mount('#app')
 }
 

@@ -39,6 +39,7 @@ export const setConfig = ({ isBuild, spa }: { isBuild: boolean; spa: boolean }):
       rollupOptions: {
         output: {
           manualChunks: {},
+          format: 'es',
           assetFileNames: (assetInfo) => {
             let extType = assetInfo?.name?.split('.').at(1) || ''
             if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {

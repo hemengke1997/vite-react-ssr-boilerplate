@@ -2,7 +2,7 @@ import express from 'express'
 import compression from 'compression'
 import colors from 'picocolors'
 import { createPageRenderer } from 'vite-plugin-ssr'
-import { openBrowser } from './openBrowser'
+// import { openBrowser } from './openBrowser'
 
 const isProd = process.env.NODE_ENV === 'production'
 const root = `${__dirname}/..`
@@ -54,9 +54,11 @@ async function startServer() {
     const { httpResponse } = pageContext
 
     if (!httpResponse) return next()
-    const { body, statusCode, contentType } = httpResponse
+    const { statusCode, contentType } = httpResponse
+    const stream = await httpResponse.getNodeStream()
 
-    res.status(statusCode).type(contentType).send(body)
+    res.status(statusCode).type(contentType)
+    stream.pipe(res)
   })
 
   const port = process.env.PORT || 3000

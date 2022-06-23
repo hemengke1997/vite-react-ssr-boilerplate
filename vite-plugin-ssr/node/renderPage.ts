@@ -215,7 +215,6 @@ async function initializePageContext<PageContextInit extends { url: string }>(pa
 
   return pageContext
 }
-
 // `renderPageWithoutThrowing()` calls `renderPage()` while ensuring an `err` is always `console.error(err)` instead of `throw err`, so that `vite-plugin-ssr` never triggers a server shut down. (Throwing an error in an Express.js middleware shuts down the whole Express.js server.)
 async function renderPageWithoutThrowing(
   pageContextInit: Parameters<typeof renderPage>[0],
@@ -577,7 +576,7 @@ async function loadPageServerFiles(pageContext: {
   _allPageFiles: AllPageFiles
 }): Promise<PageServerFiles> {
   const pageId = pageContext._pageId
-  let serverFiles = pageContext._allPageFiles['.page.server']
+  const serverFiles = pageContext._allPageFiles['.page.server']
   assertUsage(
     serverFiles.length > 0,
     'No `*.page.server.js` file found. Make sure to create one. You can create a `_default.page.server.js` which will apply as default to all your pages.',
@@ -697,8 +696,8 @@ async function executeOnBeforeRenderHooks(
     return
   }
 
-  let serverHooksCalled: boolean = false
-  let skipServerHooks: boolean = false
+  let serverHooksCalled = false
+  let skipServerHooks = false
 
   if (isomorphicHooksExist() && !pageContext._isPageContextRequest) {
     const pageContextAddendum = await runOnBeforeRenderHooks(
@@ -1075,14 +1074,14 @@ function isFileRequest(urlPathname: string) {
   assert(typeof fileExtension === 'string')
   return /^[a-z0-9]+$/.test(fileExtension)
 }
-
+// 1
 function _parseUrl(url: string, baseUrl: string): ReturnType<typeof parseUrl> & { isPageContextRequest: boolean } {
   assert(url.startsWith('/') || url.startsWith('http'))
   assert(baseUrl.startsWith('/'))
   const { urlWithoutPageContextRequestSuffix, isPageContextRequest } = handlePageContextRequestSuffix(url)
   return { ...parseUrl(urlWithoutPageContextRequestSuffix, baseUrl), isPageContextRequest }
 }
-
+// 1
 async function getGlobalContext() {
   const ssrEnv = getSsrEnv()
   const globalContext = {
@@ -1176,6 +1175,7 @@ function viteErrorCleanup(err: unknown) {
   }
 }
 
+// 1
 function getBaseUrl(): string {
   const { baseUrl } = getSsrEnv()
   return baseUrl

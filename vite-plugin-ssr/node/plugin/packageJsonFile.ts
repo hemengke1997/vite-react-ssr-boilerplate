@@ -13,6 +13,7 @@ import { isSSR_config } from './utils'
 
 export { packageJsonFile }
 
+// 生成一个package.json文件,内容是output format的类型
 function packageJsonFile(): Plugin {
   let ssr: boolean
   let isEsmOutput: true | null

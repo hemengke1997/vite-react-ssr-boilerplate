@@ -1,4 +1,4 @@
-import { PluginOption, UserConfig } from 'vite'
+import { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import ssr from 'vite-plugin-ssr/plugin'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -7,25 +7,23 @@ import GlobPlugin from 'vite-plugin-glob'
 
 import mpa from './mpa'
 import setupName from './setupName'
-import shelljs from 'shelljs'
-import { basename, resolve } from 'path'
-import { ResolvedConfig } from 'vite'
-import path from 'node:path'
+// import shelljs from 'shelljs'
+// import { basename, resolve } from 'path'
+// import { ResolvedConfig } from 'vite'
+// import path from 'node:path'
 
 // import configCompressPlugin from './compress'
 
 export default function setupVitePlugins({ isBuild, spa }: { isBuild: boolean; spa: boolean }) {
-  let config: ResolvedConfig
+  // let config: ResolvedConfig
 
   const vitePlugins: PluginOption[] = [
     vue(),
     vueJsx(),
     setupName(),
     GlobPlugin(),
-    ssr({
-      target: 'subpage',
-    }),
-    // mpa({ root: 'src/pages', mpa: !spa }),
+    ssr(),
+    mpa({ root: 'src/pages', mpa: !spa }),
     // {
     //   name: 'vite:deleteFile',
     //   apply: 'build',

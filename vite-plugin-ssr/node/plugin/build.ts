@@ -13,20 +13,21 @@ import { isSSR_config } from './utils'
 
 export { build }
 
-type BuildOptions = {
-  // 打包目标文件夹
-  target: string
-}
-
-function build(options: BuildOptions): Plugin {
+// 构建的时候执行
+// 构建时执行了 vite build && vite build ssr
+// 会根据两个命令打包两次，一次打到client dir中，一次打到server dir中
+// 两次都会根据pageFiles去查找所有文件，然后放在input中
+function build(): Plugin {
   let isSsrBuild: boolean | undefined
   return {
     name: 'vite-plugin-ssr:build',
     apply: 'build',
+
+    // 在解析 Vite 配置前调用
     config: (config) => {
       isSsrBuild = isSSR_config(config)
       const input = {
-        ...entryPoints(config, options.target),
+        ...entryPoints(config),
         ...normalizeRollupInput(config.build?.rollupOptions?.input),
       }
       return {
@@ -44,8 +45,12 @@ function build(options: BuildOptions): Plugin {
         //*/
       }
     },
+    // rollup通用钩子
+    // 可用于改造单个模块
     transform: (_src, id) => {
       assert(isSsrBuild === true || isSsrBuild === false)
+
+      // 如果是ssr, 就把.page.client里面的代码删了
       return removeClientCode(isSsrBuild!, id) || undefined
     },
   }
@@ -63,17 +68,16 @@ function removeClientCode(isSsrBuild: boolean, id: string): void | { code: strin
   }
 }
 
-function entryPoints(config: UserConfig, target: string): Record<string, string> {
+function entryPoints(config: UserConfig): Record<string, string> {
   if (isSSR_config(config)) {
-    return serverEntryPoints(target)
+    return serverEntryPoints()
   } else {
     return browserEntryPoints(config)
   }
 }
 
-function serverEntryPoints(target: string): Record<string, string> {
+function serverEntryPoints(): Record<string, string> {
   // Current directory: vite-plugin-ssr/dist/cjs/node/plugin/
-  console.log(target)
   const serverEntry = require.resolve('../../../../dist/esm/node/page-files/pageFiles.js')
   assert(serverEntry.endsWith('.js'))
 

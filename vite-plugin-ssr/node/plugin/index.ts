@@ -8,24 +8,18 @@ import { importBuild } from 'vite-plugin-import-build'
 import { getImportBuildCode } from './getImportBuildCode'
 import { transformPageServerFiles } from './transformPageServerFiles'
 import { removeRequireHookPlugin } from './removeRequireHookPlugin'
-import { isEmpty } from 'lodash-es'
 // import GlobPlugin from 'vite-plugin-glob'
 
 export default plugin
 export { plugin }
 export { plugin as ssr }
 
-type PluginOption = {
-  target: string
-}
-
+// 入口
 // Return as `any` to avoid Plugin type mismatches when there are multiple Vite versions installed
-function plugin(options: PluginOption): any {
-  console.log(isEmpty({ a: 1 }))
-
+function plugin(): any {
   const plugins: Plugin[] = [
     dev(),
-    build({ target: options.target }),
+    build(),
     manifest(),
     importBuild(getImportBuildCode()),
     packageJsonFile(),

@@ -96,7 +96,7 @@ function getPagesInfo({ defaultEntries, scanDir, scanFile, root, mpa }: MpaOptio
     : fg.sync(`${scanDir}/subpage/${scanFile}`.replace('//', '/'))
 
   // Calc
-  const pages = {}
+  const pages: any = {}
   const result = parseFiles(allFiles, defaultEntries)
   const { entries } = result
   entries.forEach((entry) => {

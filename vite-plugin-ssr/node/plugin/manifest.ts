@@ -4,16 +4,19 @@ import { isSSR_config } from './utils'
 
 export { manifest }
 
+// 生成vite-plugin-ssr.json
 function manifest(): Plugin {
   let base: string
   let ssr: boolean
   return {
     name: 'vite-plugin-ssr:manifest',
     apply: 'build',
+    // 在解析 Vite 配置后调用
     configResolved(config) {
       base = config.base
       ssr = isSSR_config(config)
     },
+    // 在打包写文件之前调用
     generateBundle(_, bundle) {
       if (ssr) return
       assert(typeof base === 'string')

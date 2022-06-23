@@ -34,6 +34,7 @@ function getUrlPathname(url?: string): string {
   return urlPathname
 }
 
+// 1
 function isParsable(url: string): boolean {
   url = decodeURI(url)
 
@@ -171,7 +172,7 @@ function parseWithNewUrl(url: string): { origin: string | null; pathname: string
   return { origin, pathname }
 }
 
-function assertUsageBaseUrl(baseUrl: string, usageErrorMessagePrefix: string = '') {
+function assertUsageBaseUrl(baseUrl: string, usageErrorMessagePrefix = '') {
   assertUsage(
     !baseUrl.startsWith('http'),
     usageErrorMessagePrefix +
@@ -214,7 +215,7 @@ function analyzeBaseUrl(
 
   // Support `url === '/some-base-url' && baseUrl === '/some-base-url/'`
   let baseUrlNormalized = baseUrl
-  let urlPathname = getUrlPathname(url)
+  const urlPathname = getUrlPathname(url)
   if (baseUrl.endsWith('/') && urlPathname === slice(baseUrl, 0, -1)) {
     baseUrlNormalized = slice(baseUrl, 0, -1)
     assert(urlPathname === baseUrlNormalized)
