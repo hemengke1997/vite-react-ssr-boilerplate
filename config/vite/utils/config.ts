@@ -24,6 +24,7 @@ export const setConfig = ({ isBuild, spa }: { isBuild: boolean; spa: boolean }):
         'vite-plugin-ssr': path.resolve(process.cwd(), 'vite-plugin-ssr'),
       },
     },
+
     publicDir: path.resolve(process.cwd(), 'public'),
     // root: Config.root,
     server: {},
@@ -37,8 +38,8 @@ export const setConfig = ({ isBuild, spa }: { isBuild: boolean; spa: boolean }):
       manifest: true,
       outDir: Config.outDir,
       rollupOptions: {
+        treeshake: false,
         output: {
-          manualChunks: {},
           format: 'es',
           assetFileNames: (assetInfo) => {
             let extType = assetInfo?.name?.split('.').at(1) || ''
@@ -47,8 +48,10 @@ export const setConfig = ({ isBuild, spa }: { isBuild: boolean; spa: boolean }):
             }
             return `assets/${extType}/[name]-[hash][extname]`
           },
-          chunkFileNames: () => {
-            return 'assets/js/[name]-[hash]-chunk.js'
+          chunkFileNames: (info) => {
+            const server = info.name.endsWith('server') ? 'server-' : ''
+            const name = info.facadeModuleId?.match(/src\/pages\/(.*?)\//)?.[1] || info.name
+            return `assets/js/${name}-${server}[hash]-chunk.js`
           },
           entryFileNames: (info) => {
             if (info.name === 'pageFiles') {

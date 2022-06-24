@@ -6,7 +6,7 @@ function create() {
     title: 'title',
     isMobile: true,
   }
-  for (let i = 0; i < 5000; i++) {
+  for (let i = 0; i < 1000; i++) {
     fs.mkdirSync(path.resolve(__dirname, `./src/pages/page${i}`))
 
     fs.mkdirSync(path.resolve(__dirname, `./src/pages/page${i}/images`))

@@ -1,5 +1,5 @@
 <template>
-  <div>template</div>
+  <div>fsdfdsa</div>
 </template>
 
 <script lang="ts" setup></script>

@@ -8,18 +8,6 @@
 </template>
 
 <script lang="ts">
-  //
-  const ext = '*([a-zA-Z0-9])'
-
-  const x = 'subpage'
-
-  const n = {
-    xx: () => import(`../src/pages/${x}/index.page.vue`),
-  }
-  console.log(n)
-
-  console.log(import.meta.importGlob(['/**/*.page.*([a-zA-Z0-9])']))
-
   console.log(`this is layout ${Math.random()}`)
 </script>
 

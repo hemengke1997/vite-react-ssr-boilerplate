@@ -32,7 +32,7 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
       }" />
       <meta name="description" content="${desc}" />
       <meta name="keywords" content="${keywords}" />
-      <title>${title} | test</title>
+      <title>${title}</title>
     </head>
     <body>
       <div id="app">${stream}</div>
