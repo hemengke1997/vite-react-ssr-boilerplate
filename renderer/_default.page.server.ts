@@ -2,7 +2,7 @@ import { renderToNodeStream } from 'vue/server-renderer'
 import { escapeInject, PageContextBuiltIn } from 'vite-plugin-ssr'
 import { PageContext } from './types'
 import { createApp } from './createApp'
-import logoUrl from '../public/favicon.ico'
+import logoUrl from '/favicon.ico'
 
 // See https://vite-plugin-ssr.com/passToClient
 export const passToClient = ['pageProps', 'urlPathname', 'documentProps']

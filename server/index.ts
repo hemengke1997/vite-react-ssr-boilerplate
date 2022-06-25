@@ -1,8 +1,9 @@
-import express from 'express'
+import express, { Application } from 'express'
 import compression from 'compression'
 import colors from 'picocolors'
 import { createPageRenderer } from 'vite-plugin-ssr'
-// import { openBrowser } from './openBrowser'
+import { openBrowser } from './openBrowser'
+import { log } from '../scripts/utils'
 
 const isProd = process.env.NODE_ENV === 'production'
 const root = `${__dirname}/..`
@@ -14,7 +15,6 @@ async function startServer() {
   let viteDevServer
   if (isProd) {
     // See https://expressjs.com/zh-cn/starter/static-files.html
-    // app.use(express.static(`${root}/dist/subpage/client`))
     app.use(express.static(`${root}/dist/client`))
   } else {
     // dev
@@ -34,7 +34,6 @@ async function startServer() {
     viteDevServer,
     isProduction: isProd,
     root,
-    // outDir: 'dist/subpage',
     outDir: 'dist',
   })
 
@@ -47,10 +46,6 @@ async function startServer() {
     }
     const pageContext = await renderPage(pageContextInit)
 
-    if (pageContext.errorWhileRendering) {
-      console.log(pageContext.errorWhileRendering, 'errorWhileRendering')
-    }
-
     const { httpResponse } = pageContext
 
     if (!httpResponse) return next()
@@ -61,16 +56,32 @@ async function startServer() {
     stream.pipe(res)
   })
 
-  const port = process.env.PORT || 3000
+  const port = Number(process.env.PORT || 3001)
 
-  // See http://expressjs.com/zh-cn/api.html#app.listen
-  app.listen(port)
+  listen(app, port)
+}
 
-  const { npm_config_page } = process.env
-  const page = npm_config_page ? '/' + npm_config_page : ''
+function listen(app: Application, _port: number) {
+  let port = _port
+  const server = app.listen(port)
+  server.on('listening', () => {
+    const { npm_config_page } = process.env
+    const page = npm_config_page ? '/' + npm_config_page : ''
 
-  console.log(colors.green(`Server running at ${colors.cyan(`http://localhost:${port}${page}`)}`))
-  // openBrowser(`http://localhost:${port}${page}`, true)
+    console.log(colors.green(`🚀 Server running at ${colors.cyan(`http://localhost:${port}${page}`)}`))
+    openBrowser(`http://localhost:${port}${page}`, true)
+  })
+  server.on('error', (error) => {
+    if ((error as any).code !== 'EADDRINUSE') {
+      throw error
+    }
+    log.error(`❌ ${error}`)
+
+    port = port + 1
+    log.info(`🔥 open port ${port} ...`)
+    // open in other port. current port + 1
+    listen(app, port)
+  })
 }
 
 startServer()

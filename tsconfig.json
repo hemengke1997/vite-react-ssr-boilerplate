@@ -13,8 +13,7 @@
     "types": ["vite/client", "vite-plugin-glob/client"],
     "paths": {
       "@/*": ["src/*"],
-      "@root/*": ["./*"],
-      "vite-plugin-ssr": ["vite-plugin-ssr/*"]
+      "@root/*": ["./*"]
     }
   },
   "exclude": ["node_modules", "dist", "**/*.js"],

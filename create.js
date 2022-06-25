@@ -1,12 +1,12 @@
-const fs = require('node:fs')
-const path = require('node:path')
+const fs = require('fs')
+const path = require('path')
 
 function create() {
   const config = {
     title: 'title',
     isMobile: true,
   }
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 700; i++) {
     fs.mkdirSync(path.resolve(__dirname, `./src/pages/page${i}`))
 
     fs.mkdirSync(path.resolve(__dirname, `./src/pages/page${i}/images`))

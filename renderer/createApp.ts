@@ -2,7 +2,7 @@ import { createSSRApp, defineComponent, h } from 'vue'
 import Layout from './Layout.vue'
 import type { PageContext } from './types'
 import { setPageContext } from './usePageContext'
-import 'modern-normalize/modern-normalize.css'
+import '@/assets/style/tailwind.css'
 
 function createApp(pageContext: PageContext) {
   const { Page, pageProps, documentProps } = pageContext

@@ -1,51 +1,85 @@
-import { UserConfig } from 'vite'
-import { ConfigEnv } from 'vite'
-import { setConfig } from './config/vite/utils/config'
-import { deepMerge } from './config/vite/utils/helper'
+import { UserConfig, ConfigEnv } from 'vite'
+import path, { resolve } from 'path'
+import setupVitePlugins from './config/vite/plugins'
+import { getContentHash, getHash } from './config/vite/utils/helper'
+
+export const Config = {
+  root: process.cwd(),
+  outDir: resolve(process.cwd(), 'dist'),
+  assets: 'assets',
+}
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
 
-  // return {
-  //   plugins: [vue(), ssr()],
-  //   resolve: {
-  //     alias: {
-  //       '@': path.resolve(process.cwd(), 'src'),
-  //     },
-  //   },
+  return {
+    plugins: [
+      setupVitePlugins({
+        isBuild,
+        spa: false,
+      }),
+    ],
 
-  //   build: {
-  //     assetsInlineLimit: 0,
-  //     target: 'es2015',
-  //     emptyOutDir: true,
-  //     cssCodeSplit: true,
-  //     manifest: true,
-  //     rollupOptions: {
-  //       output: {
-  //         manualChunks: {},
-  //         entryFileNames: (info) => {
-  //           console.log(info)
-  //           return `${info.name}/${info.name}-entry-[hash].js`
-  //         },
-  //         chunkFileNames: (info) => {
-  //           return `assets/chunk/${info.name}/${info.name}-chunk-[hash].js`
-  //         },
-  //         assetFileNames: (info) => {
-  //           const name = info.name?.match(/src\/pages\/(.+)\//) || info.name?.match(/src\/(.+)\//)
-  //           if (name?.length) {
-  //             return `${name[1]}/[name]-[hash].[ext]`
-  //           }
-  //           return `[name]/[name]-[hash].[ext]`
-  //         },
-  //       },
-  //     },
-  //   },
-  // }
-
-  return deepMerge<UserConfig>(setConfig({ isBuild, spa: false }), {
-    build: {
-      emptyOutDir: true,
+    resolve: {
+      alias: {
+        '@': path.resolve(process.cwd(), 'src'),
+        '@root': process.cwd(),
+      },
     },
-  })
+
+    publicDir: path.resolve(process.cwd(), 'public'),
+    root: Config.root,
+    server: {},
+
+    build: {
+      assetsInlineLimit: 0,
+      target: 'es2015',
+      assetsDir: Config.assets,
+      emptyOutDir: true,
+      cssCodeSplit: true,
+      manifest: true,
+      outDir: Config.outDir,
+      minify: 'esbuild',
+
+      rollupOptions: {
+        treeshake: false,
+        output: {
+          format: 'es',
+          assetFileNames: (assetInfo) => {
+            let extType = path.extname(assetInfo.name || '').split('.')[1]
+            if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType!)) {
+              extType = 'img'
+            }
+            const hash = getContentHash(assetInfo.source)
+            console.log(assetInfo, 'info')
+            return `assets/${extType}/[name].${hash}.[ext]`
+          },
+
+          chunkFileNames: (chunkInfo) => {
+            const server = chunkInfo.name.endsWith('server') ? 'server-' : ''
+            const name = chunkInfo.facadeModuleId?.match(/src\/pages\/(.*?)\//)?.[1] || chunkInfo.name
+
+            if (chunkInfo.isDynamicEntry || chunkInfo.name === 'vendor') {
+              const hash = getHash(chunkInfo)
+              return `assets/js/${name}-${server}${hash}.chunk.js`
+            } else {
+              return `assets/js/${name}-${server}[hash].chunk.js`
+            }
+          },
+          entryFileNames: (chunkInfo) => {
+            if (chunkInfo.name === 'pageFiles') {
+              return '[name].js'
+            }
+            const hash = getHash(chunkInfo)
+            return `assets/js/entry-${hash}.js`
+          },
+        },
+      },
+    },
+
+    optimizeDeps: {
+      exclude: ['lodash-es'],
+    },
+  }
 }
