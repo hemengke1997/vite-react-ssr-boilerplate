@@ -8,7 +8,8 @@
     "start": "esno scripts/dev.ts",
     "ssr": "esno server",
     "build:ssr": "vite build && vite build --ssr",
-    "ssr:prod": "cross-env NODE_ENV=production esno server"
+    "ssr:prod": "cross-env NODE_ENV=production esno server",
+    "test": "esno serv"
   },
   "imports": {
     "@root/*": "./*.ts"
