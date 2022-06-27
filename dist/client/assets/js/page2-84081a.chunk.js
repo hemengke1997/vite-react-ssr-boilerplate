@@ -1,1 +1,1 @@
-import{o as e,b as t}from"./vendor-ac3674.chunk.js";import{_ as r}from"./entry-78dfca.js";const o={inheritAttrs:!1};function a(n,s,c,p,_,i){return e(),t("div",null,"template")}var m=r(o,[["render",a]]);export{m as default};
+import{o as e,b as t}from"./vendor-ac3674.chunk.js";import{_ as r}from"./entry-a8d753.js";const o={inheritAttrs:!1};function a(n,s,c,p,_,i){return e(),t("div",null,"template")}var m=r(o,[["render",a]]);export{m as default};

@@ -2,6 +2,7 @@ module.exports = () => {
   return {
     plugins: [
       require('autoprefixer'),
+      require('tailwindcss'),
       require('postcss-viewport-units'),
 
       // .class {
@@ -31,7 +32,6 @@ module.exports = () => {
         landscapeUnit: 'vw',
         landscapeWidth: 1920,
       }),
-      require('tailwindcss')
     ],
   }
 }

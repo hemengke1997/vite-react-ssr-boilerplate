@@ -23,14 +23,14 @@
     "isDynamicEntry": true
   },
   "src/pages/page0/index.page.vue": {
-    "file": "assets/js/page0-36090e.chunk.js",
+    "file": "assets/js/page0-03f3ea.chunk.js",
     "src": "src/pages/page0/index.page.vue",
     "isDynamicEntry": true,
     "imports": [
       "_plugin-vue_export-helper-1db49828.chunk.js"
     ],
     "css": [
-      "assets/css/index.page.7bbfbf.css"
+      "assets/css/index.page.9a3434.css"
     ],
     "assets": [
       "assets/img/test.335dcc.png"
@@ -69,14 +69,14 @@
     "isDynamicEntry": true
   },
   "renderer/_default.page.server.ts": {
-    "file": "assets/js/_default.page.server-server-f424f7.chunk.js",
+    "file": "assets/js/_default.page.server-server-5990fd.chunk.js",
     "src": "renderer/_default.page.server.ts",
     "isDynamicEntry": true,
     "imports": [
       "_plugin-vue_export-helper-1db49828.chunk.js"
     ],
     "css": [
-      "assets/css/_default.page.server.82c84b.css"
+      "assets/css/_default.page.server.030228.css"
     ]
   },
   "src/pages/page0/index.page.server.ts": {

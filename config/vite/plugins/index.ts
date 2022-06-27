@@ -4,8 +4,9 @@ import ssr from 'vite-plugin-ssr/plugin'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import GlobPlugin from 'vite-plugin-glob'
-// import mpa from './mpa'
 import setupName from './setupName'
+// import mpa from './mpa'
+// import configCompressPlugin from './compress'
 
 export default function setupVitePlugins({ isBuild }: { isBuild: boolean; spa: boolean }) {
   const vitePlugins: PluginOption[] = [

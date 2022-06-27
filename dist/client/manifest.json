@@ -1,6 +1,6 @@
 {
   "renderer/_default.page.client.ts": {
-    "file": "assets/js/entry-78dfca.js",
+    "file": "assets/js/entry-a8d753.js",
     "src": "renderer/_default.page.client.ts",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -8,7 +8,7 @@
       "_vendor-ac3674.chunk.js"
     ],
     "css": [
-      "assets/css/renderer\\_default.page.client.ts.82c84b.css"
+      "assets/css/renderer\\_default.page.client.ts.030228.css"
     ]
   },
   "_vendor-ac3674.chunk.js": {
@@ -36,7 +36,7 @@
     ]
   },
   "src/pages/page0/index.page.vue": {
-    "file": "assets/js/page0-aa17bd.chunk.js",
+    "file": "assets/js/page0-aa6a99.chunk.js",
     "src": "src/pages/page0/index.page.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -44,7 +44,7 @@
       "renderer/_default.page.client.ts"
     ],
     "css": [
-      "assets/css/index.page.7bbfbf.css"
+      "assets/css/index.page.9a3434.css"
     ],
     "assets": [
       "assets/img/test.335dcc.png"

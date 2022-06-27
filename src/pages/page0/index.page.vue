@@ -3,7 +3,7 @@
   <HelloWorld msg="xxxx" />
   <img class="div" src="./images/test.png" alt="" />
   <img class="ignore-test" src="./images/test.png" alt="" />
-  <div class="tw-text-xs">21321</div>
+  <div class="tw-text-xs tw-w-[4px]">21321</div>
 </template>
 
 <script lang="ts" setup>

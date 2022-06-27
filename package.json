@@ -74,8 +74,6 @@
     "vite-plugin-glob": "^0.3.2",
     "vite-plugin-html-template": "^1.1.5",
     "vite-plugin-ssr": "^0.3.64",
-    "vite-plugin-windicss": "^1.8.4",
-    "windicss": "^3.5.5",
     "yargs": "^17.5.1"
   }
 }
