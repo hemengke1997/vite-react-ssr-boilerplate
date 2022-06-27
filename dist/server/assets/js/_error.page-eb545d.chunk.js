@@ -1,1 +1,0 @@
-import{createVNode as e,Fragment as l,createTextVNode as n}from"vue";function u({is404:r,errorInfo:o}){return r?e(l,null,[e("h1",null,[n("404 Page Not Found")]),e("p",null,[n("This page could not be found.")]),e("p",null,[o])]):e(l,null,[e("h1",null,[n("500 Internal Server Error")]),e("p",null,[n("Something went wrong.")])])}export{u as Page};
