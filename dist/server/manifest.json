@@ -64,7 +64,7 @@
     ]
   },
   "renderer/_default.page.client.ts": {
-    "file": "assets/js/_default.page.client-776975.chunk.js",
+    "file": "assets/js/_default.page.client-701653.chunk.js",
     "src": "renderer/_default.page.client.ts",
     "isDynamicEntry": true
   },
