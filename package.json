@@ -8,6 +8,9 @@
     "start:prod": "cross-env NODE_ENV=production esno server",
     "serve": "vite preview"
   },
+  "engines": {
+    "node": ">=16.14.2"
+  },
   "imports": {
     "@root/*": "./*.ts"
   },
