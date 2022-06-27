@@ -23,15 +23,14 @@ function getSpecialsName() {
       const { specialsName } = res
       const name = specialsName.replace(/\s/g, '')
 
-      // 在src/pages下查找是否存在name，若存在，提示重新输入，否则，创建模板
       try {
-        // 大小写敏感
+        // case sensitive
         fs.readdirSync(path.resolve(__dirname, `../src/pages/${(name as string).toLocaleLowerCase()}`))
-        // 目录存在，开启server
-        log.warn(`【${name}】：页面已存在，开启dev模式🦾`)
+        // dir exist, open server
+        log.warn(`💡[${name}]：页面已存在，开启dev模式🦾 \n`)
         run('npm', ['run', 'ssr', `--page=${name}`])
       } catch {
-        // 是否移动端
+        // pc or mobile
         let isMobile = false
         const res = await inquirer.prompt([
           {
@@ -52,23 +51,23 @@ function getSpecialsName() {
           isMobile,
         }
 
-        log.info(`【${name}】：创建页面中...🎈`)
-        // 创建目录
+        log.info(`🤖[${name}]：创建页面中...🎈\n`)
+        // make dir
         fs.mkdirSync(path.resolve(__dirname, `../src/pages/${name}`))
-        // 创建images文件夹
+        // make images dir
         fs.mkdirSync(path.resolve(__dirname, `../src/pages/${name}/images`))
-        // 读取vue模板
+        // read vue template
         const vueTpl = fs.readFileSync(path.resolve(__dirname, '../template/index.vue')).toString()
-        // 写vue模板
+        // write vue template
         fs.writeFileSync(path.resolve(__dirname, `../src/pages/${name}/index.page.vue`), vueTpl)
-        // 读取serverjs
+        // read serverjs
         let serverTpl = fs.readFileSync(path.resolve(__dirname, '../template/index.page.server.tpl')).toString()
 
-        // 模板匹配
+        // match template
         serverTpl = serverTpl.replace(/{{(.*?)}}/gi, (_, p1) => {
           return config[p1.trim()]
         })
-        // 写serverjs
+        // write serverjs
         fs.writeFileSync(path.resolve(__dirname, `../src/pages/${name}/index.page.server.ts`), serverTpl)
 
         log.success(
@@ -83,5 +82,6 @@ function getSpecialsName() {
 try {
   getSpecialsName()
 } catch {
+  console.log('catch')
   process.exit(1)
 }

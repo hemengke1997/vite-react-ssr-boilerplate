@@ -1,7 +1,11 @@
-# vite MPA
+# vite + ssr
 
-## issues
+## development
 
-### 打包后，hashcontent 相同的静态资源会被去重
+``` bash
+pnpm install
+```
 
-https://github.com/vitejs/vite/issues/8632
+``` ash
+npm run start
+```

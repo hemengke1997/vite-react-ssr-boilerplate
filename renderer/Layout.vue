@@ -8,7 +8,6 @@
 </template>
 
 <script lang="ts">
-  console.log(`this is layout ${Math.random()}`)
 </script>
 
 <style scoped>
