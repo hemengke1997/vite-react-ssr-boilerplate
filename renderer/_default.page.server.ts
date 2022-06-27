@@ -15,9 +15,9 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
 
   // See https://vite-plugin-ssr.com/head
   const { documentProps } = pageContext
-  const title = documentProps?.title || '奇游'
-  const desc = documentProps?.description || '奇游加速器'
-  const keywords = documentProps?.keywords || '加速器'
+  const title = documentProps?.title || 'title'
+  const desc = documentProps?.description || 'description'
+  const keywords = documentProps?.keywords || 'keywords'
 
   const isMobile = documentProps?.isMobile
 

@@ -4,6 +4,7 @@
   "scripts": {
     "start": "esno scripts/dev.ts",
     "build": "vite build && vite build --ssr",
+    "ssr": "esno server",
     "start:prod": "cross-env NODE_ENV=production esno server",
     "serve": "vite preview"
   },
