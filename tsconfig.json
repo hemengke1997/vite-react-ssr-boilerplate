@@ -4,11 +4,13 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
+    "isolatedModules": true,
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "declaration": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "vite-plugin-glob/client"],
     "paths": {

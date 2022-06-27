@@ -8,7 +8,7 @@ import logoUrl from '/favicon.ico'
 export const passToClient = ['pageProps', 'urlPathname', 'documentProps']
 
 // See https://vite-plugin-ssr.com/render
-async function render(pageContext: PageContextBuiltIn & PageContext) {
+export async function render(pageContext: PageContextBuiltIn & PageContext): Promise<any> {
   // See https://v3.cn.vuejs.org/guide/ssr/getting-started.html
   const app = createApp(pageContext)
   const stream = renderToNodeStream(app)
@@ -48,5 +48,3 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
     },
   }
 }
-
-export { render }

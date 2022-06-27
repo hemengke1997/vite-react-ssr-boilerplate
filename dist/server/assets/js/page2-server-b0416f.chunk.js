@@ -1,1 +1,0 @@
-var i=(u,c,t)=>new Promise((l,r)=>{var p=e=>{try{n(t.next(e))}catch(o){r(o)}},s=e=>{try{n(t.throw(e))}catch(o){r(o)}},n=e=>e.done?l(e.value):Promise.resolve(e.value).then(p,s);n((t=t.apply(u,c)).next())});function d(){return i(this,null,function*(){return{pageContext:{documentProps:{title:"title",isMobile:!0}}}})}export{d as onBeforeRender};
