@@ -52,7 +52,6 @@ export default ({ command }: ConfigEnv): UserConfig => {
               extType = 'img'
             }
             const hash = getContentHash(assetInfo.source)
-            console.log(assetInfo, 'info')
             return `assets/${extType}/[name].${hash}.[ext]`
           },
 

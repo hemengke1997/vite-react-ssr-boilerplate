@@ -1,0 +1,110 @@
+{
+  "renderer/_default.page.client.ts": {
+    "file": "assets/js/entry-78dfca.js",
+    "src": "renderer/_default.page.client.ts",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-ac3674.chunk.js"
+    ],
+    "css": [
+      "assets/css/renderer\\_default.page.client.ts.82c84b.css"
+    ]
+  },
+  "_vendor-ac3674.chunk.js": {
+    "file": "assets/js/vendor-ac3674.chunk.js",
+    "dynamicImports": [
+      "renderer/_error.page.tsx",
+      "src/pages/page0/index.page.vue",
+      "src/pages/page1/index.page.vue",
+      "src/pages/page2/index.page.vue",
+      "src/pages/page3/index.page.vue",
+      "renderer/_default.page.client.ts",
+      "renderer/_default.page.server.ts",
+      "src/pages/page0/index.page.server.ts",
+      "src/pages/page1/index.page.server.ts",
+      "src/pages/page2/index.page.server.ts",
+      "src/pages/page3/index.page.server.ts"
+    ]
+  },
+  "renderer/_error.page.tsx": {
+    "file": "assets/js/_error.page-eb545d.chunk.js",
+    "src": "renderer/_error.page.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-ac3674.chunk.js"
+    ]
+  },
+  "src/pages/page0/index.page.vue": {
+    "file": "assets/js/page0-aa17bd.chunk.js",
+    "src": "src/pages/page0/index.page.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-ac3674.chunk.js",
+      "renderer/_default.page.client.ts"
+    ],
+    "css": [
+      "assets/css/index.page.7bbfbf.css"
+    ],
+    "assets": [
+      "assets/img/test.335dcc.png"
+    ]
+  },
+  "src/pages/page1/index.page.vue": {
+    "file": "assets/js/page1-84081a.chunk.js",
+    "src": "src/pages/page1/index.page.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-ac3674.chunk.js",
+      "renderer/_default.page.client.ts"
+    ]
+  },
+  "src/pages/page2/index.page.vue": {
+    "file": "assets/js/page2-84081a.chunk.js",
+    "src": "src/pages/page2/index.page.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-ac3674.chunk.js",
+      "renderer/_default.page.client.ts"
+    ]
+  },
+  "src/pages/page3/index.page.vue": {
+    "file": "assets/js/page3-84081a.chunk.js",
+    "src": "src/pages/page3/index.page.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-ac3674.chunk.js",
+      "renderer/_default.page.client.ts"
+    ]
+  },
+  "renderer/_default.page.server.ts": {
+    "file": "assets/js/_default.page.server-server-5288d8.chunk.js",
+    "src": "renderer/_default.page.server.ts",
+    "isDynamicEntry": true
+  },
+  "src/pages/page0/index.page.server.ts": {
+    "file": "assets/js/page0-server-94382e.chunk.js",
+    "src": "src/pages/page0/index.page.server.ts",
+    "isDynamicEntry": true
+  },
+  "src/pages/page1/index.page.server.ts": {
+    "file": "assets/js/page1-server-94382e.chunk.js",
+    "src": "src/pages/page1/index.page.server.ts",
+    "isDynamicEntry": true
+  },
+  "src/pages/page2/index.page.server.ts": {
+    "file": "assets/js/page2-server-94382e.chunk.js",
+    "src": "src/pages/page2/index.page.server.ts",
+    "isDynamicEntry": true
+  },
+  "src/pages/page3/index.page.server.ts": {
+    "file": "assets/js/page3-server-94382e.chunk.js",
+    "src": "src/pages/page3/index.page.server.ts",
+    "isDynamicEntry": true
+  },
+  "vite/legacy-polyfills": {
+    "file": "assets/polyfills-modern.023fcaf1.js",
+    "src": "vite/legacy-polyfills",
+    "isEntry": true
+  }
+}

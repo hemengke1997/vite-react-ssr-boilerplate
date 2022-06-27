@@ -82,6 +82,5 @@ function getSpecialsName() {
 try {
   getSpecialsName()
 } catch {
-  console.log('catch')
   process.exit(1)
 }
