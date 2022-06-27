@@ -61,7 +61,7 @@ function getSpecialsName() {
         // write vue template
         fs.writeFileSync(path.resolve(__dirname, `../src/pages/${name}/index.page.vue`), vueTpl)
         // read serverjs
-        let serverTpl = fs.readFileSync(path.resolve(__dirname, '../template/index.page.server.tpl')).toString()
+        let serverTpl = fs.readFileSync(path.resolve(__dirname, '../template/server.tpl')).toString()
 
         // match template
         serverTpl = serverTpl.replace(/{{(.*?)}}/gi, (_, p1) => {
