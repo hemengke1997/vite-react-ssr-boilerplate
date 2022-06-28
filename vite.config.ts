@@ -43,7 +43,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
       minify: 'esbuild',
 
       rollupOptions: {
-        treeshake: false,
+        treeshake: 'smallest',
         output: {
           format: 'es',
           assetFileNames: (assetInfo) => {

@@ -2,11 +2,11 @@
 
 ## development
 
-``` bash
+```bash
 pnpm install
 ```
 
-``` ash
+```ash
 npm run start
 ```
 
@@ -17,3 +17,7 @@ npm run start
 ### husky
 
 ### [postcss-8-plugin-migration](https://evilmartians.com/chronicles/postcss-8-plugin-migration)
+
+## 💡 HOW
+
+https://www.yuque.com/docs/share/48935857-a4f1-4973-bec7-66eefd65b2cd?# 《vite + vue + ssr + mpa》

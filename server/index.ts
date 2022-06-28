@@ -4,11 +4,14 @@ import colors from 'picocolors'
 import { createPageRenderer } from 'vite-plugin-ssr'
 import { openBrowser } from './openBrowser'
 import { log } from '../scripts/utils'
+import { performance } from 'perf_hooks'
 
 const isProd = process.env.NODE_ENV === 'production'
 const root = `${__dirname}/..`
 
 async function startServer() {
+  global.__vite_server_start_time = performance.now()
+
   const app = express()
   app.use(compression())
 
@@ -68,17 +71,17 @@ function listen(app: Application, _port: number) {
     const { npm_config_page } = process.env
     const page = npm_config_page ? '/' + npm_config_page : ''
 
-    console.log(colors.green(`🚀 Server running at ${colors.cyan(`http://localhost:${port}${page}`)}`))
+    console.log(colors.green(`🚀 Server running at ${colors.cyan(`http://localhost:${port}${page}`)}\n`))
     openBrowser(`http://localhost:${port}${page}`, true)
   })
   server.on('error', (error) => {
     if ((error as any).code !== 'EADDRINUSE') {
       throw error
     }
-    log.error(`❌ ${error}`)
+    log.error(`❌ ${error}\n`)
 
     port = port + 1
-    log.info(`🔥 open port ${port} ...`)
+    log.info(`🔥 open port ${port} ...\n`)
     // open in other port. current port + 1
     listen(app, port)
   })

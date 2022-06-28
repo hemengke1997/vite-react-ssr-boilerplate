@@ -27,7 +27,7 @@ function getSpecialsName() {
         // case sensitive
         fs.readdirSync(path.resolve(__dirname, `../src/pages/${(name as string).toLocaleLowerCase()}`))
         // dir exist, open server
-        log.warn(`💡[${name}]：页面已存在，开启dev模式🦾 \n`)
+        log.warn(`\n⚠️  [${name}]: 页面已存在,开启dev模式 💥 \n`)
         run('npm', ['run', 'ssr', `--page=${name}`])
       } catch {
         // pc or mobile
@@ -51,7 +51,7 @@ function getSpecialsName() {
           isMobile,
         }
 
-        log.info(`🤖[${name}]：创建页面中...🎈\n`)
+        log.info(`\n🤖 [${name}]:创建页面中...🎈\n`)
         // make dir
         fs.mkdirSync(path.resolve(__dirname, `../src/pages/${name}`))
         // make images dir
@@ -71,10 +71,13 @@ function getSpecialsName() {
         fs.writeFileSync(path.resolve(__dirname, `../src/pages/${name}/index.page.server.ts`), serverTpl)
 
         log.success(
-          `✨模板创建成功，在 [${colors.underline(
+          `✅ 模板创建成功，在 [${colors.underline(
             `src/pages/${name}/index.page.vue`,
-          )}](ctrl + 单击跳转)\n开始愉快的开发吧~😊`,
+          )}](ctrl + 单击跳转)\n开始愉快的开发吧~ ✨\n`,
         )
+
+        // start server
+        run('npm', ['run', 'ssr', `--page=${name}`])
       }
     })
 }
@@ -82,5 +85,6 @@ function getSpecialsName() {
 try {
   getSpecialsName()
 } catch {
+  log.error('😥 oops, some bug happened\n')
   process.exit(1)
 }

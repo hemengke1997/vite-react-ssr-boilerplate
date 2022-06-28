@@ -9,6 +9,7 @@ export type PageContext = {
     description?: string
     keywords?: string
     isMobile?: boolean
+    layout?: boolean
   }
   urlPathname?: string
 }

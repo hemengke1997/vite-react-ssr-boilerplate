@@ -5,6 +5,7 @@ import { createApp } from './createApp'
 import logoUrl from '/favicon.ico'
 
 // See https://vite-plugin-ssr.com/passToClient
+// NOTE: this is important
 export const passToClient = ['pageProps', 'urlPathname', 'documentProps']
 
 // See https://vite-plugin-ssr.com/render

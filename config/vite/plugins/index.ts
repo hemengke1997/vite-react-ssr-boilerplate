@@ -5,8 +5,12 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import GlobPlugin from 'vite-plugin-glob'
 import setupName from './setupName'
+import progress from 'vite-plugin-progress'
+import colors from 'picocolors'
 // import mpa from './mpa'
 // import configCompressPlugin from './compress'
+
+let mounted = false
 
 export default function setupVitePlugins({ isBuild }: { isBuild: boolean; spa: boolean }) {
   const vitePlugins: PluginOption[] = [
@@ -17,6 +21,24 @@ export default function setupVitePlugins({ isBuild }: { isBuild: boolean; spa: b
     ssr(),
     // mpa({ root: 'src/pages', mpa: !spa }),
     splitVendorChunkPlugin(),
+    progress(),
+    {
+      name: 'vite:log-real-server-time',
+      apply: 'serve',
+      transformIndexHtml(_, { server }) {
+        if (!mounted) {
+          const info = server!.config.logger.info
+
+          const viteStartTime = global.__vite_server_start_time ?? false
+          const startupDurationString = viteStartTime
+            ? colors.dim(`ready in ${colors.white(colors.bold(Math.ceil(performance.now() - viteStartTime)))} ms`)
+            : ''
+
+          info(`\n🍃 ${colors.green(`${colors.bold('VITE')}`)}  ${startupDurationString}\n`)
+          mounted = true
+        }
+      },
+    },
   ]
 
   isBuild &&

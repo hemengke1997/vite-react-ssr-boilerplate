@@ -1,6 +1,6 @@
 <template>
   <div>template</div>
-  <HelloWorld msg="xxxx" />
+  <HelloWorld msg="222" />
   <img class="div" src="./images/test.png" alt="" />
   <img class="ignore-test" src="./images/test.png" alt="" />
   <div class="tw-text-xs tw-w-[4px]">21321</div>
