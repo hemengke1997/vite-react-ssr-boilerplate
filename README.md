@@ -10,6 +10,11 @@ pnpm install
 npm run start
 ```
 
+## responsive
+### postcss-px-to-viewport
+
+#### ignore: use PX or pX or Px instead of px (anyway: DONT USE `px` 🤣)
+
 ## TODO
 
 ### pm2
