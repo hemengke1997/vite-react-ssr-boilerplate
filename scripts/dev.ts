@@ -75,7 +75,7 @@ function getSpecialsName() {
 
         log.success(
           `✅ 模板创建成功，在 [${colors.underline(
-            `src/pages/${name}/index.page.vue`,
+            `src/pages/${name}/index.page.tsx`,
           )}](ctrl + 单击跳转)\n开始愉快的开发吧~ ✨\n`,
         )
 

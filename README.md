@@ -6,7 +6,7 @@
 pnpm install
 ```
 
-```ash
+```bash
 npm run start
 ```
 
@@ -21,7 +21,10 @@ npm run start
 
 ### husky
 
-### [postcss-8-plugin-migration](https://evilmartians.com/chronicles/postcss-8-plugin-migration)
+### docker
+
+### [longtime cache of rollup3](https://github.com/rollup/rollup/issues/4426)
+
 
 ## 💡 HOW
 
@@ -30,3 +33,9 @@ https://www.yuque.com/docs/share/48935857-a4f1-4973-bec7-66eefd65b2cd?# 《vite 
 ## 2022-06-28
 
 ### change vue to react, for better broswer compatibility
+
+#### The reason of choseing React
+- typescript
+- ie11
+
+> To be honest, I really want to use Vue3 as basic framework 😥

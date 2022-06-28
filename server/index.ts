@@ -72,6 +72,9 @@ function listen(app: Application, _port: number) {
     const page = npm_config_page ? '/' + npm_config_page : ''
 
     console.log(colors.green(`🚀 Server running at ${colors.cyan(`http://localhost:${port}${page}`)}\n`))
+
+    log.info(`🚩 正在打开默认浏览器...\n`)
+
     openBrowser(`http://localhost:${port}${page}`, true)
   })
   server.on('error', (error) => {

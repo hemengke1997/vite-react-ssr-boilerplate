@@ -30,12 +30,12 @@ const Header: React.FC = () => {
   ]
 
   return (
-    <header className={clsx(styles.header, 'ignore')}>
-      <div className={clsx(styles.headerContent, 'ignore')}>
-        <a href='http://www.qiyou.cn' className={styles.logo}></a>
-        <div className='menus'>
+    <header className={clsx(styles.header)}>
+      <div className={clsx(styles.headerContent)}>
+        <a href='https://www.qiyou.cn' className={styles.logo}></a>
+        <div className={styles.menus}>
           {menus.map((item, index) => (
-            <a href={item.href} key={index} className={styles.menuItem}>
+            <a href={item.href} key={index} className={styles.menu}>
               {item.text}
             </a>
           ))}

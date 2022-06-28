@@ -22,12 +22,35 @@
 
     .logo {
       display: inline-block;
-      width: 116px;
-      height: 41px;
+      width: 116PX;
+      height: 41PX;
       background-image: url(./images/logo.png);
       background-size: 100%;
       background-repeat: no-repeat;
-      margin-right: 110px;
+      margin-right: 110PX;
+    }
+
+    .menus {
+      display: flex;
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .menu {
+        padding: 15px 12px;
+        margin: 0 5px;
+        font-size: 14px;
+        line-height: 1;
+        color: #FFF;
+        border-bottom: 2px solid transparent;
+        text-align: center;
+        text-decoration: none;
+
+        &:hover {
+          border-color: #FF9800;
+        }
+      }
     }
   }
 
