@@ -15,7 +15,7 @@ function getSpecialsName() {
       {
         type: 'input',
         name: 'specialsName',
-        message: log.info(`请输入专题名?(${colors.bgBlue('回车开发全部页面')}):`, false),
+        message: log.info(`请输入专题名?${colors.dim(colors.gray('(回车开发全部页面):'))}`, false),
         default: 'all',
       },
     ])
@@ -27,7 +27,7 @@ function getSpecialsName() {
         // case sensitive
         fs.readdirSync(path.resolve(__dirname, `../src/pages/${(name as string).toLocaleLowerCase()}`))
         // dir exist, open server
-        log.warn(`\n⚠️  [${name}]: 页面已存在,开启dev模式 💥 \n`)
+        log.warn(`\n💫  [${name}]: 页面已存在,开启dev模式 👀 \n`)
         run('npm', ['run', 'ssr', `--page=${name}`])
       } catch {
         // pc or mobile
@@ -57,9 +57,12 @@ function getSpecialsName() {
         // make images dir
         fs.mkdirSync(path.resolve(__dirname, `../src/pages/${name}/images`))
         // read vue template
-        const vueTpl = fs.readFileSync(path.resolve(__dirname, '../template/index.vue')).toString()
+        // const vueTpl = fs.readFileSync(path.resolve(__dirname, '../template/index.vue')).toString()
         // write vue template
-        fs.writeFileSync(path.resolve(__dirname, `../src/pages/${name}/index.page.vue`), vueTpl)
+        // fs.writeFileSync(path.resolve(__dirname, `../src/pages/${name}/index.page.vue`), vueTpl)
+        const tsxTpl = fs.readFileSync(path.resolve(__dirname, '../template/index.tsx')).toString()
+        fs.writeFileSync(path.resolve(__dirname, `../src/pages/${name}/index.page.tsx`), tsxTpl)
+
         // read serverjs
         let serverTpl = fs.readFileSync(path.resolve(__dirname, '../template/server.tpl')).toString()
 

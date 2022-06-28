@@ -1,6 +1,5 @@
 module.exports = {
-  content: ['./src/**/*.page.vue'],
+  content: ['./renderer/**/*.{jsx,tsx}', './src/**/*.page.{jsx,tsx}'],
   prefix: 'tw-',
-
   plugins: [],
 }

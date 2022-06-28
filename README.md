@@ -21,3 +21,7 @@ npm run start
 ## 💡 HOW
 
 https://www.yuque.com/docs/share/48935857-a4f1-4973-bec7-66eefd65b2cd?# 《vite + vue + ssr + mpa》
+
+## 2022-06-28
+
+### change vue to react, for better broswer compatibility

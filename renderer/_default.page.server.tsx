@@ -1,5 +1,5 @@
-import { renderToNodeStream } from 'vue/server-renderer'
-import { escapeInject, PageContextBuiltIn } from 'vite-plugin-ssr'
+import { renderToString, renderToReadableStream } from 'react-dom/server'
+import { escapeInject, PageContextBuiltIn, dangerouslySkipEscape } from 'vite-plugin-ssr'
 import { PageContext } from './types'
 import { createApp } from './createApp'
 import logoUrl from '/favicon.ico'
@@ -10,9 +10,11 @@ export const passToClient = ['pageProps', 'urlPathname', 'documentProps']
 
 // See https://vite-plugin-ssr.com/render
 export async function render(pageContext: PageContextBuiltIn & PageContext): Promise<any> {
-  // See https://v3.cn.vuejs.org/guide/ssr/getting-started.html
-  const app = createApp(pageContext)
-  const stream = renderToNodeStream(app)
+  // TODO: renderToPipeableStream Or renderToReadableStream
+  // https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
+  // nextjs: https://github.com/vercel/next.js/blob/HEAD/packages/next/server/node-web-streams-helper.ts#L148
+  // umijs: https://github.com/umijs/umi/blob/HEAD/packages/server/src/ssr.ts#L77
+  const pageHtml = renderToString(await createApp(pageContext))
 
   // See https://vite-plugin-ssr.com/head
   const { documentProps } = pageContext
@@ -36,7 +38,7 @@ export async function render(pageContext: PageContextBuiltIn & PageContext): Pro
       <title>${title}</title>
     </head>
     <body>
-      <div id="app">${stream}</div>
+      <div id="app">${dangerouslySkipEscape(pageHtml)}</div>
     </body>
   </html>`
 

@@ -1,10 +1,11 @@
 import { PluginOption, splitVendorChunkPlugin } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import react from '@vitejs/plugin-react'
+// import vue from '@vitejs/plugin-vue'
+// import vueJsx from '@vitejs/plugin-vue-jsx'
+// import setupName from './setupName'
 import ssr from 'vite-plugin-ssr/plugin'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import GlobPlugin from 'vite-plugin-glob'
-import setupName from './setupName'
 import progress from 'vite-plugin-progress'
 import colors from 'picocolors'
 // import mpa from './mpa'
@@ -14,12 +15,13 @@ let mounted = false
 
 export default function setupVitePlugins({ isBuild }: { isBuild: boolean; spa: boolean }) {
   const vitePlugins: PluginOption[] = [
-    vue(),
-    vueJsx(),
-    setupName(),
+    // vue(),
+    // vueJsx(),
+    // setupName(),
+    // mpa({ root: 'src/pages', mpa: !spa }),
+    react(),
     GlobPlugin(),
     ssr(),
-    // mpa({ root: 'src/pages', mpa: !spa }),
     splitVendorChunkPlugin(),
     progress(),
     {

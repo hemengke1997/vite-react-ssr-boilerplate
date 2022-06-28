@@ -7,5 +7,4 @@ module.exports = {
   semi: false,
   jsxSingleQuote: true,
   htmlWhitespaceSensitivity: 'strict',
-  vueIndentScriptAndStyle: true,
 }

@@ -1,4 +1,4 @@
-// env: broswer
+// environment: broswer
 
 // insert 百度统计
 export function insert_hm() {
