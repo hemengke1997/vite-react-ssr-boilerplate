@@ -1,7 +1,14 @@
-console.log('pc')
+import styles from './index.module.less'
 
-function MobileLayout({ children }: { children: React.ReactNode }) {
-  return <div className='layout'>{children}</div>
+import Header from './Header'
+
+function PCLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className={styles.pcLayout}>
+      <Header></Header>
+      {children}
+    </div>
+  )
 }
 
-export default MobileLayout
+export default PCLayout
