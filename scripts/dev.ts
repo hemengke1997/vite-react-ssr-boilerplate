@@ -9,6 +9,10 @@ enum Type {
   pc = 'pc',
 }
 
+function startServer(name: string) {
+  run('npm', ['run', 'ssr', `--page=${name}`])
+}
+
 function getSpecialsName() {
   inquirer
     .prompt([
@@ -26,7 +30,7 @@ function getSpecialsName() {
         const files = fs.readdirSync(path.resolve(__dirname, '../src/pages'))
         name = files[0]
         log.info(`💪  启动\n`)
-        run('npm', ['run', 'ssr', `--page=${name}`])
+        startServer(name)
         return
       }
       try {
@@ -34,7 +38,7 @@ function getSpecialsName() {
         fs.readdirSync(path.resolve(__dirname, `../src/pages/${(name as string).toLocaleLowerCase()}`))
         // dir exist, open server
         log.warn(`\n💫  [${name}]: 页面已存在,开启dev模式 👀 \n`)
-        run('npm', ['run', 'ssr', `--page=${name}`])
+        startServer(name)
       } catch {
         // pc or mobile
         let isMobile = false
@@ -86,7 +90,7 @@ function getSpecialsName() {
         )
 
         // start server
-        run('npm', ['run', 'ssr', `--page=${name}`])
+        startServer(name)
       }
     })
 }

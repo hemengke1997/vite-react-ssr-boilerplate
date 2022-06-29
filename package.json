@@ -6,7 +6,8 @@
     "build": "vite build && vite build --ssr",
     "ssr": "tsx server",
     "start:prod": "cross-env NODE_ENV=production tsx server",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "refresh": "taze"
   },
   "engines": {
     "node": ">=16.14.2"
@@ -18,7 +19,8 @@
     "clsx": "^1.1.1",
     "lodash-es": "^4.17.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-streaming": "^0.2.14"
   },
   "devDependencies": {
     "@minko-fe/postcss-px-to-viewport": "^0.0.1",

@@ -50,6 +50,7 @@ specifiers:
   prompts: ^2.4.2
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-streaming: ^0.2.14
   rollup: ^2.75.7
   shelljs: ^0.8.5
   tailwindcss: ^3.1.4
@@ -70,6 +71,7 @@ dependencies:
   lodash-es: 4.17.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-streaming: 0.2.14_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@minko-fe/postcss-px-to-viewport': 0.0.1_postcss@8.4.14
@@ -420,7 +422,6 @@ packages:
 
   /@brillout/json-s/0.4.6:
     resolution: {integrity: sha512-mDgMMNFSKyN9Fy0G4yQTcWwQ1BXUE65D3i3RXPX44xD5AuIU4QQDQBi+DKiEDCS6L6nEa2frC2lCUa/ob700Aw==}
-    dev: true
 
   /@brillout/libassert/0.5.8:
     resolution: {integrity: sha512-u/fu+jTRUdNdbLONGq1plCfh+k2/XjSbGVTfnF3rHnSPZd+ABWp0XinR5ifrFkyGOzMbzv8IiQ44lZ4U6ZGrGA==}
@@ -1715,7 +1716,6 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
-    dev: true
 
   /decompress-response/3.3.0:
     resolution: {integrity: sha512-BzRPQuY1ip+qDonAOz42gRm/pg9F768C+npV/4JOsxRC2sq+Rlk+Q4ZCAsOhnIaMrgarILY+RMUIvMmmX1qAEA==}
@@ -3242,6 +3242,11 @@ packages:
     resolution: {integrity: sha512-VjSeb/lHmkoyd8ryPVIKvOCn4D1koMqY+vqyjjUfc3xyKtP4dYOxM44sZrnqQSzSds3xyOrUTLTC9LVCVgLngw==}
     dev: true
 
+  /isbot-fast/1.2.0:
+    resolution: {integrity: sha512-twjuQzy2gKMDVfKGQyQqrx6Uy4opu/fiVUTTpdqtFsd7OQijIp5oXvb27n5EemYXaijh5fomndJt/SPRLsEdSg==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
@@ -3656,7 +3661,6 @@ packages:
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
-    dev: true
 
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -4416,6 +4420,21 @@ packages:
     resolution: {integrity: sha512-XP8A9BT0CpRBD+NYLLeIhld/RqG9+gktUjW1FkE+Vm7OCinbG1SshcK5tb9ls4kzvjZr9mOQc7HYgBngEyPAXg==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-streaming/0.2.14_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-r3DgQnaCe35DwkmxQC0B4xudLCiRYj8sRtqrPugbD1RcKP4i+0GenpUG+ZJCXClXgtsAHL6YTc14bj7JGHyP6g==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      '@brillout/json-s': 0.4.6
+      debug: 4.3.4
+      isbot-fast: 1.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
