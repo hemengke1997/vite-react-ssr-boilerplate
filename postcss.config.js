@@ -2,7 +2,7 @@ module.exports = () => {
   return {
     plugins: [
       require('autoprefixer'),
-      // require('tailwindcss'),
+      require('tailwindcss'),
       require('postcss-viewport-units'),
 
       // .class {
@@ -15,14 +15,13 @@ module.exports = () => {
       //   font-size: 20px;
       //   line-height: 30px;
       // }
-      require('@tcstory/postcss-px-to-viewport')({
+      require('@minko-fe/postcss-px-to-viewport')({
         unitToConvert: 'px',
         viewportWidth: 1920,
         unitPrecision: 5,
-        propList: ['*'],
+        propList: ['*', '!border'],
         viewportUnit: 'vw',
         fontViewportUnit: 'vw',
-        selectorBlackList: ['ignore'],
         minPixelValue: 1,
         mediaQuery: false,
         replace: true,
@@ -35,5 +34,3 @@ module.exports = () => {
     ],
   }
 }
-
-module.exports.postcss = true

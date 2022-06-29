@@ -15,14 +15,20 @@ function getSpecialsName() {
       {
         type: 'input',
         name: 'specialsName',
-        message: log.info(`请输入专题名?${colors.dim(colors.gray('(回车开发全部页面):'))}`, false),
-        default: 'all',
+        message: log.info(`请输入专题名?${colors.dim(colors.gray('(回车默认开发第一个页面):'))}`, false),
       },
     ])
     .then(async (res) => {
       const { specialsName } = res
-      const name = specialsName.replace(/\s/g, '')
+      let name = specialsName.replace(/\s/g, '')
 
+      if (!name) {
+        const files = fs.readdirSync(path.resolve(__dirname, '../src/pages'))
+        name = files[0]
+        log.info(`💪  启动\n`)
+        run('npm', ['run', 'ssr', `--page=${name}`])
+        return
+      }
       try {
         // case sensitive
         fs.readdirSync(path.resolve(__dirname, `../src/pages/${(name as string).toLocaleLowerCase()}`))
