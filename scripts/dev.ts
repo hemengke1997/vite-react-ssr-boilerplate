@@ -19,7 +19,7 @@ function getSpecialsName() {
       {
         type: 'input',
         name: 'specialsName',
-        message: log.info(`请输入专题名?${colors.dim(colors.gray('(回车默认开发第一个页面):'))}`, false),
+        message: log.info(`请输入页面名?${colors.dim(colors.gray('(回车默认开发第一个页面):'))}`, false),
       },
     ])
     .then(async (res) => {
