@@ -4,7 +4,7 @@ async function onBeforeRender() {
       documentProps: {
         title: 'a',
         isMobile: false,
-        layout: true
+        layout: true,
       },
     },
   }
