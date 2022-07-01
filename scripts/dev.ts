@@ -98,6 +98,6 @@ function getSpecialsName() {
 try {
   getSpecialsName()
 } catch {
-  log.error('😥 oops, some bug happened\n')
+  log.error('😥 oops, some bug occurred\n')
   process.exit(1)
 }
