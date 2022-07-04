@@ -5,8 +5,9 @@ import Header from './Header'
 function PCLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.pcLayout}>
-      {/* <Header></Header> */}
+      <Header></Header>
       {children}
+      <script type='text/javascript' src='./lib/flexible_pc.js'></script>
     </div>
   )
 }

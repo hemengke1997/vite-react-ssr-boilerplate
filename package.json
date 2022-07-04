@@ -65,6 +65,7 @@
     "open": "^8.4.0",
     "picocolors": "^1.0.0",
     "postcss": "^8.4.14",
+    "postcss-pxtorem-media": "^0.0.3",
     "postcss-viewport-units": "^0.1.6",
     "prettier": "^2.7.1",
     "prompts": "^2.4.2",

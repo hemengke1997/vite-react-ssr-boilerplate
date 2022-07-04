@@ -40,7 +40,6 @@ export async function render(pageContext: PageContextBuiltIn & PageContext): Pro
       <meta name="og:description" content="${desc}" />
       <meta property="og:description" content="${desc}" />
       <meta name="keywords" content="${keywords}" />
-      // TODO
       <meta property="og:url" content="TODO" />
       <meta property="og:site_name" content="TODO" />
       <meta property="og:image" content="TODO">

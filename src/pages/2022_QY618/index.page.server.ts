@@ -2,7 +2,7 @@ async function onBeforeRender() {
   return {
     pageContext: {
       documentProps: {
-        title: 'b',
+        title: 'a',
         isMobile: false,
         layout: true,
       },
