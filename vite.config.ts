@@ -17,7 +17,6 @@ export default ({ command }: ConfigEnv): UserConfig => {
     plugins: [
       setupVitePlugins({
         isBuild,
-        spa: false,
       }),
     ],
 

@@ -8,17 +8,11 @@ import legacy from '@vitejs/plugin-legacy'
 import GlobPlugin from 'vite-plugin-glob'
 import progress from 'vite-plugin-progress'
 import colors from 'picocolors'
-// import mpa from './mpa'
-// import configCompressPlugin from './compress'
 
 let mounted = false
 
-export default function setupVitePlugins({ isBuild }: { isBuild: boolean; spa: boolean }) {
+export default function setupVitePlugins({ isBuild }: { isBuild: boolean }) {
   const vitePlugins: PluginOption[] = [
-    // vue(),
-    // vueJsx(),
-    // setupName(),
-    // mpa({ root: 'src/pages', mpa: !spa }),
     react(),
     GlobPlugin(),
     ssr(),
@@ -51,8 +45,6 @@ export default function setupVitePlugins({ isBuild }: { isBuild: boolean; spa: b
         renderLegacyChunks: false,
       }),
     )
-
-  // isBuild && vitePlugins.push(configCompressPlugin('gzip', false))
 
   return vitePlugins
 }
