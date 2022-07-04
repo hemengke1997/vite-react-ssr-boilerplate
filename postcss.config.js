@@ -15,14 +15,13 @@ module.exports = () => {
       //   font-size: 20px;
       //   line-height: 30px;
       // }
-      require('postcss-px-to-viewport')({
+      require('@minko-fe/postcss-px-to-viewport')({
         unitToConvert: 'px',
         viewportWidth: 1920,
         unitPrecision: 5,
         propList: ['*'],
         viewportUnit: 'vw',
         fontViewportUnit: 'vw',
-        selectorBlackList: ['ignore'],
         minPixelValue: 1,
         mediaQuery: false,
         replace: true,
@@ -35,5 +34,3 @@ module.exports = () => {
     ],
   }
 }
-
-module.exports.postcss = true

@@ -9,26 +9,36 @@ enum Type {
   pc = 'pc',
 }
 
+function startServer(name: string) {
+  run('npm', ['run', 'ssr', `--page=${name}`])
+}
+
 function getSpecialsName() {
   inquirer
     .prompt([
       {
         type: 'input',
         name: 'specialsName',
-        message: log.info(`请输入专题名?(${colors.bgBlue('回车开发全部页面')}):`, false),
-        default: 'all',
+        message: log.info(`请输入页面名?${colors.dim(colors.gray('(回车默认开发第一个页面):'))}`, false),
       },
     ])
     .then(async (res) => {
       const { specialsName } = res
-      const name = specialsName.replace(/\s/g, '')
+      let name = specialsName.replace(/\s/g, '')
 
+      if (!name) {
+        const files = fs.readdirSync(path.resolve(__dirname, '../src/pages'))
+        name = files[0]
+        log.info(`💪  启动\n`)
+        startServer(name)
+        return
+      }
       try {
         // case sensitive
         fs.readdirSync(path.resolve(__dirname, `../src/pages/${(name as string).toLocaleLowerCase()}`))
         // dir exist, open server
-        log.warn(`💡[${name}]：页面已存在，开启dev模式🦾 \n`)
-        run('npm', ['run', 'ssr', `--page=${name}`])
+        log.warn(`\n💫  [${name}]: 页面已存在,开启dev模式 👀 \n`)
+        startServer(name)
       } catch {
         // pc or mobile
         let isMobile = false
@@ -51,7 +61,7 @@ function getSpecialsName() {
           isMobile,
         }
 
-        log.info(`🤖[${name}]：创建页面中...🎈\n`)
+        log.info(`\n🤖 [${name}]:创建页面中...🎈\n`)
         // make dir
         fs.mkdirSync(path.resolve(__dirname, `../src/pages/${name}`))
         // make images dir
@@ -60,6 +70,7 @@ function getSpecialsName() {
         const vueTpl = fs.readFileSync(path.resolve(__dirname, '../template/index.vue')).toString()
         // write vue template
         fs.writeFileSync(path.resolve(__dirname, `../src/pages/${name}/index.page.vue`), vueTpl)
+
         // read serverjs
         let serverTpl = fs.readFileSync(path.resolve(__dirname, '../template/server.tpl')).toString()
 
@@ -71,10 +82,13 @@ function getSpecialsName() {
         fs.writeFileSync(path.resolve(__dirname, `../src/pages/${name}/index.page.server.ts`), serverTpl)
 
         log.success(
-          `✨模板创建成功，在 [${colors.underline(
-            `src/pages/${name}/index.page.vue`,
-          )}](ctrl + 单击跳转)\n开始愉快的开发吧~😊`,
+          `✅ 模板创建成功，在 [${colors.underline(
+            `src/pages/${name}/index.page.tsx`,
+          )}](ctrl + 单击跳转)\n开始愉快的开发吧~ ✨\n`,
         )
+
+        // start server
+        startServer(name)
       }
     })
 }
@@ -82,5 +96,6 @@ function getSpecialsName() {
 try {
   getSpecialsName()
 } catch {
+  log.error('😥 oops, some bug happened\n')
   process.exit(1)
 }

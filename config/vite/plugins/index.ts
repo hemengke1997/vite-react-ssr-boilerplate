@@ -4,19 +4,38 @@ import ssr from 'vite-plugin-ssr/plugin'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import GlobPlugin from 'vite-plugin-glob'
-import setupName from './setupName'
-// import mpa from './mpa'
-// import configCompressPlugin from './compress'
+import progress from 'vite-plugin-progress'
+import vueSetupExtend from 'vite-plugin-vue-setup-extend'
+import colors from 'picocolors'
 
-export default function setupVitePlugins({ isBuild }: { isBuild: boolean; spa: boolean }) {
+let mounted = false
+
+export default function setupVitePlugins({ isBuild }: { isBuild: boolean }) {
   const vitePlugins: PluginOption[] = [
     vue(),
     vueJsx(),
-    setupName(),
+    vueSetupExtend(),
     GlobPlugin(),
     ssr(),
-    // mpa({ root: 'src/pages', mpa: !spa }),
     splitVendorChunkPlugin(),
+    progress(),
+    {
+      name: 'vite:log-real-server-time',
+      apply: 'serve',
+      transformIndexHtml(_, { server }) {
+        if (!mounted) {
+          const info = server!.config.logger.info
+
+          const viteStartTime = global.__vite_server_start_time ?? false
+          const startupDurationString = viteStartTime
+            ? colors.dim(`ready in ${colors.white(colors.bold(Math.ceil(performance.now() - viteStartTime)))} ms`)
+            : ''
+
+          info(`\n🍃 ${colors.green(`${colors.bold('VITE')}`)}  ${startupDurationString}\n`)
+          mounted = true
+        }
+      },
+    },
   ]
 
   isBuild &&
@@ -27,8 +46,6 @@ export default function setupVitePlugins({ isBuild }: { isBuild: boolean; spa: b
         renderLegacyChunks: false,
       }),
     )
-
-  // isBuild && vitePlugins.push(configCompressPlugin('gzip', false))
 
   return vitePlugins
 }

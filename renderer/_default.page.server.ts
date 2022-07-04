@@ -26,12 +26,23 @@ export async function render(pageContext: PageContextBuiltIn & PageContext): Pro
   <html lang="zh-CN">
     <head>
       <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
       <link rel="icon" href="${logoUrl}" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0${
         isMobile ? ', maximum-scale=1.0, user-scalable=no' : ''
       }" />
       <meta name="description" content="${desc}" />
+      <meta property="description" content="${desc}" />
+      <meta name="og:description" content="${desc}" />
+      <meta property="og:description" content="${desc}" />
       <meta name="keywords" content="${keywords}" />
+      <meta property="og:url" content="TODO" />
+      <meta property="og:site_name" content="TODO" />
+      <meta property="og:image" content="TODO">
+      <meta name="page_title" content="${title}" />
+      <meta property="page_title" content="${title}" />
+      <meta name="og:title" content="${title}" />
+      <meta property="og:title" content="${title}" />
       <title>${title}</title>
     </head>
     <body>

@@ -18,11 +18,5 @@
       "@root/*": ["./*"]
     }
   },
-  "exclude": ["node_modules", "dist", "**/*.js"],
-  "ts-node": {
-    "transpileOnly": true,
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  "exclude": ["node_modules", "dist", "**/*.js"]
 }
