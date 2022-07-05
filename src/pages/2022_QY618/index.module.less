@@ -1,5 +1,201 @@
+
+.pcBg(@name) {
+  background-image: url("./images/@{name}");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.ab(@width, @height, @top, @left) {
+  position: absolute;
+  width: @width,;
+  height: @height;
+  top: @top;
+  left: @left;
+}
+:global(.highlight) {
+  color: #ffe400;
+}
 .specials {
-  color: red;
-  margin-top: 90px;
-  display: block;
+  margin: 0 auto;
+  padding-top: 90px;
+  min-width: 1300px;
+  max-width: 1920px;
+  width: 100%;
+  color: #ffffff;
+  .panel {
+    z-index: 2;
+    position: relative;
+  }
+}
+.p1 {
+  height: 872px;
+ .pcBg('2022_QY618_bg1.png');
+}
+.p2 {
+  height: 756px;
+  .pcBg('2022_QY618_bg2.png');
+  .btnBuy {
+    .ab(132px, 49px, 554px, 396px);
+    .pcBg('2022_QY618_button-yellow.png');
+    cursor: pointer;
+
+    &.buy1 {
+      .pcBg('2022_QY618_button-red.png');
+    }
+
+    &.buy2 {
+      left: 645px;
+    }
+
+    &.buy3 {
+      left: 892px;
+    }
+    
+    &.buy4 {
+      left: 1139px;
+    }
+
+    &.buy5 {
+      left: 1389px;
+    }
+  }
+  .desc {
+    position: absolute;
+    top: 356px;
+    font-style: italic;
+    line-height: 24px;
+    font-size: 0px;
+    font-family: Source Han Sans CN;
+    span {
+      font-size: 15px;
+    }
+  }
+  .desc1 {
+    left: 416px;
+  }
+  .desc2 {
+    left: 662px;
+  }
+}
+.p3 {
+  height: 668px;
+  .pcBg('2022_QY618_bg3.png');
+  .btnBuy {
+    .ab(215px, 54px, 473px, 785px);
+    cursor: pointer;
+    &.buy1 {
+      .pcBg('2022_QY618_button-pink.png');
+    }
+    &.buy2 {
+      .pcBg('2022_QY618_button-blue.png');
+      left: 1376px;
+    }
+  }
+  .left {
+    position: absolute;
+    font-size: 18px;
+    left: 809px;
+    top: 415px;
+    font-size: 0;
+    span {
+      font-size: 18px;
+      &:first-child {
+        margin-right: 30px;
+      }
+    }
+  }
+  .right {
+    position: absolute;
+    left: 1399px;
+    top: 415px;
+    font-size: 0;
+    span {
+      font-size: 18px;
+      &:first-child {
+        margin-right: 30px;
+      }
+    }
+  }
+}
+.p4 {
+  height: 767px;
+  position: relative;
+  .pcBg('2022_QY618_bg4.png');
+
+  .btnBuy {
+    .ab(132px, 49px, 570px, 525px);
+    cursor: pointer;
+    &.buy2 {
+      left: 775px;
+    }
+    &.buy3 {
+      left: 1022px;
+    }
+    &.buy4 {
+      left: 1270px;
+    }
+  }
+}
+.p5 {
+  height: 638px;
+  position: relative;
+  .pcBg('2022_QY618_bg5.png');
+  .desc {
+    position: absolute;
+    top: 210px;
+    left: 696px;
+    max-width: 834px;
+    font-size: 18px;
+    line-height: 1.67;
+  }
+}
+.hashContainer {
+  position: fixed;
+  top: 140px;
+  right: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+
+  .hash {
+    width: 230px;
+    height: 124px;
+    transform: scale(0.8);
+    cursor: pointer;
+
+    &.hash1 {
+      .pcBg('2022_QY618-hash1.png');
+      &:hover,
+      &.active {
+        .pcBg('2022_QY618-hash1-active.png');
+      }
+    }
+    &.hash2 {
+      .pcBg('2022_QY618-hash2.png');
+      &:hover,
+      &.active {
+        .pcBg('2022_QY618-hash2-active.png');
+      }
+    }
+    &.hash3 {
+      .pcBg('2022_QY618-hash3.png');
+      &:hover,
+      &.active {
+        .pcBg('2022_QY618-hash3-active.png');
+      }
+    }
+  }
+
+  .toTop {
+    width: 53px;
+    height: 53px;
+    margin-top: 30px;
+    cursor: pointer;
+    .pcBg('2022_QY618-to-top.png');
+
+    &:hover {
+      .pcBg('2022_QY618-to-top-active.png');
+    }
+  }
 }

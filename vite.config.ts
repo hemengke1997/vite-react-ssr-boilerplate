@@ -27,7 +27,14 @@ export default ({ command }: ConfigEnv): UserConfig => {
         '@root': process.cwd(),
       },
     },
-
+    css: {
+      preprocessorOptions: {
+        less: {
+          charset: false,
+          additionalData: '@import "@/assets/style/common.less";',
+        },
+      },
+    },
     publicDir: path.resolve(process.cwd(), 'public'),
     root: Config.root,
     server: {},

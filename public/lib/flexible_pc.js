@@ -98,7 +98,7 @@
   );
   win.addEventListener(
     'pageshow',
-    function(e) {
+    function (e) {
       if (e.persisted) {
         clearTimeout(tid);
         tid = setTimeout(refreshRem, 300);
@@ -106,13 +106,17 @@
     },
     false
   );
-
+  if (doc.readyState !== 'complete') { 
+    doc.body.style.display = 'none';
+  }
   if (doc.readyState === 'complete') {
+    doc.body.style.display = 'block';
     doc.body.style.fontSize = 12 * dpr + 'px';
   } else {
+    console.log(dpr)
     doc.addEventListener(
       'DOMContentLoaded',
-      function(e) {
+      function (e) {
         doc.body.style.fontSize = 12 * dpr + 'px';
       },
       false
