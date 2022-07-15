@@ -28,7 +28,7 @@ const Header: React.FC = () => {
       text: '公告',
     },
   ]
-  const [isShowLoginModal, setIsShowLoginModal] = useState(true)
+  const [isShowLoginModal, setIsShowLoginModal] = useState(false)
   const toLogin = () => {
     setIsShowLoginModal(true)
   }
