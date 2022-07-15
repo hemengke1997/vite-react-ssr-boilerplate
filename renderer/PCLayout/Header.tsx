@@ -1,6 +1,6 @@
 import styles from './index.module.less'
 import clsx from 'clsx'
-
+import { useState } from 'react'
 const Header: React.FC = () => {
   const menus = [
     {
@@ -28,7 +28,42 @@ const Header: React.FC = () => {
       text: '公告',
     },
   ]
-
+  const [isShowLoginModal, setIsShowLoginModal] = useState(true)
+  const toLogin = () => {
+    setIsShowLoginModal(true)
+  }
+  const LoginModal = () => {
+    return (
+      <div className={styles.login_modal}>
+        <div className={styles.modal_container}>
+          <span className={styles.close}></span>
+          <input type='text' placeholder='手机号码/邮箱' />
+          <input type='text' placeholder='密码' />
+          {/* <div className={styles.sms_login_wrapper}>
+            <button className={`${styles.login_sms_send_btn} ${styles.disabled}`} disabled>
+              发送验证码
+            </button>
+          </div> */}
+          {/* <div id='geetest-box'></div> */}
+          <div className={styles.check_type_wrapper}>
+            <div className={styles.login_type}>短信验证码登录</div>
+            <a href='/forgot-password' className={styles.forget_pass}>
+              忘记密码？
+            </a>
+          </div>
+          <button className={styles.modal_login_btn}>登录</button>
+          <p className={styles.tip}>
+            <span>
+              没有奇游账号？
+              <a href='/register' target='_blank' className={styles.modal_reg}>
+                立即注册
+              </a>
+            </span>
+          </p>
+        </div>
+      </div>
+    )
+  }
   return (
     <header className={clsx(styles.header)}>
       <div className={clsx(styles.headerContent)}>
@@ -42,7 +77,9 @@ const Header: React.FC = () => {
         </div>
         <div className={styles.login_cont}>
           <div className={styles.menu_btn}>
-            <a className={styles.login}>登录</a>
+            <a className={styles.login} onClick={() => toLogin()}>
+              登录
+            </a>
             <a className={styles.download_btn} target='_blank' href=''>
               下载PC客户端
             </a>
@@ -63,32 +100,7 @@ const Header: React.FC = () => {
             </div>
           </div> */}
         </div>
-        {/* <div className='login-modal'>
-          <div className='modal-container'>
-            <span className='close'></span>
-            <div className='sms-login-wrapper'>
-              <button className='login-sms-send-btn disabled' disabled>
-                发送验证码
-              </button>
-            </div>
-            <div id='geetest-box'></div>
-            <div className='check-type-wrapper'>
-              <div className='login-type'>短信验证码登录</div>
-              <a href='/forgot-password' className='forget-pass'>
-                忘记密码？
-              </a>
-            </div>
-            <button className='modal-login-btn'>登录</button>
-            <p className='tip'>
-              <span>
-                没有奇游账号？
-                <a href='/register' target='_blank' className='modal-reg'>
-                  立即注册
-                </a>
-              </span>
-            </p>
-          </div>
-        </div> */}
+        {isShowLoginModal ? <LoginModal></LoginModal> : ''}
       </div>
     </header>
   )
