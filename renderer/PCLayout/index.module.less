@@ -7,12 +7,11 @@
     width: 100%;
     height: 90px;
     background: linear-gradient(90deg, #243442, #000);
-
+    font-size: 14px;
     .headerContent {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      align-content: space-between;
       flex-wrap: nowrap;
       margin: 0 auto;
       /* px-to-rem-ignore-next */
@@ -33,10 +32,8 @@
     .menus {
       display: flex;
       flex: 1;
-      display: flex;
       justify-content: flex-start;
       align-items: center;
-
       .menu {
         padding: 15px 12px;
         margin: 0 5px;
@@ -51,6 +48,35 @@
           border-color: #FF9800;
         }
       }
+    }
+    .login_cont{
+      font-size: 14px;
+      color: #fff;
+      
+      .menu_btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .login{
+          cursor:pointer;
+          margin-right: 30px;
+        }
+        .download_btn{
+          display: inline-block;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 130px;
+          height: 38px;
+          border:1px solid #FF9800;
+          line-height:38px;
+          border-radius:19px;
+          &:hover{
+            background-color:#FF9800;
+          }
+        }
+      }
+
     }
   }
 

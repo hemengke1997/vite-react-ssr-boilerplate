@@ -40,14 +40,14 @@ const Header: React.FC = () => {
             </a>
           ))}
         </div>
-        <div className='login-cont'>
-          <div className='menu-btns'>
-            <a className='login'>登录</a>
-            <a className='download-btn' target='_blank' href=''>
+        <div className={styles.login_cont}>
+          <div className={styles.menu_btn}>
+            <a className={styles.login}>登录</a>
+            <a className={styles.download_btn} target='_blank' href=''>
               下载PC客户端
             </a>
           </div>
-          <div className='user-info'>
+          {/* <div className='user-info'>
             <div className='avatar-container'>
               <div className='avatar'></div>
               <a href='/member/center' className='user-account'></a>
@@ -61,23 +61,16 @@ const Header: React.FC = () => {
                 退出
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className='login-modal'>
+        {/* <div className='login-modal'>
           <div className='modal-container'>
             <span className='close'></span>
-            {/* <label for="username">
-        <input type="text" id="username" className="user-name" autocomplete="off" placeholder="手机号码/邮箱">
-      </label> */}
             <div className='sms-login-wrapper'>
-              {/* <input type="test" className="login-sms-input" autocomplete="off" placeholder="验证码"/> */}
               <button className='login-sms-send-btn disabled' disabled>
                 发送验证码
               </button>
             </div>
-            {/* <label for="userpass" className="user-pass-wrapper show"> */}
-            {/* <input type="password" id="userpass" className="user-pass" autocomplete="new-password" placeholder="密码"> */}
-            {/* </label> */}
             <div id='geetest-box'></div>
             <div className='check-type-wrapper'>
               <div className='login-type'>短信验证码登录</div>
@@ -95,7 +88,7 @@ const Header: React.FC = () => {
               </span>
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </header>
   )
