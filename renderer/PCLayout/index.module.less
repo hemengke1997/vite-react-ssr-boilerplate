@@ -1,4 +1,3 @@
-@import './Less/common.less';
 .pcLayout {
   .header {
     position: fixed;
@@ -9,6 +8,7 @@
     height: 90px;
     background: linear-gradient(90deg, #243442, #000);
     font-size: 14px;
+
     .headerContent {
       display: flex;
       justify-content: space-between;
@@ -35,6 +35,7 @@
       flex: 1;
       justify-content: flex-start;
       align-items: center;
+
       .menu {
         padding: 15px 12px;
         margin: 0 5px;
@@ -50,39 +51,45 @@
         }
       }
     }
-    .login_cont{
+
+    .login_cont {
       font-size: 14px;
       color: #fff;
-      
-      .menu_btn{
+
+      .menu_btn {
         display: flex;
         justify-content: center;
         align-items: center;
-        .login{
-          cursor:pointer;
+
+        .login {
+          cursor: pointer;
           margin-right: 30px;
-          &:hover{
+
+          &:hover {
             color: #FF9800;
           }
         }
-        .download_btn{
+
+        .download_btn {
           display: inline-block;
           display: flex;
           align-items: center;
           justify-content: center;
           width: 130px;
           height: 38px;
-          border:1px solid #FF9800;
-          line-height:38px;
-          border-radius:19px;
-          &:hover{
-            background-color:#FF9800;
+          border: 1px solid #FF9800;
+          line-height: 38px;
+          border-radius: 19px;
+
+          &:hover {
+            background-color: #FF9800;
           }
         }
       }
 
     }
-    .login_modal{
+
+    .login_modal {
       position: fixed;
       top: 0;
       left: 0;
@@ -92,7 +99,8 @@
       justify-content: center;
       background-color: rgba(0, 0, 0, 0.08);
       display: flex;
-      .modal_container{
+
+      .modal_container {
         position: relative;
         width: 440px;
         background: #31394c;
@@ -101,8 +109,10 @@
         padding: 102px 50px 60px 50px;
         box-sizing: border-box;
         box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.06);
-        // padding-bottom: 40px; 
-        input{
+        padding-bottom: 40px;
+
+        // padding-bottom: 40px;
+        input {
           width: 100%;
           height: 46px;
           outline: none;
@@ -111,7 +121,7 @@
           color: #202020;
           padding-left: 20px;
           font-size: 14px;
-          box-sizing: border-box; 
+          box-sizing: border-box;
           margin-bottom: 20px;
         }
         .sms_login{
@@ -153,25 +163,29 @@
           background-size: 100%;
           content: '';
           cursor: pointer;
-          .bg('./images/login_modal_close.png');
+          background-image: url('./images/login_modal_close.png');
         }
-        .check_type_wrapper{
+
+        .check_type_wrapper {
           display: flex;
           width: 100%;
           justify-content: space-between;
           font-size: 14px;
           font-weight: 400;
           line-height: 20px;
-          .login_type{
+
+          .login_type {
             color: #ff8900;
-            cursor: pointer; 
+            cursor: pointer;
           }
-          .forget_pass{
-            color: #acafb8; 
+
+          .forget_pass {
+            color: #acafb8;
             text-decoration: underline;
           }
         }
-        .modal_login_btn{
+
+        .modal_login_btn {
           width: 100%;
           height: 46px;
           background: #4a5161;
@@ -186,7 +200,8 @@
           outline: none;
           cursor: pointer;
         }
-        .tip{
+
+        .tip {
           width: 100%;
           height: 20px;
           display: flex;
@@ -195,13 +210,14 @@
           font-size: 14px;
           line-height: 20px;
           padding: 10px 0px;
-          .modal_reg{
+
+          .modal_reg {
             display: inline-block;
             color: #FC7400;
           }
         }
       }
-      
+
     }
   }
 

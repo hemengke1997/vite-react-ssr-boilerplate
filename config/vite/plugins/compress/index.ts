@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
 import compressPlugin from 'vite-plugin-compression'
 
-export default function configCompressPlugin(
+export function configCompressPlugin(
   compress: 'gzip' | 'brotli' | 'none',
   deleteOriginFile = false,
 ): Plugin | Plugin[] {

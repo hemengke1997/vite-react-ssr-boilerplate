@@ -12,5 +12,4 @@ LICENSE
 .eslintcache
 *.lock
 yarn-error.log
-CNAME
 /public

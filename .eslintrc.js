@@ -24,6 +24,13 @@ module.exports = defineConfig({
   // "error" or 2 - turn the rule on as an error (exit code will be 1)
   rules: {
     'prettier/prettier': ['warn', { singleQuote: true, jsxSingleQuote: true, semi: false }],
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'ExportDefaultDeclaration',
+        message: 'Prefer named exports',
+      },
+    ],
     'arrow-body-style': 'off',
     'prefer-arrow-callback': 'off',
     '@typescript-eslint/no-var-requires': 'off',

@@ -7,5 +7,6 @@
   },
   "[css]": {
     "editor.defaultFormatter": null
-  }
+  },
+  "npm.packageManager": "pnpm"
 }

@@ -1,5 +1,7 @@
 import React from 'react'
+// import { ReactStreaming } from 'react-streaming/client'
 import type { PageContext } from './types'
+import { SWRConfig } from 'swr'
 
 async function createApp(pageContext: PageContext) {
   const { Page, pageProps, documentProps } = pageContext
@@ -11,9 +13,14 @@ async function createApp(pageContext: PageContext) {
   const Tpl = documentProps?.layout || typeof documentProps?.layout === 'undefined' ? Layout : React.Fragment
 
   return (
-    <Tpl>
-      <Page {...pageProps} />
-    </Tpl>
+    // <ReactStreaming>
+    <SWRConfig>
+      <Tpl>
+        <Page {...pageProps} />
+      </Tpl>
+    </SWRConfig>
+
+    // </ReactStreaming>
   )
 }
 

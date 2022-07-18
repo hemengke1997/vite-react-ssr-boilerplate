@@ -2,7 +2,7 @@ import { renderToString } from 'react-dom/server'
 import { escapeInject, PageContextBuiltIn, dangerouslySkipEscape } from 'vite-plugin-ssr'
 import { PageContext } from './types'
 import { createApp } from './createApp'
-import logoUrl from '/favicon.ico'
+// import { renderToStream } from 'react-streaming/server'
 
 // See https://vite-plugin-ssr.com/passToClient
 // NOTE: this is important
@@ -15,6 +15,7 @@ export async function render(pageContext: PageContextBuiltIn & PageContext): Pro
   // nextjs: https://github.com/vercel/next.js/blob/HEAD/packages/next/server/node-web-streams-helper.ts#L148
   // umijs: https://github.com/umijs/umi/blob/HEAD/packages/server/src/ssr.ts#L77
   // 观望中... 目前没有比较好的实践
+  // const pageHtml = await renderToStream(await createApp(pageContext))
   const pageHtml = renderToString(await createApp(pageContext))
 
   // See https://vite-plugin-ssr.com/head
@@ -26,12 +27,12 @@ export async function render(pageContext: PageContextBuiltIn & PageContext): Pro
   const isMobile = documentProps?.isMobile
 
   // See https://vite-plugin-ssr.com/escapeInject
-  const documentHtml = escapeInject`<!DOCTYPE html>
+  const documentHtml = escapeInject/*html*/ `<!DOCTYPE html>
   <html lang="zh-CN">
     <head>
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-      <link rel="icon" href="${logoUrl}" />
+      <link rel="icon" href="/favicon.ico" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0${
         isMobile ? ', maximum-scale=1.0, user-scalable=no' : ''
       }" />
@@ -52,11 +53,11 @@ export async function render(pageContext: PageContextBuiltIn & PageContext): Pro
     <body>
       <div id="app">${dangerouslySkipEscape(pageHtml)}</div>
     </body>
+    <script src="./lib/flexible_pc.js"></script>
   </html>`
 
   return {
     documentHtml,
-    // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection'
     // https://vite-plugin-ssr.com/pageContext#custom
     pageContext: {
       documentProps,
