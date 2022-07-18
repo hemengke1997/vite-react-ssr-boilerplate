@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react'
 import clsx from 'clsx'
+import { useRef, useState } from 'react'
 import { trackEvent } from '@/utils/hmt'
 import { useMount } from 'react-use'
-import styles from './index.module.less'
 import { axiosRequest } from '@/service/index'
+import styles from './index.module.less'
 
 const AID = 119 // 折扣活动
 
@@ -50,6 +50,7 @@ const PACKAGES = {
     pointsName: '2022官网618活动_PC_移动端会员月卡',
   },
 }
+
 export function Page() {
   const hashOne = useRef<HTMLDivElement | null>(null)
   const hashTwo = useRef<HTMLDivElement | null>(null)

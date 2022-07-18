@@ -29,14 +29,24 @@ const Header: React.FC = () => {
     },
   ]
   const [isShowLoginModal, setIsShowLoginModal] = useState(false)
-  const toLogin = () => {
-    setIsShowLoginModal(true)
+  const controlLoginModal = (val: boolean) => {
+    setIsShowLoginModal(val)
   }
-  const LoginModal = () => {
+  const toLoginBtn = () => {
+    console.log('去登录')
+  }
+  const LoginModal = (props: any) => {
+    const { changeLoginModalFuc, toLoginFuc } = props
+    const changeLoginModalStatus = (val: any) => {
+      changeLoginModalFuc(val)
+    }
+    const toLogin = () => {
+      toLoginFuc()
+    }
     return (
       <div className={styles.login_modal}>
         <div className={styles.modal_container}>
-          <span className={styles.close}></span>
+          <span className={styles.close} onClick={() => changeLoginModalStatus(false)}></span>
           <input type='text' placeholder='手机号码/邮箱' />
           <input type='text' placeholder='密码' />
           {/* <div className={styles.sms_login_wrapper}>
@@ -51,7 +61,9 @@ const Header: React.FC = () => {
               忘记密码？
             </a>
           </div>
-          <button className={styles.modal_login_btn}>登录</button>
+          <button className={styles.modal_login_btn} onClick={() => toLogin()}>
+            登录
+          </button>
           <p className={styles.tip}>
             <span>
               没有奇游账号？
@@ -77,7 +89,7 @@ const Header: React.FC = () => {
         </div>
         <div className={styles.login_cont}>
           <div className={styles.menu_btn}>
-            <a className={styles.login} onClick={() => toLogin()}>
+            <a className={styles.login} onClick={() => controlLoginModal(true)}>
               登录
             </a>
             <a className={styles.download_btn} target='_blank' href=''>
@@ -100,7 +112,11 @@ const Header: React.FC = () => {
             </div>
           </div> */}
         </div>
-        {isShowLoginModal ? <LoginModal></LoginModal> : ''}
+        {isShowLoginModal ? (
+          <LoginModal changeLoginModalFuc={controlLoginModal} toLoginFuc={toLoginBtn}></LoginModal>
+        ) : (
+          ''
+        )}
       </div>
     </header>
   )
