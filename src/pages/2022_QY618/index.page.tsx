@@ -1,7 +1,8 @@
 import styles from './index.module.less'
 import cns from 'classnames'
 import { trackEvent } from '@/utils'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { loginStatus } from '../../../config/apiConfig/api.js'
 interface SelfPageProps {
   PACKAGES: object
 }
@@ -13,6 +14,11 @@ export function Page(props: SelfPageProps) {
   const hashClickHandler = () => {
     console.dir(hashOne.current)
   }
+  useEffect(() => {
+    loginStatus({}).then((res: any) => {
+      console.log(res, 'res')
+    })
+  })
   return (
     <>
       <div className={cns(styles.specials, 'tw-flex', 'tw-flex-col')}>
