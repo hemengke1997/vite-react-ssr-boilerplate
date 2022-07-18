@@ -1,6 +1,7 @@
 import styles from './index.module.less'
 import clsx from 'clsx'
 import { useState } from 'react'
+import { divide } from 'lodash-es'
 const Header: React.FC = () => {
   const menus = [
     {
@@ -29,26 +30,58 @@ const Header: React.FC = () => {
     },
   ]
   const [isShowLoginModal, setIsShowLoginModal] = useState(false)
+  const [currentTb, setCurrentTab] = useState(1)
+
   const controlLoginModal = (val: boolean) => {
     setIsShowLoginModal(val)
   }
   const toLoginBtn = () => {
     console.log('去登录')
   }
+  const changeCurrentTab = (val: number) => {
+    console.log(val, 'currentTab')
+    setCurrentTab(val)
+  }
   const LoginModal = (props: any) => {
-    const { changeLoginModalFuc, toLoginFuc } = props
+    const { currentTab, changeLoginModalFuc, toLoginFuc, loginByMessageFuc } = props
     const changeLoginModalStatus = (val: any) => {
       changeLoginModalFuc(val)
     }
     const toLogin = () => {
       toLoginFuc()
     }
+    const loginByMessage = () => {
+      loginByMessageFuc(2)
+    }
+    const InputBox = () => {
+      let inputBox
+      if (currentTab == 1) {
+        inputBox = (
+          <div className={styles.inputBox}>
+            <input type='text' placeholder='手机号码/邮箱' />
+            <input type='text' placeholder='密码' />
+          </div>
+        )
+      } else {
+        inputBox = (
+          <div className={styles.inputBox}>
+            <input type='text' placeholder='手机' />
+            <div className={styles.sms_login}>
+              <input type='text' placeholder='验证码' />
+              <button>发送验证码</button>
+            </div>
+          </div>
+        )
+      }
+      return inputBox
+    }
     return (
       <div className={styles.login_modal}>
         <div className={styles.modal_container}>
           <span className={styles.close} onClick={() => changeLoginModalStatus(false)}></span>
-          <input type='text' placeholder='手机号码/邮箱' />
-          <input type='text' placeholder='密码' />
+          <InputBox></InputBox>
+          {/* <input type='text' placeholder='手机号码/邮箱' />
+          <input type='text' placeholder='密码' /> */}
           {/* <div className={styles.sms_login_wrapper}>
             <button className={`${styles.login_sms_send_btn} ${styles.disabled}`} disabled>
               发送验证码
@@ -56,7 +89,14 @@ const Header: React.FC = () => {
           </div> */}
           {/* <div id='geetest-box'></div> */}
           <div className={styles.check_type_wrapper}>
-            <div className={styles.login_type}>短信验证码登录</div>
+            <div
+              className={styles.login_type}
+              onClick={() => {
+                loginByMessage()
+              }}
+            >
+              {currentTab == 1 ? '短信验证码登录' : '账号密码登录'}
+            </div>
             <a href='/forgot-password' className={styles.forget_pass}>
               忘记密码？
             </a>
@@ -113,7 +153,12 @@ const Header: React.FC = () => {
           </div> */}
         </div>
         {isShowLoginModal ? (
-          <LoginModal changeLoginModalFuc={controlLoginModal} toLoginFuc={toLoginBtn}></LoginModal>
+          <LoginModal
+            currentTab={currentTb}
+            changeLoginModalFuc={controlLoginModal}
+            toLoginFuc={toLoginBtn}
+            loginByMessageFuc={changeCurrentTab}
+          ></LoginModal>
         ) : (
           ''
         )}
