@@ -6,6 +6,8 @@ import { getMPAIO, getHistoryReWriteRuleList, getFirstPage } from './lib/utils'
 /**
  * @see https://github.com/IndexXuan/vite-plugin-mpa
  */
+
+// eslint-disable-next-line no-restricted-syntax
 export default function mpa(userOptions: UserOptions = {}): Plugin {
   const options = {
     open: '',

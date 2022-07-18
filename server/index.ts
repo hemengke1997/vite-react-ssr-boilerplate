@@ -1,10 +1,11 @@
 import express, { Application } from 'express'
 import compression from 'compression'
 import colors from 'picocolors'
-import { createPageRenderer } from 'vite-plugin-ssr'
+import { renderPage } from 'vite-plugin-ssr'
 import { openBrowser } from './openBrowser'
 import { log } from '../scripts/utils'
 import { performance } from 'perf_hooks'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
 const isProd = process.env.NODE_ENV === 'production'
 const root = `${__dirname}/..`
@@ -14,10 +15,10 @@ async function startServer() {
 
   const app = express()
   app.use(compression())
-
+  debugger
   let viteDevServer
   if (isProd) {
-    // See https://expressjs.com/zh-cn/starter/static-files.html
+    // const sirv = require('sirv')
     app.use(express.static(`${root}/dist/client`))
   } else {
     // dev
@@ -25,20 +26,21 @@ async function startServer() {
       viteDevServer = await vite.createServer({
         root,
         server: {
-          middlewareMode: 'ssr',
+          middlewareMode: true,
         },
       })
       app.use(viteDevServer.middlewares)
     })
-  }
 
-  // See https://vite-plugin-ssr.com/createPageRenderer
-  const renderPage = createPageRenderer({
-    viteDevServer,
-    isProduction: isProd,
-    root,
-    outDir: 'dist',
-  })
+    app.use(
+      '/api',
+      createProxyMiddleware({
+        target: 'http://webtest.qiyou.cn',
+        secure: false,
+        changeOrigin: true,
+      }),
+    )
+  }
 
   app.get('*', async (req, res, next) => {
     const url = req.originalUrl
@@ -48,15 +50,11 @@ async function startServer() {
       url,
     }
     const pageContext = await renderPage(pageContextInit)
-
     const { httpResponse } = pageContext
 
     if (!httpResponse) return next()
-    const { statusCode, contentType } = httpResponse
-    const stream = await httpResponse.getNodeStream()
 
-    res.status(statusCode).type(contentType)
-    stream.pipe(res)
+    httpResponse.pipe(res)
   })
 
   const port = Number(process.env.PORT || 3001)
@@ -71,7 +69,7 @@ function listen(app: Application, _port: number) {
     const { npm_config_page } = process.env
     const page = npm_config_page ? '/' + npm_config_page : ''
 
-    console.log(colors.green(`🚀 Server running at ${colors.cyan(`http://localhost:${port}${page}`)}\n`))
+    console.log(colors.green(`\n 🚀 Server running at ${colors.cyan(`http://localhost:${port}${page}`)}\n`))
 
     log.info(`🚩 正在打开默认浏览器...\n`)
 

@@ -3,6 +3,8 @@ async function onBeforeRender() {
     pageContext: {
       documentProps: {
         title: '{{ title }}',
+        description: '',
+        keywords: '',
         isMobile: {{ isMobile }},
       },
     },

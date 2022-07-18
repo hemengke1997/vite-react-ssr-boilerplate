@@ -7,3 +7,11 @@ export function insert_hm() {
   const s = document.getElementsByTagName('script')[0]
   s.parentNode?.insertBefore(hm, s)
 }
+
+// flexible
+export function insert_flexible() {
+  const flexible = document.createElement('script')
+  flexible.src = './lib/flexible_pc.js'
+  const s = document.getElementsByTagName('script')[0]
+  s.parentNode?.insertBefore(flexible, s)
+}

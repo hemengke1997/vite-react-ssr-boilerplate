@@ -1,7 +1,3 @@
-export function trackEvent(name: string, type: string = 'click') {
-  console.log(name)
-  ;(window as any)._hmt?.push(['_trackEvent', name, type, '', ''])
-}
 export function isObject(val: any): boolean {
   return val !== null && Object.prototype.toString.call(val) === '[object Object]'
 }
