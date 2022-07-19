@@ -4,11 +4,11 @@ import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 import { ContentTypeEnum, RequestEnum, VAxios } from './Axios'
 import { joinTimestamp, formatRequestDate, setObjToUrlParams, deepMerge } from './helper'
 import { isString } from 'lodash-es'
-import { OriginResult, RequestOptions } from './axios.d'
+import { OriginResult, RequestOptions } from './axiosType.d'
 import querystring from 'query-string'
 import { isDevMode } from '@root/shared/env'
 
-export * from './axios.d'
+export * from './axiosType.d'
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -227,4 +227,11 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
   return new VAxios(deepMerge(OPTION, opt || {}))
 }
 
-export const axiosRequest = createAxios({ requestOptions: { joinTime: true } })
+const prefix = process.env['API_PREFIX']
+
+export const axiosRequest = createAxios({
+  requestOptions: {
+    joinTime: true,
+    urlPrefix: prefix ?? '',
+  },
+})

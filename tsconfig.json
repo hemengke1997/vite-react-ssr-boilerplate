@@ -17,7 +17,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@root/*": ["./*"]
-    }
+    },
+    "outDir": "./"
   },
   "exclude": ["node_modules", "dist", "**/*.js","axios"],
   "ts-node": {

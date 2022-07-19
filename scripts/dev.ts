@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 import colors from 'picocolors'
-import fs from 'node:fs'
+import fs from 'fs-extra'
 import path from 'node:path'
 import { log, run } from './utils'
 
@@ -13,18 +13,18 @@ function startServer(name: string) {
   run('npm', ['run', 'ssr', `--page=${name}`])
 }
 
-function getSpecialsName() {
+function getPageName() {
   inquirer
     .prompt([
       {
         type: 'input',
-        name: 'specialsName',
+        name: 'pageName',
         message: log.info(`请输入页面名?${colors.dim(colors.gray('(回车默认开发第一个页面):'))}`, false),
       },
     ])
     .then(async (res) => {
-      const { specialsName } = res
-      let name = specialsName.replace(/\s/g, '')
+      const { pageName } = res
+      let name = pageName.replace(/\s/g, '')
 
       if (!name) {
         const files = fs.readdirSync(path.resolve(__dirname, '../src/pages'))
@@ -96,7 +96,7 @@ function getSpecialsName() {
 }
 
 try {
-  getSpecialsName()
+  getPageName()
 } catch {
   log.error('😥 oops, some bug occurred\n')
   process.exit(1)

@@ -15,7 +15,10 @@ export default ({ command }: ConfigEnv): UserConfig => {
         spa: false,
       }),
     ],
-    optimizeDeps: { exclude: ['react-streaming', 'react-streaming/client'] },
+    optimizeDeps: {
+      exclude: ['react-streaming', 'react-streaming/client'],
+      include: ['terser'],
+    },
     resolve: {
       alias: {
         '@': path.resolve(process.cwd(), 'src'),
@@ -23,7 +26,9 @@ export default ({ command }: ConfigEnv): UserConfig => {
       },
     },
     css: {},
-
+    define: {
+      'process.env': process.env,
+    },
     build: {
       assetsInlineLimit: 0,
       target: 'es2015',
