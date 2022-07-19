@@ -7,12 +7,12 @@ pnpm install
 ```
 
 ```bash
-npm run start
+pnpm run start
 ```
 
 ## 💡 HOW
 
-https://www.yuque.com/docs/share/48935857-a4f1-4973-bec7-66eefd65b2cd?# 《vite + vue + ssr + mpa》
+https://www.yuque.com/docs/share/48935857-a4f1-4973-bec7-66eefd65b2cd?# 《vite + ssr + mpa + framework》
 
 ## The reason for choseing React
 
@@ -20,7 +20,8 @@ https://www.yuque.com/docs/share/48935857-a4f1-4973-bec7-66eefd65b2cd?# 《vite 
 - ie11
 
 
-vue3-mpa-app
+## 项目结构树
+```
 ├─ config                                                  关于项目的build/node相关配置（请勿随意修改添加）
 ├─ dist                                                    打包输出目录
 ├─ public                                                  公共目录（build会直接copy）
@@ -41,3 +42,4 @@ vue3-mpa-app
 ├─ README.md                                               开发前阅读
 ├─ tailwind.config.js                                      tw配置
 ├─ TODO.md                                                 待开发list
+```
