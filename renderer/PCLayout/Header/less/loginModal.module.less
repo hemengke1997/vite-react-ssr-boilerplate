@@ -1,0 +1,136 @@
+.login_modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.08);
+    display: flex;
+
+    .modal_container {
+      position: relative;
+      width: 440px;
+      background: #31394c;
+      border-radius: 5px;
+      margin: 0 auto;
+      padding: 102px 50px 60px 50px;
+      box-sizing: border-box;
+      box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.06);
+      padding-bottom: 40px;
+
+      // padding-bottom: 40px;
+      input {
+        width: 100%;
+        height: 46px;
+        outline: none;
+        border: 1px solid #E5E5E5;
+        border-radius: 3px;
+        color: #202020;
+        padding-left: 20px;
+        font-size: 14px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+      .sms_login{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        height: 46px;
+        margin-bottom: 20px;
+        input{
+          width: 200px;
+          height: 46px;
+          border: 1px solid #E5E5E5;
+          border-radius: 3px;
+          color: #202020;
+          padding-left: 20px;
+          font-size: 14px;
+          box-sizing: border-box;
+        }
+        button{
+          width: 120px;
+          height: 46px;
+          background: transparent;
+          background: #4a5161;
+          border-radius: 3px;
+          font-size: 14px;
+          font-weight: 400;
+          color: white;
+          border: none;
+          outline: none;
+          cursor: pointer;
+        }
+      }
+      .close{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 18px;
+        height: 18px;
+        background-size: 100%;
+        content: '';
+        cursor: pointer;
+        background-image: url('../../images/Header/login_modal_close.png');
+      }
+
+      .check_type_wrapper {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+
+        .login_type {
+          color: #ff8900;
+          cursor: pointer;
+        }
+
+        .forget_pass {
+          color: #acafb8;
+          text-decoration: underline;
+        }
+      }
+
+      .modal_login_btn {
+        width: 100%;
+        height: 46px;
+        background: #4a5161;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        line-height: 46px;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 40px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        &.active{
+          background: #F18E2D;
+          &:hover{
+            background: #f8b62d;
+          }
+        }
+      }
+
+      .tip {
+        width: 100%;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        color: #8389A1;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 10px 0px;
+
+        .modal_reg {
+          display: inline-block;
+          color: #FC7400;
+        }
+      }
+    }
+
+  }

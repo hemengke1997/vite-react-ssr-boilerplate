@@ -18,6 +18,7 @@
     "@root/*": "./*.ts"
   },
   "dependencies": {
+    "antd": "^4.21.7",
     "axios": "^0.27.2",
     "clsx": "^1.2.1",
     "lodash-es": "^4.17.21",
