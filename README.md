@@ -10,31 +10,34 @@ pnpm install
 npm run start
 ```
 
-## responsive
-
-### postcss-px-to-viewport
-
-#### ignore: use PX or pX or Px instead of px (anyway: DONT USE `px` 🤣)
-
-## TODO
-
-### pm2
-
-### husky
-
-### docker
-
-### [longtime cache of rollup3](https://github.com/rollup/rollup/issues/4426)
-
 ## 💡 HOW
 
 https://www.yuque.com/docs/share/48935857-a4f1-4973-bec7-66eefd65b2cd?# 《vite + vue + ssr + mpa》
 
-## 2022-06-28
-
-### change vue to react, for better broswer compatibility
-
-#### The reason of choseing React
+## The reason for choseing React
 
 - typescript
 - ie11
+
+
+vue3-mpa-app
+├─ config                                                  关于项目的build/node相关配置（请勿随意修改添加）
+├─ dist                                                    打包输出目录
+├─ public                                                  公共目录（build会直接copy）
+├─ renderer                                                ssr渲染相关
+├─ scripts                                                 node脚本
+├─ server                                                  node服务
+├─ shared                                                  client & server 共享功能目录
+├─ src                                                     业务源码
+│  ├─ assets                                               静态文件，放公共css/字体
+│  ├─ client                                               客户端方法
+│  ├─ hooks                                                react hook
+│  ├─ pages                                                页面
+│  ├─ service                                              axios
+│  ├─ typings                                              全局类型（请勿随意添加）
+│  └─ utils                                                工具方法
+├─ template                                                页面模板
+├─ postcss.config.js                                       postcss配置
+├─ README.md                                               开发前阅读
+├─ tailwind.config.js                                      tw配置
+├─ TODO.md                                                 待开发list
