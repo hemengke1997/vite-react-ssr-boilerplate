@@ -27,6 +27,9 @@ async function startServer() {
         root,
         server: {
           middlewareMode: true,
+          watch: {
+            ignored: ['tsconfig.json'],
+          },
         },
       })
       app.use(viteDevServer.middlewares)

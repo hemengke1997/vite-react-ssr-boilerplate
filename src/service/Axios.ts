@@ -169,8 +169,6 @@ export class VAxios {
       method: 'POST',
       withCredentials: false,
       headers: {
-        // 'Content-type': ContentTypeEnum.FORM_DATA,
-        // @ts-ignore
         ignoreRepeatToken: true,
       },
     })

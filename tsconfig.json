@@ -17,9 +17,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@root/*": ["./*"]
-    }
+    },
+    "outDir": "./"
   },
-  "exclude": ["node_modules", "dist", "**/*.js","axios"],
+  "exclude": ["node_modules", "dist", "**/*.js"],
   "ts-node": {
     "transpileOnly": true,
     "compilerOptions": {

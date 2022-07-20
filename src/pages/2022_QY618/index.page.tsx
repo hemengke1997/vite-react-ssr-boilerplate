@@ -5,7 +5,7 @@ import { useMount } from 'react-use'
 import { axiosRequest } from '@/service/index'
 import styles from './index.module.less'
 
-const AID = 119 // 折扣活动
+const AID = 163 // 折扣活动
 
 const PACKAGES = {
   svip1: {
