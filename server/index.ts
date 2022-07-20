@@ -35,12 +35,18 @@ async function startServer() {
       app.use(viteDevServer.middlewares)
     })
 
+    const prefix = process.env.API_PREFIX || '/api'
+    const rewriteKey = `^${prefix}`
+
     app.use(
-      '/api',
+      prefix,
       createProxyMiddleware({
         target: 'http://webtest.qiyou.cn',
         secure: false,
         changeOrigin: true,
+        pathRewrite: {
+          [rewriteKey]: '/',
+        },
       }),
     )
   }

@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "declaration": true,
-    "types": ["vite/client"],
+    "types": ["vite/client", "vite-plugin-glob/client"],
     "paths": {
       "@/*": ["src/*"],
       "@root/*": ["./*"]

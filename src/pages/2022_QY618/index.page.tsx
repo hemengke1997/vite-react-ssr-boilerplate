@@ -84,6 +84,7 @@ export function Page() {
   }
 
   useMount(() => {
+    console.log('mount')
     getActivityInfo(AID)
   })
 
