@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react'
-import { useMount } from 'react-use'
-import styles from './less/loginModal.module.less'
+import { useMount } from 'ahooks'
 import { axiosRequest } from '@/service/index'
-import { Form, Input } from 'antd'
+// import { Input } from 'antd'
+import styles from './less/loginModal.module.less'
+
 const LoginModal = (props: any) => {
   const { currentTab, changeLoginModalFuc, toLoginFuc, loginByMessageFuc } = props
-  const [formOfPhone] = Form.useForm()
-  const [isActive, setActive] = useState(false)
+  // const [formOfPhone] = Form.useForm()
+  // const [isActive, setActive] = useState(false)
   //   const [username, setUserName] = useState('')
   //   const [password, setPassword] = useState('')
   //   const [phone_num, setPhoneNUM] = useState('')
@@ -20,11 +21,11 @@ const LoginModal = (props: any) => {
   const [loginData, setLoginData] = useState(userInfo.current)
   const checkIsActive = () => {
     // if (userInfo.current.username !== '' && userInfo.current.password !== '') {
-    if (userInfo.current.username !== '') {
-      setActive(true)
-    } else {
-      setActive(false)
-    }
+    // if (userInfo.current.username !== '') {
+    //   setActive(true)
+    // } else {
+    //   setActive(false)
+    // }
   }
   const checkUsernameChange = (val: string) => {
     userInfo.current = Object.assign({}, loginData, { username: val })
@@ -114,20 +115,21 @@ const LoginModal = (props: any) => {
 
   const PhoneLogin = () => {
     return (
-      <Form initialValues={loginData} name='basic' form={formOfPhone} onFinish={onFinishOfEmail}>
-        <Form.Item>
-          <Form.Item name='username' shouldUpdate={true}>
-            <Input
-              name='username'
-              style={{ height: '39px' }}
-              onKeyUp={(e) => checkUsernameChange(e.target.value)}
-              onChange={(e) => checkUsernameChange(e.target.value)}
-              autoComplete='off'
-              placeholder='手机号码/邮箱'
-            />
-          </Form.Item>
-        </Form.Item>
-        {/* <div className={styles.inputBox}>
+      // <Form initialValues={loginData} name='basic' form={formOfPhone} onFinish={onFinishOfEmail}>
+      //   <Form.Item>
+      //     <Form.Item name='username' shouldUpdate={true}>
+      //       <Input
+      //         name='username'
+      //         style={{ height: '39px' }}
+      //         onKeyUp={(e) => checkUsernameChange(e.target.value)}
+      //         onChange={(e) => checkUsernameChange(e.target.value)}
+      //         autoComplete='off'
+      //         placeholder='手机号码/邮箱'
+      //       />
+      //     </Form.Item>
+      //   </Form.Item>
+      {
+        /* <div className={styles.inputBox}>
           <input
             type='text'
             defaultValue={loginData.username}
@@ -140,15 +142,16 @@ const LoginModal = (props: any) => {
             placeholder='密码'
             onBlur={(event) => checkPasswordChange(event.target.value)}
           />
-        </div> */}
-      </Form>
+        </div> */
+      }
+      // </Form>
     )
   }
   return (
     <div className={styles.login_modal}>
       <div className={styles.modal_container}>
         <span className={styles.close} onClick={() => changeLoginModalStatus(false)}></span>
-        {currentTab ? <PhoneLogin></PhoneLogin> : <SmsLogin></SmsLogin>}
+        {/* {currentTab ? <PhoneLogin></PhoneLogin> : <SmsLogin></SmsLogin>} */}
         {/* <div id='geetest-box'></div> */}
         <div className={styles.check_type_wrapper}>
           <div
@@ -163,9 +166,9 @@ const LoginModal = (props: any) => {
             忘记密码？
           </a>
         </div>
-        <button className={`${styles.modal_login_btn} ${isActive ? styles.active : ''}`} onClick={() => toLogin()}>
+        {/* <button className={`${styles.modal_login_btn} ${isActive ? styles.active : ''}`} onClick={() => toLogin()}>
           登录 {loginData.username}
-        </button>
+        </button> */}
         <p className={styles.tip}>
           <span>
             没有奇游账号？
@@ -174,6 +177,7 @@ const LoginModal = (props: any) => {
             </a>
           </span>
         </p>
+        {/* <Input /> */}
       </div>
     </div>
   )

@@ -9,3 +9,6 @@
 [] docker
 [] pm2
 [] longtime cache of rollup3
+[] 命名规范
+[] 加入antd后冷启动慢的问题
+  - 这是vps or vite 的问题，目前还不是很确定 https://github.com/brillout/vite-plugin-ssr/issues/367

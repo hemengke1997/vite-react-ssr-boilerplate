@@ -4,7 +4,6 @@ import { setupVitePlugins } from './config/vite/plugins'
 import { getContentHash, getHash } from './config/vite/utils/helper'
 
 // https://vitejs.dev/config/
-// eslint-disable-next-line no-restricted-syntax
 export default ({ command }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
 
@@ -12,12 +11,11 @@ export default ({ command }: ConfigEnv): UserConfig => {
     plugins: [
       setupVitePlugins({
         isBuild,
-        spa: false,
       }),
     ],
     optimizeDeps: {
-      exclude: ['react-streaming', 'react-streaming/client'],
-      include: ['terser'],
+      // exclude: ['react-streaming', 'react-streaming/client'],
+      include: ['vite-plugin-ssr'],
     },
     resolve: {
       alias: {
@@ -25,20 +23,25 @@ export default ({ command }: ConfigEnv): UserConfig => {
         '@root': process.cwd(),
       },
     },
-    css: {},
+    css: {
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+        },
+      },
+    },
     define: {
       'process.env': process.env,
     },
     build: {
-      assetsInlineLimit: 0,
       target: 'es2015',
       emptyOutDir: true,
       cssCodeSplit: true,
       manifest: true,
       minify: 'esbuild',
       reportCompressedSize: true,
+      chunkSizeWarningLimit: 500,
       rollupOptions: {
-        treeshake: 'recommended',
         output: {
           format: 'es',
           assetFileNames: (assetInfo) => {
@@ -46,7 +49,6 @@ export default ({ command }: ConfigEnv): UserConfig => {
             if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType!)) {
               extType = 'img'
             }
-            debugger
             const hash = getContentHash(assetInfo.source)
             if (assetInfo.name?.endsWith('?extractStyles&lang.css')) {
               // dist/client/assets/index.page.server.jsx_extractStyles_lang.e4e33422.css
@@ -65,13 +67,13 @@ export default ({ command }: ConfigEnv): UserConfig => {
             return `assets/${extType}/[name].${hash}[extname]`
           },
           chunkFileNames: (chunkInfo) => {
-            const server = chunkInfo.name.endsWith('server') ? 'server-' : ''
-            const name = chunkInfo.facadeModuleId?.match(/src\/pages\/(.*?)\//)?.[1] || chunkInfo.name
+            const server = chunkInfo.name.endsWith('server') ? 'server.' : ''
+            // const name = chunkInfo.facadeModuleId?.match(/src\/pages\/(.*?)\//)?.[1] || chunkInfo.name
             if (chunkInfo.isDynamicEntry || chunkInfo.name === 'vendor') {
               const hash = getHash(chunkInfo)
-              return `assets/js/${name}-${server}${hash}.chunk.js`
+              return `assets/js/[name].${server}${hash}.chunk.js`
             } else {
-              return `assets/js/${name}-${server}[hash].chunk.js`
+              return `assets/js/[name].${server}[hash].chunk.js`
             }
           },
           entryFileNames: (chunkInfo) => {
@@ -79,7 +81,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
               return '[name].js'
             }
             const hash = getHash(chunkInfo)
-            return `assets/js/entry-${hash}.js`
+            return `assets/js/[name].${hash}.entry.js`
           },
         },
       },

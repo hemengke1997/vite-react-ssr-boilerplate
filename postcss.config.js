@@ -3,7 +3,6 @@ module.exports = () => {
     plugins: [
       require('autoprefixer'),
       require('tailwindcss'),
-      require('postcss-viewport-units'),
       require("postcss-pxtorem-media")({
         rootValue: 192,
         replace: true,

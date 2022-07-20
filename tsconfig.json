@@ -13,12 +13,11 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "declaration": true,
-    "types": ["vite/client", "vite-plugin-glob/client"],
+    "types": ["vite/client"],
     "paths": {
       "@/*": ["src/*"],
       "@root/*": ["./*"]
-    },
-    "outDir": "./"
+    }
   },
   "exclude": ["node_modules", "dist", "**/*.js"],
   "ts-node": {

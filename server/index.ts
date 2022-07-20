@@ -12,10 +12,10 @@ const root = `${__dirname}/..`
 
 async function startServer() {
   global.__vite_server_start_time = performance.now()
+  global.__vite_dom_mounted = false
 
   const app = express()
   app.use(compression())
-  debugger
   let viteDevServer
   if (isProd) {
     // const sirv = require('sirv')
@@ -53,16 +53,13 @@ async function startServer() {
 
   app.get('*', async (req, res, next) => {
     const url = req.originalUrl
-
-    // https://vite-plugin-ssr.com/pageContext#custom
     const pageContextInit = {
       url,
     }
     const pageContext = await renderPage(pageContextInit)
+    console.log(pageContext, 'pageContext')
     const { httpResponse } = pageContext
-
     if (!httpResponse) return next()
-
     httpResponse.pipe(res)
   })
 
