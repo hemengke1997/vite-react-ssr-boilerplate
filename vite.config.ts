@@ -33,6 +33,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
     define: {
       'process.env': process.env,
     },
+
     build: {
       target: 'es2015',
       emptyOutDir: true,
@@ -71,7 +72,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
             // const name = chunkInfo.facadeModuleId?.match(/src\/pages\/(.*?)\//)?.[1] || chunkInfo.name
             if (chunkInfo.isDynamicEntry || chunkInfo.name === 'vendor') {
               const hash = getHash(chunkInfo)
-              return `assets/js/[name].${server}${hash}.chunk.js`
+              return `assets/js/vendor.${server}${hash}.chunk.js`
             } else {
               return `assets/js/[name].${server}[hash].chunk.js`
             }

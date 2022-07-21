@@ -8,7 +8,7 @@
  *
  */
 
-import { execSync } from 'node:child_process'
+import { execSync } from 'child_process'
 import open from 'open'
 import spawn from 'cross-spawn'
 import colors from 'picocolors'

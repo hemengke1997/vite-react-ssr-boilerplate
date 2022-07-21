@@ -1,7 +1,4 @@
 import colors from 'picocolors'
-import type { Options as ExecaOptions } from 'execa'
-import { execa } from 'execa'
-import minimist from 'minimist'
 
 export const log = {
   info: (str: string, log = true) => {
@@ -16,10 +13,4 @@ export const log = {
   warn: (str: string, log = true) => {
     return log ? console.log(colors.yellow(str)) : colors.cyan(str)
   },
-}
-
-export const args = minimist(process.argv.slice(2))
-
-export async function run(bin: string, args: string[], opts: ExecaOptions<string> = {}) {
-  return execa(bin, args, { stdio: 'inherit', ...opts })
 }

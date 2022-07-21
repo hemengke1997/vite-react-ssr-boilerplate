@@ -12,7 +12,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "declaration": true,
+    "declaration": false,
     "types": ["vite/client"],
     "paths": {
       "@/*": ["src/*"],

@@ -3,7 +3,6 @@ import { useRef, useState } from 'react'
 import { trackEvent } from '@/utils/hmt'
 import { useMount } from 'ahooks'
 import { axiosRequest } from '@/service/index'
-import { Button } from 'antd'
 import styles from './index.module.less'
 
 const AID = 163 // 折扣活动
@@ -93,7 +92,6 @@ export function Page() {
     <>
       <div className={clsx(styles.specials, 'tw-flex', 'tw-flex-col')}>
         <div className={clsx(styles.p1, styles.panel)}></div>
-        <Button>testestest</Button>
         <div className={clsx(styles.p2, styles.panel)} id='page1'>
           {new Array(5).fill('').map((_, index) => {
             return (
