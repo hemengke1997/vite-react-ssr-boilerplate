@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "lib": ["esnext", "dom", "DOM.Iterable"],
+    "strict": true,
+    "jsx": "react-jsx",
+    "sourceMap": false,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "declaration": false,
+    "noImplicitAny": false,
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["src/*"],
+      "@root/*": ["./*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "**/*.js"]
+}
