@@ -2,17 +2,19 @@ import path from 'path'
 import { UserConfig, ConfigEnv } from 'vite'
 import { setupVitePlugins } from './config/vite/plugins'
 import { getContentHash, getHash } from './config/vite/utils/helper'
+import { BASE } from './shared/constant'
 
-export default ({ command }: ConfigEnv): UserConfig => {
+export default ({ command, ssrBuild }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
+  // const isProd = process.env.NODE_ENV === 'production'
 
   return {
+    base: BASE,
     plugins: [
       setupVitePlugins({
         isBuild,
       }),
     ],
-
     resolve: {
       alias: {
         '@': path.resolve(process.cwd(), 'src'),
@@ -25,6 +27,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
           javascriptEnabled: true,
           modifyVars: {
             'border-radius-base': '4px',
+            'primary-color': '#FF9800',
           },
         },
       },
@@ -50,7 +53,10 @@ export default ({ command }: ConfigEnv): UserConfig => {
               extType = 'img'
             }
             const hash = getContentHash(assetInfo.source)
-
+            if (assetInfo.name?.endsWith('?extractStyles&lang.css')) {
+              const nameBase = assetInfo.name.split('.').slice(0, -2).join('.')
+              return `assets/${extType}/${nameBase}.${hash}[extname]`
+            }
             if (extType === 'img' && assetInfo.name) {
               const dir = path.basename(path.dirname(path.dirname(assetInfo.name)))
               if (dir) {
@@ -61,13 +67,14 @@ export default ({ command }: ConfigEnv): UserConfig => {
           },
           chunkFileNames: (chunkInfo) => {
             const server = chunkInfo.name.endsWith('server') ? 'server.' : ''
-            const name = chunkInfo.facadeModuleId?.match(/src\/pages\/(.*?)\//)?.[1] || chunkInfo.name
-
+            const name = ssrBuild
+              ? chunkInfo.facadeModuleId?.match(/src\/pages\/(.*?)\//)?.[1] || chunkInfo.name
+              : chunkInfo.name
             if (chunkInfo.isDynamicEntry) {
               const hash = getHash(chunkInfo)
-              return `assets/js/${name}.${server}${hash}.chunk.js`
+              return `assets/js/${name}.${server}${hash}.js`
             } else {
-              return `assets/js/${name}.${server}[hash].chunk.js`
+              return `assets/js/${name}.${server}[hash].js`
             }
           },
           entryFileNames: (chunkInfo) => {

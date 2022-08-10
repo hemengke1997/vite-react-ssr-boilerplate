@@ -2,17 +2,11 @@ import inquirer from 'inquirer'
 import colors from 'picocolors'
 import fs from 'fs-extra'
 import path from 'node:path'
-import { log } from './utils'
-import { execa } from 'execa'
-import type { Options as ExecaOptions } from 'execa'
+import { log, run } from './utils'
 
 enum Type {
   mobile = 'mobile',
   pc = 'pc',
-}
-
-export async function run(bin: string, args: string[], opts: ExecaOptions<string> = {}) {
-  return execa(bin, args, { stdio: 'inherit', ...opts })
 }
 
 function startServer(name: string) {

@@ -15,8 +15,9 @@ async function bundleServer() {
     format: 'cjs',
     sourcemap: false,
     treeShaking: true,
+    splitting: false,
     banner: {
-      js: `/* eslint-disable prettier/prettier */`,
+      js: `/* eslint-disable */`,
     },
     tsconfig: path.resolve(__dirname, './tsconfig.server.json'),
     plugins: [

@@ -1,14 +1,15 @@
 import express, { Application } from 'express'
 import colors from 'picocolors'
 import { renderPage } from 'vite-plugin-ssr'
-import { log } from '../scripts/utils'
 import { performance } from 'perf_hooks'
 import type { ViteDevServer } from 'vite'
+import { BASE } from '../shared/constant'
+import { log } from '../scripts/utils'
 
 const isProd = process.env.NODE_ENV === 'production'
-const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
+const isDev = process.env.NODE_ENV === 'development'
 const root = `${__dirname}/..`
-const HOST = `localhost`
+const HOST = isDev ? `your.host.com` : `localhost`
 const PORT = 9527
 
 async function startServer() {
@@ -18,7 +19,7 @@ async function startServer() {
     const { default: compression } = await import('compression')
     app.use(compression())
     const sirv = (await import('sirv')).default
-    app.use(sirv(`${root}/dist/client`))
+    app.use(BASE, sirv(`${root}/dist/client`, { extensions: [] }))
   } else {
     global.__vite_server_start_time = performance.now()
     global.__vite_dom_mounted = false
@@ -46,7 +47,7 @@ async function startServer() {
     app.use(
       prefix,
       createProxyMiddleware({
-        target: isProd ? '/' : '/some-api',
+        target: isProd ? '/' : 'http://your.proxy.com',
         secure: false,
         changeOrigin: true,
         pathRewrite: {
@@ -84,12 +85,12 @@ function listen(app: Application, _port: number) {
     const { npm_config_page } = process.env
     const page = npm_config_page ? '/' + npm_config_page : ''
 
-    console.log(colors.green(`\n 🚀 Server running at ${colors.cyan(`http://${HOST}:${port}${page}`)}\n`))
+    console.log(colors.green(`\n 🚀 Server running at ${colors.cyan(`http://${HOST}:${port}${BASE}${page}`)}\n`))
 
     if (isDev) {
       log.info(`🚩 正在打开默认浏览器...\n`)
       import('./openBrowser').then(({ openBrowser }) => {
-        openBrowser(`http://${HOST}:${port}${page}`, true)
+        openBrowser(`http://${HOST}:${port}${BASE}${page}`, true)
       })
     }
   })

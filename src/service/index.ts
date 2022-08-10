@@ -177,7 +177,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
   return new VAxios(deepMerge(OPTION, opt || {}))
 }
 
-const prefix = process.env['API_PREFIX']
+const prefix = import.meta.env.VITE_APIPREFIX
 
 export const axiosRequest = createAxios({
   requestOptions: {

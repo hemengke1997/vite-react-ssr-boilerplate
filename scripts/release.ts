@@ -1,15 +1,11 @@
-import { execa, Options as ExecaOptions } from 'execa'
 import colors from 'picocolors'
 import minimist from 'minimist'
-import pkg from '../package.json'
+import dayjs from 'dayjs'
+import { run } from './utils'
 
 enum BranchEnum {
   test = 'testing',
   prod = 'master',
-}
-
-async function run(bin: string, args: string[], opts: ExecaOptions<string> = {}) {
-  return execa(bin, args, { stdio: 'inherit', ...opts })
 }
 
 function step(msg: string) {
@@ -21,7 +17,7 @@ async function main() {
   const { stdout: branch } = await run('git', ['rev-parse', '--abbrev-ref', 'HEAD'], { stdio: 'pipe' })
 
   if (Branch.includes(branch)) {
-    step('\n 🚧 Building...')
+    step(`\n 🚧 Building for ${branch}`)
     switch (branch) {
       case BranchEnum.test:
         await run('pnpm', ['run', 'build:test'])
@@ -46,17 +42,30 @@ async function main() {
     step('\n 🚧 Committing changes...')
     await run('git', ['add', '-A'])
     const args = minimist(process.argv.slice(2))
-    await run('git', ['commit', '-m', args.m ? `${args.m}` : `build: v${pkg.version}`, '--no-verify'])
+    await run('git', [
+      'commit',
+      '-m',
+      args.m ? `${args.m}` : `build: ${branch} at ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
+      '--no-verify',
+    ])
   } else {
     console.log('⚠️ No changes to commit.')
     return
   }
 
-  step('\n 👾 Pushing to Gitee...')
+  step('\n 👾 Pushing to Git...')
 
-  await run('git', ['push'])
+  {
+    const { stdout } = await run('git', ['remote', '-v'], { stdio: 'pipe' })
+    const o = stdout.split('\n')[0]?.split('\t')[0]
+    if (o) {
+      await run('git', ['push', o, branch])
+    } else {
+      await run('git', ['push'])
+    }
+  }
 
-  console.log(`\n 🌈 Git push finished`)
+  console.log(`\n 🌈  Git push finished`)
 }
 
 main().catch((err) => {

@@ -1,10 +1,7 @@
 {
   "name": "vite-react-ssr-boilerplate",
   "version": "0.0.0",
-  "author": {
-    "name": "hemengke",
-    "email": "23536175@qq.com"
-  },
+  "author": "hemengke1997 <https://github.com/hemengke1997>",
   "description": "vite ssr boilerplate",
   "keywords": [
     "vite",
@@ -16,17 +13,19 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "tsx scripts/dev.ts",
-    "build": "cross-env API_PREFIX=/THEAPI NODE_ENV=production vite build --mode production && vite build --ssr --mode production",
-    "build:test": "cross-env API_PREFIX=/THEAPI NODE_ENV=test vite build --mode test && vite build --ssr --mode test",
+    "build": "cross-env NODE_ENV=production vite build --mode production && vite build --ssr --mode production",
+    "build:test": "cross-env NODE_ENV=test vite build --mode test && vite build --ssr --mode test",
     "start:test": "cross-env API_PREFIX=/THEAPI NODE_ENV=test tsx server/index.ts",
-    "start:prod": "cross-env API_PREFIX=/THEAPI NODE_ENV=production tsx server/index.ts",
-    "ssr": "cross-env DEBUG= API_PREFIX=/THEAPI tsx server/index.ts",
-    "bundleServer": "tsx scripts/bundleServer",
-    "run:pm2": "pm2 start server/index.js",
+    "start:prod": "cross-env NODE_ENV=production tsx server/index.ts",
+    "ssr": "cross-env API_PREFIX=/THEAPI NODE_ENV=development tsx server/index.ts",
     "preview": "vite preview",
     "report": "cross-env REPORT=true vite build",
     "bump:deps": "pnpm update --i --L",
-    "release": "tsx scripts/release"
+    "//": "以下部署相关",
+    "bundleServer": "tsx scripts/bundleServer",
+    "release": "tsx scripts/release",
+    "pm2:test": "npx pnpm i && cross-env NODE_ENV=test && tsx scripts/pm2",
+    "pm2:prod": "npx pnpm i && cross-env NODE_ENV=production && tsx scripts/pm2"
   },
   "engines": {
     "node": ">=16.14.2"
@@ -35,7 +34,9 @@
     "antd": "^4.22.3",
     "axios": "^0.27.2",
     "clsx": "^1.2.1",
+    "dayjs": "^1.11.4",
     "lodash-es": "^4.17.21",
+    "normalize-path": "^3.0.0",
     "query-string": "^7.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2"
@@ -89,6 +90,7 @@
     "rollup": "^2.77.2",
     "rollup-plugin-visualizer": "^5.7.1",
     "shelljs": "^0.8.5",
+    "simple-git-hooks": "^2.8.0",
     "sirv": "^2.0.2",
     "tailwindcss": "^3.1.6",
     "terser": "5.14.2",
@@ -97,5 +99,8 @@
     "vite": "^3.0.4",
     "vite-plugin-ssr": "^0.4.17",
     "vite-plugin-style-import": "^2.0.0"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "pnpm exec tsx scripts/verifyCommit.ts $1"
   }
 }

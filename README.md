@@ -10,6 +10,19 @@ pnpm install
 pnpm run start
 ```
 
+## deploy
+
+### test
+
+```bash
+pnpm run pm2:test
+```
+### production
+
+```bash
+pnpm run pm2:prod
+```
+
 ## 项目结构树
 
 ```

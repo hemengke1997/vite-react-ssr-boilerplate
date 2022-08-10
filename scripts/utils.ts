@@ -1,4 +1,5 @@
 import colors from 'picocolors'
+import type { Options } from 'execa'
 
 export const log = {
   info: (str: string, log = true) => {
@@ -13,4 +14,9 @@ export const log = {
   warn: (str: string, log = true) => {
     return log ? console.log(colors.yellow(str)) : colors.cyan(str)
   },
+}
+
+export async function run(bin: string, args: string[], opts: Options<string> = {}) {
+  const execa = await (await import('execa')).execa
+  return execa(bin, args, { stdio: 'inherit', ...opts })
 }
