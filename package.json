@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "postinstall": "simple-git-hooks",
     "start": "tsx scripts/dev.ts",
     "build": "cross-env NODE_ENV=production vite build --mode production && vite build --ssr --mode production",
     "build:test": "cross-env NODE_ENV=test vite build --mode test && vite build --ssr --mode test",
