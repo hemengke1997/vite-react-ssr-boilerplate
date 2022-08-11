@@ -1,7 +1,7 @@
 import path from 'path'
 import pm2 from 'pm2'
 
-const processName = `act`
+const processName = `pm2-progress-name`
 
 async function runPm2() {
   pm2.connect((err) => {
@@ -17,14 +17,12 @@ async function runPm2() {
       },
       (err) => {
         if (err) {
-          console.error(err)
+          pm2.restart(processName, () => {
+            return pm2.disconnect()
+          })
           return pm2.disconnect()
         }
-        pm2.list(() => {
-          pm2.restart(processName, () => {
-            pm2.disconnect()
-          })
-        })
+        pm2.disconnect()
       },
     )
   })
