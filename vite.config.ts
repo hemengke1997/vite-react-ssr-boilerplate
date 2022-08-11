@@ -1,5 +1,6 @@
 import path from 'node:path'
-import { UserConfig, ConfigEnv } from 'vite'
+import { ConfigEnv, UserConfig } from 'vite'
+
 import { setupVitePlugins } from './config/vite/plugins'
 import { getContentHash, getHash } from './config/vite/utils/helper'
 import { BASE } from './shared/constant'

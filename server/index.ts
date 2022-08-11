@@ -1,13 +1,14 @@
 import express, { Application } from 'express'
+import path from 'node:path'
+import { performance } from 'node:perf_hooks'
+import { fileURLToPath } from 'node:url'
 import colors from 'picocolors'
 import { renderPage } from 'vite-plugin-ssr'
-import { performance } from 'node:perf_hooks'
-import type { ViteDevServer } from 'vite'
-import { BASE } from '../shared/constant'
-import { log } from '../scripts/utils'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 
+import { log } from '../scripts/utils'
+import { BASE } from '../shared/constant'
+
+import type { ViteDevServer } from 'vite'
 const dir = path.dirname(fileURLToPath(import.meta.url))
 
 const isProd = process.env.NODE_ENV === 'production'

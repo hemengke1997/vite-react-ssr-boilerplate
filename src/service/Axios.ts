@@ -3,10 +3,11 @@
  */
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { cloneDeep, isFunction } from 'lodash-es'
-import { RequestOptions, Result } from './axiosType.d'
+import querystring from 'query-string'
+
 import { AxiosCanceler } from './axiosCancel'
 import { CreateAxiosOptions, ResponseErrorType } from './axiosTransform'
-import querystring from 'query-string'
+import { RequestOptions, Result } from './axiosType.d'
 
 export * from './axiosTransform'
 

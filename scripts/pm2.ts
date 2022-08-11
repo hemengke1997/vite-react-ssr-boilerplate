@@ -1,6 +1,7 @@
-import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import pm2 from 'pm2'
+
 import { log } from './utils'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))

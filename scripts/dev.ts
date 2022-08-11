@@ -1,8 +1,9 @@
-import { fileURLToPath } from 'node:url'
-import path from 'node:path'
-import inquirer from 'inquirer'
-import colors from 'picocolors'
 import fs from 'fs-extra'
+import inquirer from 'inquirer'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import colors from 'picocolors'
+
 import { log, run } from './utils'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))

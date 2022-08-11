@@ -1,10 +1,12 @@
-import { PluginOption } from 'vite'
-import react from '@vitejs/plugin-react'
-import ssr from 'vite-plugin-ssr/plugin'
-import legacy from '@vitejs/plugin-legacy'
 import colors from 'picocolors'
+import { PluginOption } from 'vite'
+import ssr from 'vite-plugin-ssr/plugin'
+import { AntdResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
+
+import legacy from '@vitejs/plugin-legacy'
+import react from '@vitejs/plugin-react'
+
 import { configVisualizerConfig } from './visualizer'
-import { createStyleImportPlugin, AntdResolve } from 'vite-plugin-style-import'
 
 export function setupVitePlugins({ isBuild }: { isBuild: boolean }) {
   const vitePlugins: PluginOption[] = [

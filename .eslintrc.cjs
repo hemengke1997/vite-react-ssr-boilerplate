@@ -74,6 +74,15 @@ module.exports = defineConfig({
     'import/no-nodejs-modules': ['error', { allow: builtinModules.map((mod) => `node:${mod}`) }],
     'import/no-duplicates': 'error',
     'import/order': 'off',
-    'sort-imports': 'off',
+    'sort-imports': [
+      'error',
+      {
+        ignoreCase: false,
+        ignoreDeclarationSort: true,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+        allowSeparatedGroups: false,
+      },
+    ],
   },
 })

@@ -1,7 +1,8 @@
 import { renderToString } from 'react-dom/server'
-import { escapeInject, PageContextBuiltIn, dangerouslySkipEscape } from 'vite-plugin-ssr'
-import { PageContext } from './types'
+import { dangerouslySkipEscape, escapeInject, PageContextBuiltIn } from 'vite-plugin-ssr'
+
 import { createApp } from './createApp'
+import { PageContext } from './types'
 
 export const passToClient = ['pageProps', 'documentProps']
 

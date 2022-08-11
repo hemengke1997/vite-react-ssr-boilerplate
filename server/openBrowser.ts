@@ -8,13 +8,14 @@
  *
  */
 
-import { execSync } from 'node:child_process'
-import open from 'open'
 import spawn from 'cross-spawn'
-import colors from 'picocolors'
-import { log } from '../scripts/utils'
-import { fileURLToPath } from 'node:url'
+import { execSync } from 'node:child_process'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import open from 'open'
+import colors from 'picocolors'
+
+import { log } from '../scripts/utils'
 
 // https://github.com/sindresorhus/open#app
 const OSX_CHROME = 'google chrome'

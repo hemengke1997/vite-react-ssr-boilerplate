@@ -3,6 +3,7 @@
  */
 
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+
 import { OriginResult, RejectType, RequestOptions, Result } from './axiosType.d'
 
 export interface CreateAxiosOptions extends AxiosRequestConfig {

@@ -1,7 +1,8 @@
-import React from 'react'
-import type { PageContext } from './types'
-
 import '@/assets/style/index.less'
+
+import React from 'react'
+
+import type { PageContext } from './types'
 
 async function createApp(pageContext: PageContext) {
   const { Page, pageProps, documentProps } = pageContext

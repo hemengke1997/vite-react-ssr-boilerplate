@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+
 import type { PageContext } from './types'
 
 export { PageContextProvider }
