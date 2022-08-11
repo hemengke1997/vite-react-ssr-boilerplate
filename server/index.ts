@@ -1,14 +1,18 @@
 import express, { Application } from 'express'
 import colors from 'picocolors'
 import { renderPage } from 'vite-plugin-ssr'
-import { performance } from 'perf_hooks'
+import { performance } from 'node:perf_hooks'
 import type { ViteDevServer } from 'vite'
 import { BASE } from '../shared/constant'
 import { log } from '../scripts/utils'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const dir = path.dirname(fileURLToPath(import.meta.url))
 
 const isProd = process.env.NODE_ENV === 'production'
 const isDev = process.env.NODE_ENV === 'development'
-const root = `${__dirname}/..`
+const root = `${dir}/..`
 const HOST = isDev ? `your.host.com` : `localhost`
 const PORT = 9527
 

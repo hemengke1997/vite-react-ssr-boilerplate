@@ -8,14 +8,17 @@
  *
  */
 
-import { execSync } from 'child_process'
+import { execSync } from 'node:child_process'
 import open from 'open'
 import spawn from 'cross-spawn'
 import colors from 'picocolors'
 import { log } from '../scripts/utils'
+import { fileURLToPath } from 'node:url'
+import path from 'node:path'
 
 // https://github.com/sindresorhus/open#app
 const OSX_CHROME = 'google chrome'
+const dir = path.dirname(fileURLToPath(import.meta.url))
 
 /**
  * Reads the BROWSER environment variable and decides what to do with it.
@@ -63,7 +66,7 @@ function startBrowserProcess(browser: string | undefined, url: string) {
       // on OS X Google Chrome with AppleScript
       execSync('ps cax | grep "Google Chrome"')
       execSync('osascript openChrome.applescript "' + encodeURI(url) + '"', {
-        cwd: __dirname,
+        cwd: dir,
         stdio: 'ignore',
       })
       return true

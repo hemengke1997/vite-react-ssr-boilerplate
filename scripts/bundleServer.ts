@@ -1,8 +1,11 @@
 import path from 'node:path'
 import fs from 'fs-extra'
 import { build } from 'esbuild'
+import { fileURLToPath } from 'node:url'
 
-const serverDir = path.resolve(__dirname, '../server/')
+const dir = path.dirname(fileURLToPath(import.meta.url))
+
+const serverDir = path.resolve(dir, '../server/')
 
 async function bundleServer() {
   const result = await build({
@@ -17,9 +20,9 @@ async function bundleServer() {
     treeShaking: true,
     splitting: false,
     banner: {
-      js: `/* eslint-disable */`,
+      js: `/* eslint-disable */\n"use strict"\n`,
     },
-    tsconfig: path.resolve(__dirname, './tsconfig.server.json'),
+    tsconfig: path.resolve(dir, './tsconfig.server.json'),
     plugins: [
       {
         name: 'externalize-deps',

@@ -10,6 +10,7 @@
     "boilerplate",
     "vite-plugin-ssr"
   ],
+  "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
@@ -71,6 +72,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-define-config": "^1.5.1",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "execa": "^6.1.0",

@@ -11,5 +11,7 @@
 LICENSE
 .eslintcache
 *.lock
+*.yaml
 yarn-error.log
-/public
+/dist/*
+server/*.js

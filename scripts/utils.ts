@@ -17,6 +17,6 @@ export const log = {
 }
 
 export async function run(bin: string, args: string[], opts: Options<string> = {}) {
-  const execa = await (await import('execa')).execa
+  const execa = (await import('execa')).execa
   return execa(bin, args, { stdio: 'inherit', ...opts })
 }

@@ -17,4 +17,4 @@ function PCLayout({ children }) {
   )
 }
 
-export default PCLayout
+export { PCLayout }

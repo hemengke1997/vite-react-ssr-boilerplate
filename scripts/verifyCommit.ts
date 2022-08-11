@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs-extra'
+import { readFileSync } from 'node:fs'
 import colors from 'picocolors'
 
 const msgPath = process.argv[2]
