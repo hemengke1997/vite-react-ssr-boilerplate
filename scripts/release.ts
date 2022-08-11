@@ -1,6 +1,7 @@
-import colors from 'picocolors'
-import minimist from 'minimist'
 import dayjs from 'dayjs'
+import minimist from 'minimist'
+import colors from 'picocolors'
+
 import { run } from './utils'
 
 enum BranchEnum {

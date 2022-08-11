@@ -1,6 +1,6 @@
-import '@/assets/style/index.less'
-
 import React from 'react'
+
+import '@/assets/style/index.less'
 
 import type { PageContext } from './types'
 

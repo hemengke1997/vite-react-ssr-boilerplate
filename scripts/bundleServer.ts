@@ -1,7 +1,7 @@
-import { fileURLToPath } from 'node:url'
-import path from 'node:path'
-import fs from 'fs-extra'
 import { build } from 'esbuild'
+import fs from 'fs-extra'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 

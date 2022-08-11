@@ -4,7 +4,6 @@ import { isString } from 'lodash-es'
 import querystring from 'query-string'
 
 import { isDevMode } from '@root/shared/env'
-
 import { ContentTypeEnum, RequestEnum, VAxios } from './Axios'
 import { OriginResult, RequestOptions } from './axiosType.d'
 import { deepMerge, formatRequestDate, joinTimestamp, setObjToUrlParams } from './helper'
