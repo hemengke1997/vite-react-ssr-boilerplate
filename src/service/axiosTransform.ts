@@ -1,10 +1,6 @@
-/**
- * 数据处理类，根据项目配置
- */
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
-
-import { OriginResult, RejectType, RequestOptions, Result } from './axiosType.d'
+import type { OriginResult, RejectType, RequestOptions, Result } from './axiosType.d'
 
 export interface CreateAxiosOptions extends AxiosRequestConfig {
   authenticationScheme?: string

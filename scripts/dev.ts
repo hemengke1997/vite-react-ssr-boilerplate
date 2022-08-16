@@ -1,7 +1,7 @@
-import fs from 'fs-extra'
-import inquirer from 'inquirer'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import fs from 'fs-extra'
+import inquirer from 'inquirer'
 import colors from 'picocolors'
 
 import { log, run } from './utils'
@@ -33,7 +33,7 @@ function getPageName() {
       if (!name) {
         const files = fs.readdirSync(path.resolve(dir, '../src/pages'))
         name = files[0]
-        log.info(`💪  启动\n`)
+        log.info('💪  启动\n')
         startServer(name)
         return
       }

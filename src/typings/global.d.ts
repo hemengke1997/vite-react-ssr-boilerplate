@@ -1,1 +1,3 @@
-interface Window {}
+interface Window {
+  _hmt: any
+}

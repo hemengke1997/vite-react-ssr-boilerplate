@@ -1,14 +1,14 @@
-import express, { Application } from 'express'
 import path from 'node:path'
 import { performance } from 'node:perf_hooks'
 import { fileURLToPath } from 'node:url'
+import express from 'express'
+import type { Application } from 'express'
 import colors from 'picocolors'
 import { renderPage } from 'vite-plugin-ssr'
 
-import { log } from '../scripts/utils'
-import { BASE } from '../shared/constant'
-
 import type { ViteDevServer } from 'vite'
+import { BASE } from '../shared/constant'
+import { log } from '../scripts/utils'
 const dir = path.dirname(fileURLToPath(import.meta.url))
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -88,7 +88,7 @@ function listen(app: Application, _port: number) {
   const server = app.listen(port, HOST)
   server.on('listening', () => {
     const { npm_config_page } = process.env
-    const page = npm_config_page ? '/' + npm_config_page : ''
+    const page = npm_config_page ? `/${npm_config_page}` : ''
 
     console.log(colors.green(`\n 🚀 Server running at ${colors.cyan(`http://${HOST}:${port}${BASE}${page}`)}\n`))
 

@@ -1,11 +1,10 @@
 import type { AxiosResponse } from 'axios'
-import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 import { isString } from 'lodash-es'
 import querystring from 'query-string'
-
 import { isDevMode } from '@root/shared/env'
+import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 import { ContentTypeEnum, RequestEnum, VAxios } from './Axios'
-import { OriginResult, RequestOptions } from './axiosType.d'
+import type { OriginResult, RequestOptions } from './axiosType.d'
 import { deepMerge, formatRequestDate, joinTimestamp, setObjToUrlParams } from './helper'
 
 export * from './axiosType.d'
@@ -63,7 +62,7 @@ const transform: AxiosTransform = {
       if (!isString(params)) {
         config.params = Object.assign(params || {}, joinTimestamp(joinTime, false))
       } else {
-        config.url = config.url + params + `${joinTimestamp(joinTime, true)}`
+        config.url = `${config.url + params}${joinTimestamp(joinTime, true)}`
         config.params = undefined
       }
     } else {
@@ -101,7 +100,7 @@ const transform: AxiosTransform = {
     config.headers = Object.assign({}, config.headers)
     config.headers.Accept = config.headers.accept
     if (isDevMode()) {
-      config.headers['UserAgent'] = 'terminal_type/system_type/system_version/channel/lagofast/1.0.0/terminal_code/lang'
+      config.headers.UserAgent = 'terminal_type/system_type/system_version/channel/lagofast/1.0.0/terminal_code/lang'
     }
     delete config.headers.accept
 
@@ -129,7 +128,7 @@ const transform: AxiosTransform = {
     const err = error?.toString?.() ?? ''
 
     try {
-      if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
+      if (code === 'ECONNABORTED' && message.includes('timeout')) {
       }
       if (err?.includes('Network Error')) {
       }

@@ -10,10 +10,9 @@ const commitRE =
 
 if (!releaseRE.test(msg) && !commitRE.test(msg)) {
   console.error(
-    `  ${colors.bgRed(colors.white(' ERROR '))} ${colors.red(`invalid commit message format.`)}\n\n` +
-      colors.red(`  Examples:\n\n`) +
-      `    ${colors.green(`feat: add some function`)}\n` +
-      `    ${colors.green(`fix: handle some error`)}\n`,
+    `  ${colors.bgRed(colors.white(' ERROR '))} ${colors.red(`invalid commit message format.`)}\n\n${colors.red(
+      `  Examples:\n\n`,
+    )}    ${colors.green(`feat: add some function`)}\n` + `    ${colors.green(`fix: handle some error`)}\n`,
   )
   process.exit(1)
 }

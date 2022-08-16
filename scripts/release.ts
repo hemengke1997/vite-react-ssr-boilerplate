@@ -33,7 +33,9 @@ async function main() {
   }
 
   const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
-  const { stdout: status } = await run('git', ['status', '-s'], { stdio: 'pipe' })
+  const { stdout: status } = await run('git', ['status', '-s'], {
+    stdio: 'pipe',
+  })
 
   if (status.includes('server/index.ts')) {
     await run('pnpm', ['run', 'bundleServer'], { stdio: 'pipe' })

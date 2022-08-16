@@ -1,13 +1,14 @@
 /*
  * axios module
  */
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios from 'axios'
 import { cloneDeep, isFunction } from 'lodash-es'
 import querystring from 'query-string'
 
 import { AxiosCanceler } from './axiosCancel'
-import { CreateAxiosOptions, ResponseErrorType } from './axiosTransform'
-import { RequestOptions, Result } from './axiosType.d'
+import type { CreateAxiosOptions, ResponseErrorType } from './axiosTransform'
+import type { RequestOptions, Result } from './axiosType.d'
 
 export * from './axiosTransform'
 
@@ -76,7 +77,7 @@ export class VAxios {
 
     this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
       const {
-        // @ts-ignore
+        // @ts-expect-error
         headers: { ignoreRepeatToken },
       } = config
 

@@ -8,10 +8,10 @@
  *
  */
 
-import spawn from 'cross-spawn'
 import { execSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import spawn from 'cross-spawn'
 import open from 'open'
 import colors from 'picocolors'
 
@@ -66,7 +66,7 @@ function startBrowserProcess(browser: string | undefined, url: string) {
       // Try our best to reuse existing tab
       // on OS X Google Chrome with AppleScript
       execSync('ps cax | grep "Google Chrome"')
-      execSync('osascript openChrome.applescript "' + encodeURI(url) + '"', {
+      execSync(`osascript openChrome.applescript "${encodeURI(url)}"`, {
         cwd: dir,
         stdio: 'ignore',
       })

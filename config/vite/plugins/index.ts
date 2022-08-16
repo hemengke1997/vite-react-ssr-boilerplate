@@ -1,7 +1,7 @@
 import legacy from '@vitejs/plugin-legacy'
 import react from '@vitejs/plugin-react'
 import colors from 'picocolors'
-import { PluginOption } from 'vite'
+import type { PluginOption } from 'vite'
 import ssr from 'vite-plugin-ssr/plugin'
 import { AntdResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
 

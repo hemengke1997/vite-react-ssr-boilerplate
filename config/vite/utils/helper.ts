@@ -1,5 +1,5 @@
-import { createHash } from 'crypto'
-import { PreRenderedChunk } from 'rollup'
+import { createHash } from 'node:crypto'
+import type { PreRenderedChunk } from 'rollup'
 
 function isObject(value?: any): value is Object {
   return Object.prototype.toString.call(value) === '[Object Object]'
@@ -7,9 +7,8 @@ function isObject(value?: any): value is Object {
 
 export function deepMerge<T = any>(src: T, target: T): T {
   let key: string
-  for (key in target) {
-    src[key] = isObject(src[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key])
-  }
+  for (key in target) src[key] = isObject(src[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key])
+
   return src
 }
 

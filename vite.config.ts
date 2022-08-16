@@ -1,11 +1,10 @@
 import path from 'node:path'
-import { ConfigEnv, UserConfig } from 'vite'
+import type { ConfigEnv, UserConfig } from 'vite'
 
 import { setupVitePlugins } from './config/vite/plugins'
 import { getContentHash, getHash } from './config/vite/utils/helper'
 import { BASE } from './shared/constant'
 
-// eslint-disable-next-line no-restricted-syntax
 export default ({ command, ssrBuild }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
   // const isProd = process.env.NODE_ENV === 'production'

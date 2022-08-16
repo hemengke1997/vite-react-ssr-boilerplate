@@ -1,8 +1,9 @@
 import { renderToString } from 'react-dom/server'
-import { dangerouslySkipEscape, escapeInject, PageContextBuiltIn } from 'vite-plugin-ssr'
+import type { PageContextBuiltIn } from 'vite-plugin-ssr'
+import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr'
 
 import { createApp } from './createApp'
-import { PageContext } from './types'
+import type { PageContext } from './types'
 
 export const passToClient = ['pageProps', 'documentProps']
 
@@ -16,7 +17,7 @@ export async function render(pageContext: PageContextBuiltIn & PageContext): Pro
 
   const isMobile = documentProps?.isMobile
 
-  const documentHtml = escapeInject/*html*/ `<!DOCTYPE html>
+  const documentHtml = escapeInject/* html */ `<!DOCTYPE html>
   <html lang="zh-CN">
     <head>
       <meta charset="UTF-8" />

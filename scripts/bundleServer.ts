@@ -1,7 +1,7 @@
-import { build } from 'esbuild'
-import fs from 'fs-extra'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { build } from 'esbuild'
+import fs from 'fs-extra'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 
@@ -20,7 +20,7 @@ async function bundleServer() {
     treeShaking: true,
     splitting: false,
     banner: {
-      js: `/* eslint-disable */\n"use strict"\n`,
+      js: '/* eslint-disable */\n"use strict"\n',
     },
     tsconfig: path.resolve(dir, './tsconfig.server.json'),
     plugins: [
