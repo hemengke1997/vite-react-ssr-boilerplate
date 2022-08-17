@@ -1,6 +1,6 @@
-export type PageProps = {}
+export interface PageProps {}
 
-export type PageContext = {
+export interface PageContext {
   Page: any
   pageProps?: PageProps
   documentProps?: {
