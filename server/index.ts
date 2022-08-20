@@ -14,7 +14,7 @@ const dir = path.dirname(fileURLToPath(import.meta.url))
 const isProd = process.env.NODE_ENV === 'production'
 const isDev = process.env.NODE_ENV === 'development'
 const root = `${dir}/..`
-const HOST = isDev ? `your.host.com` : `localhost`
+const HOST = isDev ? `localhost` : `localhost` // replace HOST as your need
 const PORT = 9527
 
 async function startServer() {
@@ -52,7 +52,7 @@ async function startServer() {
     app.use(
       prefix,
       createProxyMiddleware({
-        target: isProd ? '/' : 'http://your.proxy.com',
+        target: isProd ? '/' : 'http://your.proxy.com', // replace proxy location as your need
         secure: false,
         changeOrigin: true,
         pathRewrite: {

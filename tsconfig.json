@@ -1,5 +1,5 @@
 {
-  "extends": "@minko-fe/tsconfig/tsconfig.base.json",
+  "extends": "@minko-fe/tsconfig/tsconfig.base",
   "compilerOptions": {
     "types": ["vite/client"],
     "paths": {

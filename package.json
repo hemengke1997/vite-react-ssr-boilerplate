@@ -47,6 +47,7 @@
   "devDependencies": {
     "@minko-fe/commitlint-config": "^1.1.1",
     "@minko-fe/eslint-config": "^1.1.1",
+    "@minko-fe/postcss-pxtorem": "^0.0.5",
     "@minko-fe/prettier-config": "^1.1.1",
     "@minko-fe/tsconfig": "^1.1.1",
     "@types/compression": "^1.7.2",
@@ -61,7 +62,6 @@
     "@types/react-dom": "18.0.6",
     "@types/react-helmet": "^6.1.5",
     "@types/shelljs": "^0.8.11",
-    "@types/yargs": "^17.0.10",
     "@vitejs/plugin-legacy": "2.0.1",
     "@vitejs/plugin-react": "2.0.1",
     "autoprefixer": "^10.4.7",
@@ -85,7 +85,6 @@
     "picocolors": "^1.0.0",
     "pm2": "^5.2.0",
     "postcss": "^8.4.14",
-    "postcss-pxtorem-media": "^0.0.4",
     "prettier": "^2.7.1",
     "prompts": "^2.4.2",
     "rollup": "^2.78.0",
@@ -97,7 +96,7 @@
     "terser": "5.14.2",
     "tsx": "^3.8.2",
     "typescript": "^4.7.4",
-    "vite": "^3.0.8",
+    "vite": "^3.0.9",
     "vite-plugin-ssr": "^0.4.20",
     "vite-plugin-style-import": "^2.0.0"
   },
