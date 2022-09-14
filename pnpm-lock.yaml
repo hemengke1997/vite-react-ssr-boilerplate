@@ -14,6 +14,7 @@ specifiers:
   '@types/lodash-es': ^4.17.6
   '@types/minimist': ^1.2.2
   '@types/node': ^18.7.6
+  '@types/normalize-path': ^3.0.0
   '@types/react': 18.0.17
   '@types/react-dom': 18.0.6
   '@types/react-helmet': ^6.1.5
@@ -90,6 +91,7 @@ devDependencies:
   '@types/lodash-es': registry.npmmirror.com/@types/lodash-es/4.17.6
   '@types/minimist': registry.npmmirror.com/@types/minimist/1.2.2
   '@types/node': registry.npmmirror.com/@types/node/18.7.8
+  '@types/normalize-path': 3.0.0
   '@types/react': registry.npmmirror.com/@types/react/18.0.17
   '@types/react-dom': registry.npmmirror.com/@types/react-dom/18.0.6
   '@types/react-helmet': registry.npmmirror.com/@types/react-helmet/6.1.5
@@ -336,6 +338,10 @@ packages:
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+    dev: true
+
+  /@types/normalize-path/3.0.0:
+    resolution: {integrity: sha512-Nd8y/5t/7CRakPYiyPzr/IAfYusy1FkcZYFEAcoMZkwpJv2n4Wm+olW+e7xBdHEXhOnWdG9ddbar0gqZWS4x5Q==}
     dev: true
 
   /@types/unist/2.0.6:
