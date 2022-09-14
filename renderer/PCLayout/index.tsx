@@ -9,7 +9,7 @@ message.config({
   transitionName: 'ant-zoom',
 })
 
-function PCLayout({ children }) {
+function PCLayout({ children }: { children: React.ReactNode }) {
   return (
     <ConfigProvider locale={zh_CN} autoInsertSpaceInButton={false}>
       {children}
