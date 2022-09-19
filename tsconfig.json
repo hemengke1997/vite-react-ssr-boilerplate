@@ -1,7 +1,9 @@
 {
-  "extends": "@minko-fe/tsconfig/tsconfig.base",
+  "extends": "@minko-fe/tsconfig/tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "types": ["vite/client"],
+    "noImplicitAny": false,
     "paths": {
       "@/*": ["src/*"],
       "@root/*": ["./*"]
