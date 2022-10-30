@@ -2,7 +2,12 @@ import dayjs from 'dayjs'
 import minimist from 'minimist'
 import colors from 'picocolors'
 
-import { run } from './utils'
+import type { Options } from 'execa'
+
+async function run(bin: string, args: string[], opts: Options<string> = {}) {
+  const execa = (await import('execa')).execa
+  return execa(bin, args, { stdio: 'inherit', ...opts })
+}
 
 enum BranchEnum {
   test = 'testing',
@@ -33,13 +38,9 @@ async function main() {
   }
 
   const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
-  const { stdout: status } = await run('git', ['status', '-s'], {
-    stdio: 'pipe',
-  })
+  const { stdout: status } = await run('git', ['status', '-s'], { stdio: 'pipe' })
 
-  if (status.includes('server/index.ts')) {
-    await run('pnpm', ['run', 'bundleServer'], { stdio: 'pipe' })
-  }
+  await run('pnpm', ['run', 'bundleServer'], { stdio: 'pipe' })
 
   if (stdout || status) {
     step('\n 🚧 Committing changes...')
@@ -56,11 +57,14 @@ async function main() {
     return
   }
 
-  step('\n 👾 Pushing to Git...')
+  step('\n 👾 Pushing to Gitee...')
 
   {
     const { stdout } = await run('git', ['remote', '-v'], { stdio: 'pipe' })
-    const o = stdout.split('\n')[0]?.split('\t')[0]
+    const o = stdout
+      .split('\n')
+      .find((r) => r.includes('qeeyoutechnology/activity-project.git'))
+      ?.split('\t')[0]
     if (o) {
       await run('git', ['push', o, branch])
     } else {

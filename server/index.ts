@@ -1,20 +1,24 @@
 import path from 'node:path'
 import { performance } from 'node:perf_hooks'
 import { fileURLToPath } from 'node:url'
+import normalize from 'normalize-url'
 import express from 'express'
 import type { Application } from 'express'
 import colors from 'picocolors'
 import { renderPage } from 'vite-plugin-ssr'
-
 import type { ViteDevServer } from 'vite'
-import { BASE } from '../shared/constant'
+import { loadEnv } from 'vite'
+import { BASE } from '@root/shared/constant'
+import { Env } from '@root/shared/enum'
 import { log } from '../scripts/utils'
-const dir = path.dirname(fileURLToPath(import.meta.url))
 
-const isProd = process.env.NODE_ENV === 'production'
-const isDev = process.env.NODE_ENV === 'development'
+const dir = path.dirname(fileURLToPath(import.meta.url))
+const isDev = process.env.NODE_ENV === Env.development
 const root = `${dir}/..`
-const HOST = isDev ? `localhost` : `localhost` // replace HOST as your need
+
+const { VITE_APIPREFIX } = loadEnv(process.env.NODE_ENV, process.cwd()) as ImportMetaEnv
+
+const HOST = `localhost`
 const PORT = 9527
 
 async function startServer() {
@@ -35,25 +39,29 @@ async function startServer() {
         server: {
           middlewareMode: true,
           watch: {
-            ignored: ['tsconfig.json'],
+            ignored: ['**/tsconfig.*.json', '**/tsconfig.json'],
           },
+          cors: true,
         },
       })
       app.use(viteDevServer.middlewares)
     })
+    app.set('etag', false)
+    app.use((_, res, next) => {
+      res.set('Cache-Control', 'no-store')
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      next()
+    })
   }
 
-  const { createProxyMiddleware } = await import('http-proxy-middleware')
-
-  const prefix = process.env.API_PREFIX
-
+  const prefix = VITE_APIPREFIX
   if (prefix) {
+    const { createProxyMiddleware } = await import('http-proxy-middleware')
     const rewriteKey = `^${prefix}`
     app.use(
       prefix,
       createProxyMiddleware({
-        target: isProd ? '/' : 'http://your.proxy.com', // replace proxy location as your need
-        secure: false,
+        target: 'localhost', // TODO: fill your target
         changeOrigin: true,
         pathRewrite: {
           [rewriteKey]: '/',
@@ -66,7 +74,7 @@ async function startServer() {
     try {
       const url = req.originalUrl
       const pageContextInit = {
-        url,
+        urlOriginal: url,
       }
       const pageContext = await renderPage(pageContextInit)
       const { httpResponse } = pageContext
@@ -87,23 +95,22 @@ function listen(app: Application, _port: number) {
   let port = _port
   const server = app.listen(port, HOST)
   server.on('listening', () => {
-    const { npm_config_page } = process.env
-    const page = npm_config_page ? `/${npm_config_page}` : ''
+    const { Start_Page } = process.env
+    const page = Start_Page ? `/${Start_Page}` : ''
 
-    console.log(colors.green(`\n 🚀 Server running at ${colors.cyan(`http://${HOST}:${port}${BASE}${page}`)}\n`))
+    const pathUrl = normalize(`http:\/\/${HOST}:${port}${BASE}${page}`, { normalizeProtocol: false })
+
+    log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
 
     if (isDev) {
-      log.info(`🚩 正在打开默认浏览器...\n`)
-      import('./openBrowser').then(({ openBrowser }) => {
-        openBrowser(`http://${HOST}:${port}${BASE}${page}`, true)
-      })
+      log.info(`\n⏳ waiting for vite optimizing...`)
     }
   })
   server.on('error', (error) => {
     if ((error as any).code !== 'EADDRINUSE') {
       throw error
     }
-    log.error(`❌ ${error}\n`)
+    log.error(`\n❌ ${error}\n`)
 
     port = port + 1
     log.info(`🔥 open port ${port} ...\n`)
@@ -111,4 +118,8 @@ function listen(app: Application, _port: number) {
   })
 }
 
-startServer()
+try {
+  startServer()
+} catch {
+  process.exit(1)
+}

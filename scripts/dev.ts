@@ -3,8 +3,8 @@ import { fileURLToPath } from 'node:url'
 import fs from 'fs-extra'
 import inquirer from 'inquirer'
 import colors from 'picocolors'
-
-import { log, run } from './utils'
+import shelljs from 'shelljs'
+import { log } from './utils'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 
@@ -14,7 +14,11 @@ enum Type {
 }
 
 function startServer(name: string) {
-  run('npm', ['run', 'ssr', `--page=${name}`])
+  try {
+    shelljs.exec(`cross-env Start_Page=${name} pnpm run ssr`)
+  } catch {
+    process.exit(1)
+  }
 }
 
 function getPageName() {
@@ -28,12 +32,12 @@ function getPageName() {
     ])
     .then(async (res) => {
       const { pageName } = res
-      let name = pageName.replace(/\s/g, '')
+      let name = pageName.replace(/\s/g, '') as string
 
       if (!name) {
         const files = fs.readdirSync(path.resolve(dir, '../src/pages'))
         name = files[0]
-        log.info('💪  启动\n')
+        log.info(`💪  启动`)
         startServer(name)
         return
       }
@@ -43,21 +47,26 @@ function getPageName() {
         startServer(name)
       } catch {
         let isMobile = false
-        const res = await inquirer.prompt([
-          {
-            type: 'list',
-            name: 'type',
-            message: 'PC or 移动端?',
-            choices: [Type.pc, Type.mobile],
-          },
-        ])
-
-        if (res.type === Type.mobile) {
+        if (name.endsWith('-m')) {
           isMobile = true
         } else {
-          isMobile = false
+          const res = await inquirer.prompt([
+            {
+              type: 'list',
+              name: 'type',
+              message: 'PC or 移动端?',
+              choices: [Type.pc, Type.mobile],
+            },
+          ])
+
+          if (res.type === Type.mobile) {
+            isMobile = true
+          } else {
+            isMobile = false
+          }
         }
-        const config: any = {
+
+        const config = {
           title: name,
           isMobile,
         }
@@ -65,7 +74,8 @@ function getPageName() {
         log.info(`\n🤖 [${name}]:创建页面中...🎈\n`)
         fs.mkdirSync(path.resolve(dir, `../src/pages/${name}`))
         fs.mkdirSync(path.resolve(dir, `../src/pages/${name}/images`))
-        const tsxTpl = fs.readFileSync(path.resolve(dir, '../template/index.tsx')).toString()
+        fs.writeFileSync(path.resolve(dir, `../src/pages/${name}/index.module.less`), '')
+        const tsxTpl = fs.readFileSync(path.resolve(dir, '../template/index.tpl')).toString()
         fs.writeFileSync(path.resolve(dir, `../src/pages/${name}/index.page.tsx`), tsxTpl)
 
         let serverTpl = fs.readFileSync(path.resolve(dir, '../template/server.tpl')).toString()
@@ -81,6 +91,8 @@ function getPageName() {
           )}](ctrl + 单击跳转)\n开始愉快的开发吧~ ✨\n`,
         )
 
+        log.info(`\n🔜 请记得在 page.server.ts 中完善TDK等`)
+
         startServer(name)
       }
     })
@@ -89,6 +101,5 @@ function getPageName() {
 try {
   getPageName()
 } catch {
-  log.error('😥 oops, some bug occurred\n')
   process.exit(1)
 }

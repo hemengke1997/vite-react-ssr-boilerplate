@@ -8,3 +8,4 @@ node_modules
 .local
 dist
 *.d.ts
+public

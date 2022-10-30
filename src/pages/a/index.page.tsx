@@ -1,3 +1,3 @@
 export function Page() {
-  return <div>this is page A</div>
+  return <div className='tw-text-red-600'>this is page A</div>
 }

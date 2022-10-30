@@ -1,11 +1,11 @@
 import type { AxiosResponse } from 'axios'
 import { isString } from 'lodash-es'
 import querystring from 'query-string'
-import { isDevMode } from '@root/shared/env'
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 import { ContentTypeEnum, RequestEnum, VAxios } from './Axios'
 import type { OriginResult, RequestOptions } from './axiosType.d'
 import { deepMerge, formatRequestDate, joinTimestamp, setObjToUrlParams } from './helper'
+import { isDevMode } from '@/client'
 
 export * from './axiosType.d'
 

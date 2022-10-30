@@ -1,4 +1,4 @@
-async function onBeforeRender() {
+async function onBeforeRender(): PageType.onBeforeRender {
   return {
     pageContext: {
       documentProps: {
@@ -6,6 +6,7 @@ async function onBeforeRender() {
         description: '',
         keywords: '',
         isMobile: {{ isMobile }},
+        checkPlatform: true,
       },
     },
   }

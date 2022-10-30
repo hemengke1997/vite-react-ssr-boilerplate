@@ -11,7 +11,7 @@ const processName = `act`
 async function runPm2() {
   pm2.connect((err) => {
     if (err) {
-      log.error(`\n [pm2]: connect error \n ${err}`)
+      log.error(`\n[pm2]: connect error\n${err}`)
       process.exit(1)
     }
 
@@ -19,19 +19,20 @@ async function runPm2() {
       {
         script: path.resolve(dir, '../server/index.js'),
         name: processName,
+        watch: true,
       },
       (err) => {
-        log.info(`[pm2]: start`)
+        log.info(`\n[pm2]: start`)
         if (err) {
-          log.error(`\n [pm2]: start error \n ${err}`)
-          log.info(`\n [pm2]: restart`)
+          log.error(`\n[pm2]: start error \n ${err}`)
+          log.info(`\n[pm2]: restart`)
           pm2.restart(processName, () => {
-            log.success(`\n [pm2]: restart success`)
+            log.success(`\n[pm2]: restart success`)
             return pm2.disconnect()
           })
           return pm2.disconnect()
         }
-        log.success(`\n [pm2]: start success`)
+        log.success(`\n[pm2]: start success`)
         pm2.disconnect()
       },
     )
@@ -41,6 +42,6 @@ async function runPm2() {
 try {
   runPm2()
 } catch {
-  log.error(`\n [pm2]: something wrong`)
+  log.error(`\n[pm2]: something wrong`)
   process.exit(1)
 }

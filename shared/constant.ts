@@ -1,1 +1,1 @@
-export const BASE = '/some-base-url/'
+export const BASE = '/base-url/'

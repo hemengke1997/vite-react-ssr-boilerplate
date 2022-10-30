@@ -4,11 +4,16 @@ module.exports = () => {
       require('autoprefixer'),
       require('tailwindcss'),
       require('@minko-fe/postcss-pxtorem')({
-        rootValue: 16,
+        rootValue({ file }) {
+          return file.includes('node_modules/react-vant') ? 8 : 16
+        },
         replace: true,
-        minPixelValue: 2,
-        mediaQuery: false,
+        minPixelValue: 1,
+        atRules: false,
         propList: ['*'],
+        exclude(file) {
+          return file.includes('assets/style') || file.includes('node_modules/antd')
+        },
       }),
     ],
   }

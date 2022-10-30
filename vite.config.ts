@@ -1,30 +1,47 @@
 import path from 'node:path'
 import type { ConfigEnv, UserConfig } from 'vite'
-
+import { loadEnv, normalizePath } from 'vite'
 import { setupVitePlugins } from './config/vite/plugins'
-import { getContentHash, getHash } from './config/vite/utils/helper'
+import { getContentHash, getHash, wrapperEnv } from './config/vite/utils/helper'
+import { LessPluginRemoveAntdGlobalStyles } from './scripts/remove-antd-global-style'
 import { BASE } from './shared/constant'
+import { Env } from './shared/enum'
 
-export default ({ command, ssrBuild }: ConfigEnv): UserConfig => {
+export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
+  const root = process.cwd()
+
   const isBuild = command === 'build'
-  // const isProd = process.env.NODE_ENV === 'production'
+
+  const env = loadEnv(mode, root) as ImportMetaEnv
+
+  wrapperEnv(env)
 
   return {
     base: BASE,
+    mode,
     plugins: [
       setupVitePlugins({
         isBuild,
+        mode: mode as Env,
       }),
     ],
     resolve: {
-      alias: {
-        '@': path.resolve(process.cwd(), 'src'),
-        '@root': process.cwd(),
-      },
+      alias: [
+        { find: '@', replacement: path.resolve(__dirname, './src') },
+        {
+          find: '@root',
+          replacement: path.resolve(__dirname),
+        },
+        {
+          find: /^~/,
+          replacement: `${path.resolve(__dirname, './node_modules')}/`,
+        },
+      ],
     },
     css: {
       preprocessorOptions: {
         less: {
+          plugins: [new LessPluginRemoveAntdGlobalStyles()],
           javascriptEnabled: true,
           modifyVars: {
             'border-radius-base': '4px',
@@ -36,15 +53,21 @@ export default ({ command, ssrBuild }: ConfigEnv): UserConfig => {
     define: {
       'process.env': process.env,
     },
-
+    ssr: {
+      optimizeDeps: {
+        disabled: 'build',
+      },
+      noExternal: isBuild ? ['react-vant'] : [],
+    },
+    optimizeDeps: {
+      include: ['antd/lib/locale/zh_CN'],
+    },
     build: {
-      target: 'es2015',
       emptyOutDir: true,
       cssCodeSplit: true,
-      manifest: true,
-      ssrManifest: true,
-      minify: 'esbuild',
-      chunkSizeWarningLimit: 500,
+      minify: mode === Env.test ? false : 'esbuild',
+      reportCompressedSize: false,
+      chunkSizeWarningLimit: 2048,
       rollupOptions: {
         output: {
           format: 'es',
@@ -54,14 +77,13 @@ export default ({ command, ssrBuild }: ConfigEnv): UserConfig => {
               extType = 'img'
             }
             const hash = getContentHash(assetInfo.source)
-            if (assetInfo.name?.endsWith('?extractStyles&lang.css')) {
-              const nameBase = assetInfo.name.split('.').slice(0, -2).join('.')
-              return `assets/${extType}/${nameBase}.${hash}[extname]`
-            }
+
             if (extType === 'img' && assetInfo.name) {
-              const dir = path.basename(path.dirname(path.dirname(assetInfo.name)))
+              const assetPath = path.relative(root, assetInfo.name)
+              const dir = path.dirname(assetPath)
+
               if (dir) {
-                return `assets/${extType}/${dir}/[name].${hash}[extname]`
+                return normalizePath(`assets/${extType}/${dir}/[name].${hash}[extname]`)
               }
             }
             return `assets/${extType}/[name].${hash}[extname]`

@@ -1,26 +1,27 @@
-import React from 'react'
-
+import { PageContextProvider } from './usePageContext'
 import '@/assets/style/index.less'
 
-import type { PageContext } from './types'
-
-async function createApp(pageContext: PageContext) {
-  const { Page, pageProps, documentProps } = pageContext
+async function createApp(pageContext: PageType.PageContext) {
+  const { Page, pageProps } = pageContext
 
   let Layout
 
-  if (documentProps?.isMobile) {
-    Layout = (await import('./MobileLayout')).MobileLayout
+  if (pageProps?.isMobile) {
+    Layout = (await import('@/components/mobile/MobileLayout')).MobileLayout
   } else {
-    Layout = (await import('./PCLayout')).PCLayout
+    Layout = (await import('@/components/pc/PCLayout')).PCLayout
   }
 
-  const Tpl = documentProps?.layout || typeof documentProps?.layout === 'undefined' ? Layout : React.Fragment
+  const Tpl = Layout
 
   return (
-    <Tpl>
-      <Page {...pageProps} />
-    </Tpl>
+    <>
+      <PageContextProvider pageContext={pageContext}>
+        <Tpl>
+          <Page {...pageProps} />
+        </Tpl>
+      </PageContextProvider>
+    </>
   )
 }
 

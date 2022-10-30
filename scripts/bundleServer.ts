@@ -2,28 +2,68 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { build } from 'esbuild'
 import fs from 'fs-extra'
+import { normalizePath } from 'vite'
+import fg from 'fast-glob'
+import { loadTsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
+
+const { sync: glob } = fg
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 
 const serverDir = path.resolve(dir, '../server/')
 
+const tsconfig = path.resolve(dir, './tsconfig.server.json')
+
+const tsconfigData = loadTsconfig(tsconfig)
+
+const compilerOptions = tsconfigData!.compilerOptions
+
 async function bundleServer() {
+  const pathKeys = Object.keys(compilerOptions?.paths || {}).filter((t) => t.startsWith('@'))
+
+  const re = new RegExp(`^(${pathKeys.join('|')})`)
+
   const result = await build({
-    absWorkingDir: process.cwd(),
     entryPoints: [path.join(serverDir, 'index.ts')],
     outfile: 'index.js',
     write: false,
     platform: 'node',
     bundle: true,
-    format: 'cjs',
+    format: 'esm',
     sourcemap: false,
     treeShaking: true,
     splitting: false,
     banner: {
-      js: '/* eslint-disable */\n"use strict"\n',
+      js: `/* eslint-disable */\n"use strict";\n`,
     },
-    tsconfig: path.resolve(dir, './tsconfig.server.json'),
+    tsconfig,
     plugins: [
+      {
+        name: 'ts-paths',
+        setup(build) {
+          build.onResolve({ filter: re }, (args) => {
+            const pathKey = pathKeys.find((pkey) => new RegExp(`^${pkey.replaceAll('*', '')}`).test(args.path))
+            if (!pathKey) return { path: args.path }
+            const [pathDir] = pathKey?.split('*')
+            let file = args.path.replace(pathDir, '')
+            if (file === args.path) {
+              file = ''
+            }
+            for (const dir of compilerOptions!.paths![pathKey]) {
+              const fileDir = normalizePath(path.resolve(process.cwd(), dir).replace('*', file))
+              let [matchedFile] = glob(`${fileDir}.*`)
+              if (!matchedFile) {
+                const [matchIndexFile] = glob(`${fileDir}/index.*`)
+                matchedFile = matchIndexFile
+              }
+              if (matchedFile) {
+                return { path: matchedFile }
+              }
+            }
+            return { path: args.path }
+          })
+        },
+      },
       {
         name: 'externalize-deps',
         setup(build) {
