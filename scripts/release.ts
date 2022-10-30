@@ -57,14 +57,11 @@ async function main() {
     return
   }
 
-  step('\n 👾 Pushing to Gitee...')
+  step('\n 👾 Pushing to Git...')
 
   {
     const { stdout } = await run('git', ['remote', '-v'], { stdio: 'pipe' })
-    const o = stdout
-      .split('\n')
-      .find((r) => r.includes('qeeyoutechnology/activity-project.git'))
-      ?.split('\t')[0]
+    const o = stdout.split('\n')[0]?.split('\t')[0]
     if (o) {
       await run('git', ['push', o, branch])
     } else {
