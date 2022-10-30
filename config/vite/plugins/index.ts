@@ -13,8 +13,8 @@ import fg from 'fast-glob'
 import fs from 'fs-extra'
 import { configVisualizerConfig } from './visualizer'
 
-function build(filePath: string, outDir: string) {
-  const code = fs.readFileSync(filePath, 'utf-8')
+function build(filePath: string, outDir: string, code?: string) {
+  code = code || fs.readFileSync(filePath, 'utf-8')
   const fileName = path.basename(filePath, path.extname(filePath))
   transformWithEsbuild(code, fileName, {
     loader: 'ts',
@@ -114,10 +114,10 @@ export function setupVitePlugins({ isBuild, mode }: { isBuild: boolean; mode: ke
           build(f, outDir)
         })
       },
-      handleHotUpdate(ctx) {
+      async handleHotUpdate(ctx) {
         if (ctx.file.includes(normalizePath(path.resolve(config.root, 'publicTs')))) {
-          build(ctx.file, config.publicDir)
-          return []
+          const code = await ctx.read()
+          build(ctx.file, config.publicDir, code)
         }
       },
     },
