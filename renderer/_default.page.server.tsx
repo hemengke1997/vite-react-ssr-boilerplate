@@ -3,7 +3,6 @@ import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr'
 import { BASE } from '@root/shared/constant'
 import { getLibAssets } from '@root/shared'
-import '@root/publicTs/flexible'
 import { createApp } from './createApp'
 
 export const passToClient = ['pageProps']
@@ -12,14 +11,13 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
   const pageHtml = renderToString(await createApp(pageContext))
 
   const { pageProps } = pageContext
+  const { checkPlatform = true, isMobile = false } = pageProps
   const title = pageProps?.title || 'title'
   const desc = pageProps?.description || 'description'
   const keywords = pageProps?.keywords || 'keywords'
 
-  const isMobile = pageProps?.isMobile || false
-
   const documentHtml = escapeInject/* html */ `<!DOCTYPE html>
-  <html lang="zh-CN" is-mobile="${isMobile.toString()}">
+  <html lang="zh-CN" is-mobile="${isMobile.toString()}" check-platform='${checkPlatform.toString()}'>
     <head>
       <meta charset="UTF-8" />
       <meta name="renderer" content="webkit" />
@@ -37,7 +35,9 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
       <meta property="page_title" content="${title}" />
       <meta name="og:title" content="${title}" />
       <meta property="og:title" content="${title}" />
+      <script src=${getLibAssets('/lib/initGlobalVars.js')}></script>
       <script src=${getLibAssets('/lib/flexible.js')}></script>
+      <script src=${getLibAssets('/lib/checkPlatform.js')}></script>
       <title>${title}</title>
     </head>
     <body>

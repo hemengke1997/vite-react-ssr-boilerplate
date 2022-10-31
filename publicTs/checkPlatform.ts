@@ -1,5 +1,10 @@
-export const checkoutPlatform = (isMobile?: boolean) => {
+;(() => {
   let check = false
+
+  const { isMobile, checkPlatform } = window
+
+  if (!checkPlatform) return
+
   const w = navigator.userAgent || navigator.vendor || (window as any).opera
   if (
     /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(
@@ -20,4 +25,6 @@ export const checkoutPlatform = (isMobile?: boolean) => {
   if (check && !isMobile) {
     window.location.pathname = `${window.location.pathname}-m`
   }
-}
+})()
+
+export {}

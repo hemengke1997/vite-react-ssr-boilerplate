@@ -37,6 +37,7 @@ vite-react-ssr-boilerplate
 ├─ shared                                                 client & server 共享功能目录
 ├─ src                                                    业务源码
 ├─ template                                               页面模板
+├─ typings                                                全局类型
 ├─ postcss.config.js                                      postcss配置
 ├─ README.md                                              开发前阅读
 ├─ tailwind.config.js                                     tw配置
