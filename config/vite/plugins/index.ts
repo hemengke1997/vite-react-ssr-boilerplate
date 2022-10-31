@@ -103,7 +103,7 @@ export function setupVitePlugins({ isBuild, mode }: { isBuild: boolean; mode: ke
         config = c
       },
       buildStart() {
-        const outDir = isBuild ? config.build.outDir : config.publicDir
+        const outDir = config.publicDir
         const root = config.root
         const files = fg.sync(normalizePath(path.resolve(root, 'publicTs/*.ts')), {
           cwd: root,
