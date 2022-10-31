@@ -8,7 +8,7 @@ const releaseRE = /^v\d/
 const commitRE =
   /^(revert: )?(feat|fix|docs|style|refactor|perf|test|workflow|build|ci|chore|types|wip|release|deps|merge)(\(.+\))?: .{1,50}/
 
-if (!releaseRE.test(msg) && !commitRE.test(msg)) {
+if (!releaseRE.test(msg) && !commitRE.test(msg) && !msg.startsWith('Merge')) {
   console.error(
     `  ${colors.bgRed(colors.white(' ERROR '))} ${colors.red(`invalid commit message format.`)}\n\n${colors.red(
       `  Examples:\n\n`,

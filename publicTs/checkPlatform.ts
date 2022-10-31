@@ -1,4 +1,4 @@
-;(() => {
+;(function () {
   let check = false
 
   const { isMobile, checkPlatform } = window
