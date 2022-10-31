@@ -35,9 +35,9 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
       <meta property="page_title" content="${title}" />
       <meta name="og:title" content="${title}" />
       <meta property="og:title" content="${title}" />
-      <script src=${getLibAssets('/lib/initGlobalVars.js')}></script>
-      <script src=${getLibAssets('/lib/flexible.js')}></script>
-      <script src=${getLibAssets('/lib/checkPlatform.js')}></script>
+      <script src="${getLibAssets('/lib/initGlobalVars.js')}"></script>
+      <script src="${getLibAssets('/lib/checkPlatform.js')}"></script>
+      <script src="${getLibAssets('/lib/flexible.js')}"></script>
       <title>${title}</title>
     </head>
     <body>

@@ -45,15 +45,6 @@
       resize()
     }
   })
-
-  document.addEventListener('readystatechange', () => {
-    if (document.readyState !== 'complete') {
-      document.body.style.display = 'none'
-    }
-    if (document.readyState === 'complete') {
-      document.body.style.display = ''
-    }
-  })
 })()
 
 export {}
