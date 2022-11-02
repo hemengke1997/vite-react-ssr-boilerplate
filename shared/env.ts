@@ -4,7 +4,6 @@ export enum Env {
   production = 'production',
 }
 
-
 export function getEnv(): string {
   return import.meta.env.MODE
 }
