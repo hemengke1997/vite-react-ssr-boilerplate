@@ -9,6 +9,7 @@ declare global {
 
   interface ImportMetaEnv {
     readonly VITE_APIPREFIX: '/proxyPrefix' | undefined
+    readonly VITE_APIURL: string
   }
 }
 

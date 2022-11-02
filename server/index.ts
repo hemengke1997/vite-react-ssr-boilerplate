@@ -9,7 +9,7 @@ import { renderPage } from 'vite-plugin-ssr'
 import type { ViteDevServer } from 'vite'
 import { loadEnv } from 'vite'
 import { BASE } from '@root/shared/constant'
-import { Env } from '@root/shared/enum'
+import { Env } from '@root/shared/env'
 import { log } from '../scripts/utils'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))

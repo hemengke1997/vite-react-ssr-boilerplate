@@ -1,11 +1,13 @@
 import type { AxiosResponse } from 'axios'
 import { isString } from 'lodash-es'
 import querystring from 'query-string'
+import { isDevMode } from '@root/shared/env'
+import { isBrowser } from '@root/shared'
+import normalizeUrl from 'normalize-url'
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 import { ContentTypeEnum, RequestEnum, VAxios } from './Axios'
 import type { OriginResult, RequestOptions } from './axiosType.d'
 import { deepMerge, formatRequestDate, joinTimestamp, setObjToUrlParams } from './helper'
-import { isDevMode } from '@/client'
 
 export * from './axiosType.d'
 
@@ -54,6 +56,9 @@ const transform: AxiosTransform = {
     if (apiUrl && isString(apiUrl)) {
       config.url = `${apiUrl}${config.url}`
     }
+
+    config.url = normalizeUrl(config.url ?? '')
+
     const params = config.params || {}
 
     const data = config.data || false
@@ -178,10 +183,12 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
 }
 
 const prefix = import.meta.env.VITE_APIPREFIX
+const apiUrl = import.meta.env.VITE_APIURL
 
 export const axiosRequest = createAxios({
   requestOptions: {
     joinTime: true,
-    urlPrefix: prefix ?? '',
+    urlPrefix: isBrowser() ? prefix ?? '' : '',
+    apiUrl: isBrowser() ? window.location.origin : apiUrl,
   },
 })

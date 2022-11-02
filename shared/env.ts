@@ -1,6 +1,9 @@
-// environment: broswer & vite server (not only node)
+export enum Env {
+  development = 'development',
+  test = 'test',
+  production = 'production',
+}
 
-import { Env } from '@root/shared/enum'
 
 export function getEnv(): string {
   return import.meta.env.MODE

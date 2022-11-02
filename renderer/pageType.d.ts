@@ -8,6 +8,10 @@ declare namespace PageType {
      * @description 是否检查平台（移动端/pc）
      */
     checkPlatform: boolean
+    /**
+     * data from backend
+     */
+    data?: Record<string, any>
   }>
 
   interface PageContext {

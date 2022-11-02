@@ -3,11 +3,31 @@
 ## development
 
 ```bash
-pnpm i
+pnpm install
 ```
 
 ```bash
-npm run dev
+pnpm run dev
+```
+
+## build
+
+### test
+
+```bash
+pnpm run build:test
+```
+
+### prod
+
+```bash
+pnpm run build
+```
+
+## release
+
+```bash
+pnpm run release
 ```
 
 ## deploy
@@ -15,13 +35,13 @@ npm run dev
 ### test
 
 ```bash
-npm run pm2:test
+pnpm run pm2:test
 ```
 
 ### production
 
 ```bash
-npm run pm2:prod
+pnpm run pm2:prod
 ```
 
 ## 项目结构树

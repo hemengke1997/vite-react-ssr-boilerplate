@@ -12,9 +12,9 @@
   ],
   "type": "module",
   "scripts": {
+    "dev": "tsx scripts/dev.ts",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
-    "dev": "tsx scripts/dev.ts",
     "ssr": "cross-env NODE_ENV=development tsx server/index.ts",
     "start:prod": "cross-env NODE_ENV=production tsx server/index.ts",
     "start:test": "cross-env NODE_ENV=test tsx server/index.ts",
@@ -29,11 +29,10 @@
     "bundleServer": "tsx scripts/bundleServer",
     "server:local": "cross-env NODE_ENV=test node server/index.js",
     "//": "以下部署相关",
-    "pm2:dev": "npx --yes pnpm i && cross-env NODE_ENV=test tsx scripts/pm2 --tsconfig tsconfig.pm2.json",
-    "pm2:test": "npx --yes pnpm i -P && cross-env NODE_ENV=test tsx scripts/pm2 --tsconfig tsconfig.pm2.json",
-    "pm2:prod": "npx --yes pnpm i -P && cross-env NODE_ENV=production tsx scripts/pm2 --tsconfig tsconfig.pm2.json"
+    "pm2:dev": "npx --yes --ignore-scripts pnpm i && cross-env NODE_ENV=development tsx server/pm2 --tsconfig tsconfig.pm2.json",
+    "pm2:test": "npx --yes --ignore-scripts pnpm i -P && cross-env NODE_ENV=test tsx server/pm2 --tsconfig tsconfig.pm2.json",
+    "pm2:prod": "npx --yes --ignore-scripts pnpm i -P && cross-env NODE_ENV=production tsx server/pm2 --tsconfig tsconfig.pm2.json"
   },
-  "//": "请勿升级react及相关依赖",
   "dependencies": {
     "@minko-fe/tsconfig": "^1.2.2",
     "ahooks": "^3.7.2",
@@ -43,19 +42,15 @@
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.6",
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "headroom.js": "^0.12.0",
     "http-proxy-middleware": "^2.0.6",
-    "inquirer": "^9.1.4",
     "lodash-es": "^4.17.21",
-    "minimist": "^1.2.7",
     "normalize-path": "^3.0.0",
     "normalize-url": "^7.2.0",
     "normalize.css": "^8.0.1",
-    "ora": "^6.1.2",
     "picocolors": "^1.0.0",
-    "pm2": "5.2.0",
+    "pm2": "5.2.2",
     "qrcode.react": "3.1.0",
     "query-string": "^7.1.1",
     "react": "17.0.2",
@@ -63,14 +58,12 @@
     "react-dom": "17.0.2",
     "react-helmet": "^6.1.0",
     "react-transition-group": "^4.4.5",
-    "react-use": "^17.4.0",
     "react-vant": "^3.0.2",
     "sirv": "^2.0.2",
-    "tailwindcss": "^3.2.1",
     "tsx": "^3.11.0",
     "vite": "npm:@minko-fe/vite@^3.2.1",
     "vite-plugin-ssr": "^0.4.43",
-    "zustand": "^4.1.3"
+    "zustand": "^4.1.4"
   },
   "devDependencies": {
     "@minko-fe/commitlint-config": "^1.2.2",
@@ -86,25 +79,29 @@
     "@types/less": "^3.0.3",
     "@types/lodash-es": "^4.17.6",
     "@types/minimist": "^1.2.2",
-    "@types/node": "^18.11.5",
+    "@types/node": "^18.11.9",
     "@types/normalize-path": "^3.0.0",
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2",
     "@types/react-helmet": "^6.1.5",
     "@types/react-transition-group": "^4.4.5",
     "@types/shelljs": "^0.8.11",
-    "@vitejs/plugin-legacy": "2.2.0",
-    "@vitejs/plugin-react": "2.1.0",
+    "@vitejs/plugin-legacy": "2.3.0",
+    "@vitejs/plugin-react": "2.2.0",
     "autoprefixer": "^10.4.12",
     "consola": "^2.15.3",
     "esbuild": "^0.15.12",
     "eslint": "^8.26.0",
-    "eslint-define-config": "^1.8.0",
+    "eslint-define-config": "^1.11.0",
     "execa": "^6.1.0",
     "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",
+    "inquirer": "^9.1.4",
     "less": "^4.1.3",
+    "lint-staged": "^13.0.3",
     "magic-string": "^0.26.7",
+    "minimist": "^1.2.7",
+    "ora": "^6.1.2",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "prompts": "^2.4.2",
@@ -126,6 +123,15 @@
     }
   },
   "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged --concurrent false",
     "commit-msg": "pnpm exec tsx scripts/verifyCommit.ts $1"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ],
+    "!(dist/**)/*.{js,jsx,ts,tsx}": [
+      "eslint --cache --fix"
+    ]
   }
 }
