@@ -15,7 +15,7 @@ declare namespace PageType {
   }>
 
   interface PageContext {
-    Page?: React.FC<PageProps>
+    Page: React.FC<PageProps>
     pageProps: PageProps
   }
 

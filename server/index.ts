@@ -78,8 +78,9 @@ async function startServer() {
       }
       const pageContext = await renderPage(pageContextInit)
       const { httpResponse } = pageContext
-      if (!httpResponse) return next()
-      httpResponse.pipe(res)
+      if (httpResponse === null) return next()
+      const { body, statusCode, contentType } = httpResponse
+      res.status(statusCode).type(contentType).send(body)
     } catch (e: any) {
       viteDevServer?.ssrFixStacktrace(e)
       res.status(500).end(e.stack)

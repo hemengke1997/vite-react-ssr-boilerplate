@@ -6,4 +6,4 @@ const dir = path.dirname(fileURLToPath(import.meta.url))
 
 const serverDir = path.resolve(dir, '../server/')
 
-bundle(path.join(serverDir, 'index.ts'), path.join(serverDir, 'index.js'))
+bundle(path.join(serverDir, 'pm2.ts'), path.join(serverDir, 'pm2.js'))
