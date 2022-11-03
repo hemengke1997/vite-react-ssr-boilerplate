@@ -11,3 +11,4 @@ LICENSE
 *.yaml
 server/*.js
 dist
+publicTs/manifest-publicTs.json
