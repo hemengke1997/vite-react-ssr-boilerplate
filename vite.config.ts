@@ -22,6 +22,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
     plugins: [
       setupVitePlugins({
         isBuild,
+        ssrBuild,
         mode: mode as Env,
       }),
     ],

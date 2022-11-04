@@ -11,6 +11,7 @@ import MagicString from 'magic-string'
 import type { Env } from '@root/shared/enum'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { configVisualizerConfig } from './visualizer'
 
 function build(filePath: string, outDir: string, code?: string) {
@@ -44,7 +45,15 @@ function resolveNodeModules(libName: string, ...dir: string[]) {
   return normalizePath(path.resolve(modulePath.substring(0, lastIndex), ...dir))
 }
 
-export function setupVitePlugins({ isBuild, mode }: { isBuild: boolean; mode: keyof typeof Env }) {
+export function setupVitePlugins({
+  isBuild,
+  ssrBuild,
+  mode,
+}: {
+  isBuild: boolean
+  ssrBuild: boolean | undefined
+  mode: keyof typeof Env
+}) {
   let config: ResolvedConfig
   const vitePlugins: PluginOption[] = [
     react(),
@@ -122,6 +131,12 @@ export function setupVitePlugins({ isBuild, mode }: { isBuild: boolean; mode: ke
       },
     },
   ]
+
+  ssrBuild &&
+    vitePlugins.push({
+      enforce: 'pre',
+      ...nodeResolve(),
+    })
 
   isBuild &&
     vitePlugins.push(
