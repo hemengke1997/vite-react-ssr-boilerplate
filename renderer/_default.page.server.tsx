@@ -3,7 +3,20 @@ import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr'
 import { BASE } from '@root/shared/constant'
 import { getLibAssets } from '@root/shared'
+import { isProdMode } from '@root/shared/env'
+import manifestPublicTs from '../publicTs/manifest-publicTs.json'
 import { createApp } from './createApp'
+
+function setupVconsole(isMobile?: boolean) {
+  if (!isProdMode() && isMobile) {
+    return escapeInject/* html */ `
+    <script src="https://cdn.jsdelivr.net/npm/vconsole@latest/dist/vconsole.min.js"></script>
+    <script>
+      var vConsole = new window.VConsole();
+    </script>`
+  }
+  return escapeInject``
+}
 
 export const passToClient = ['pageProps']
 
@@ -12,19 +25,22 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
 
   const { pageProps } = pageContext
   const { checkPlatform = true, isMobile = false } = pageProps
-  const title = pageProps?.title || 'title'
-  const desc = pageProps?.description || 'description'
-  const keywords = pageProps?.keywords || 'keywords'
+  const title = pageProps?.title || 't'
+  const desc = pageProps?.description || 'd'
+  const keywords = pageProps?.keywords || 'k'
+
+  const viteEnv = import.meta.env
 
   const documentHtml = escapeInject/* html */ `<!DOCTYPE html>
-  <html lang="zh-CN" is-mobile="${isMobile.toString()}" check-platform='${checkPlatform.toString()}'>
+  <html lang="zh-CN" is-mobile="${String(isMobile)}" check-platform='${String(checkPlatform)}'>
     <head>
       <meta charset="UTF-8" />
+      <meta http-equiv="Cache-Control" content="no-store">
       <meta name="renderer" content="webkit" />
       <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
       <link rel="icon" href="${BASE}favicon.ico" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0${
-        isMobile ? ', maximum-scale=1.0, user-scalable=no' : ''
+        isMobile ? ', maximum-scale=1.0, user-scalable=no, viewport-fit=cover' : ''
       }" />
       <meta name="description" content="${desc}" />
       <meta property="description" content="${desc}" />
@@ -35,14 +51,18 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
       <meta property="page_title" content="${title}" />
       <meta name="og:title" content="${title}" />
       <meta property="og:title" content="${title}" />
-      <script src="${getLibAssets('/lib/initGlobalVars.js')}"></script>
-      <script src="${getLibAssets('/lib/checkPlatform.js')}"></script>
-      <script src="${getLibAssets('/lib/flexible.js')}"></script>
+      <script src="${getLibAssets(manifestPublicTs.initGlobalVars)}"></script>
+      <script src="${getLibAssets(manifestPublicTs.checkPlatform)}"></script>
+      <script src="${getLibAssets(manifestPublicTs.flexible)}"></script>
       <title>${title}</title>
     </head>
     <body>
       <div id="app">${dangerouslySkipEscape(pageHtml)}</div>
     </body>
+    ${setupVconsole(isMobile)}
+    <script last-build-time="${__APP_INFO__.lastBuildTime}" env="${viteEnv.MODE}" proxy="${
+    viteEnv.VITE_APIPREFIX ?? ''
+  }" api-url="${viteEnv.VITE_APIURL}" type="application/json"></script>
   </html>`
 
   return {
@@ -50,11 +70,5 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
     pageContext: {
       pageProps,
     },
-  }
-}
-
-export async function onBeforeRender(pageContext): PageType.onBeforeRender {
-  return {
-    pageContext: pageContext.exports.pageContext,
   }
 }

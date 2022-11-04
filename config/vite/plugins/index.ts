@@ -3,35 +3,14 @@ import path from 'node:path'
 import legacy from '@vitejs/plugin-legacy'
 import react from '@vitejs/plugin-react'
 import colors from 'picocolors'
-import type { PluginOption, ResolvedConfig } from 'vite'
-import { normalizePath, transformWithEsbuild } from 'vite'
+import type { PluginOption } from 'vite'
+import { normalizePath } from 'vite'
 import ssr from 'vite-plugin-ssr/plugin'
-import { AntdResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
 import MagicString from 'magic-string'
-import type { Env } from '@root/shared/enum'
-import fg from 'fast-glob'
-import fs from 'fs-extra'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
+import type { Env } from '@root/shared/env'
+import { AntdResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
 import { configVisualizerConfig } from './visualizer'
-
-function build(filePath: string, outDir: string, code?: string) {
-  code = code || fs.readFileSync(filePath, 'utf-8')
-  const fileName = path.basename(filePath, path.extname(filePath))
-  transformWithEsbuild(code, fileName, {
-    loader: 'ts',
-    format: 'esm',
-    minify: true,
-    platform: 'browser',
-    sourcemap: false,
-  }).then(async (res) => {
-    const filePath = path.join(outDir, `lib/${fileName}.js`)
-    if (fs.existsSync(filePath)) {
-      await fs.remove(filePath)
-    }
-    await fs.ensureDir(path.dirname(filePath))
-    await fs.writeFile(filePath, res.code)
-  })
-}
+import { bundlePublicTs } from './bundlePublicTs'
 
 function resolveNodeModules(libName: string, ...dir: string[]) {
   const esRequire = createRequire(import.meta.url)
@@ -48,13 +27,12 @@ function resolveNodeModules(libName: string, ...dir: string[]) {
 export function setupVitePlugins({
   isBuild,
   ssrBuild,
-  mode,
+  mode: _mode,
 }: {
   isBuild: boolean
-  ssrBuild: boolean | undefined
+  ssrBuild: boolean
   mode: keyof typeof Env
 }) {
-  let config: ResolvedConfig
   const vitePlugins: PluginOption[] = [
     react(),
     ssr({
@@ -106,44 +84,15 @@ export function setupVitePlugins({
         }
       },
     },
-    {
-      name: 'vite:bundlePublicTs',
-      configResolved(c) {
-        config = c
-      },
-      buildStart() {
-        const outDir = config.publicDir
-        const root = config.root
-        const files = fg.sync(normalizePath(path.resolve(root, 'publicTs/*.ts')), {
-          cwd: root,
-          absolute: true,
-        })
-
-        files.forEach((f) => {
-          build(f, outDir)
-        })
-      },
-      async handleHotUpdate(ctx) {
-        if (ctx.file.includes(normalizePath(path.resolve(config.root, 'publicTs')))) {
-          const code = await ctx.read()
-          build(ctx.file, config.publicDir, code)
-        }
-      },
-    },
+    bundlePublicTs(ssrBuild),
   ]
-
-  ssrBuild &&
-    vitePlugins.push({
-      enforce: 'pre',
-      ...nodeResolve(),
-    })
 
   isBuild &&
     vitePlugins.push(
       legacy({
         modernPolyfills: ['es.global-this'],
         polyfills: true,
-        renderLegacyChunks: mode === 'production',
+        renderLegacyChunks: true,
       }),
     )
 

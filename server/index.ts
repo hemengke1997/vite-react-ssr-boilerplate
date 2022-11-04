@@ -87,7 +87,6 @@ async function startServer() {
       const { httpResponse } = pageContext
       if (httpResponse === null) return next()
       const { body, statusCode, contentType } = httpResponse
-      // 返回string (服务器cdn不支持stream流)
       res.status(statusCode).type(contentType).send(body)
     } catch (e: any) {
       viteDevServer?.ssrFixStacktrace(e)

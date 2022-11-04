@@ -1,9 +1,15 @@
-export const pageContext: PageType.PageContext = {
-  pageProps: {
-    title: '标题',
-    description: '描述',
-    keywords: '关键字',
-    isMobile: false,
-    checkPlatform: true,
-  },
+async function onBeforeRender(): PageType.onBeforeRender {
+  return {
+    pageContext: {
+      pageProps: {
+        title: '标题',
+        description: '描述',
+        keywords: '关键词',
+        isMobile: false,
+        checkPlatform: true,
+      },
+    },
+  }
 }
+
+export { onBeforeRender }

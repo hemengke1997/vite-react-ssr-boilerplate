@@ -1,0 +1,52 @@
+:root {
+  /* ---------------------------------- selector ---------------------------------- */
+  .ant-select-clear {
+    .anticon {
+      vertical-align: super;
+    }
+  }
+
+  /* ---------------------------------- input --------------------------------- */
+  .ant-input {
+    border: none;
+    box-shadow: none;
+  }
+
+  /* --------------------------------- button --------------------------------- */
+  .ant-btn {
+    border: none;
+  }
+
+  .ant-btn[disabled]:hover,
+  .ant-btn[disabled]:focus,
+  .ant-btn[disabled]:active {
+    background-color: inherit;
+  }
+
+  .ant-btn-text {
+    padding: 0;
+    height: auto;
+  }
+
+  /* ---------------------------------- modal --------------------------------- */
+  .ant-modal[role='document'],
+  .ant-modal[role='dialog'] {
+    transform-origin: center center !important;
+  }
+
+  /* --------------------------------- message -------------------------------- */
+  .ant-message {
+    top: 50%;
+    transform: translateY(-50%);
+
+    .ant-message-notice-content {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 12px 25px;
+    }
+
+    .anticon {
+      display: none;
+    }
+  }
+}

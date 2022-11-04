@@ -5,7 +5,7 @@ function Page({ is404, errorInfo }: { is404: boolean; errorInfo?: string }) {
     return (
       <>
         <h1>404 Page Not Found</h1>
-        <p>[qiyou]: This page could not be found!</p>
+        <p>[vite-ssr]: This page could not be found!</p>
         <p>{errorInfo}</p>
       </>
     )
@@ -13,7 +13,7 @@ function Page({ is404, errorInfo }: { is404: boolean; errorInfo?: string }) {
     return (
       <>
         <h1>500 Internal Server Error</h1>
-        <p>[qiyou]: Something went wrong!</p>
+        <p>[vite-ssr]: Something went wrong!</p>
       </>
     )
   }

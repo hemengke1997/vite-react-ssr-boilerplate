@@ -1,5 +1,5 @@
 import { PageContextProvider } from './usePageContext'
-import '@/assets/style/index.less'
+import '@/assets/style/global.less'
 
 async function createApp(pageContext: PageType.PageContext) {
   const { Page, pageProps } = pageContext
@@ -15,13 +15,11 @@ async function createApp(pageContext: PageType.PageContext) {
   const Tpl = Layout
 
   return (
-    <>
-      <PageContextProvider pageContext={pageContext}>
-        <Tpl>
-          <Page {...pageProps} />
-        </Tpl>
-      </PageContextProvider>
-    </>
+    <PageContextProvider pageContext={pageContext}>
+      <Tpl>
+        <Page {...pageProps} />
+      </Tpl>
+    </PageContextProvider>
   )
 }
 

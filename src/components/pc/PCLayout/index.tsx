@@ -1,6 +1,6 @@
 import { ConfigProvider, message } from 'antd'
 import zh_CN from 'antd/lib/locale/zh_CN'
-import '@/assets/style/pc.less'
+import '@/assets/style/pc/index.less'
 
 message.config({
   maxCount: 1,

@@ -8,11 +8,6 @@ import { log } from './utils'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 
-enum Type {
-  mobile = 'mobile',
-  pc = 'pc',
-}
-
 function startServer(name: string) {
   try {
     shelljs.exec(`cross-env Start_Page=${name} pnpm run ssr`)
@@ -55,11 +50,11 @@ function getPageName() {
               type: 'list',
               name: 'type',
               message: 'PC or 移动端?',
-              choices: [Type.pc, Type.mobile],
+              choices: [Device.pc, Device.mobile],
             },
           ])
 
-          if (res.type === Type.mobile) {
+          if (res.type === Device.mobile) {
             isMobile = true
           } else {
             isMobile = false

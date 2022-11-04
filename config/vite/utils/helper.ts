@@ -14,7 +14,7 @@ export function deepMerge<T = any>(src: T, target: T): T {
 }
 
 export function getContentHash(chunk: string | Uint8Array) {
-  return createHash('md5').update(chunk).digest('hex').substring(0, 8)
+  return createHash('sha256').update(chunk).digest('hex').substring(0, 8)
 }
 
 export function getHash(chunkInfo: PreRenderedChunk) {
