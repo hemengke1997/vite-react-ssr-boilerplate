@@ -4,6 +4,7 @@ import fs from 'fs-extra'
 import inquirer from 'inquirer'
 import colors from 'picocolors'
 import shelljs from 'shelljs'
+import { Device } from '@root/shared/device'
 import { log } from './utils'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
