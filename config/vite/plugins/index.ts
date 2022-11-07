@@ -9,8 +9,8 @@ import ssr from 'vite-plugin-ssr/plugin'
 import MagicString from 'magic-string'
 import type { Env } from '@root/shared/env'
 import { AntdResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
+import { publicTypescript } from 'vite-plugin-public-typescript'
 import { configVisualizerConfig } from './visualizer'
-import { bundlePublicTs } from './bundlePublicTs'
 
 function resolveNodeModules(libName: string, ...dir: string[]) {
   const esRequire = createRequire(import.meta.url)
@@ -84,7 +84,7 @@ export function setupVitePlugins({
         }
       },
     },
-    bundlePublicTs(ssrBuild),
+    publicTypescript({ ssrBuild, inputDir: 'publicTs', outputDir: 'lib' }),
   ]
 
   isBuild &&
