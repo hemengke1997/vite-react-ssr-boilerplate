@@ -17,7 +17,7 @@ interface CacheType {
 
 let cacheMap = new Map<CacheType['key'], CacheType['value']>()
 
-export class ManifestCache {
+class ManifestCache {
   setCache(c: CacheType) {
     this.removeCache(c)
 
@@ -65,11 +65,11 @@ function build(filePath: string, outDir: string, cache: ManifestCache, code?: st
   }).then(async (res) => {
     const hash = getContentHash(res.code)
     const outPath = `lib/${fileName}.${hash}.js`
-    const filePath = path.join(outDir, outPath)
+    const fp = normalizePath(path.join(outDir, outPath))
     const oldFiles = fg.sync(normalizePath(path.join(outDir, `lib/${fileName}.?(*.)js`)))
     // if exits old files
-    if (oldFiles.length >= 1) {
-      const oldFile = oldFiles.filter((t) => t !== filePath)
+    if (oldFiles.length) {
+      const oldFile = oldFiles.filter((t) => t !== fp)
       // delete old files
       oldFile.forEach(async (f) => {
         if (fs.existsSync(f)) {
@@ -77,9 +77,8 @@ function build(filePath: string, outDir: string, cache: ManifestCache, code?: st
         }
       })
     }
-
-    await fs.ensureDir(path.dirname(filePath))
-    await fs.writeFile(filePath, res.code.replace(/\r\n|\r(?!\n)|\n/g, '\r\n'))
+    await fs.ensureDir(path.dirname(fp))
+    await fs.writeFile(fp, res.code)
     cache.setCache({ key: fileName, value: outPath })
     // write cache
     current++

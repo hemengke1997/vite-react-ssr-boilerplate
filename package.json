@@ -33,6 +33,7 @@
     "pm2:prod": "npx --yes --ignore-scripts pnpm i -P && cross-env NODE_ENV=production tsx server/pm2 --tsconfig tsconfig.pm2.json"
   },
   "dependencies": {
+    "@minko-fe/style-object-to-string": "^0.0.1",
     "@minko-fe/tsconfig": "^1.2.2",
     "ahooks": "^3.7.2",
     "antd": "^4.24.0",
@@ -59,7 +60,6 @@
     "react-transition-group": "^4.4.5",
     "react-vant": "^3.0.2",
     "sirv": "^2.0.2",
-    "style-object-to-css-string": "^1.0.1",
     "tailwindcss": "^3.2.1",
     "tsx": "^3.11.0",
     "vite": "npm:@minko-fe/vite@^3.2.1",
