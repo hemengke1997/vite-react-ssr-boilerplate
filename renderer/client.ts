@@ -1,6 +1,6 @@
 import { isProdMode } from '@root/shared/env'
 import type { CSSProperties } from 'react'
-import styleToString from 'style-object-to-css-string'
+import { styleObjectToString } from '@minko-fe/style-object-to-string'
 
 function logClientInfo() {
   interface Log {
@@ -16,7 +16,7 @@ function logClientInfo() {
   }
 
   function log(title: Log, value: Log) {
-    const qiyouStyle: CSSProperties = {
+    const nameStyle: CSSProperties = {
       background: '#FF9800',
       borderRadius: '4px',
       padding: '2px 4px',
@@ -38,12 +38,12 @@ function logClientInfo() {
     }
     console.log(
       `%cvite-ssr%c${title.text} %c ${value.text}`,
-      `${styleToString(qiyouStyle)}`,
-      `${styleToString({
+      `${styleObjectToString(nameStyle)}`,
+      `${styleObjectToString({
         ...defaultTitleStyle,
         ...title.style,
       })}`,
-      `${styleToString({
+      `${styleObjectToString({
         ...defaultValueStyle,
         ...value.style,
       })}`,

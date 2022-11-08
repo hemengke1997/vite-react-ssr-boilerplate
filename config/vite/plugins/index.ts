@@ -84,7 +84,7 @@ export function setupVitePlugins({
         }
       },
     },
-    publicTypescript({ ssrBuild, inputDir: 'publicTs', outputDir: 'lib' }),
+    publicTypescript({ ssrBuild, inputDir: 'publicTypescript', outputDir: 'lib' }),
   ]
 
   isBuild &&

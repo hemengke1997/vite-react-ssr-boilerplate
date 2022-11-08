@@ -1,10 +1,10 @@
-import { hydrate } from 'react-dom'
+import { hydrateRoot } from 'react-dom/client'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import { createApp } from './createApp'
 import { onClientInit } from './client'
 
 async function render(pageContext: PageContextBuiltInClient & PageType.PageContext) {
-  hydrate(await createApp(pageContext), document.getElementById('app')!)
+  hydrateRoot(document.getElementById('app')!, await createApp(pageContext))
   onClientInit()
 }
 

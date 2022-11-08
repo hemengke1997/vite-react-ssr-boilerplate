@@ -1,5 +1,5 @@
-;(function () {
-  let check = false
+;(() => {
+  let currentIsMobile = false
 
   const { isMobile, checkPlatform } = window
 
@@ -14,16 +14,19 @@
       w.substr(0, 4),
     )
   ) {
-    check = true
+    currentIsMobile = true
   }
 
-  if (!check && isMobile) {
+  if (!currentIsMobile && isMobile) {
+    // jump pc
     const l = `${window.location.pathname}`.lastIndexOf('-m')
-
     window.location.pathname = window.location.pathname.slice(0, l)
   }
-  if (check && !isMobile) {
-    window.location.pathname = `${window.location.pathname}-m`
+  if (currentIsMobile && !isMobile) {
+    // jump mobile
+    if (!window.location.pathname.endsWith('-m')) {
+      window.location.pathname = `${window.location.pathname}-m`
+    }
   }
 })()
 
