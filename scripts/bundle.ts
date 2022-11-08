@@ -4,7 +4,7 @@ import { build } from 'esbuild'
 import fs from 'fs-extra'
 import { normalizePath } from 'vite'
 import fg from 'fast-glob'
-import { loadTsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
+import { getTsconfig } from 'get-tsconfig'
 
 const { sync: glob } = fg
 
@@ -12,9 +12,9 @@ const dir = path.dirname(fileURLToPath(import.meta.url))
 
 const tsconfig = path.resolve(dir, './tsconfig.server.json')
 
-const tsconfigData = loadTsconfig(tsconfig)
+const tsconfigData = getTsconfig(tsconfig)
 
-const compilerOptions = tsconfigData!.compilerOptions
+const compilerOptions = tsconfigData?.config.compilerOptions
 
 async function bundle(entry: string, out: string) {
   const pathKeys = Object.keys(compilerOptions?.paths || {}).filter((t) => t.startsWith('@'))
