@@ -4,7 +4,7 @@ import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr'
 import { BASE } from '@root/shared/constant'
 import { getLibAssets } from '@root/shared'
 import { isProdMode } from '@root/shared/env'
-import manifestPublicTs from '../publicTs/manifest-publicTs.json'
+import manifestPublicTs from '../publicTypescript/manifest.json'
 import { createApp } from './createApp'
 
 function setupVconsole(isMobile?: boolean) {
