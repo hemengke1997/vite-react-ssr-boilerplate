@@ -10,6 +10,7 @@ import MagicString from 'magic-string'
 import type { Env } from '@root/shared/env'
 import { AntdResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
 import { publicTypescript } from 'vite-plugin-public-typescript'
+import timeReporter from 'vite-plugin-time-reporter'
 import { configVisualizerConfig } from './visualizer'
 
 function resolveNodeModules(libName: string, ...dir: string[]) {
@@ -85,6 +86,7 @@ export function setupVitePlugins({
       },
     },
     publicTypescript({ ssrBuild, inputDir: 'publicTypescript', outputDir: 'lib' }),
+    timeReporter(),
   ]
 
   isBuild &&
