@@ -52,7 +52,6 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
       <meta name="og:title" content="${title}" />
       <meta property="og:title" content="${title}" />
       <script src="${getLibAssets(manifestPublicTs.initGlobalVars)}"></script>
-      <script src="${getLibAssets(manifestPublicTs.checkPlatform)}"></script>
       <script src="${getLibAssets(manifestPublicTs.flexible)}"></script>
       <title>${title}</title>
     </head>

@@ -1,5 +1,9 @@
 # vite + ssr
 
+## Intro
+
+ssr boilerplate based on vite/vite-plugin-ssr/react
+
 ## development
 
 ```bash

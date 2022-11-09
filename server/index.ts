@@ -112,7 +112,7 @@ function listen(app: Application, _port: number) {
     log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
 
     if (isDev) {
-      log.info(`\n⏳ waiting for vite optimizing...`)
+      log.info(`\n⏳ open the link above then waiting for vite optimizing...`)
     }
   })
 
