@@ -9,4 +9,4 @@ node_modules
 dist
 *.d.ts
 public
-publicTs/manifest-publicTs.json
+publicTypescript/manifest.json
