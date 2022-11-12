@@ -11,7 +11,7 @@ const dir = path.dirname(fileURLToPath(import.meta.url))
 
 function startServer(name: string) {
   try {
-    shelljs.exec(`cross-env Start_Page=${name} pnpm run ssr`)
+    shelljs.exec(`cross-env Start_Page=${name} pnpm run ssr`, { async: true })
   } catch {
     process.exit(1)
   }
