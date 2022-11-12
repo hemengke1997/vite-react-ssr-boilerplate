@@ -2,7 +2,6 @@ import { createRequire } from 'node:module'
 import path from 'node:path'
 import legacy from '@vitejs/plugin-legacy'
 import react from '@vitejs/plugin-react'
-import colors from 'picocolors'
 import type { PluginOption } from 'vite'
 import { normalizePath } from 'vite'
 import ssr from 'vite-plugin-ssr/plugin'
@@ -65,27 +64,6 @@ export function setupVitePlugins({
             map: null,
             code: str().toString(),
           }
-        }
-      },
-    },
-    {
-      name: 'vite:log-real-server-time',
-      apply: 'serve',
-      transformIndexHtml(_, { server }) {
-        if (!global.__vite_dom_mounted) {
-          const info = server!.config.logger.info
-
-          const viteStartTime = global.__vite_server_start_time ?? false
-          const startupDurationString = viteStartTime
-            ? colors.dim(
-                `DOM ready in ${colors.white(
-                  colors.bold((Number(Math.ceil(performance.now() - viteStartTime)) / 1000).toFixed(2)),
-                )} s`,
-              )
-            : ''
-
-          info(`\n🍃 ${colors.green(`${colors.bold('VITE')}`)}  ${startupDurationString}\n`)
-          global.__vite_dom_mounted = true
         }
       },
     },

@@ -1,8 +1,7 @@
 import { renderToString } from 'react-dom/server'
 import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr'
-import { BASE } from '@root/shared/constant'
-import { getLibAssets } from '@root/shared'
+import { getBase, getLibAssets } from '@root/shared'
 import { isProdMode } from '@root/shared/env'
 import manifestPublicTs from '../publicTypescript/manifest.json'
 import { createApp } from './createApp'
@@ -38,7 +37,7 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
       <meta http-equiv="Cache-Control" content="no-store">
       <meta name="renderer" content="webkit" />
       <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-      <link rel="icon" href="${BASE}favicon.ico" />
+      <link rel="icon" href="${getBase()}favicon.ico" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0${
         isMobile ? ', maximum-scale=1.0, user-scalable=no, viewport-fit=cover' : ''
       }" />
@@ -60,7 +59,7 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
     </body>
     ${setupVconsole(isMobile)}
     <script last-build-time="${__APP_INFO__.lastBuildTime}" env="${viteEnv.MODE}" proxy="${
-    viteEnv.VITE_APIPREFIX ?? ''
+    viteEnv.VITE_PROXY ?? ''
   }" api-url="${viteEnv.VITE_APIURL}" type="application/json"></script>
   </html>`
 

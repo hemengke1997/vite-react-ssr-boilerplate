@@ -1,4 +1,14 @@
 async function onBeforeRender(): PageType.onBeforeRender {
+  function lazy() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(1)
+      }, 2000)
+    })
+  }
+
+  const res = await lazy()
+
   return {
     pageContext: {
       pageProps: {
@@ -7,6 +17,7 @@ async function onBeforeRender(): PageType.onBeforeRender {
         keywords: '关键词',
         isMobile: false,
         checkPlatform: true,
+        data: { x: res },
       },
     },
   }

@@ -3,8 +3,6 @@ const __APP_INFO__: {
 }
 
 interface Window {
-  _hmt?: any[]
-  initGeetest?: any
   isMobile: boolean
   checkPlatform: boolean
 }
