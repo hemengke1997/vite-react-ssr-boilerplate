@@ -1,5 +1,4 @@
 import path from 'node:path'
-import { performance } from 'node:perf_hooks'
 import { fileURLToPath } from 'node:url'
 import normalizeUrl from 'normalize-url'
 import express from 'express'
@@ -8,16 +7,15 @@ import colors from 'picocolors'
 import { renderPage } from 'vite-plugin-ssr'
 import type { ViteDevServer } from 'vite'
 import { loadEnv } from 'vite'
-import { BASE } from '@root/shared/constant'
 import { Env } from '@root/shared/env'
+import { getBase } from '@root/shared'
 import { log } from '../scripts/utils'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 const isDev = process.env.NODE_ENV === Env.development
-// const isProd = process.env.NODE_ENV === Env.production
 const root = `${dir}/..`
 
-const { VITE_APIPREFIX, VITE_APIURL, VITE_HOST } = loadEnv(process.env.NODE_ENV, root) as ImportMetaEnv
+const { VITE_PROXY, VITE_APIURL, VITE_HOST } = loadEnv(process.env.NODE_ENV, root) as ImportMetaEnv
 
 const HOST = VITE_HOST
 
@@ -30,11 +28,8 @@ async function startServer() {
     const { default: compression } = await import('compression')
     app.use(compression())
     const sirv = (await import('sirv')).default
-    app.use(BASE, sirv(`${root}/dist/client`, { extensions: [] }))
-    // app.use(BASE, express.static(`${root}/dist/client`))
+    app.use(getBase(), sirv(`${root}/dist/client`, { extensions: [] }))
   } else {
-    global.__vite_server_start_time = performance.now()
-    global.__vite_dom_mounted = false
     await import('vite').then(async (vite) => {
       viteDevServer = await vite.createServer({
         root,
@@ -56,12 +51,13 @@ async function startServer() {
     })
   }
 
-  const prefix = VITE_APIPREFIX
-  if (prefix) {
+  const proxy = VITE_PROXY
+
+  if (proxy) {
     const { createProxyMiddleware } = await import('http-proxy-middleware')
-    const rewriteKey = `^${prefix}`
+    const rewriteKey = `^${proxy}`
     app.use(
-      prefix,
+      proxy,
       createProxyMiddleware({
         target: VITE_APIURL,
         changeOrigin: true,
@@ -107,7 +103,7 @@ function listen(app: Application, _port: number) {
     const { Start_Page } = process.env
     const page = Start_Page ? `/${Start_Page}` : ''
 
-    const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${BASE}${page}`, { normalizeProtocol: false })
+    const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${getBase()}${page}`, { normalizeProtocol: false })
 
     log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
 

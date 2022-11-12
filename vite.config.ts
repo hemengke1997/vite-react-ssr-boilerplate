@@ -6,8 +6,8 @@ import { setupVitePlugins } from './config/vite/plugins'
 import { setupRollupOptions } from './config/vite/rollupOptions'
 import { wrapperEnv } from './config/vite/utils/helper'
 import { LessPluginRemoveAntdGlobalStyles } from './scripts/remove-antd-global-style'
-import { BASE } from './shared/constant'
 import { Env } from './shared/env'
+import { getBase } from './shared'
 
 const __APP_INFO__ = {
   lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
@@ -25,7 +25,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
   wrapperEnv(env)
 
   return {
-    base: BASE,
+    base: getBase(),
     mode,
     plugins: [
       setupVitePlugins({
