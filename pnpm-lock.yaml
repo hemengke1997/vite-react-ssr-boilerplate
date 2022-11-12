@@ -33,6 +33,7 @@ specifiers:
   antd: ^4.24.0
   autoprefixer: ^10.4.12
   axios: 0.27.2
+  browserslist: ^4.21.4
   clsx: ^1.2.1
   compression: ^1.7.4
   consola: ^2.15.3
@@ -146,6 +147,7 @@ devDependencies:
   '@vitejs/plugin-legacy': registry.npmmirror.com/@vitejs/plugin-legacy/2.3.1_35mdlii6kms72oqivf7xhdyqni
   '@vitejs/plugin-react': registry.npmmirror.com/@vitejs/plugin-react/2.2.0_@minko-fe+vite@3.2.1
   autoprefixer: registry.npmmirror.com/autoprefixer/10.4.13_postcss@8.4.18
+  browserslist: registry.npmmirror.com/browserslist/4.21.4
   consola: registry.npmmirror.com/consola/2.15.3
   esbuild: registry.npmmirror.com/esbuild/0.15.13
   eslint: registry.npmmirror.com/eslint/8.27.0

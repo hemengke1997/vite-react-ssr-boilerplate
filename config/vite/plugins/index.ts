@@ -11,6 +11,8 @@ import type { Env } from '@root/shared/env'
 import { AntdResolve, createStyleImportPlugin } from 'vite-plugin-style-import'
 import { publicTypescript } from 'vite-plugin-public-typescript'
 import timeReporter from 'vite-plugin-time-reporter'
+import browserslist from 'browserslist'
+
 import { configVisualizerConfig } from './visualizer'
 
 function resolveNodeModules(libName: string, ...dir: string[]) {
@@ -24,6 +26,8 @@ function resolveNodeModules(libName: string, ...dir: string[]) {
   const lastIndex = modulePath.lastIndexOf(libName)
   return normalizePath(path.resolve(modulePath.substring(0, lastIndex), ...dir))
 }
+
+const browserslistConfig = browserslist.loadConfig({ path: '.' })
 
 export function setupVitePlugins({
   isBuild,
@@ -92,6 +96,7 @@ export function setupVitePlugins({
   isBuild &&
     vitePlugins.push(
       legacy({
+        targets: browserslistConfig,
         modernPolyfills: ['es.global-this'],
         polyfills: true,
         renderLegacyChunks: true,
