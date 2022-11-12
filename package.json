@@ -14,6 +14,7 @@
   ],
   "type": "module",
   "scripts": {
+    "vite": "vite",
     "dev": "tsx scripts/dev.ts",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
@@ -22,6 +23,7 @@
     "start:test": "cross-env NODE_ENV=test tsx server/index.ts",
     "build": "cross-env NODE_ENV=production vite build --mode production && vite build --ssr --mode production",
     "build:test": "cross-env NODE_ENV=test vite build --mode test && vite build --ssr --mode test",
+    "test:build": "cross-env NODE_ENV=test vite build --mode test",
     "bump:deps": "pnpm update --i --L",
     "init": "simple-git-hooks",
     "lint": "eslint . --fix",

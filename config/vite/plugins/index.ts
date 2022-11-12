@@ -41,8 +41,9 @@ export function setupVitePlugins({
   const vitePlugins: PluginOption[] = [
     react(),
     ssr({
-      disableAutoFullBuild: true,
-      includeAssetsImportedByServer: false,
+      // disableAutoFullBuild: false,
+      // includeAssetsImportedByServer: false,
+      prerender: true,
     }),
     configVisualizerConfig(),
     createStyleImportPlugin({

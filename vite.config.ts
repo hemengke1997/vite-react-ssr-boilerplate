@@ -16,6 +16,8 @@ const __APP_INFO__ = {
 export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd()
 
+  process.env.NODE_ENV = mode as Env
+
   const isBuild = command === 'build'
 
   const env = loadEnv(mode, root) as ImportMetaEnv
@@ -62,9 +64,6 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
       '__APP_INFO__': JSON.stringify(__APP_INFO__),
     },
     ssr: {
-      optimizeDeps: {
-        disabled: 'build',
-      },
       noExternal: isBuild ? ['react-vant', 'pm2'] : [],
     },
     optimizeDeps: {
