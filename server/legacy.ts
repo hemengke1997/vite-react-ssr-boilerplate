@@ -16,104 +16,114 @@ const dynamicFallbackInlineCode = `!function(){if(window.${detectModernBrowserVa
 
 const safari10NoModuleFix = `!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();`
 
+// cache
+const tags: HtmlTagDescriptor[] = []
+
 export function legacyHtml(pageContext: any, html: string) {
-  const tags: HtmlTagDescriptor[] = []
-
-  // lookup modern polyfills
-  const files = fg.sync(`dist/client/assets/js/polyfills.*.entry.js`, {
-    onlyFiles: true,
-    unique: true,
-    deep: 1,
-  })
-
-  const modernPolyfill = `${getBase()}${files[0].replace(`dist/client/`, '')}`
-
-  // 1. inject modern polyfills
-  tags.push({
-    tag: 'script',
-    attrs: {
-      type: 'module',
-      crossorigin: true,
-      src: modernPolyfill,
-    },
-    injectTo: 'head-prepend',
-  })
-
-  // 2. inject Safari 10 nomodule fix
-  tags.push({
-    tag: 'script',
-    attrs: { nomodule: true },
-    children: safari10NoModuleFix,
-    injectTo: 'body',
-  })
-
-  // lookup legacy
-  const manifest = pageContext._manifestClient
-  const ks = Object.keys(pageContext._manifestClient)
-  const js = pageContext._pageAssets
-    ?.filter((t) => t.mediaType === 'text/javascript')
-    .map((s) => {
-      return s.src.replace(new RegExp(getBase()), '')
+  if (!tags.length) {
+    // lookup modern polyfills
+    const files = fg.sync(`dist/client/assets/js/polyfills.*.entry.js`, {
+      onlyFiles: true,
+      unique: true,
+      deep: 1,
     })
-    .find((entry) => entry.includes('.entry.js'))
 
-  // 3. inject legacy polyfills
-  for (let i = 0; i < ks.length; i++) {
-    const { file, isEntry } = manifest[ks[i]]
-    const parsed = path.parse(file)
-    const realName = parsed.name.slice(0, parsed.name.indexOf('.'))
-    if (realName.includes('polyfills-legacy') && isEntry) {
-      tags.push({
-        tag: 'script',
-        attrs: {
-          nomodule: true,
-          crossorigin: true,
-          src: `${getBase()}${file}`,
-          id: legacyPolyfillId,
-        },
-        injectTo: 'body',
+    const modernPolyfill = `${getBase()}${files[0].replace(`dist/client/`, '')}`
+
+    // 1. inject modern polyfills
+    tags.push({
+      tag: 'script',
+      attrs: {
+        type: 'module',
+        crossorigin: true,
+        src: modernPolyfill,
+      },
+      injectTo: 'head-prepend',
+    })
+
+    // 2. inject Safari 10 nomodule fix
+    tags.push({
+      tag: 'script',
+      attrs: { nomodule: true },
+      children: safari10NoModuleFix,
+      injectTo: 'body',
+    })
+
+    // lookup legacy
+    const manifest = pageContext._manifestClient
+    const ks = Object.keys(pageContext._manifestClient)
+
+    const entryJs = pageContext._pageAssets
+      ?.filter((t) => t.mediaType === 'text/javascript')
+      .map((s) => {
+        return {
+          ...s,
+          src: s.src.replace(new RegExp(getBase()), ''),
+        }
       })
-      break
+      .find((entry) => entry.src.includes('.entry.js') && entry.preloadType === null) as {
+      src: string
     }
-  }
 
-  // 4. inject legacy entry
-  for (let i = 0; i < ks.length; i++) {
-    const k = ks[i]
-    const parsed = path.parse(js)
-    const realName = parsed.name.slice(0, parsed.name.indexOf('.'))
-
-    const target = manifest[k].file as string
-
-    if (new RegExp(`${parsed.dir}/${realName}(\.+)(.+)${parsed.ext}$`, 'gi').test(target)) {
-      tags.push({
-        tag: 'script',
-        attrs: {
-          'nomodule': true,
-          'crossorigin': true,
-          'data-src': `${getBase()}${target}`,
-          'id': legacyEntryId,
-        },
-        injectTo: 'body',
-        children: systemJSInlineCode,
-      })
-      break
+    // 3. inject legacy polyfills
+    for (let i = 0; i < ks.length; i++) {
+      const { file, isEntry } = manifest[ks[i]]
+      const parsed = path.parse(file)
+      const realName = parsed.name.slice(0, parsed.name.indexOf('.'))
+      if (realName.includes('polyfills-legacy') && isEntry) {
+        tags.push({
+          tag: 'script',
+          attrs: {
+            nomodule: true,
+            crossorigin: true,
+            src: `${getBase()}${file}`,
+            id: legacyPolyfillId,
+          },
+          injectTo: 'body',
+        })
+        break
+      }
     }
-  }
 
-  // 5. inject dynamic import fallback entry
-  tags.push({
-    tag: 'script',
-    attrs: { type: 'module' },
-    children: detectModernBrowserCode,
-    injectTo: 'head',
-  })
-  tags.push({
-    tag: 'script',
-    attrs: { type: 'module' },
-    children: dynamicFallbackInlineCode,
-    injectTo: 'head',
-  })
+    // 4. inject legacy entry
+    for (let i = 0; i < ks.length; i++) {
+      const k = ks[i]
+      const parsed = path.parse(entryJs.src)
+
+      const entryJsName = parsed.name.slice(0, parsed.name.indexOf('.'))
+
+      const target = manifest[k].file as string
+
+      if (new RegExp(`${parsed.dir}/${entryJsName}(\.+)(.+)${parsed.ext}$`, 'gi').test(target)) {
+        tags.push({
+          tag: 'script',
+          attrs: {
+            'nomodule': true,
+            'crossorigin': true,
+            'data-src': `${getBase()}${target}`,
+            'id': legacyEntryId,
+          },
+          injectTo: 'body',
+          children: systemJSInlineCode,
+        })
+        break
+      }
+    }
+
+    // 5. inject dynamic import fallback entry
+    tags.push({
+      tag: 'script',
+      attrs: { type: 'module' },
+      children: detectModernBrowserCode,
+      injectTo: 'head',
+    })
+    tags.push({
+      tag: 'script',
+      attrs: { type: 'module' },
+      children: dynamicFallbackInlineCode,
+      injectTo: 'head',
+    })
+  }
 
   const headTags: HtmlTagDescriptor[] = []
   const headPrependTags: HtmlTagDescriptor[] = []
