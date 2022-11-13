@@ -10,7 +10,7 @@ export function getBase() {
   } else if (typeof process !== 'undefined') {
     mode = process.env.NODE_ENV
   }
-  return mode === Env.test ? normalize(`/test${base}`) : base
+  return mode === Env.test ? `${base}` : base
 }
 
 export function getLibAssets(url: string) {

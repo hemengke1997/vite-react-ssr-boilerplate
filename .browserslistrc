@@ -1,4 +1,1 @@
-defaults
-last 2 versions
-> 1%
-not dead
+>0.01%, last 4 versions, not ie<11, not dead

@@ -1,9 +1,6 @@
 import { createHash } from 'node:crypto'
+import { isObject } from 'lodash-es'
 import type { PreRenderedChunk } from 'rollup'
-
-function isObject(value?: any): value is Object {
-  return Object.prototype.toString.call(value) === '[Object Object]'
-}
 
 export function deepMerge<T = any>(src: T, target: T): T {
   let key: string

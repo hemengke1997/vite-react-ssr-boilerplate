@@ -1,7 +1,7 @@
 'use strict'
 ;(() => {
   ;(function () {
-    if (typeof window > 'u') return
+    if (typeof window == 'undefined') return
     let t = document.documentElement.getAttribute('is-mobile') === 'true' ? 'mobile' : 'pc',
       i = {
         pc: { maxWidth: 1920, minWidth: 1300, UIWidth: 1920 },

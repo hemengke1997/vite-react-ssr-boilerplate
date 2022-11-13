@@ -1,7 +1,6 @@
 module.exports = () => {
   return {
     plugins: [
-      require('autoprefixer'),
       require('tailwindcss'),
       require('@minko-fe/postcss-pxtorem')({
         rootValue({ file }) {
@@ -15,6 +14,7 @@ module.exports = () => {
           return file.includes('assets/style') || file.includes('node_modules/antd')
         },
       }),
+      require('autoprefixer'),
     ],
   }
 }

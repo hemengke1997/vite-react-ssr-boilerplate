@@ -10,9 +10,11 @@ import { loadEnv } from 'vite'
 import { Env } from '@root/shared/env'
 import { getBase } from '@root/shared'
 import { log } from '../scripts/utils'
+import { legacyHtml } from './legacy'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 const isDev = process.env.NODE_ENV === Env.development
+// const isProd = process.env.NODE_ENV === Env.production
 const root = `${dir}/..`
 
 const { VITE_PROXY, VITE_APIURL, VITE_HOST } = loadEnv(process.env.NODE_ENV, root) as ImportMetaEnv
@@ -52,7 +54,6 @@ async function startServer() {
   }
 
   const proxy = VITE_PROXY
-
   if (proxy) {
     const { createProxyMiddleware } = await import('http-proxy-middleware')
     const rewriteKey = `^${proxy}`
@@ -79,11 +80,20 @@ async function startServer() {
       const pageContextInit = {
         urlOriginal: url,
       }
-      const pageContext = await renderPage(pageContextInit)
+      const pageContext: any = await renderPage(pageContextInit)
+
+      const env = process.env.NODE_ENV
+
       const { httpResponse } = pageContext
       if (httpResponse === null) return next()
-      const { body, statusCode, contentType } = httpResponse
-      res.status(statusCode).type(contentType).send(body)
+      const { statusCode, contentType } = httpResponse
+      let html = httpResponse.body
+
+      if (!env || env !== 'development') {
+        html = legacyHtml(pageContext, html)
+      }
+
+      res.status(statusCode).type(contentType).send(html)
     } catch (e: any) {
       viteDevServer?.ssrFixStacktrace(e)
       res.status(500).end(e.stack)
@@ -108,21 +118,19 @@ function listen(app: Application, _port: number) {
     log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
 
     if (isDev) {
-      log.info(`\n⏳ open the link above then waiting for vite optimizing...`)
+      log.info(`\n⏳ waiting for vite optimizing...`)
     }
   })
 
   server.on('error', (error) => {
-    if (isDev) {
-      if ((error as any).code !== 'EADDRINUSE') {
-        throw error
-      }
-      log.error(`❌ ${error}\n`)
-
-      port = port + 1
-      log.info(`🔥 open port ${port} ...\n`)
-      listen(app, port)
+    if ((error as any).code !== 'EADDRINUSE') {
+      throw error
     }
+    log.error(`❌ ${error}\n`)
+
+    port = port + 1
+    log.info(`🔥 open port ${port} ...\n`)
+    listen(app, port)
   })
 
   process.on('SIGINT', () => {

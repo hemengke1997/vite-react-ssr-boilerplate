@@ -4,7 +4,6 @@
 
 // server/index.ts
 import path from "node:path";
-import { performance } from "node:perf_hooks";
 import { fileURLToPath } from "node:url";
 import normalizeUrl from "normalize-url";
 import express from "express";
@@ -12,8 +11,18 @@ import colors2 from "picocolors";
 import { renderPage } from "vite-plugin-ssr";
 import { loadEnv } from "vite";
 
-// shared/constant.ts
-var BASE = "/base-url/";
+// shared/index.ts
+import normalize from "normalize-path";
+function getBase() {
+  const base = "/base-url/";
+  let mode = "";
+  if (import.meta.env?.MODE) {
+    mode = import.meta.env.MODE;
+  } else if (typeof process !== "undefined") {
+    mode = process.env.NODE_ENV;
+  }
+  return mode === "test" /* test */ ? normalize(`/test${base}`) : base;
+}
 
 // scripts/utils.ts
 import colors from "picocolors";
@@ -36,7 +45,7 @@ var log = {
 var dir = path.dirname(fileURLToPath(import.meta.url));
 var isDev = process.env.NODE_ENV === "development" /* development */;
 var root = `${dir}/..`;
-var { VITE_APIPREFIX, VITE_APIURL, VITE_HOST } = loadEnv(process.env.NODE_ENV, root);
+var { VITE_PROXY, VITE_APIURL, VITE_HOST } = loadEnv(process.env.NODE_ENV, root);
 var HOST = VITE_HOST;
 var PORT = 9527;
 async function startServer() {
@@ -46,10 +55,8 @@ async function startServer() {
     const { default: compression } = await import("compression");
     app.use(compression());
     const sirv = (await import("sirv")).default;
-    app.use(BASE, sirv(`${root}/dist/client`, { extensions: [] }));
+    app.use(getBase(), sirv(`${root}/dist/client`, { extensions: [] }));
   } else {
-    global.__vite_server_start_time = performance.now();
-    global.__vite_dom_mounted = false;
     await import("vite").then(async (vite) => {
       viteDevServer = await vite.createServer({
         root,
@@ -70,12 +77,12 @@ async function startServer() {
       next();
     });
   }
-  const prefix = VITE_APIPREFIX;
-  if (prefix) {
+  const proxy = VITE_PROXY;
+  if (proxy) {
     const { createProxyMiddleware } = await import("http-proxy-middleware");
-    const rewriteKey = `^${prefix}`;
+    const rewriteKey = `^${proxy}`;
     app.use(
-      prefix,
+      proxy,
       createProxyMiddleware({
         target: VITE_APIURL,
         changeOrigin: true,
@@ -115,13 +122,13 @@ function listen(app, _port) {
   server.on("listening", () => {
     const { Start_Page } = process.env;
     const page = Start_Page ? `/${Start_Page}` : "";
-    const pathUrl = normalizeUrl(`http://${HOST}:${port}${BASE}${page}`, { normalizeProtocol: false });
+    const pathUrl = normalizeUrl(`http://${HOST}:${port}${getBase()}${page}`, { normalizeProtocol: false });
     log.info(`
 \u{1F680} [${process.env.NODE_ENV}]: Server running at ${colors2.underline(colors2.blue(pathUrl))}
 `);
     if (isDev) {
       log.info(`
-\u23F3 waiting for vite optimizing...`);
+\u23F3 open the link above then waiting for vite optimizing...`);
     }
   });
   server.on("error", (error) => {

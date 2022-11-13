@@ -28,8 +28,6 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
   const desc = pageProps?.description || 'd'
   const keywords = pageProps?.keywords || 'k'
 
-  const viteEnv = import.meta.env
-
   const documentHtml = escapeInject/* html */ `<!DOCTYPE html>
   <html lang="zh-CN" is-mobile="${String(isMobile)}" check-platform='${String(checkPlatform)}'>
     <head>
@@ -56,11 +54,10 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
     </head>
     <body>
       <div id="app">${dangerouslySkipEscape(pageHtml)}</div>
+
+
+      ${setupVconsole(isMobile)}
     </body>
-    ${setupVconsole(isMobile)}
-    <script last-build-time="${__APP_INFO__.lastBuildTime}" env="${viteEnv.MODE}" proxy="${
-    viteEnv.VITE_PROXY ?? ''
-  }" api-url="${viteEnv.VITE_APIURL}" type="application/json"></script>
   </html>`
 
   return {

@@ -1,15 +1,18 @@
 /// <reference types="vite/client" />
 
-declare global {
-  interface ImportMeta {
-    readonly env: ImportMetaEnv
-  }
+import { Env } from '@root/shared/env'
 
+declare global {
   interface ImportMetaEnv {
+    readonly MODE: keyof typeof Env
     readonly VITE_APIPREFIX: string | undefined
     readonly VITE_PROXY: string | undefined
+    readonly VITE_BASE_URL: string | undefined
     readonly VITE_APIURL: string
     readonly VITE_HOST: string
+  }
+  interface ImportMeta {
+    readonly env: ImportMetaEnv
   }
 }
 

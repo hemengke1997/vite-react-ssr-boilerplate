@@ -67,7 +67,14 @@ export function setupVitePlugins({
         }
       },
     },
-    publicTypescript({ ssrBuild, inputDir: 'publicTypescript', outputDir: 'lib' }),
+    publicTypescript({
+      ssrBuild,
+      inputDir: 'publicTypescript',
+      outputDir: 'lib',
+      esbuildOptions: {
+        target: 'es2015',
+      },
+    }),
     timeReporter(),
   ]
 
