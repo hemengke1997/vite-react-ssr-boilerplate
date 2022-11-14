@@ -5,7 +5,7 @@ import { log } from '../scripts/utils'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 
-const processName = `act`
+const processName = `process-name`
 
 const isDev = process.env.NODE_ENV === 'development'
 

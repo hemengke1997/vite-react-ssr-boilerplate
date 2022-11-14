@@ -1,6 +1,5 @@
 import path from 'node:path'
 import type { HtmlTagDescriptor } from 'vite'
-import { loadEnv } from 'vite'
 import fg from 'fast-glob'
 import { getBase } from '@root/shared'
 
@@ -29,7 +28,7 @@ export function legacyHtml(pageContext: any, html: string) {
       deep: 1,
     })
 
-    const modernPolyfill = `${getBase(loadEnv)}${files[0].replace(`dist/client/`, '')}`
+    const modernPolyfill = `${getBase()}${files[0].replace(`dist/client/`, '')}`
 
     // 1. inject modern polyfills
     tags.push({
@@ -59,7 +58,7 @@ export function legacyHtml(pageContext: any, html: string) {
       .map((s) => {
         return {
           ...s,
-          src: s.src.replace(new RegExp(getBase(loadEnv)), ''),
+          src: s.src.replace(new RegExp(getBase()), ''),
         }
       })
       .find((entry) => entry.src.includes('.entry.js') && entry.preloadType === null) as {
@@ -77,7 +76,7 @@ export function legacyHtml(pageContext: any, html: string) {
           attrs: {
             nomodule: true,
             crossorigin: true,
-            src: `${getBase(loadEnv)}${file}`,
+            src: `${getBase()}${file}`,
             id: legacyPolyfillId,
           },
           injectTo: 'body',
@@ -101,7 +100,7 @@ export function legacyHtml(pageContext: any, html: string) {
           attrs: {
             'nomodule': true,
             'crossorigin': true,
-            'data-src': `${getBase(loadEnv)}${target}`,
+            'data-src': `${getBase()}${target}`,
             'id': legacyEntryId,
           },
           injectTo: 'body',

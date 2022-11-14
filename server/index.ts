@@ -9,6 +9,7 @@ import type { ViteDevServer } from 'vite'
 import { loadEnv } from 'vite'
 import { Env } from '@root/shared/env'
 import { getBase } from '@root/shared'
+import { wrapperEnv } from '@root/config/vite/utils/helper'
 import { log } from '../scripts/utils'
 import { legacyHtml } from './legacy'
 
@@ -17,7 +18,10 @@ const isDev = process.env.NODE_ENV === Env.development
 // const isProd = process.env.NODE_ENV === Env.production
 const root = `${dir}/..`
 
-const { VITE_PROXY, VITE_APIURL, VITE_HOST } = loadEnv(process.env.NODE_ENV, root) as ImportMetaEnv
+const env = loadEnv(process.env.NODE_ENV, root) as ImportMetaEnv
+const { VITE_PROXY, VITE_APIURL, VITE_HOST } = env
+
+wrapperEnv(env)
 
 const HOST = VITE_HOST
 
@@ -30,7 +34,7 @@ async function startServer() {
     const { default: compression } = await import('compression')
     app.use(compression())
     const sirv = (await import('sirv')).default
-    app.use(getBase(loadEnv), sirv(`${root}/dist/client`, { extensions: [] }))
+    app.use(getBase(), sirv(`${root}/dist/client`, { extensions: [] }))
   } else {
     await import('vite').then(async (vite) => {
       viteDevServer = await vite.createServer({
@@ -113,7 +117,7 @@ function listen(app: Application, _port: number) {
     const { Start_Page } = process.env
     const page = Start_Page ? `/${Start_Page}` : ''
 
-    const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${getBase(loadEnv)}${page}`, { normalizeProtocol: false })
+    const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${getBase()}${page}`, { normalizeProtocol: false })
 
     log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
 
