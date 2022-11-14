@@ -23,7 +23,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
   wrapperEnv(env)
 
   return {
-    base: getBase(),
+    base: getBase(loadEnv),
     mode,
     plugins: [
       setupVitePlugins({

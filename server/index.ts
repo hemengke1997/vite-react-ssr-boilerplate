@@ -30,7 +30,7 @@ async function startServer() {
     const { default: compression } = await import('compression')
     app.use(compression())
     const sirv = (await import('sirv')).default
-    app.use(getBase(), sirv(`${root}/dist/client`, { extensions: [] }))
+    app.use(getBase(loadEnv), sirv(`${root}/dist/client`, { extensions: [] }))
   } else {
     await import('vite').then(async (vite) => {
       viteDevServer = await vite.createServer({
@@ -113,7 +113,7 @@ function listen(app: Application, _port: number) {
     const { Start_Page } = process.env
     const page = Start_Page ? `/${Start_Page}` : ''
 
-    const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${getBase()}${page}`, { normalizeProtocol: false })
+    const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${getBase(loadEnv)}${page}`, { normalizeProtocol: false })
 
     log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
 
