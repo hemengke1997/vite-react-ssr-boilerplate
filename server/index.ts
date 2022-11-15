@@ -30,22 +30,7 @@ const PORT = 9527
 async function startServer() {
   const app = express()
   let viteDevServer: ViteDevServer
-  if (!isDev) {
-    const { default: compression } = await import('compression')
-    app.use(compression())
-    const sirv = (await import('sirv')).default
-    app.use(
-      getBase(),
-      sirv(`${root}/dist/client`, {
-        extensions: [],
-        etag: true,
-        gzip: true,
-        setHeaders(res) {
-          res.setHeader('x-foo', 'bar')
-        },
-      }),
-    )
-  } else {
+  if (isDev) {
     await import('vite').then(async (vite) => {
       viteDevServer = await vite.createServer({
         root,
@@ -65,6 +50,21 @@ async function startServer() {
       res.setHeader('Access-Control-Allow-Origin', '*')
       next()
     })
+  } else {
+    const { default: compression } = await import('compression')
+    app.use(compression())
+    const sirv = (await import('sirv')).default
+    app.use(
+      getBase(),
+      sirv(`${root}/dist/client`, {
+        extensions: [],
+        etag: true,
+        gzip: true,
+        setHeaders(res) {
+          res.setHeader('x-foo', 'bar')
+        },
+      }),
+    )
   }
 
   const proxy = VITE_PROXY
@@ -82,11 +82,6 @@ async function startServer() {
       }),
     )
   }
-
-  // app.use((_, res, next) => {
-  //   res.set('Cache-Control', 'no-store')
-  //   next()
-  // })
 
   app.get('*', async (req, res, next) => {
     try {
