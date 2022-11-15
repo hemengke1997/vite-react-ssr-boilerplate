@@ -5,7 +5,7 @@ import { loadEnv } from 'vite'
 import { setupVitePlugins } from './config/vite/plugins'
 import { setupRollupOptions } from './config/vite/rollupOptions'
 import { wrapperEnv } from './config/vite/utils/helper'
-import { Env } from './shared/env'
+import type { Env } from './shared/env'
 import { getBase } from './shared'
 
 const __APP_INFO__ = {
@@ -63,7 +63,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
     build: {
       emptyOutDir: true,
       cssCodeSplit: true,
-      minify: mode === Env.test ? false : 'esbuild',
+      minify: 'esbuild',
       reportCompressedSize: false,
       chunkSizeWarningLimit: 2048,
       rollupOptions: setupRollupOptions(root, ssrBuild),
