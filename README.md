@@ -54,7 +54,7 @@ pnpm run pm2:prod
 vite-react-ssr-boilerplate
 ├─ config                                                 关于项目的build/node相关配置
 ├─ public                                                 公共目录（build会直接copy）
-├─ publicTs                                               TS公共目录（build会编译后copy）
+├─ publicTypescript                                       typescript公共目录（build会编译后copy）
 ├─ renderer                                               vps渲染相关
 ├─ scripts                                                node脚本
 ├─ server                                                 node服务
