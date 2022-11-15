@@ -56,7 +56,6 @@ async function startServer() {
     })
     app.set('etag', false)
     app.use((_, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', '*')
       res.setHeader('Cache-Control', 'no-store')
       next()
     })

@@ -39,13 +39,19 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
           replacement: path.resolve(__dirname),
         },
         {
+          find: '@backend',
+          replacement: path.resolve(__dirname, './backend'),
+        },
+        {
           find: /^~/,
           replacement: `${path.resolve(__dirname, './node_modules')}/`,
         },
       ],
     },
     css: {
-      preprocessorOptions: {},
+      modules: {
+        generateScopedName: '[local]__[hash:base64:6]',
+      },
     },
     define: {
       'process.env': process.env,
