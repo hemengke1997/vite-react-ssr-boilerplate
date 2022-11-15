@@ -908,12 +908,12 @@
         var pageFilesLazyIsomorph1 = /* #__PURE__ */Object.assign({
           "/renderer/_error.page.tsx": function renderer_errorPageTsx() {
             return __vitePreload(function () {
-              return module["import"]('./renderer/_error.page-legacy.8cc51444.entry.js');
+              return module["import"]('./renderer/_error.page-legacy.23eb305b.entry.js');
             }, false ? "__VITE_PRELOAD__" : void 0);
           },
           "/src/pages/a/index.page.tsx": function srcPagesAIndexPageTsx() {
             return __vitePreload(function () {
-              return module["import"]('./src/pages/a/index.page-legacy.33cf9744.entry.js');
+              return module["import"]('./src/pages/a/index.page-legacy.ddeddb33.entry.js');
             }, false ? "__VITE_PRELOAD__" : void 0);
           }
         });
@@ -925,7 +925,7 @@
         var pageFilesLazyClient1 = /* #__PURE__ */Object.assign({
           "/renderer/_default.page.client.tsx": function renderer_defaultPageClientTsx() {
             return __vitePreload(function () {
-              return module["import"]('./renderer/_default.page.client-legacy.9c4482b7.entry.js');
+              return module["import"]('./renderer/_default.page.client-legacy.337703c8.entry.js');
             }, false ? "__VITE_PRELOAD__" : void 0);
           }
         });

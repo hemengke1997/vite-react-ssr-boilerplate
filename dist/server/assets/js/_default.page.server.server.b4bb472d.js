@@ -57,9 +57,9 @@ async function createApp(pageContext) {
   } = pageContext;
   let Layout;
   if (pageProps == null ? void 0 : pageProps.isMobile) {
-    Layout = (await import("./index.66a5ee89.js")).MobileLayout;
+    Layout = (await import("./index.7bc088cc.js")).MobileLayout;
   } else {
-    Layout = (await import("./index.e7858967.js")).PCLayout;
+    Layout = (await import("./index.a44c84d9.js")).PCLayout;
   }
   const Tpl = Layout;
   return /* @__PURE__ */ jsxDEV(PageContextProvider, {

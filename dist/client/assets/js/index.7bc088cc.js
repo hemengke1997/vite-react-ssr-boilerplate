@@ -1,4 +1,4 @@
-import { j as jsxDEV } from "./jsx-dev-runtime.62039f8c.js";
+import { j as jsxDEV } from "./jsx-dev-runtime.4156efef.js";
 const index = "";
 var _jsxFileName = "E:\\github\\vite-react-ssr-boilerplate\\src\\components\\mobile\\MobileLayout\\index.tsx";
 function MobileLayout({

@@ -2,7 +2,7 @@ function __vite_legacy_guard() {
   import("data:text/javascript,");
 }
 ;
-import { j as jsxDEV, F as Fragment } from "../jsx-dev-runtime.62039f8c.js";
+import { j as jsxDEV, F as Fragment } from "../jsx-dev-runtime.4156efef.js";
 var _jsxFileName = "E:\\github\\vite-react-ssr-boilerplate\\renderer\\_error.page.tsx";
 function Page({
   is404,

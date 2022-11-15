@@ -1,23 +1,9 @@
-import { r as react, g as getDefaultExportFromCjs } from "./jsx-dev-runtime.62039f8c.js";
-function _mergeNamespaces(n, m) {
-  for (var i = 0; i < m.length; i++) {
-    const e = m[i];
-    if (typeof e !== "string" && !Array.isArray(e)) {
-      for (const k in e) {
-        if (k !== "default" && !(k in n)) {
-          const d = Object.getOwnPropertyDescriptor(e, k);
-          if (d) {
-            Object.defineProperty(n, k, d.get ? d : {
-              enumerable: true,
-              get: () => e[k]
-            });
-          }
-        }
-      }
-    }
-  }
-  return Object.freeze(Object.defineProperty(n, Symbol.toStringTag, { value: "Module" }));
+function __vite_legacy_guard() {
+  import("data:text/javascript,");
 }
+;
+import { r as react, R as React, j as jsxDEV } from "../jsx-dev-runtime.4156efef.js";
+import { _ as __vitePreload } from "../preload-helper.e1a242f9.js";
 var reactDom = { exports: {} };
 var reactDom_development = {};
 var scheduler = { exports: {} };
@@ -486,9 +472,9 @@ var scheduler_development = {};
     if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
       __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
     }
-    var React = react.exports;
+    var React2 = react.exports;
     var Scheduler = scheduler.exports;
-    var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+    var ReactSharedInternals = React2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     var suppressWarning = false;
     function setSuppressWarning(newSuppressWarning) {
       {
@@ -593,71 +579,71 @@ var scheduler_development = {};
     }
     var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
     var hasOwnProperty = Object.prototype.hasOwnProperty;
-    function typeName(value) {
+    function typeName2(value) {
       {
         var hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
         var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
         return type;
       }
     }
-    function willCoercionThrow(value) {
+    function willCoercionThrow2(value) {
       {
         try {
-          testStringCoercion(value);
+          testStringCoercion2(value);
           return false;
         } catch (e) {
           return true;
         }
       }
     }
-    function testStringCoercion(value) {
+    function testStringCoercion2(value) {
       return "" + value;
     }
     function checkAttributeStringCoercion(value, attributeName) {
       {
-        if (willCoercionThrow(value)) {
-          error("The provided `%s` attribute is an unsupported type %s. This value must be coerced to a string before before using it here.", attributeName, typeName(value));
-          return testStringCoercion(value);
+        if (willCoercionThrow2(value)) {
+          error("The provided `%s` attribute is an unsupported type %s. This value must be coerced to a string before before using it here.", attributeName, typeName2(value));
+          return testStringCoercion2(value);
         }
       }
     }
     function checkKeyStringCoercion(value) {
       {
-        if (willCoercionThrow(value)) {
-          error("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", typeName(value));
-          return testStringCoercion(value);
+        if (willCoercionThrow2(value)) {
+          error("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", typeName2(value));
+          return testStringCoercion2(value);
         }
       }
     }
     function checkPropStringCoercion(value, propName) {
       {
-        if (willCoercionThrow(value)) {
-          error("The provided `%s` prop is an unsupported type %s. This value must be coerced to a string before before using it here.", propName, typeName(value));
-          return testStringCoercion(value);
+        if (willCoercionThrow2(value)) {
+          error("The provided `%s` prop is an unsupported type %s. This value must be coerced to a string before before using it here.", propName, typeName2(value));
+          return testStringCoercion2(value);
         }
       }
     }
-    function checkCSSPropertyStringCoercion(value, propName) {
+    function checkCSSPropertyStringCoercion2(value, propName) {
       {
-        if (willCoercionThrow(value)) {
-          error("The provided `%s` CSS property is an unsupported type %s. This value must be coerced to a string before before using it here.", propName, typeName(value));
-          return testStringCoercion(value);
+        if (willCoercionThrow2(value)) {
+          error("The provided `%s` CSS property is an unsupported type %s. This value must be coerced to a string before before using it here.", propName, typeName2(value));
+          return testStringCoercion2(value);
         }
       }
     }
     function checkHtmlStringCoercion(value) {
       {
-        if (willCoercionThrow(value)) {
-          error("The provided HTML markup uses a value of unsupported type %s. This value must be coerced to a string before before using it here.", typeName(value));
-          return testStringCoercion(value);
+        if (willCoercionThrow2(value)) {
+          error("The provided HTML markup uses a value of unsupported type %s. This value must be coerced to a string before before using it here.", typeName2(value));
+          return testStringCoercion2(value);
         }
       }
     }
     function checkFormFieldValueStringCoercion(value) {
       {
-        if (willCoercionThrow(value)) {
-          error("Form field values (value, checked, defaultValue, or defaultChecked props) must be strings, not %s. This value must be coerced to a string before before using it here.", typeName(value));
-          return testStringCoercion(value);
+        if (willCoercionThrow2(value)) {
+          error("Form field values (value, checked, defaultValue, or defaultChecked props) must be strings, not %s. This value must be coerced to a string before before using it here.", typeName2(value));
+          return testStringCoercion2(value);
         }
       }
     }
@@ -2009,7 +1995,7 @@ var scheduler_development = {};
       {
         if (props.value == null) {
           if (typeof props.children === "object" && props.children !== null) {
-            React.Children.forEach(props.children, function(child) {
+            React2.Children.forEach(props.children, function(child) {
               if (child == null) {
                 return;
               }
@@ -2356,7 +2342,7 @@ var scheduler_development = {};
       transition: ["transitionDelay", "transitionDuration", "transitionProperty", "transitionTimingFunction"],
       wordWrap: ["overflowWrap"]
     };
-    var isUnitlessNumber = {
+    var isUnitlessNumber2 = {
       animationIterationCount: true,
       aspectRatio: true,
       borderImageOutset: true,
@@ -2405,28 +2391,28 @@ var scheduler_development = {};
       return prefix2 + key.charAt(0).toUpperCase() + key.substring(1);
     }
     var prefixes = ["Webkit", "ms", "Moz", "O"];
-    Object.keys(isUnitlessNumber).forEach(function(prop) {
+    Object.keys(isUnitlessNumber2).forEach(function(prop) {
       prefixes.forEach(function(prefix2) {
-        isUnitlessNumber[prefixKey(prefix2, prop)] = isUnitlessNumber[prop];
+        isUnitlessNumber2[prefixKey(prefix2, prop)] = isUnitlessNumber2[prop];
       });
     });
-    function dangerousStyleValue(name, value, isCustomProperty) {
+    function dangerousStyleValue2(name, value, isCustomProperty) {
       var isEmpty = value == null || typeof value === "boolean" || value === "";
       if (isEmpty) {
         return "";
       }
-      if (!isCustomProperty && typeof value === "number" && value !== 0 && !(isUnitlessNumber.hasOwnProperty(name) && isUnitlessNumber[name])) {
+      if (!isCustomProperty && typeof value === "number" && value !== 0 && !(isUnitlessNumber2.hasOwnProperty(name) && isUnitlessNumber2[name])) {
         return value + "px";
       }
       {
-        checkCSSPropertyStringCoercion(value, name);
+        checkCSSPropertyStringCoercion2(value, name);
       }
       return ("" + value).trim();
     }
-    var uppercasePattern = /([A-Z])/g;
-    var msPattern = /^ms-/;
-    function hyphenateStyleName(name) {
-      return name.replace(uppercasePattern, "-$1").toLowerCase().replace(msPattern, "-ms-");
+    var uppercasePattern2 = /([A-Z])/g;
+    var msPattern2 = /^ms-/;
+    function hyphenateStyleName2(name) {
+      return name.replace(uppercasePattern2, "-$1").toLowerCase().replace(msPattern2, "-ms-");
     }
     var warnValidStyle = function() {
     };
@@ -2501,7 +2487,7 @@ var scheduler_development = {};
       };
     }
     var warnValidStyle$1 = warnValidStyle;
-    function createDangerousStringForStyles(styles) {
+    function createDangerousStringForStyles2(styles) {
       {
         var serialized = "";
         var delimiter = "";
@@ -2512,8 +2498,8 @@ var scheduler_development = {};
           var styleValue = styles[styleName];
           if (styleValue != null) {
             var isCustomProperty = styleName.indexOf("--") === 0;
-            serialized += delimiter + (isCustomProperty ? styleName : hyphenateStyleName(styleName)) + ":";
-            serialized += dangerousStyleValue(styleName, styleValue, isCustomProperty);
+            serialized += delimiter + (isCustomProperty ? styleName : hyphenateStyleName2(styleName)) + ":";
+            serialized += dangerousStyleValue2(styleName, styleValue, isCustomProperty);
             delimiter = ";";
           }
         }
@@ -2532,7 +2518,7 @@ var scheduler_development = {};
             warnValidStyle$1(styleName, styles[styleName]);
           }
         }
-        var styleValue = dangerousStyleValue(styleName, styles[styleName], isCustomProperty);
+        var styleValue = dangerousStyleValue2(styleName, styles[styleName], isCustomProperty);
         if (styleName === "float") {
           styleName = "cssFloat";
         }
@@ -7575,7 +7561,7 @@ var scheduler_development = {};
           } else if (propKey === STYLE) {
             extraAttributeNames.delete(propKey);
             if (canDiffStyleForHydrationWarning) {
-              var expectedStyle = createDangerousStringForStyles(nextProp);
+              var expectedStyle = createDangerousStringForStyles2(nextProp);
               serverValue = domElement.getAttribute("style");
               if (expectedStyle !== serverValue) {
                 warnForPropDifference(propKey, serverValue, expectedStyle);
@@ -8181,7 +8167,7 @@ var scheduler_development = {};
       instance = instance;
       var styleProp = props[STYLE$1];
       var display = styleProp !== void 0 && styleProp !== null && styleProp.hasOwnProperty("display") ? styleProp.display : null;
-      instance.style.display = dangerousStyleValue("display", display);
+      instance.style.display = dangerousStyleValue2("display", display);
     }
     function unhideTextInstance(textInstance, text) {
       textInstance.nodeValue = text;
@@ -10180,7 +10166,7 @@ var scheduler_development = {};
       }
     }
     var fakeInternalInstance = {};
-    var emptyRefsObject = new React.Component().refs;
+    var emptyRefsObject = new React2.Component().refs;
     var didWarnAboutStateAssignmentForComponent;
     var didWarnAboutUninitializedState;
     var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -13910,7 +13896,7 @@ var scheduler_development = {};
           }
         }
       }
-      var render2 = Component.render;
+      var render3 = Component.render;
       var ref = workInProgress2.ref;
       var nextChildren;
       var hasId;
@@ -13921,12 +13907,12 @@ var scheduler_development = {};
       {
         ReactCurrentOwner$1.current = workInProgress2;
         setIsRendering(true);
-        nextChildren = renderWithHooks(current2, workInProgress2, render2, nextProps, ref, renderLanes2);
+        nextChildren = renderWithHooks(current2, workInProgress2, render3, nextProps, ref, renderLanes2);
         hasId = checkDidRenderIdHook();
         if (workInProgress2.mode & StrictLegacyMode) {
           setIsStrictModeForDevtools(true);
           try {
-            nextChildren = renderWithHooks(current2, workInProgress2, render2, nextProps, ref, renderLanes2);
+            nextChildren = renderWithHooks(current2, workInProgress2, render3, nextProps, ref, renderLanes2);
             hasId = checkDidRenderIdHook();
           } finally {
             setIsStrictModeForDevtools(false);
@@ -15234,9 +15220,9 @@ var scheduler_development = {};
         }
       }
       var newProps = workInProgress2.pendingProps;
-      var render2 = newProps.children;
+      var render3 = newProps.children;
       {
-        if (typeof render2 !== "function") {
+        if (typeof render3 !== "function") {
           error("A context consumer was rendered with multiple children, or a child that isn't a function. A context consumer expects a single child that is a function. If you did pass a function, make sure there is no trailing or leading whitespace around it.");
         }
       }
@@ -15249,7 +15235,7 @@ var scheduler_development = {};
       {
         ReactCurrentOwner$1.current = workInProgress2;
         setIsRendering(true);
-        newChildren = render2(newValue);
+        newChildren = render3(newValue);
         setIsRendering(false);
       }
       {
@@ -20675,7 +20661,7 @@ var scheduler_development = {};
       }
     }
     ReactDOMHydrationRoot.prototype.unstable_scheduleHydration = scheduleHydration;
-    function hydrateRoot(container, initialChildren, options2) {
+    function hydrateRoot2(container, initialChildren, options2) {
       if (!isValidContainer(container)) {
         throw new Error("hydrateRoot(...): Target container is not a DOM element.");
       }
@@ -20890,7 +20876,7 @@ var scheduler_development = {};
       }
       return legacyRenderSubtreeIntoContainer(null, element, container, true, callback);
     }
-    function render(element, container, callback) {
+    function render2(element, container, callback) {
       {
         error("ReactDOM.render is no longer supported in React 18. Use createRoot instead. Until you switch to the new API, your app will behave as if it's running React 17. Learn more: https://reactjs.org/link/switch-to-createroot");
       }
@@ -20994,7 +20980,7 @@ var scheduler_development = {};
           error('You are importing hydrateRoot from "react-dom" which is not supported. You should instead import it from "react-dom/client".');
         }
       }
-      return hydrateRoot(container, initialChildren, options2);
+      return hydrateRoot2(container, initialChildren, options2);
     }
     function flushSync$1(fn) {
       {
@@ -21027,7 +21013,7 @@ var scheduler_development = {};
     reactDom_development.flushSync = flushSync$1;
     reactDom_development.hydrate = hydrate;
     reactDom_development.hydrateRoot = hydrateRoot$1;
-    reactDom_development.render = render;
+    reactDom_development.render = render2;
     reactDom_development.unmountComponentAtNode = unmountComponentAtNode;
     reactDom_development.unstable_batchedUpdates = batchedUpdates$1;
     reactDom_development.unstable_renderSubtreeIntoContainer = renderSubtreeIntoContainer;
@@ -21042,13 +21028,237 @@ var scheduler_development = {};
     module.exports = reactDom_development;
   }
 })(reactDom);
-const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(reactDom.exports);
-const ReactDOM$1 = /* @__PURE__ */ _mergeNamespaces({
-  __proto__: null,
-  default: ReactDOM
-}, [reactDom.exports]);
+var hydrateRoot;
+var m = reactDom.exports;
+{
+  var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+  hydrateRoot = function(c, h, o) {
+    i.usingClientEntryPoint = true;
+    try {
+      return m.hydrateRoot(c, h, o);
+    } finally {
+      i.usingClientEntryPoint = false;
+    }
+  };
+}
+var _jsxFileName$1 = "E:\\github\\vite-react-ssr-boilerplate\\renderer\\usePageContext.tsx";
+const Context = React.createContext(void 0);
+function PageContextProvider({
+  pageContext,
+  children
+}) {
+  return /* @__PURE__ */ jsxDEV(Context.Provider, {
+    value: pageContext,
+    children
+  }, void 0, false, {
+    fileName: _jsxFileName$1,
+    lineNumber: 15,
+    columnNumber: 10
+  }, this);
+}
+const global = "";
+var _jsxFileName = "E:\\github\\vite-react-ssr-boilerplate\\renderer\\createApp.tsx";
+async function createApp(pageContext) {
+  const {
+    Page,
+    pageProps
+  } = pageContext;
+  let Layout;
+  if (pageProps == null ? void 0 : pageProps.isMobile) {
+    Layout = (await __vitePreload(() => import("../index.7bc088cc.js"), true ? ["assets/js/index.7bc088cc.js","assets/js/jsx-dev-runtime.4156efef.js","assets/css/index.655867c1.css"] : void 0)).MobileLayout;
+  } else {
+    Layout = (await __vitePreload(() => import("../index.a44c84d9.js"), true ? ["assets/js/index.a44c84d9.js","assets/css/index.b7f775ab.css"] : void 0)).PCLayout;
+  }
+  const Tpl = Layout;
+  return /* @__PURE__ */ jsxDEV(PageContextProvider, {
+    pageContext,
+    children: /* @__PURE__ */ jsxDEV(Tpl, {
+      children: /* @__PURE__ */ jsxDEV(Page, {
+        ...pageProps
+      }, void 0, false, {
+        fileName: _jsxFileName,
+        lineNumber: 20,
+        columnNumber: 9
+      }, this)
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 19,
+      columnNumber: 7
+    }, this)
+  }, void 0, false, {
+    fileName: _jsxFileName,
+    lineNumber: 18,
+    columnNumber: 5
+  }, this);
+}
+var uppercasePattern = /([A-Z])/g;
+var msPattern = /^ms-/;
+function hyphenateStyleName(name) {
+  return name.replace(uppercasePattern, "-$1").toLowerCase().replace(msPattern, "-ms-");
+}
+function typeName(value) {
+  const hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
+  const type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+  return type;
+}
+function testStringCoercion(value) {
+  return `${value}`;
+}
+function willCoercionThrow(value) {
+  try {
+    testStringCoercion(value);
+    return false;
+  } catch (e) {
+    return true;
+  }
+}
+function checkCSSPropertyStringCoercion(value, propName) {
+  if (willCoercionThrow(value)) {
+    console.error(
+      "The provided `%s` CSS property is an unsupported type %s. This value must be coerced to a string before before using it here.",
+      propName,
+      typeName(value)
+    );
+    return testStringCoercion(value);
+  }
+}
+var isUnitlessNumber = {
+  animationIterationCount: true,
+  aspectRatio: true,
+  borderImageOutset: true,
+  borderImageSlice: true,
+  borderImageWidth: true,
+  boxFlex: true,
+  boxFlexGroup: true,
+  boxOrdinalGroup: true,
+  columnCount: true,
+  columns: true,
+  flex: true,
+  flexGrow: true,
+  flexPositive: true,
+  flexShrink: true,
+  flexNegative: true,
+  flexOrder: true,
+  gridArea: true,
+  gridRow: true,
+  gridRowEnd: true,
+  gridRowSpan: true,
+  gridRowStart: true,
+  gridColumn: true,
+  gridColumnEnd: true,
+  gridColumnSpan: true,
+  gridColumnStart: true,
+  fontWeight: true,
+  lineClamp: true,
+  lineHeight: true,
+  opacity: true,
+  order: true,
+  orphans: true,
+  tabSize: true,
+  widows: true,
+  zIndex: true,
+  zoom: true,
+  fillOpacity: true,
+  floodOpacity: true,
+  stopOpacity: true,
+  strokeDasharray: true,
+  strokeDashoffset: true,
+  strokeMiterlimit: true,
+  strokeOpacity: true,
+  strokeWidth: true
+};
+function dangerousStyleValue(name, value, isCustomProperty) {
+  const isEmpty = value == null || typeof value === "boolean" || value === "";
+  if (isEmpty) {
+    return "";
+  }
+  if (!isCustomProperty && typeof value === "number" && value !== 0 && !(isUnitlessNumber.hasOwnProperty(name) && isUnitlessNumber[name])) {
+    return `${value}px`;
+  }
+  checkCSSPropertyStringCoercion(value, name);
+  return `${value}`.trim();
+}
+function createDangerousStringForStyles(styles) {
+  let serialized = "";
+  let delimiter = "";
+  for (const styleName in styles) {
+    if (!styles.hasOwnProperty(styleName)) {
+      continue;
+    }
+    const styleValue = styles[styleName];
+    if (styleValue != null) {
+      const isCustomProperty = styleName.indexOf("--") === 0;
+      serialized += `${delimiter + (isCustomProperty ? styleName : hyphenateStyleName(styleName))}:`;
+      serialized += dangerousStyleValue(styleName, styleValue, isCustomProperty);
+      delimiter = ";";
+    }
+  }
+  return serialized || null;
+}
+function styleObjectToString(style) {
+  return createDangerousStringForStyles(style);
+}
+function logClientInfo() {
+  const colors = {
+    blue: "#3B82F6",
+    red: "#EF4444",
+    green: "#10B981",
+    gray: "#6B7280"
+  };
+  function log(title, value) {
+    const nameStyle = {
+      background: "#FF9800",
+      borderRadius: "4px",
+      padding: "2px 4px",
+      marginRight: "4px",
+      fontWeight: "700"
+    };
+    const defaultTitleStyle = {
+      color: "#fff",
+      paddingLeft: "6px",
+      borderRadius: "4px 0 0 4px",
+      background: "#9CA3AF"
+    };
+    const defaultValueStyle = {
+      color: "#fff",
+      paddingRight: "6px",
+      borderRadius: "0 4px 4px 0",
+      background: "#3B82F6"
+    };
+    console.log(
+      `%cvite-ssr%c${title.text} %c ${value.text}`,
+      `${styleObjectToString(nameStyle)}`,
+      `${styleObjectToString({
+        ...defaultTitleStyle,
+        ...title.style
+      })}`,
+      `${styleObjectToString({
+        ...defaultValueStyle,
+        ...value.style
+      })}`
+    );
+  }
+  log(
+    {
+      text: "Build Date"
+    },
+    { text: { "lastBuildTime": "2022-11-15 22:29:04" }.lastBuildTime }
+  );
+  const envStyle = () => {
+    return {
+      background: colors.blue
+    };
+  };
+  log({ text: "Env" }, { text: "test", style: envStyle() });
+}
+function onClientInit() {
+  logClientInfo();
+}
+async function render(pageContext) {
+  hydrateRoot(document.getElementById("app"), await createApp(pageContext));
+  onClientInit();
+}
 export {
-  ReactDOM as R,
-  ReactDOM$1 as a,
-  reactDom as r
+  __vite_legacy_guard,
+  render
 };

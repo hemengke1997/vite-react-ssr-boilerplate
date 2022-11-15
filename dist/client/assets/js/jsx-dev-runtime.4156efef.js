@@ -2673,7 +2673,6 @@ const jsxDEV = jsxDevRuntime.exports.jsxDEV;
 export {
   Fragment as F,
   React as R,
-  getDefaultExportFromCjs as g,
   jsxDEV as j,
   react as r
 };

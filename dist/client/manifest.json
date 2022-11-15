@@ -1,13 +1,12 @@
 {
   "renderer/_default.page.client-legacy.tsx": {
-    "file": "assets/js/renderer/_default.page.client-legacy.9c4482b7.entry.js",
+    "file": "assets/js/renderer/_default.page.client-legacy.337703c8.entry.js",
     "src": "renderer/_default.page.client-legacy.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index.110d239b-legacy.js",
-      "_preload-helper.8628f229-legacy.js",
-      "_jsx-dev-runtime.10b3778c-legacy.js"
+      "_jsx-dev-runtime.abb0654c-legacy.js",
+      "_preload-helper.8628f229-legacy.js"
     ],
     "dynamicImports": [
       "src/components/mobile/MobileLayout/index-legacy.tsx",
@@ -15,27 +14,25 @@
     ]
   },
   "renderer/_error.page-legacy.tsx": {
-    "file": "assets/js/renderer/_error.page-legacy.8cc51444.entry.js",
+    "file": "assets/js/renderer/_error.page-legacy.23eb305b.entry.js",
     "src": "renderer/_error.page-legacy.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-dev-runtime.10b3778c-legacy.js"
+      "_jsx-dev-runtime.abb0654c-legacy.js"
     ]
   },
   "src/pages/a/index.page-legacy.tsx": {
-    "file": "assets/js/src/pages/a/index.page-legacy.33cf9744.entry.js",
+    "file": "assets/js/src/pages/a/index.page-legacy.ddeddb33.entry.js",
     "src": "src/pages/a/index.page-legacy.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-dev-runtime.10b3778c-legacy.js",
-      "_LoadingOutlined.be4fdceb-legacy.js",
-      "_index.110d239b-legacy.js"
+      "_jsx-dev-runtime.abb0654c-legacy.js"
     ]
   },
   "node_modules/.pnpm/registry.npmmirror.com+vite-plugin-ssr@0.4.48_@minko-fe+vite@3.2.1/node_modules/vite-plugin-ssr/dist/esm/client/router/entry-legacy.js": {
-    "file": "assets/js/entry-client-routing-legacy.a55517bb.entry.js",
+    "file": "assets/js/entry-client-routing-legacy.06f88db3.entry.js",
     "src": "node_modules/.pnpm/registry.npmmirror.com+vite-plugin-ssr@0.4.48_@minko-fe+vite@3.2.1/node_modules/vite-plugin-ssr/dist/esm/client/router/entry-legacy.js",
     "isEntry": true,
     "imports": [
@@ -49,7 +46,7 @@
     ]
   },
   "node_modules/.pnpm/registry.npmmirror.com+vite-plugin-ssr@0.4.48_@minko-fe+vite@3.2.1/node_modules/vite-plugin-ssr/dist/esm/client/entry-legacy.js": {
-    "file": "assets/js/entry-server-routing-legacy.501c3498.entry.js",
+    "file": "assets/js/entry-server-routing-legacy.f70e6db4.entry.js",
     "src": "node_modules/.pnpm/registry.npmmirror.com+vite-plugin-ssr@0.4.48_@minko-fe+vite@3.2.1/node_modules/vite-plugin-ssr/dist/esm/client/entry-legacy.js",
     "isEntry": true,
     "imports": [
@@ -62,60 +59,41 @@
       "renderer/_default.page.client-legacy.tsx"
     ]
   },
-  "_index.110d239b-legacy.js": {
-    "file": "assets/js/index.110d239b-legacy.js",
-    "imports": [
-      "_jsx-dev-runtime.10b3778c-legacy.js"
-    ]
-  },
   "_preload-helper.8628f229-legacy.js": {
     "file": "assets/js/preload-helper.8628f229-legacy.js"
   },
-  "_jsx-dev-runtime.10b3778c-legacy.js": {
-    "file": "assets/js/jsx-dev-runtime.10b3778c-legacy.js"
-  },
-  "_LoadingOutlined.be4fdceb-legacy.js": {
-    "file": "assets/js/LoadingOutlined.be4fdceb-legacy.js",
-    "imports": [
-      "_jsx-dev-runtime.10b3778c-legacy.js",
-      "_index.110d239b-legacy.js"
-    ]
+  "_jsx-dev-runtime.abb0654c-legacy.js": {
+    "file": "assets/js/jsx-dev-runtime.abb0654c-legacy.js"
   },
   "_assertRenderHook.06a94f78-legacy.js": {
     "file": "assets/js/assertRenderHook.06a94f78-legacy.js"
   },
   "src/components/mobile/MobileLayout/index-legacy.tsx": {
-    "file": "assets/js/index.0a3ee2ce-legacy.js",
+    "file": "assets/js/index.7bc088cc-legacy.js",
     "src": "src/components/mobile/MobileLayout/index-legacy.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-dev-runtime.10b3778c-legacy.js"
+      "_jsx-dev-runtime.abb0654c-legacy.js"
     ]
   },
   "src/components/pc/PCLayout/index-legacy.tsx": {
-    "file": "assets/js/index.a541a18e-legacy.js",
+    "file": "assets/js/index.a44c84d9-legacy.js",
     "src": "src/components/pc/PCLayout/index-legacy.tsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "_jsx-dev-runtime.10b3778c-legacy.js",
-      "_LoadingOutlined.be4fdceb-legacy.js",
-      "_index.110d239b-legacy.js"
-    ]
+    "isDynamicEntry": true
   },
   "vite/legacy-polyfills-legacy": {
-    "file": "assets/js/polyfills-legacy.c418aa5f.entry.js",
+    "file": "assets/js/polyfills-legacy.2f40f742.entry.js",
     "src": "vite/legacy-polyfills-legacy",
     "isEntry": true
   },
   "renderer/_default.page.client.tsx": {
-    "file": "assets/js/renderer/_default.page.client.b499ae53.entry.js",
+    "file": "assets/js/renderer/_default.page.client.01064642.entry.js",
     "src": "renderer/_default.page.client.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index.a1ea8fec.js",
-      "_preload-helper.e1a242f9.js",
-      "_jsx-dev-runtime.62039f8c.js"
+      "_jsx-dev-runtime.4156efef.js",
+      "_preload-helper.e1a242f9.js"
     ],
     "dynamicImports": [
       "src/components/mobile/MobileLayout/index.tsx",
@@ -126,27 +104,25 @@
     ]
   },
   "renderer/_error.page.tsx": {
-    "file": "assets/js/renderer/_error.page.e8c35ef3.entry.js",
+    "file": "assets/js/renderer/_error.page.23eb305b.entry.js",
     "src": "renderer/_error.page.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-dev-runtime.62039f8c.js"
+      "_jsx-dev-runtime.4156efef.js"
     ]
   },
   "src/pages/a/index.page.tsx": {
-    "file": "assets/js/src/pages/a/index.page.a4ab6925.entry.js",
+    "file": "assets/js/src/pages/a/index.page.ddeddb33.entry.js",
     "src": "src/pages/a/index.page.tsx",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-dev-runtime.62039f8c.js",
-      "_LoadingOutlined.60004926.js",
-      "_index.a1ea8fec.js"
+      "_jsx-dev-runtime.4156efef.js"
     ]
   },
   "node_modules/.pnpm/registry.npmmirror.com+vite-plugin-ssr@0.4.48_@minko-fe+vite@3.2.1/node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
-    "file": "assets/js/entry-client-routing.0a1ad6fd.entry.js",
+    "file": "assets/js/entry-client-routing.b58fed7f.entry.js",
     "src": "node_modules/.pnpm/registry.npmmirror.com+vite-plugin-ssr@0.4.48_@minko-fe+vite@3.2.1/node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js",
     "isEntry": true,
     "imports": [
@@ -160,7 +136,7 @@
     ]
   },
   "node_modules/.pnpm/registry.npmmirror.com+vite-plugin-ssr@0.4.48_@minko-fe+vite@3.2.1/node_modules/vite-plugin-ssr/dist/esm/client/entry.js": {
-    "file": "assets/js/entry-server-routing.fb5e0411.entry.js",
+    "file": "assets/js/entry-server-routing.12eb60ab.entry.js",
     "src": "node_modules/.pnpm/registry.npmmirror.com+vite-plugin-ssr@0.4.48_@minko-fe+vite@3.2.1/node_modules/vite-plugin-ssr/dist/esm/client/entry.js",
     "isEntry": true,
     "imports": [
@@ -173,48 +149,30 @@
       "renderer/_default.page.client.tsx"
     ]
   },
-  "_index.a1ea8fec.js": {
-    "file": "assets/js/index.a1ea8fec.js",
-    "imports": [
-      "_jsx-dev-runtime.62039f8c.js"
-    ]
-  },
   "_preload-helper.e1a242f9.js": {
     "file": "assets/js/preload-helper.e1a242f9.js"
   },
-  "_jsx-dev-runtime.62039f8c.js": {
-    "file": "assets/js/jsx-dev-runtime.62039f8c.js"
-  },
-  "_LoadingOutlined.60004926.js": {
-    "file": "assets/js/LoadingOutlined.60004926.js",
-    "imports": [
-      "_jsx-dev-runtime.62039f8c.js",
-      "_index.a1ea8fec.js"
-    ]
+  "_jsx-dev-runtime.4156efef.js": {
+    "file": "assets/js/jsx-dev-runtime.4156efef.js"
   },
   "_assertRenderHook.8766fbcf.js": {
     "file": "assets/js/assertRenderHook.8766fbcf.js"
   },
   "src/components/mobile/MobileLayout/index.tsx": {
-    "file": "assets/js/index.94b9cf5c.js",
+    "file": "assets/js/index.7bc088cc.js",
     "src": "src/components/mobile/MobileLayout/index.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-dev-runtime.62039f8c.js"
+      "_jsx-dev-runtime.4156efef.js"
     ],
     "css": [
       "assets/css/index.655867c1.css"
     ]
   },
   "src/components/pc/PCLayout/index.tsx": {
-    "file": "assets/js/index.bdcdd877.js",
+    "file": "assets/js/index.a44c84d9.js",
     "src": "src/components/pc/PCLayout/index.tsx",
     "isDynamicEntry": true,
-    "imports": [
-      "_jsx-dev-runtime.62039f8c.js",
-      "_LoadingOutlined.60004926.js",
-      "_index.a1ea8fec.js"
-    ],
     "css": [
       "assets/css/index.b7f775ab.css"
     ]
@@ -232,7 +190,7 @@
     "src": "src/components/pc/PCLayout/index.css"
   },
   "vite/legacy-polyfills": {
-    "file": "assets/js/polyfills.139161ad.entry.js",
+    "file": "assets/js/polyfills.b95b57fd.entry.js",
     "src": "vite/legacy-polyfills",
     "isEntry": true
   }
