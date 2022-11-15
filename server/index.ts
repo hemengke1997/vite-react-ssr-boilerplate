@@ -60,12 +60,14 @@ async function startServer() {
       sirv(`${root}/dist/client`, {
         extensions: [],
         etag: true,
-        setHeaders(res) {
-          res.setHeader('x-foo', 'bar')
-        },
       }),
     )
   }
+
+  app.use((_, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    next()
+  })
 
   const proxy = VITE_PROXY
   if (proxy) {
@@ -83,9 +85,20 @@ async function startServer() {
     )
   }
 
+  // support html
+  app.use((req, _, next) => {
+    const url = req.originalUrl
+    const isHtml = /\.html?$/gi
+    if (isHtml.test(url)) {
+      req.originalUrl = url.replace(isHtml, '')
+    }
+    next()
+  })
+
   app.get('*', async (req, res, next) => {
     try {
       const url = req.originalUrl
+
       const pageContextInit = {
         urlOriginal: url,
       }
@@ -94,8 +107,15 @@ async function startServer() {
       const env = process.env.NODE_ENV
 
       const { httpResponse } = pageContext
+
       if (httpResponse === null) return next()
       const { statusCode, contentType } = httpResponse
+
+      // if (statusCode === 404) {
+      //   res.status(statusCode).redirect('https://www.google.com')
+      //   return
+      // }
+
       let html = httpResponse.body
 
       if (!env || env !== 'development') {
