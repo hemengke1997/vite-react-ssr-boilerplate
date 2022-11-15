@@ -1,5 +1,6 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import readline from 'node:readline'
 import normalizeUrl from 'normalize-url'
 import express from 'express'
 import type { Application } from 'express'
@@ -12,6 +13,14 @@ import { getBase } from '@root/shared'
 import { wrapperEnv } from '@root/config/vite/utils/helper'
 import { log } from '../scripts/utils'
 import { legacyHtml } from './legacy'
+
+function clearScreen() {
+  const repeatCount = process.stdout.rows - 2
+  const blank = repeatCount > 0 ? '\n'.repeat(repeatCount) : ''
+  console.log(blank)
+  readline.cursorTo(process.stdout, 0, 0)
+  readline.clearScreenDown(process.stdout)
+}
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 const isDev = process.env.NODE_ENV === Env.development
@@ -144,29 +153,31 @@ function listen(app: Application, _port: number) {
 
     const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${getBase()}${page}`, { normalizeProtocol: false })
 
-    log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
+    clearScreen()
 
-    if (isDev) {
-      log.info(`\n⏳ waiting for vite optimizing...`)
-    }
+    log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
   })
 
   server.on('error', (error) => {
+    clearScreen()
+
     if ((error as any).code !== 'EADDRINUSE') {
       throw error
     }
-    log.error(`❌ ${error}\n`)
 
+    log.error(`❌ ${error}\n`)
     port = port + 1
     log.info(`🔥 open port ${port} ...\n`)
     listen(app, port)
   })
 
-  process.on('SIGINT', () => {
-    server.close(() => {
-      process.exit(0)
+  if (!isDev) {
+    process.on('SIGINT', () => {
+      server.close(() => {
+        process.exit(0)
+      })
     })
-  })
+  }
 }
 
 try {

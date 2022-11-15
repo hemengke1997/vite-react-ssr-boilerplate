@@ -1,0 +1,7 @@
+{
+  "version": "0.4.48",
+  "usesClientRouter": false,
+  "baseUrl": "/base-url/",
+  "baseAssets": null,
+  "includeAssetsImportedByServer": false
+}
