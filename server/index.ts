@@ -48,6 +48,7 @@ async function startServer() {
     app.set('etag', false)
     app.use((_, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*')
+      res.setHeader('Cache-Control', 'no-store')
       next()
     })
   } else {
@@ -59,7 +60,6 @@ async function startServer() {
       sirv(`${root}/dist/client`, {
         extensions: [],
         etag: true,
-        gzip: true,
         setHeaders(res) {
           res.setHeader('x-foo', 'bar')
         },
@@ -99,7 +99,7 @@ async function startServer() {
       let html = httpResponse.body
 
       if (!env || env !== 'development') {
-        html = legacyHtml(pageContext, html)
+        html = await legacyHtml(pageContext, html)
       }
 
       res.status(statusCode).type(contentType).send(html)

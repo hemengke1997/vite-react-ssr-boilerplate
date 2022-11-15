@@ -16,11 +16,10 @@ const dynamicFallbackInlineCode = `!function(){if(window.${detectModernBrowserVa
 
 const safari10NoModuleFix = `!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();`
 
-// TODO: add redis
 // cache
 const tags: HtmlTagDescriptor[] = []
 
-export function legacyHtml(pageContext: any, html: string) {
+export async function legacyHtml(pageContext: any, html: string) {
   if (!tags.length) {
     // lookup modern polyfills
     const files = fg.sync(`dist/client/assets/js/polyfills.*.entry.js`, {
@@ -235,7 +234,6 @@ function injectToBody(html: string, tags: HtmlTagDescriptor[], prepend = false) 
     if (htmlInjectRE.test(html)) {
       return html.replace(htmlInjectRE, `${serializeTags(tags)}\n$&`)
     }
-    console.log(4)
     return `${html}\n${serializeTags(tags)}`
   }
 }

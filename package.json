@@ -19,7 +19,7 @@
     "postinstall": "simple-git-hooks",
     "ssr": "cross-env NODE_ENV=development tsx server/index.ts",
     "start:prod": "cross-env NODE_ENV=production tsx server/index.ts",
-    "start:test": "cross-env NODE_ENV=test tsx server/index.ts",
+    "start:test": "cross-env NODE_ENV=test tsx watch server/index.ts",
     "build": "cross-env NODE_ENV=production vite build --mode production && vite build --ssr --mode production",
     "build:test": "cross-env NODE_ENV=test vite build --mode test && vite build --ssr --mode test",
     "bump:deps": "pnpm update --i --L",
