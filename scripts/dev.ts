@@ -70,7 +70,7 @@ function getPageName() {
         log.info(`\n🤖 [${name}]:创建页面中...🎈\n`)
         fs.mkdirSync(path.resolve(dir, `../src/pages/${name}`))
         fs.mkdirSync(path.resolve(dir, `../src/pages/${name}/images`))
-        fs.writeFileSync(path.resolve(dir, `../src/pages/${name}/index.module.less`), '')
+        fs.writeFileSync(path.resolve(dir, `../src/pages/${name}/index.module.css`), '')
         const tsxTpl = fs.readFileSync(path.resolve(dir, '../template/index.tpl')).toString()
         fs.writeFileSync(path.resolve(dir, `../src/pages/${name}/index.page.tsx`), tsxTpl)
 

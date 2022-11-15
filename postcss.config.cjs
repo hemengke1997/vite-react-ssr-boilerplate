@@ -1,6 +1,7 @@
 module.exports = () => {
   return {
     plugins: [
+      require('tailwindcss/nesting'),
       require('tailwindcss'),
       require('@minko-fe/postcss-pxtorem')({
         rootValue({ file }) {

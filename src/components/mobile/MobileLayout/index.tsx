@@ -1,4 +1,4 @@
-import '@/assets/style/mobile/index.less'
+import '@/assets/style/mobile/index.css'
 
 function MobileLayout({ children }: { children: React.ReactNode }) {
   return <div className='layout'>{children}</div>

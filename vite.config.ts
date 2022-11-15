@@ -2,7 +2,6 @@ import path from 'node:path'
 import dayjs from 'dayjs'
 import type { ConfigEnv, UserConfig } from 'vite'
 import { loadEnv } from 'vite'
-import { LessPluginRemoveAntdGlobalStyles } from 'less-plugin-remove-antd-global-styles'
 import { setupVitePlugins } from './config/vite/plugins'
 import { setupRollupOptions } from './config/vite/rollupOptions'
 import { wrapperEnv } from './config/vite/utils/helper'
@@ -46,16 +45,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
       ],
     },
     css: {
-      preprocessorOptions: {
-        less: {
-          plugins: [new LessPluginRemoveAntdGlobalStyles()],
-          javascriptEnabled: true,
-          modifyVars: {
-            'border-radius-base': '4px',
-            'primary-color': '#FF9800',
-          },
-        },
-      },
+      preprocessorOptions: {},
     },
     define: {
       'process.env': process.env,
@@ -68,7 +58,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
       noExternal: isBuild ? ['react-vant', 'pm2'] : [],
     },
     optimizeDeps: {
-      include: ['antd/lib/locale/zh_CN'],
+      include: ['antd/locale/zh_CN'],
     },
     build: {
       emptyOutDir: true,

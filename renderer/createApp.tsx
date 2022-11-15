@@ -1,5 +1,5 @@
 import { PageContextProvider } from './usePageContext'
-import '@/assets/style/global.less'
+import '@/assets/style/global.css'
 
 async function createApp(pageContext: PageType.PageContext) {
   const { Page, pageProps } = pageContext
