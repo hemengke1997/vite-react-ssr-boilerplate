@@ -1,18 +1,25 @@
-import { localeDefault, locales } from './locales'
+import { localesMap } from './locales'
 
 export { extractLocale }
 
-function extractLocale(url) {
-  const urlPaths = url.split('/')
+function extractLocale(url: string) {
+  const urlPaths = url.replace(import.meta.env.VITE_BASEURL!, '').split('/')
 
-  let locale
+  const locales = Object.keys(localesMap)
+
+  let locale: {
+    key: string
+    value: string
+  }
   let urlWithoutLocale
-  const firstPath = urlPaths[1]
+  const firstPath = urlPaths[0]
+
   if (locales.includes(firstPath)) {
-    locale = firstPath
-    urlWithoutLocale = `/${urlPaths.slice(2).join('/')}`
+    locale = localesMap[firstPath]
+    urlWithoutLocale = `/${urlPaths.slice(1).join('/')}`
   } else {
-    locale = localeDefault
+    // fallback
+    locale = localesMap.zh
     urlWithoutLocale = url
   }
 

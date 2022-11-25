@@ -1,4 +1,3 @@
-
 # edit nextjs Dockerfile
 # see https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 

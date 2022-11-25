@@ -1,18 +1,17 @@
-// import { extractLocale } from '@root/locales'
+import { extractLocale } from '@root/locales'
 
 export { onBeforeRoute }
 
 function onBeforeRoute(pageContext) {
-  // const urlMod = pageContext.urlOriginal
+  let urlMod = pageContext.urlOriginal
 
-  // const { urlWithoutLocale, locale } = extractLocale(urlMod)
-  // urlMod = urlWithoutLocale
-  // console.log('🚀 -> onBeforeRoute -> urlMod', urlMod)
+  const { urlWithoutLocale, locale } = extractLocale(urlMod)
+  urlMod = urlWithoutLocale
 
   return {
     pageContext: {
-      // locale,
-      urlOriginal: pageContext.urlOriginal,
+      locale,
+      urlOriginal: urlMod,
     },
   }
 }

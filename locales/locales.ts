@@ -1,2 +1,10 @@
-export const locales = ['en', 'de-DE', 'fr-FR']
-export const localeDefault = locales[0]
+export const localesMap = {
+  zh: {
+    key: 'zh',
+    value: 'zh-CN',
+  },
+  en: {
+    key: 'en',
+    value: 'en-US',
+  },
+}

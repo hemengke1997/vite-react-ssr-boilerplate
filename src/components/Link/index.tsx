@@ -1,4 +1,6 @@
+import { usePageContext } from '@root/renderer/usePageContext'
 import { getBase } from '@root/shared'
+import normalizePath from 'normalize-path'
 import type { FC, ReactNode } from 'react'
 
 const Link: FC<
@@ -10,7 +12,12 @@ const Link: FC<
   let { href } = props
   if (!href?.startsWith('/')) throw new Error('Link href should start with /')
   href = href.slice(1)
-  return <a {...props} href={base + href} />
+
+  const { locale } = usePageContext()
+
+  href = normalizePath(`${base}/${locale.key}/${href}`, false)
+
+  return <a {...props} href={href} />
 }
 
 export { Link }

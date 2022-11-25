@@ -46,6 +46,10 @@ specifiers:
   http-proxy-middleware: ^2.0.6
   i18next: ^22.0.6
   i18next-browser-languagedetector: ^7.0.1
+  i18next-fs-backend: ^2.0.0
+  i18next-http-backend: ^2.0.1
+  i18next-http-middleware: ^3.2.1
+  i18next-multiload-backend-adapter: ^2.0.0
   inquirer: ^9.1.4
   lint-staged: ^13.0.3
   lodash-es: ^4.17.21
@@ -78,7 +82,7 @@ specifiers:
   typescript: ^4.9.3
   vite: 3.2.4
   vite-plugin-i18next-loader: ^2.0.2
-  vite-plugin-public-typescript: ^1.0.0
+  vite-plugin-public-typescript: 'link: ./../../vite-plugin-public-typescript'
   vite-plugin-ssr: ^0.4.52
   vite-plugin-style-import: ^2.0.0
   vite-plugin-time-reporter: ^2.0.0
@@ -100,6 +104,10 @@ dependencies:
   http-proxy-middleware: registry.npmmirror.com/http-proxy-middleware/2.0.6_@types+express@4.17.14
   i18next: registry.npmmirror.com/i18next/22.0.6
   i18next-browser-languagedetector: registry.npmmirror.com/i18next-browser-languagedetector/7.0.1
+  i18next-fs-backend: registry.npmmirror.com/i18next-fs-backend/2.0.0
+  i18next-http-backend: registry.npmmirror.com/i18next-http-backend/2.0.1
+  i18next-http-middleware: registry.npmmirror.com/i18next-http-middleware/3.2.1
+  i18next-multiload-backend-adapter: registry.npmmirror.com/i18next-multiload-backend-adapter/2.0.0
   lodash-es: registry.npmmirror.com/lodash-es/4.17.21
   normalize-path: registry.npmmirror.com/normalize-path/3.0.0
   normalize-url: registry.npmmirror.com/normalize-url/8.0.0
@@ -166,7 +174,7 @@ devDependencies:
   terser: registry.npmmirror.com/terser/5.16.0
   typescript: registry.npmmirror.com/typescript/4.9.3
   vite-plugin-i18next-loader: registry.npmmirror.com/vite-plugin-i18next-loader/2.0.2_vite@3.2.4
-  vite-plugin-public-typescript: registry.npmmirror.com/vite-plugin-public-typescript/1.0.0_vite@3.2.4
+  vite-plugin-public-typescript: link:../vite-plugin-public-typescript
   vite-plugin-style-import: registry.npmmirror.com/vite-plugin-style-import/2.0.0_vite@3.2.4
   vite-plugin-time-reporter: registry.npmmirror.com/vite-plugin-time-reporter/2.0.0_vite@3.2.4
 
@@ -3025,6 +3033,16 @@ packages:
       cross-spawn: registry.npmmirror.com/cross-spawn/7.0.3
     dev: false
 
+  registry.npmmirror.com/cross-fetch/3.1.5:
+    resolution: {integrity: sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cross-fetch/-/cross-fetch-3.1.5.tgz}
+    name: cross-fetch
+    version: 3.1.5
+    dependencies:
+      node-fetch: registry.npmmirror.com/node-fetch/2.6.7
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   registry.npmmirror.com/cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cross-spawn/-/cross-spawn-7.0.3.tgz}
     name: cross-spawn
@@ -4975,6 +4993,34 @@ packages:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.20.1
     dev: false
 
+  registry.npmmirror.com/i18next-fs-backend/2.0.0:
+    resolution: {integrity: sha512-zlwzcoUKlveoRt/SxgeP8i/6p1rxwxZ+x0w4sfCTY1zgUlhhnoxBSRX3GjVIsDJm5mky8Hpr//UX93UIknK7yQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/i18next-fs-backend/-/i18next-fs-backend-2.0.0.tgz}
+    name: i18next-fs-backend
+    version: 2.0.0
+    dev: false
+
+  registry.npmmirror.com/i18next-http-backend/2.0.1:
+    resolution: {integrity: sha512-kzvSkOT3yhVijumDlp8/TgD1v07lYdFXsf5YYbB7Yu+K2S6PO0lKgZ4c/fyFcAKWiAiTjt9uVecBAbnJjKzhOw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/i18next-http-backend/-/i18next-http-backend-2.0.1.tgz}
+    name: i18next-http-backend
+    version: 2.0.1
+    dependencies:
+      cross-fetch: registry.npmmirror.com/cross-fetch/3.1.5
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  registry.npmmirror.com/i18next-http-middleware/3.2.1:
+    resolution: {integrity: sha512-zBwXxDChT0YLoTXIR6jRuqnUUhXW0Iw7egoTnNXyaDRtTbfWNXwU0a53ThyuRPQ+k+tXu3ZMNKRzfLuononaRw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/i18next-http-middleware/-/i18next-http-middleware-3.2.1.tgz}
+    name: i18next-http-middleware
+    version: 3.2.1
+    dev: false
+
+  registry.npmmirror.com/i18next-multiload-backend-adapter/2.0.0:
+    resolution: {integrity: sha512-Qy3dbKMOGOC65tSsbFWxHSMvKpPmKnPAm0TR8BtkeRQ2Srafwc1NTkPQOliUVILsl10p7F7fKaCpevzm+qBwNA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/i18next-multiload-backend-adapter/-/i18next-multiload-backend-adapter-2.0.0.tgz}
+    name: i18next-multiload-backend-adapter
+    version: 2.0.0
+    dev: false
+
   registry.npmmirror.com/i18next/22.0.6:
     resolution: {integrity: sha512-RlreNGoPIdDP4QG+qSA9PxZKGwlzmcozbI9ObI6+OyUa/Rp0EjZZA9ubyBjw887zVNZsC+7FI3sXX8oiTzAfig==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/i18next/-/i18next-22.0.6.tgz}
     name: i18next
@@ -5989,6 +6035,20 @@ packages:
     dependencies:
       lodash: registry.npmmirror.com/lodash/4.17.21
     dev: true
+
+  registry.npmmirror.com/node-fetch/2.6.7:
+    resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/node-fetch/-/node-fetch-2.6.7.tgz}
+    name: node-fetch
+    version: 2.6.7
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+    dependencies:
+      whatwg-url: registry.npmmirror.com/whatwg-url/5.0.0
+    dev: false
 
   registry.npmmirror.com/node-releases/2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/node-releases/-/node-releases-2.0.6.tgz}
@@ -8643,6 +8703,12 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  registry.npmmirror.com/tr46/0.0.3:
+    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tr46/-/tr46-0.0.3.tgz}
+    name: tr46
+    version: 0.0.3
+    dev: false
+
   registry.npmmirror.com/tsconfig-paths/3.14.1:
     resolution: {integrity: sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz}
     name: tsconfig-paths
@@ -8937,21 +9003,6 @@ packages:
       vite: registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy
     dev: true
 
-  registry.npmmirror.com/vite-plugin-public-typescript/1.0.0_vite@3.2.4:
-    resolution: {integrity: sha512-25d/CE1QA7wmaeewyFn5L3vMjZhh7ieeViD4gSnYpts+9MaXvI3yMvx2HFT6yup4ypJB+9YWSCW1rfthdEap0w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-public-typescript/-/vite-plugin-public-typescript-1.0.0.tgz}
-    id: registry.npmmirror.com/vite-plugin-public-typescript/1.0.0
-    name: vite-plugin-public-typescript
-    version: 1.0.0
-    requiresBuild: true
-    peerDependencies:
-      vite: '>=2.0.0'
-    dependencies:
-      esbuild: registry.npmmirror.com/esbuild/0.15.15
-      fast-glob: registry.npmmirror.com/fast-glob/3.2.12
-      fs-extra: registry.npmmirror.com/fs-extra/10.1.0
-      vite: registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy
-    dev: true
-
   registry.npmmirror.com/vite-plugin-ssr/0.4.52_vite@3.2.4:
     resolution: {integrity: sha512-XzBDNaV+IyEVY1XfUjNmpynfNjnKr5xGIqF3KFVAOIJFo15bgT010/+1LcC4tSpdaSEFEETynmCjSzNJd9lSrA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-ssr/-/vite-plugin-ssr-0.4.52.tgz}
     id: registry.npmmirror.com/vite-plugin-ssr/0.4.52
@@ -9102,6 +9153,21 @@ packages:
     dependencies:
       defaults: registry.npmmirror.com/defaults/1.0.3
     dev: true
+
+  registry.npmmirror.com/webidl-conversions/3.0.1:
+    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz}
+    name: webidl-conversions
+    version: 3.0.1
+    dev: false
+
+  registry.npmmirror.com/whatwg-url/5.0.0:
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/whatwg-url/-/whatwg-url-5.0.0.tgz}
+    name: whatwg-url
+    version: 5.0.0
+    dependencies:
+      tr46: registry.npmmirror.com/tr46/0.0.3
+      webidl-conversions: registry.npmmirror.com/webidl-conversions/3.0.1
+    dev: false
 
   registry.npmmirror.com/which-boxed-primitive/1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/which-boxed-primitive/-/which-boxed-primitive-1.0.2.tgz}

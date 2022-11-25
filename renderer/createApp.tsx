@@ -24,7 +24,9 @@ const AnimateRouteWrapper = ({ children }: PropsWithChildren) => {
 let transitionKey = 0
 
 async function createApp(pageContext: PageType.PageContext & { transitionKey?: number }) {
-  const { Page, pageProps } = pageContext
+  const { Page, pageProps, locale } = pageContext
+
+  i18next.changeLanguage(locale.key)
 
   transitionKey = transitionKey ^ 1
 

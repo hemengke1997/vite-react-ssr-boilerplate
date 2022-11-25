@@ -21,6 +21,16 @@ declare namespace PageType {
   interface PageContext {
     Page: React.FC<PageProps>
     pageProps: PageProps
+    locale: {
+      /**
+       * eg. en
+       */
+      key: string
+      /**
+       * eg. en-US
+       */
+      value: string
+    }
   }
 
   type onBeforeRender = Promise<{

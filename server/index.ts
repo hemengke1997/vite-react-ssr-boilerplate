@@ -44,10 +44,11 @@ async function startServer() {
             ignored: ['**/tsconfig.*'],
           },
           cors: true,
-          hmr: {
-            port: 24990,
-          },
         },
+      })
+
+      process.on('SIGINT', () => {
+        viteDevServer.close()
       })
 
       app.use(viteDevServer.middlewares)

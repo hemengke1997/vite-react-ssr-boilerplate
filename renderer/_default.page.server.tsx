@@ -20,16 +20,15 @@ function setupVconsole(isMobile?: boolean, force?: boolean) {
 export const passToClient = ['pageProps', 'locale']
 
 export async function render(pageContext: PageContextBuiltIn & PageType.PageContext) {
-  console.log(pageContext.urlOriginal, 'urlOriginal')
   const pageHtml = renderToString(await createApp(pageContext))
-  const { pageProps } = pageContext
+  const { pageProps, locale } = pageContext
   const { checkPlatform = true, isMobile = false, vconsole } = pageProps
   const title = pageProps?.title || 'vite-react-ssr-boilerplate'
   const desc = pageProps?.description || 'description'
   const keywords = pageProps?.keywords || 'keywords'
 
   const documentHtml = escapeInject/* html */ `<!DOCTYPE html>
-  <html lang="zh-CN" is-mobile="${String(isMobile)}" check-platform='${String(checkPlatform)}'>
+  <html lang="${locale.value}" is-mobile="${String(isMobile)}" check-platform='${String(checkPlatform)}'>
     <head>
       <meta charset="UTF-8" />
       <meta http-equiv="Cache-Control" content="no-store">
@@ -64,6 +63,7 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
     documentHtml,
     pageContext: {
       pageProps,
+      locale,
     },
   }
 }
