@@ -30,19 +30,47 @@ pnpm run build
 
 ## release
 
+> 本地打包再部署的话可以执行(Docker 部署不需要)
+
 ```bash
 pnpm run release
 ```
 
 ## deploy
 
-### test
+### Docker
+
+#### test
+
+> container / image 名称可以自定义
+
+```shell
+# build
+docker build --build-arg node_env=test -t web:1.0 .
+# run
+docker run -d -p 9527:9527 --name ssr-web web:1.0
+```
+
+#### production
+
+```shell
+# build
+docker build --build-arg node_env=production -t web:1.0 .
+# run
+docker run -d -p 9527:9527 --name ssr-web web:1.0
+```
+
+### 传统部署
+
+> 传统部署的话需要 `pnpm build:server` 打包 `pm2` 需要的脚本
+
+#### test
 
 ```bash
 pnpm run pm2:test
 ```
 
-### production
+#### production
 
 ```bash
 pnpm run pm2:prod

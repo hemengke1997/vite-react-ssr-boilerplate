@@ -2,3 +2,5 @@ node_modules
 *.local
 dist
 .eslintcache
+.vscode
+.nvmrc

@@ -1,5 +1,0 @@
-{
-  "typescript.suggestionActions.enabled": false,
-  "javascript.suggestionActions.enabled": false, // ts(80001)
-  "npm.packageManager": "pnpm"
-}
