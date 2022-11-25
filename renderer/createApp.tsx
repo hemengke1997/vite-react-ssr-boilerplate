@@ -1,5 +1,7 @@
 import type { PropsWithChildren } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { I18nextProvider } from 'react-i18next'
+import { i18next } from '@root/locales'
 import { PageContextProvider } from './usePageContext'
 import '@/assets/style/global.css'
 
@@ -39,11 +41,13 @@ async function createApp(pageContext: PageType.PageContext & { transitionKey?: n
   return (
     <AnimatePresence mode='wait' initial={false}>
       <AnimateRouteWrapper key={transitionKey}>
-        <PageContextProvider pageContext={pageContext}>
-          <Tpl>
-            <Page {...pageProps} />
-          </Tpl>
-        </PageContextProvider>
+        <I18nextProvider i18n={i18next}>
+          <PageContextProvider pageContext={pageContext}>
+            <Tpl>
+              <Page {...pageProps} />
+            </Tpl>
+          </PageContextProvider>
+        </I18nextProvider>
       </AnimateRouteWrapper>
     </AnimatePresence>
   )

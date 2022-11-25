@@ -17,11 +17,11 @@ function setupVconsole(isMobile?: boolean, force?: boolean) {
   return escapeInject``
 }
 
-export const passToClient = ['pageProps']
+export const passToClient = ['pageProps', 'locale']
 
 export async function render(pageContext: PageContextBuiltIn & PageType.PageContext) {
+  console.log(pageContext.urlOriginal, 'urlOriginal')
   const pageHtml = renderToString(await createApp(pageContext))
-
   const { pageProps } = pageContext
   const { checkPlatform = true, isMobile = false, vconsole } = pageProps
   const title = pageProps?.title || 'vite-react-ssr-boilerplate'

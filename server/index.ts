@@ -106,7 +106,7 @@ async function startServer() {
       const pageContextInit = {
         urlOriginal: url,
       }
-      const pageContext: any = await renderPage(pageContextInit)
+      const pageContext = await renderPage(pageContextInit)
 
       const { NODE_ENV } = process.env
 
@@ -114,11 +114,6 @@ async function startServer() {
 
       if (httpResponse === null) return next()
       const { statusCode, contentType } = httpResponse
-
-      // if (statusCode === 404) {
-      //   res.status(statusCode).redirect('https://www.google.com')
-      //   return
-      // }
 
       let html = httpResponse.body
 
