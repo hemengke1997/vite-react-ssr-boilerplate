@@ -1,0 +1,133 @@
+/* copy from react/vant */
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes slide-up-enter {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+@keyframes slide-up-leave {
+  to {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+@keyframes slide-down-enter {
+  from {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+@keyframes slide-down-leave {
+  to {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+@keyframes slide-left-enter {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@keyframes slide-left-leave {
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@keyframes slide-right-enter {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+@keyframes slide-right-leave {
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes zoom-in {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes zoom-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-in-enter-active,
+.fade-enter-active {
+  animation: 0.3s fade-in both ease-out;
+}
+.fade-exit-active {
+  animation: 0.3s fade-out both ease-in;
+}
+.slide-up-enter-active {
+  animation: 0.3s slide-up-enter both ease-out;
+}
+.slide-up-exit-active {
+  animation: 0.3s slide-up-leave both ease-in;
+}
+.slide-down-enter-active {
+  animation: slide-down-enter 0.3s both ease-out;
+}
+.slide-down-exit-active {
+  animation: slide-down-leave 0.3s both ease-in;
+}
+.slide-left-enter-active {
+  animation: slide-left-enter 0.3s both ease-out;
+}
+.slide-left-exit-active {
+  animation: slide-left-leave 0.3s both ease-in;
+}
+.slide-right-enter-active {
+  animation: slide-right-enter 0.3s both ease-out;
+}
+.slide-right-exit-active {
+  animation: slide-right-leave 0.3s both ease-in;
+}
+.zoom-enter-active {
+  animation: 0.3s zoom-in both ease-out;
+}
+.zoom-exit-active {
+  animation: 0.3s zoom-out both ease-in;
+}

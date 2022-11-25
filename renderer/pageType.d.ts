@@ -9,6 +9,10 @@ declare namespace PageType {
      */
     checkPlatform: boolean
     /**
+     * 是否强制开启 vconsole
+     */
+    vconsole?: boolean
+    /**
      * data from backend
      */
     data?: Record<string, any>

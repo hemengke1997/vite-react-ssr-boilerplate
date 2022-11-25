@@ -1,15 +1,14 @@
 import type { AxiosResponse } from 'axios'
 import { isString } from 'lodash-es'
 import querystring from 'query-string'
-import { isDevMode } from '@root/shared/env'
 import { isBrowser } from '@root/shared'
 import normalizeUrl from 'normalize-url'
-import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
-import { ContentTypeEnum, RequestEnum, VAxios } from './Axios'
-import type { OriginResult, RequestOptions } from './axiosType.d'
-import { deepMerge, formatRequestDate, joinTimestamp, setObjToUrlParams } from './helper'
+import { AxiosPro, ContentTypeEnum, RequestEnum } from './AxiosPro'
+import type { AxiosTransform, CreateAxiosOptions, OriginResult, RequestOptions } from './axiosType.d'
+import { deepMerge, joinTimestamp } from './utils'
 
 export * from './axiosType.d'
+export { ContentTypeEnum, RequestEnum }
 
 const transform: AxiosTransform = {
   transformRequestHook: (res: AxiosResponse<OriginResult>, options: RequestOptions) => {
@@ -47,9 +46,9 @@ const transform: AxiosTransform = {
   },
 
   beforeRequestHook: (config, options) => {
-    const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, joinTime = true, urlPrefix } = options
+    const { apiUrl, joinUrlPrefix, joinTime = '', urlPrefix } = options
 
-    if (joinPrefix) {
+    if (joinUrlPrefix) {
       config.url = `${urlPrefix}${config.url}`
     }
 
@@ -62,7 +61,6 @@ const transform: AxiosTransform = {
     const params = config.params || {}
 
     const data = config.data || false
-    formatDate && data && !isString(data) && formatRequestDate(data)
     if (config.method?.toUpperCase() === RequestEnum.GET) {
       if (!isString(params)) {
         config.params = Object.assign(params || {}, joinTimestamp(joinTime, false))
@@ -82,16 +80,12 @@ const transform: AxiosTransform = {
         }
       }
       if (!isString(params)) {
-        formatDate && formatRequestDate(params)
         if (Reflect.has(config, 'data') && config.data && Object.keys(config.data).length > 0) {
           config.data = data
           config.params = params
         } else {
           config.data = params
           config.params = undefined
-        }
-        if (joinParamsToUrl) {
-          config.url = setObjToUrlParams(config.url as string, Object.assign({}, config.params, config.data))
         }
       } else {
         config.url = config.url + params
@@ -101,25 +95,7 @@ const transform: AxiosTransform = {
     return config
   },
 
-  requestInterceptors: (config, options) => {
-    config.headers = Object.assign({}, config.headers)
-    config.headers.Accept = config.headers.accept
-    if (isDevMode()) {
-      config.headers.UserAgent = 'terminal_type/system_type/system_version/channel/lagofast/1.0.0/terminal_code/lang'
-    }
-    delete config.headers.accept
-
-    if (config.method?.toLocaleLowerCase() === 'get') {
-    }
-
-    if (config.method?.toLocaleLowerCase() === 'post') {
-      const contentType = options.headers?.['Content-Type'] || options.headers?.['content-type']
-
-      if (contentType === ContentTypeEnum.JSON) {
-      } else if (contentType === ContentTypeEnum.FORM_URLENCODED) {
-      }
-    }
-
+  requestInterceptors: (config) => {
     return config
   },
 
@@ -128,23 +104,6 @@ const transform: AxiosTransform = {
   },
 
   responseInterceptorsCatch: (error) => {
-    const { response, code, message } = error || {}
-    const _msg = response?.data?.error_msg
-    const err = error?.toString?.() ?? ''
-
-    try {
-      if (code === 'ECONNABORTED' && message.includes('timeout')) {
-      }
-      if (err?.includes('Network Error')) {
-      }
-
-      if (_msg) {
-        return Promise.reject(_msg)
-      }
-    } catch (e) {
-      throw new Error(e as unknown as string)
-    }
-
     return Promise.reject(error)
   },
 
@@ -157,29 +116,25 @@ const transform: AxiosTransform = {
   },
 }
 
-const OPTION = {
-  authenticationScheme: '',
+const defaultOptions: CreateAxiosOptions = {
   timeout: 30 * 1000,
   headers: { 'Content-Type': ContentTypeEnum.JSON },
-
   transform,
   requestOptions: {
-    joinPrefix: true,
+    joinUrlPrefix: true,
     isReturnNativeResponse: false,
     isTransformResponse: true,
-    joinParamsToUrl: false,
-    formatDate: true,
     apiUrl: '',
     urlPrefix: '',
-    joinTime: false,
-    ignoreRepeatToken: true,
-    withToken: true,
+    joinTime: '',
   },
-  paramsSerializer: (params) => querystring.stringify(params),
-} as CreateAxiosOptions
+  paramsSerializer: {
+    serialize: (params) => querystring.stringify(params, { arrayFormat: 'bracket' }),
+  },
+}
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
-  return new VAxios(deepMerge(OPTION, opt || {}))
+  return new AxiosPro(deepMerge(defaultOptions, opt || {}))
 }
 
 const prefix = import.meta.env.VITE_APIPREFIX
@@ -187,8 +142,8 @@ const apiUrl = import.meta.env.VITE_APIURL
 
 export const axiosRequest = createAxios({
   requestOptions: {
-    joinTime: true,
     urlPrefix: isBrowser() ? prefix ?? '' : '',
     apiUrl: isBrowser() ? window.location.origin : apiUrl,
+    joinTime: 'ts',
   },
 })

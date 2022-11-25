@@ -1,20 +1,14 @@
+import type { AxiosError, AxiosRequestConfig, AxiosResponse, AxiosResponse } from 'axios'
+
 export interface RequestOptions {
-  joinParamsToUrl?: boolean
-  formatDate?: boolean
   isTransformResponse?: boolean
   isReturnNativeResponse?: boolean
-  joinPrefix?: boolean
+  joinUrlPrefix?: boolean
   apiUrl?: string
   urlPrefix?: string
-  joinTime?: boolean
-  ignoreRepeatToken?: boolean
-  withToken?: boolean
+  joinTime?: string
+  ignoreRepeatRequest?: boolean
 }
-
-export type RejectType = Partial<{
-  error_code: number
-  error_msg: string
-}>
 
 export interface OriginResult {
   status?: number
@@ -22,10 +16,13 @@ export interface OriginResult {
   [key: string]: any
 }
 
-export interface Result<T extends any = any> {
-  success: boolean
-  result: T
-}
+export type Result<T extends any = any> =
+  | OriginResult
+  | AxiosResponse<OriginResult, any>
+  | {
+      success: boolean
+      result: T
+    }
 
 export interface UploadFileParams {
   data?: Record<string, any>
@@ -33,4 +30,29 @@ export interface UploadFileParams {
   file: File | Blob
   filename?: string
   [key: string]: any
+}
+
+export interface CreateAxiosOptions extends AxiosRequestConfig {
+  transform?: AxiosTransform
+  requestOptions?: RequestOptions
+}
+
+export interface ResponseErrorType extends AxiosError {
+  config: CreateAxiosOptions
+}
+
+export abstract class AxiosTransform<T extends any = any> {
+  beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig
+
+  transformRequestHook?: (res: AxiosResponse<OriginResult>, options: RequestOptions) => Result<T>
+
+  requestCatchHook?: (e: ResponseErrorType, options: RequestOptions) => Result<T>
+
+  requestInterceptors?: (config: AxiosRequestConfig, options: CreateAxiosOptions) => AxiosRequestConfig
+
+  responseInterceptors?: (res: AxiosResponse<any>) => AxiosResponse<any>
+
+  requestInterceptorsCatch?: (error: Error) => void
+
+  responseInterceptorsCatch?: (error: ResponseErrorType) => void
 }

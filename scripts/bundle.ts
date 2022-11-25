@@ -70,6 +70,7 @@ async function bundle(entry: string, out: string) {
             if (id[0] !== '.' && !path.isAbsolute(id)) {
               return {
                 external: true,
+                sideEffects: false,
               }
             }
           })

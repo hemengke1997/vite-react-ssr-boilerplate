@@ -1,4 +1,4 @@
-import { isProdMode } from '@root/shared/env'
+import { isProd } from '@root/shared/env'
 import type { CSSProperties } from 'react'
 import { styleObjectToString } from '@minko-fe/style-object-to-string'
 
@@ -58,7 +58,7 @@ function logClientInfo() {
   )
 
   const envStyle = (): CSSProperties => {
-    if (isProdMode()) {
+    if (isProd()) {
       return {
         background: colors.green,
       }

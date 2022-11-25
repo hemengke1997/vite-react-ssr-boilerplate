@@ -1,0 +1,5 @@
+/* ---------------------------------- modal --------------------------------- */
+.ant-modal[role='document'],
+.ant-modal[role='dialog'] {
+  transform-origin: center center !important;
+}

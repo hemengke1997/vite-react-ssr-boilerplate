@@ -7,7 +7,7 @@ declare global {
     readonly MODE: keyof typeof Env
     readonly VITE_APIPREFIX: string | undefined
     readonly VITE_PROXY: string | undefined
-    readonly VITE_BASE_URL: string | undefined
+    readonly VITE_BASEURL: string | undefined
     readonly VITE_APIURL: string
     readonly VITE_HOST: string
   }

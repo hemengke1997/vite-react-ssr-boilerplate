@@ -2,12 +2,12 @@ import { renderToString } from 'react-dom/server'
 import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr'
 import { getBase, getLibAssets } from '@root/shared'
-import { isProdMode } from '@root/shared/env'
+import { isProd } from '@root/shared/env'
 import manifestPublicTs from '../publicTypescript/manifest.json'
 import { createApp } from './createApp'
 
-function setupVconsole(isMobile?: boolean) {
-  if (!isProdMode() && isMobile) {
+function setupVconsole(isMobile?: boolean, force?: boolean) {
+  if ((!isProd() || force) && isMobile) {
     return escapeInject/* html */ `
     <script src="https://cdn.jsdelivr.net/npm/vconsole@latest/dist/vconsole.min.js"></script>
     <script>
@@ -23,10 +23,10 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
   const pageHtml = renderToString(await createApp(pageContext))
 
   const { pageProps } = pageContext
-  const { checkPlatform = true, isMobile = false } = pageProps
-  const title = pageProps?.title || 't'
-  const desc = pageProps?.description || 'd'
-  const keywords = pageProps?.keywords || 'k'
+  const { checkPlatform = true, isMobile = false, vconsole } = pageProps
+  const title = pageProps?.title || 'vite-react-ssr-boilerplate'
+  const desc = pageProps?.description || 'description'
+  const keywords = pageProps?.keywords || 'keywords'
 
   const documentHtml = escapeInject/* html */ `<!DOCTYPE html>
   <html lang="zh-CN" is-mobile="${String(isMobile)}" check-platform='${String(checkPlatform)}'>
@@ -56,7 +56,7 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
       <div id="app">${dangerouslySkipEscape(pageHtml)}</div>
 
 
-      ${setupVconsole(isMobile)}
+      ${setupVconsole(isMobile, vconsole)}
     </body>
   </html>`
 

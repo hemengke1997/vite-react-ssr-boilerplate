@@ -1,8 +1,30 @@
+import type { PropsWithChildren } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { PageContextProvider } from './usePageContext'
 import '@/assets/style/global.css'
 
-async function createApp(pageContext: PageType.PageContext) {
+const AnimateRouteWrapper = ({ children }: PropsWithChildren) => {
+  return (
+    <motion.div
+      initial={{
+        translateX: 8,
+        opacity: 0,
+      }}
+      animate={{ translateX: 0, opacity: 1 }}
+      exit={{ translateX: -8, opacity: 0 }}
+      transition={{ duration: 0.15 }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+let transitionKey = 0
+
+async function createApp(pageContext: PageType.PageContext & { transitionKey?: number }) {
   const { Page, pageProps } = pageContext
+
+  transitionKey = transitionKey ^ 1
 
   let Layout
 
@@ -15,11 +37,15 @@ async function createApp(pageContext: PageType.PageContext) {
   const Tpl = Layout
 
   return (
-    <PageContextProvider pageContext={pageContext}>
-      <Tpl>
-        <Page {...pageProps} />
-      </Tpl>
-    </PageContextProvider>
+    <AnimatePresence mode='wait' initial={false}>
+      <AnimateRouteWrapper key={transitionKey}>
+        <PageContextProvider pageContext={pageContext}>
+          <Tpl>
+            <Page {...pageProps} />
+          </Tpl>
+        </PageContextProvider>
+      </AnimateRouteWrapper>
+    </AnimatePresence>
   )
 }
 

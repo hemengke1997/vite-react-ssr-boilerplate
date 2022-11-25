@@ -1,3 +1,15 @@
+/* pxtorem?disable=false */
+
 .pageA {
+  background-color: #000;
+
   color: red;
+  font-size: 40px;
+
+  .c1 {
+    font-size: 20px;
+    .c2 {
+      font-size: 30px;
+    }
+  }
 }

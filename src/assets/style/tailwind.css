@@ -1,2 +1,3 @@
+/* no @tailwind base, because it conflicts with antd */
 @tailwind components;
 @tailwind utilities;

@@ -1,0 +1,9 @@
+/* pxtorem?disable=true */
+.login {
+  &-title {
+    @apply tw-text-center tw-text-[18px];
+    color: var(--brand_blue);
+  }
+  &-content {
+  }
+}

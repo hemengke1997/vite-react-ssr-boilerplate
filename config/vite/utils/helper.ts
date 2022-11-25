@@ -22,7 +22,7 @@ export function getHash(chunkInfo: PreRenderedChunk) {
   )
 }
 
-export function wrapperEnv(envConf: Record<string, any>): ImportMetaEnv {
+export function injectEnv(envConf: Record<string, any>): ImportMetaEnv {
   const ret: any = {}
 
   for (const envName of Object.keys(envConf)) {

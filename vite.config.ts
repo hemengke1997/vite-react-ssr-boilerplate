@@ -4,7 +4,7 @@ import type { ConfigEnv, UserConfig } from 'vite'
 import { loadEnv } from 'vite'
 import { setupVitePlugins } from './config/vite/plugins'
 import { setupRollupOptions } from './config/vite/rollupOptions'
-import { wrapperEnv } from './config/vite/utils/helper'
+import { injectEnv } from './config/vite/utils/helper'
 import type { Env } from './shared/env'
 import { getBase } from './shared'
 
@@ -19,7 +19,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
 
   const env = loadEnv(mode, root) as ImportMetaEnv
 
-  wrapperEnv(env)
+  injectEnv(env)
 
   return {
     base: getBase(),
@@ -37,10 +37,6 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
         {
           find: '@root',
           replacement: path.resolve(__dirname),
-        },
-        {
-          find: '@backend',
-          replacement: path.resolve(__dirname, './backend'),
         },
         {
           find: /^~/,
@@ -61,7 +57,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
       optimizeDeps: {
         disabled: 'build',
       },
-      noExternal: isBuild ? ['react-vant', 'pm2'] : [],
+      noExternal: isBuild ? ['react-vant'] : [],
     },
     optimizeDeps: {
       include: ['antd/locale/zh_CN'],

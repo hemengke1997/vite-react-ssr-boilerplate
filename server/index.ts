@@ -10,17 +10,9 @@ import type { ViteDevServer } from 'vite'
 import { loadEnv } from 'vite'
 import { Env } from '@root/shared/env'
 import { getBase } from '@root/shared'
-import { wrapperEnv } from '@root/config/vite/utils/helper'
+import { injectEnv } from '@root/config/vite/utils/helper'
 import { log } from '../scripts/utils'
 import { legacyHtml } from './legacy'
-
-function clearScreen() {
-  const repeatCount = process.stdout.rows - 2
-  const blank = repeatCount > 0 ? '\n'.repeat(repeatCount) : ''
-  console.log(blank)
-  readline.cursorTo(process.stdout, 0, 0)
-  readline.clearScreenDown(process.stdout)
-}
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 const isDev = process.env.NODE_ENV === Env.development
@@ -30,11 +22,13 @@ const root = `${dir}/..`
 const env = loadEnv(process.env.NODE_ENV, root) as ImportMetaEnv
 const { VITE_PROXY, VITE_APIURL, VITE_HOST } = env
 
-wrapperEnv(env)
+injectEnv(env)
 
 const HOST = VITE_HOST
 
-const PORT = 9527
+const PORT = Number(process.env.PORT) || 9527
+
+let port = PORT
 
 async function startServer() {
   const app = express()
@@ -47,11 +41,15 @@ async function startServer() {
         server: {
           middlewareMode: true,
           watch: {
-            ignored: ['**/tsconfig.*.json', '**/tsconfig.json'],
+            ignored: ['**/tsconfig.*'],
           },
           cors: true,
+          hmr: {
+            port: 24990,
+          },
         },
       })
+
       app.use(viteDevServer.middlewares)
     })
     app.set('etag', false)
@@ -81,6 +79,7 @@ async function startServer() {
   if (proxy) {
     const { createProxyMiddleware } = await import('http-proxy-middleware')
     const rewriteKey = `^${proxy}`
+
     app.use(
       proxy,
       createProxyMiddleware({
@@ -96,10 +95,7 @@ async function startServer() {
   // support html
   app.use((req, _, next) => {
     const url = req.originalUrl
-    const isHtml = /\.html?$/gi
-    if (isHtml.test(url)) {
-      req.originalUrl = url.replace(isHtml, '')
-    }
+    req.originalUrl = url.replace(/(\.html?)$/gi, '')
     next()
   })
 
@@ -112,7 +108,7 @@ async function startServer() {
       }
       const pageContext: any = await renderPage(pageContextInit)
 
-      const env = process.env.NODE_ENV
+      const { NODE_ENV } = process.env
 
       const { httpResponse } = pageContext
 
@@ -126,7 +122,7 @@ async function startServer() {
 
       let html = httpResponse.body
 
-      if (!env || env !== 'development') {
+      if (!NODE_ENV && NODE_ENV !== 'development') {
         html = await legacyHtml(pageContext, html)
       }
 
@@ -137,50 +133,60 @@ async function startServer() {
     }
   })
 
-  const port = Number(process.env.PORT || PORT)
-
-  listen(app, port)
+  listen(app)
 }
 
-function listen(app: Application, _port: number) {
-  let port = _port
+function listen(app: Application) {
   const server = app.listen(port, HOST)
 
   server.on('listening', () => {
-    const { Start_Page } = process.env
-    const page = Start_Page ? `/${Start_Page}` : ''
+    const { START_PAGE } = process.env
+    const page = START_PAGE ? `/${START_PAGE}` : ''
 
     const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${getBase()}${page}`, { normalizeProtocol: false })
 
     clearScreen()
 
-    log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
+    log.info(`\n🚀 [前端服务${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
   })
 
   server.on('error', (error) => {
     clearScreen()
 
-    if ((error as any).code !== 'EADDRINUSE') {
-      throw error
-    }
-
-    log.error(`❌ ${error}\n`)
-    port = port + 1
-    log.info(`🔥 open port ${port} ...\n`)
-    listen(app, port)
+    catchError(error, () => {
+      listen(app)
+    })
   })
 
-  if (!isDev) {
-    process.on('SIGINT', () => {
-      server.close(() => {
-        process.exit(0)
-      })
+  process.on('SIGINT', () => {
+    server.close(() => {
+      process.exit(0)
     })
-  }
+  })
 }
 
 try {
   startServer()
 } catch {
   process.exit(1)
+}
+
+function clearScreen() {
+  const repeatCount = process.stdout.rows - 2
+  const blank = repeatCount > 0 ? '\n'.repeat(repeatCount) : ''
+  console.log(blank)
+  readline.cursorTo(process.stdout, 0, 0)
+  readline.clearScreenDown(process.stdout)
+}
+
+function catchError(error: unknown, cb: Function) {
+  if ((error as any).code !== 'EADDRINUSE') {
+    throw error
+  }
+
+  log.error(`❌ ${error}\n`)
+  port = port + 1
+  log.info(`🔥 open port ${port} ...\n`)
+
+  cb()
 }

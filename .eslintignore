@@ -7,6 +7,5 @@ node_modules
 .husky
 .local
 dist
-*.d.ts
 public
 publicTypescript/manifest.json

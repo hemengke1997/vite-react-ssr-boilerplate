@@ -1,16 +1,11 @@
-/*
- * axios module
- */
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 import { cloneDeep, isFunction } from 'lodash-es'
 import querystring from 'query-string'
-
 import { AxiosCanceler } from './axiosCancel'
-import type { CreateAxiosOptions, ResponseErrorType } from './axiosTransform'
-import type { RequestOptions, Result } from './axiosType.d'
+import type { CreateAxiosOptions, RequestOptions, ResponseErrorType, Result } from './axiosType'
 
-export * from './axiosTransform'
+export * from './axiosType.d'
 
 export enum ContentTypeEnum {
   JSON = 'application/json;charset=UTF-8',
@@ -25,13 +20,7 @@ export enum RequestEnum {
   DELETE = 'DELETE',
 }
 
-export enum ResultEnum {
-  ERROR = 1,
-  TIMEOUT = '401',
-  TYPE = 'success',
-}
-
-export class VAxios {
+export class AxiosPro {
   private axiosInstance: AxiosInstance
   readonly options: CreateAxiosOptions
 
@@ -76,15 +65,9 @@ export class VAxios {
     const { requestInterceptors, requestInterceptorsCatch, responseInterceptors, responseInterceptorsCatch } = transform
 
     this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-      const {
-        // @ts-expect-error
-        headers: { ignoreRepeatToken },
-      } = config
+      const ignoreRepeatRequest = this.options.requestOptions?.ignoreRepeatRequest
 
-      const ignoreRepeat =
-        ignoreRepeatToken !== undefined ? ignoreRepeatToken : this.options.requestOptions?.ignoreRepeatToken
-
-      ignoreRepeat && axiosCanceler.addPending(config)
+      ignoreRepeatRequest && axiosCanceler.addPending(config)
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config, this.options)
       }
@@ -130,10 +113,6 @@ export class VAxios {
     return this.request<T>({
       ...config,
       method: 'POST',
-      withCredentials: false,
-      headers: {
-        ignoreRepeatToken: true,
-      },
     })
   }
 
