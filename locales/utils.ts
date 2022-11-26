@@ -1,8 +1,6 @@
 import { localesMap } from './locales'
 
-export { extractLocale }
-
-function extractLocale(url: string) {
+export function extractLocale(url: string) {
   const urlPaths = url.replace(import.meta.env.VITE_BASEURL!, '').split('/')
 
   const locales = Object.keys(localesMap)
@@ -24,4 +22,17 @@ function extractLocale(url: string) {
   }
 
   return { locale, urlWithoutLocale }
+}
+
+export function loadLocaleJson(localesJson: Record<string, unknown>) {
+  const locales = {}
+
+  Object.keys(localesJson).forEach((k) => {
+    const dir = /\.\/(.+)\.json/.exec(k)![1]
+    locales[dir] = localesJson[k]
+  })
+
+  console.log(locales, 'locales')
+
+  return locales
 }

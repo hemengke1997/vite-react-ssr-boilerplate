@@ -1,5 +1,8 @@
 lockfileVersion: 5.4
 
+overrides:
+  vite: npm:@minko-fe/vite
+
 specifiers:
   '@minko-fe/commitlint-config': ^1.2.3
   '@minko-fe/eslint-config': ^1.2.3
@@ -80,9 +83,9 @@ specifiers:
   terser: 5.16.0
   tsx: ^3.12.1
   typescript: ^4.9.3
-  vite: 3.2.4
+  vite: npm:@minko-fe/vite
   vite-plugin-i18next-loader: ^2.0.2
-  vite-plugin-public-typescript: 'link: ./../../vite-plugin-public-typescript'
+  vite-plugin-public-typescript: 1.0.0
   vite-plugin-ssr: ^0.4.52
   vite-plugin-style-import: ^2.0.0
   vite-plugin-time-reporter: ^2.0.0
@@ -122,8 +125,8 @@ dependencies:
   react-vant: registry.npmmirror.com/react-vant/3.1.0_biqbaboplfbrettd7655fr4n2y
   sirv: registry.npmmirror.com/sirv/2.0.2
   tsx: registry.npmmirror.com/tsx/3.12.1
-  vite: registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy
-  vite-plugin-ssr: registry.npmmirror.com/vite-plugin-ssr/0.4.52_vite@3.2.4
+  vite: registry.npmmirror.com/@minko-fe/vite/3.2.1_terser@5.16.0
+  vite-plugin-ssr: registry.npmmirror.com/vite-plugin-ssr/0.4.52_@minko-fe+vite@3.2.1
   zustand: registry.npmmirror.com/zustand/4.1.4_react@18.2.0
 
 devDependencies:
@@ -146,8 +149,8 @@ devDependencies:
   '@types/react-dom': registry.npmmirror.com/@types/react-dom/18.0.9
   '@types/react-helmet': registry.npmmirror.com/@types/react-helmet/6.1.5
   '@types/shelljs': registry.npmmirror.com/@types/shelljs/0.8.11
-  '@vitejs/plugin-legacy': registry.npmmirror.com/@vitejs/plugin-legacy/2.3.1_terser@5.16.0+vite@3.2.4
-  '@vitejs/plugin-react': registry.npmmirror.com/@vitejs/plugin-react/2.2.0_vite@3.2.4
+  '@vitejs/plugin-legacy': registry.npmmirror.com/@vitejs/plugin-legacy/2.3.1_w5oma2itcr6vykegzswaydpgoi
+  '@vitejs/plugin-react': registry.npmmirror.com/@vitejs/plugin-react/2.2.0_@minko-fe+vite@3.2.1
   autoprefixer: registry.npmmirror.com/autoprefixer/10.4.13_postcss@8.4.19
   browserslist: registry.npmmirror.com/browserslist/4.21.4
   consola: registry.npmmirror.com/consola/2.15.3
@@ -173,10 +176,10 @@ devDependencies:
   tailwindcss: registry.npmmirror.com/tailwindcss/3.2.4_postcss@8.4.19
   terser: registry.npmmirror.com/terser/5.16.0
   typescript: registry.npmmirror.com/typescript/4.9.3
-  vite-plugin-i18next-loader: registry.npmmirror.com/vite-plugin-i18next-loader/2.0.2_vite@3.2.4
-  vite-plugin-public-typescript: link:../vite-plugin-public-typescript
-  vite-plugin-style-import: registry.npmmirror.com/vite-plugin-style-import/2.0.0_vite@3.2.4
-  vite-plugin-time-reporter: registry.npmmirror.com/vite-plugin-time-reporter/2.0.0_vite@3.2.4
+  vite-plugin-i18next-loader: registry.npmmirror.com/vite-plugin-i18next-loader/2.0.2_@minko-fe+vite@3.2.1
+  vite-plugin-public-typescript: registry.npmmirror.com/vite-plugin-public-typescript/1.0.0_@minko-fe+vite@3.2.1
+  vite-plugin-style-import: registry.npmmirror.com/vite-plugin-style-import/2.0.0_@minko-fe+vite@3.2.1
+  vite-plugin-time-reporter: registry.npmmirror.com/vite-plugin-time-reporter/2.0.0_@minko-fe+vite@3.2.1
 
 packages:
 
@@ -991,6 +994,39 @@ packages:
     name: '@minko-fe/tsconfig'
     version: 1.2.3
     dev: false
+
+  registry.npmmirror.com/@minko-fe/vite/3.2.1_terser@5.16.0:
+    resolution: {integrity: sha512-ffqA7ymovSwK05m+a5xBRyzyNIIclB32FzzykXFD/H9VQayEf7fkuMgdHsNG78wr9mHeJZVByPEzPKM+9abDfQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@minko-fe/vite/-/vite-3.2.1.tgz}
+    id: registry.npmmirror.com/@minko-fe/vite/3.2.1
+    name: '@minko-fe/vite'
+    version: 3.2.1
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      less: '*'
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      esbuild: registry.npmmirror.com/esbuild/0.15.15
+      postcss: registry.npmmirror.com/postcss/8.4.19
+      resolve: registry.npmmirror.com/resolve/1.22.1
+      rollup: registry.npmmirror.com/rollup/2.79.1
+      terser: registry.npmmirror.com/terser/5.16.0
+    optionalDependencies:
+      fsevents: registry.npmmirror.com/fsevents/2.3.2
 
   registry.npmmirror.com/@motionone/animation/10.14.0:
     resolution: {integrity: sha512-h+1sdyBP8vbxEBW5gPFDnj+m2DCqdlAuf2g6Iafb1lcMnqjsRXWlPw1AXgvUMXmreyhqmPbJqoNfIKdytampRQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@motionone/animation/-/animation-10.14.0.tgz}
@@ -1832,7 +1868,7 @@ packages:
     version: 1.3.0
     dev: false
 
-  registry.npmmirror.com/@vitejs/plugin-legacy/2.3.1_terser@5.16.0+vite@3.2.4:
+  registry.npmmirror.com/@vitejs/plugin-legacy/2.3.1_w5oma2itcr6vykegzswaydpgoi:
     resolution: {integrity: sha512-J5KaGBlSt2tEYPVjM/C8dA6DkRzkFkbPe+Xb4IX5G+XOV5OGbVAfkMjKywdrkO3gGynO8S98i71Lmsff4cWkCQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vitejs/plugin-legacy/-/plugin-legacy-2.3.1.tgz}
     id: registry.npmmirror.com/@vitejs/plugin-legacy/2.3.1
     name: '@vitejs/plugin-legacy'
@@ -1848,10 +1884,10 @@ packages:
       regenerator-runtime: registry.npmmirror.com/regenerator-runtime/0.13.10
       systemjs: registry.npmmirror.com/systemjs/6.13.0
       terser: registry.npmmirror.com/terser/5.16.0
-      vite: registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy
+      vite: registry.npmmirror.com/@minko-fe/vite/3.2.1_terser@5.16.0
     dev: true
 
-  registry.npmmirror.com/@vitejs/plugin-react/2.2.0_vite@3.2.4:
+  registry.npmmirror.com/@vitejs/plugin-react/2.2.0_@minko-fe+vite@3.2.1:
     resolution: {integrity: sha512-FFpefhvExd1toVRlokZgxgy2JtnBOdp4ZDsq7ldCWaqGSGn9UhWMAVm/1lxPL14JfNS5yGz+s9yFrQY6shoStA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vitejs/plugin-react/-/plugin-react-2.2.0.tgz}
     id: registry.npmmirror.com/@vitejs/plugin-react/2.2.0
     name: '@vitejs/plugin-react'
@@ -1867,7 +1903,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': registry.npmmirror.com/@babel/plugin-transform-react-jsx-source/7.19.6_@babel+core@7.19.6
       magic-string: registry.npmmirror.com/magic-string/0.26.7
       react-refresh: registry.npmmirror.com/react-refresh/0.14.0
-      vite: registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy
+      vite: registry.npmmirror.com/@minko-fe/vite/3.2.1_terser@5.16.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8987,7 +9023,7 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
-  registry.npmmirror.com/vite-plugin-i18next-loader/2.0.2_vite@3.2.4:
+  registry.npmmirror.com/vite-plugin-i18next-loader/2.0.2_@minko-fe+vite@3.2.1:
     resolution: {integrity: sha512-z5mkrUmg5AiDttn/W19y4086QbEu5nE12bNUclKnkmFhgP5icStdDZb3LJJDbvenjkA5fC6rTaDwU3sT6BFXXg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-i18next-loader/-/vite-plugin-i18next-loader-2.0.2.tgz}
     id: registry.npmmirror.com/vite-plugin-i18next-loader/2.0.2
     name: vite-plugin-i18next-loader
@@ -9000,10 +9036,25 @@ packages:
       lodash-es: registry.npmmirror.com/lodash-es/4.17.21
       marked: registry.npmmirror.com/marked/4.2.3
       marked-terminal: registry.npmmirror.com/marked-terminal/5.1.1_marked@4.2.3
-      vite: registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy
+      vite: registry.npmmirror.com/@minko-fe/vite/3.2.1_terser@5.16.0
     dev: true
 
-  registry.npmmirror.com/vite-plugin-ssr/0.4.52_vite@3.2.4:
+  registry.npmmirror.com/vite-plugin-public-typescript/1.0.0_@minko-fe+vite@3.2.1:
+    resolution: {integrity: sha512-25d/CE1QA7wmaeewyFn5L3vMjZhh7ieeViD4gSnYpts+9MaXvI3yMvx2HFT6yup4ypJB+9YWSCW1rfthdEap0w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-public-typescript/-/vite-plugin-public-typescript-1.0.0.tgz}
+    id: registry.npmmirror.com/vite-plugin-public-typescript/1.0.0
+    name: vite-plugin-public-typescript
+    version: 1.0.0
+    requiresBuild: true
+    peerDependencies:
+      vite: '>=2.0.0'
+    dependencies:
+      esbuild: registry.npmmirror.com/esbuild/0.15.15
+      fast-glob: registry.npmmirror.com/fast-glob/3.2.12
+      fs-extra: registry.npmmirror.com/fs-extra/10.1.0
+      vite: registry.npmmirror.com/@minko-fe/vite/3.2.1_terser@5.16.0
+    dev: true
+
+  registry.npmmirror.com/vite-plugin-ssr/0.4.52_@minko-fe+vite@3.2.1:
     resolution: {integrity: sha512-XzBDNaV+IyEVY1XfUjNmpynfNjnKr5xGIqF3KFVAOIJFo15bgT010/+1LcC4tSpdaSEFEETynmCjSzNJd9lSrA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-ssr/-/vite-plugin-ssr-0.4.52.tgz}
     id: registry.npmmirror.com/vite-plugin-ssr/0.4.52
     name: vite-plugin-ssr
@@ -9026,10 +9077,10 @@ packages:
       picocolors: registry.npmmirror.com/picocolors/1.0.0
       resolve: registry.npmmirror.com/resolve/1.22.1
       symlink-dir: registry.npmmirror.com/symlink-dir/5.0.1
-      vite: registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy
+      vite: registry.npmmirror.com/@minko-fe/vite/3.2.1_terser@5.16.0
     dev: false
 
-  registry.npmmirror.com/vite-plugin-style-import/2.0.0_vite@3.2.4:
+  registry.npmmirror.com/vite-plugin-style-import/2.0.0_@minko-fe+vite@3.2.1:
     resolution: {integrity: sha512-qtoHQae5dSUQPo/rYz/8p190VU5y19rtBaeV7ryLa/AYAU/e9CG89NrN/3+k7MR8mJy/GPIu91iJ3zk9foUOSA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-style-import/-/vite-plugin-style-import-2.0.0.tgz}
     id: registry.npmmirror.com/vite-plugin-style-import/2.0.0
     name: vite-plugin-style-import
@@ -9044,10 +9095,10 @@ packages:
       fs-extra: registry.npmmirror.com/fs-extra/10.1.0
       magic-string: registry.npmmirror.com/magic-string/0.25.9
       pathe: registry.npmmirror.com/pathe/0.2.0
-      vite: registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy
+      vite: registry.npmmirror.com/@minko-fe/vite/3.2.1_terser@5.16.0
     dev: true
 
-  registry.npmmirror.com/vite-plugin-time-reporter/2.0.0_vite@3.2.4:
+  registry.npmmirror.com/vite-plugin-time-reporter/2.0.0_@minko-fe+vite@3.2.1:
     resolution: {integrity: sha512-/QX7KBWi5Ae8t0TxZxPmHE8l8Tvf34uVnK40G9ZJdYrXi1ddffTi1Ax1rdcv3F7ATRroaNcRdW0VZJwOQaX3Ug==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-time-reporter/-/vite-plugin-time-reporter-2.0.0.tgz}
     id: registry.npmmirror.com/vite-plugin-time-reporter/2.0.0
     name: vite-plugin-time-reporter
@@ -9055,45 +9106,8 @@ packages:
     peerDependencies:
       vite: ^2.0.0 || ^3.0.0
     dependencies:
-      vite: registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy
+      vite: registry.npmmirror.com/@minko-fe/vite/3.2.1_terser@5.16.0
     dev: true
-
-  registry.npmmirror.com/vite/3.2.4_qee7e2w6wma2o2koxfm26lyzqy:
-    resolution: {integrity: sha512-Z2X6SRAffOUYTa+sLy3NQ7nlHFU100xwanq1WDwqaiFiCe+25zdxP1TfCS5ojPV2oDDcXudHIoPnI1Z/66B7Yw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite/-/vite-3.2.4.tgz}
-    id: registry.npmmirror.com/vite/3.2.4
-    name: vite
-    version: 3.2.4
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': registry.npmmirror.com/@types/node/18.11.9
-      esbuild: registry.npmmirror.com/esbuild/0.15.15
-      postcss: registry.npmmirror.com/postcss/8.4.19
-      resolve: registry.npmmirror.com/resolve/1.22.1
-      rollup: registry.npmmirror.com/rollup/2.79.1
-      terser: registry.npmmirror.com/terser/5.16.0
-    optionalDependencies:
-      fsevents: registry.npmmirror.com/fsevents/2.3.2
 
   registry.npmmirror.com/vizion/2.2.1:
     resolution: {integrity: sha512-sfAcO2yeSU0CSPFI/DmZp3FsFE9T+8913nv1xWBOyzODv13fwkn6Vl7HqxGpkr9F608M+8SuFId3s+BlZqfXww==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vizion/-/vizion-2.2.1.tgz}

@@ -16,7 +16,6 @@ import { legacyHtml } from './legacy'
 
 const dir = path.dirname(fileURLToPath(import.meta.url))
 const isDev = process.env.NODE_ENV === Env.development
-// const isProd = process.env.NODE_ENV === Env.production
 const root = `${dir}/..`
 
 const env = loadEnv(process.env.NODE_ENV, root) as ImportMetaEnv
@@ -45,10 +44,6 @@ async function startServer() {
           },
           cors: true,
         },
-      })
-
-      process.on('SIGINT', () => {
-        viteDevServer.close()
       })
 
       app.use(viteDevServer.middlewares)
@@ -141,33 +136,29 @@ function listen(app: Application) {
 
     const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${getBase()}${page}`, { normalizeProtocol: false })
 
-    clearScreen()
-
     log.info(`\n🚀 [前端服务${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
   })
 
   server.on('error', (error) => {
-    clearScreen()
+    if ((error as any).code !== 'EADDRINUSE') {
+      throw error
+    }
 
-    catchError(error, () => {
-      listen(app)
-    })
+    log.error(`❌ ${error}\n`)
+    port = port + 1
+    log.info(`🔥 open port ${port} ...\n`)
   })
 
-  process.on('SIGINT', () => {
-    server.close(() => {
-      process.exit(0)
+  if (!isDev) {
+    process.on('SIGINT', () => {
+      server.close(() => {
+        process.exit(0)
+      })
     })
-  })
+  }
 }
 
-try {
-  startServer()
-} catch {
-  process.exit(1)
-}
-
-function clearScreen() {
+export function clearScreen() {
   const repeatCount = process.stdout.rows - 2
   const blank = repeatCount > 0 ? '\n'.repeat(repeatCount) : ''
   console.log(blank)
@@ -175,14 +166,8 @@ function clearScreen() {
   readline.clearScreenDown(process.stdout)
 }
 
-function catchError(error: unknown, cb: Function) {
-  if ((error as any).code !== 'EADDRINUSE') {
-    throw error
-  }
-
-  log.error(`❌ ${error}\n`)
-  port = port + 1
-  log.info(`🔥 open port ${port} ...\n`)
-
-  cb()
+try {
+  startServer()
+} catch {
+  process.exit(1)
 }

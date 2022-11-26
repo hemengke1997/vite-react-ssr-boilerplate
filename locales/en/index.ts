@@ -1,7 +1,7 @@
-import home from './home.json'
+import { loadLocaleJson } from '../utils'
 
-const en = {
-  home,
-}
+const localesJson = import.meta.glob('./*.json', { eager: true, import: 'default' })
 
-export default en
+const locales = loadLocaleJson(localesJson)
+
+export default locales
