@@ -23,6 +23,7 @@ export function Page() {
             }}
           >
             {t('home:hello')}
+            {t('home:name')}
           </div>
         </div>
       </div>

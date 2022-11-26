@@ -32,7 +32,5 @@ export function loadLocaleJson(localesJson: Record<string, unknown>) {
     locales[dir] = localesJson[k]
   })
 
-  console.log(locales, 'locales')
-
   return locales
 }
