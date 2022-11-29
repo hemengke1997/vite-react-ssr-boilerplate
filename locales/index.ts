@@ -1,3 +1,5 @@
-export { i18next } from './init'
+export { getI18next, lookupTarget } from './init'
 
 export { extractLocale } from './utils'
+
+export { localesMap } from './locales'

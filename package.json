@@ -38,6 +38,7 @@
     "pm2:prod": "npx --yes --ignore-scripts pnpm i -P && cross-env NODE_ENV=production tsx server/pm2 --tsconfig tsconfig.pm2.json"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.1.0",
     "@minko-fe/style-object-to-string": "^0.0.1",
     "@minko-fe/tsconfig": "^1.2.3",
     "ahooks": "^3.7.2",
@@ -45,6 +46,7 @@
     "axios": "1.2.0",
     "classnames": "^2.3.2",
     "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.6",
     "express": "^4.18.2",

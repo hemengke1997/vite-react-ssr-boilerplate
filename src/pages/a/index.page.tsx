@@ -22,8 +22,8 @@ export function Page() {
               navigate('/')
             }}
           >
-            {t('home:hello')}
-            {t('home:name')}
+            {t('home.hello')}
+            {t('home.name')}
           </div>
         </div>
       </div>

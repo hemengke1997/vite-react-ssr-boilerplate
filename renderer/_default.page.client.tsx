@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
+import { navigate } from 'vite-plugin-ssr/client/router'
 import { createApp } from './createApp'
 import { onClientInit } from './client'
 
@@ -12,6 +13,12 @@ let root: ReactDOM.Root
 onClientInit()
 
 async function render(pageContext: PageContextBuiltInClient & PageType.PageContext) {
+  const { redirectTo } = pageContext
+  if (redirectTo) {
+    navigate(redirectTo)
+    return
+  }
+
   const container = document.getElementById('app')!
 
   if (pageContext.isHydration) {

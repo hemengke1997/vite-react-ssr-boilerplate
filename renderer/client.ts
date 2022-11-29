@@ -1,5 +1,6 @@
 import { isProd } from '@root/shared/env'
 import type { CSSProperties } from 'react'
+import { name } from '@root/package.json'
 import { styleObjectToString } from '@minko-fe/style-object-to-string'
 
 function logClientInfo() {
@@ -37,7 +38,7 @@ function logClientInfo() {
       background: '#3B82F6',
     }
     console.log(
-      `%cvite-ssr%c${title.text} %c ${value.text}`,
+      `%c${name}%c${title.text} %c ${value.text}`,
       `${styleObjectToString(nameStyle)}`,
       `${styleObjectToString({
         ...defaultTitleStyle,

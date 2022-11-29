@@ -1,3 +1,4 @@
-/* no @tailwind base, because it conflicts with antd */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind screens;

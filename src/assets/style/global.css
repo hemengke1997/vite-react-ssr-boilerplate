@@ -1,10 +1,12 @@
-@import '~modern-normalize';
+@import '~antd/dist/reset.css';
 @import './vars.css';
 @import './animation.css';
 @import './tailwind.css';
 
-body {
-  font-size: 16px;
+*,
+*::before,
+*::after {
+  border: 0 solid;
 }
 
 /* aviod fouc */

@@ -15,7 +15,7 @@ const Link: FC<
 
   const { locale } = usePageContext()
 
-  href = normalizePath(`${base}/${locale.key}/${href}`, false)
+  href = normalizePath(`${base}/${locale}/${href}`, false)
 
   return <a {...props} href={href} />
 }
