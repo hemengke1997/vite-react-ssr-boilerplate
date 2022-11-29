@@ -34,12 +34,12 @@ declare global {
       }
     }>
 
-    type onBeforeRoute = {
+    type onBeforeRoute = Promise<{
       pageContext: {
         urlOriginal: string
         locale: string
         redirectTo?: string
       }
-    }
+    }>
   }
 }

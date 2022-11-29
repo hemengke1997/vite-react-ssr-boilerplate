@@ -1,7 +1,6 @@
 import type { i18n as i18nType } from 'i18next'
 import i18next from 'i18next'
 import { getBase } from '@root/shared'
-import { localesMap } from './locales'
 
 export const lookupTarget = 'i18next'
 
@@ -13,7 +12,6 @@ const createI18nextInstance = () => {
     interpolation: {
       escapeValue: false,
     },
-    fallbackLng: [localesMap.en],
   })
 }
 
@@ -43,6 +41,8 @@ export async function getI18next(server?: boolean) {
         const dir = /\.\/(.+)\//.exec(k)![1]
         resources[dir] = resourcesOrigin[k]
       })
+
+      const { localesMap } = await import('./locales')
 
       const LanguageDetector = (await import('i18next-browser-languagedetector')).default
 

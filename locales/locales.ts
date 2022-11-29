@@ -1,12 +1,12 @@
 const localesMap: Record<string, string> = {}
 
-if (typeof import.meta.glob !== 'undefined') {
+if (typeof import.meta.env !== 'undefined') {
   const resourcesOrigin = import.meta.glob('./*/index.ts', {})
   Object.keys(resourcesOrigin).forEach((k) => {
     const dir = /\.\/(.+)\//.exec(k)![1]
     localesMap[dir] = dir
   })
-} else {
+} else if (typeof process !== 'undefined') {
   const { fileURLToPath } = await import('node:url')
   const { default: path } = await import('node:path')
   const { default: fg } = await import('fast-glob')
