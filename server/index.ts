@@ -124,6 +124,11 @@ async function startServer() {
       if (httpResponse === null) return next()
       const { statusCode, contentType } = httpResponse
 
+      if (statusCode === 404 && NODE_ENV === 'production') {
+        // if you want 404 redirect to some url
+        return res.status(statusCode).redirect('https://www.google.com')
+      }
+
       let html = httpResponse.body
 
       if (NODE_ENV && NODE_ENV !== 'development') {
