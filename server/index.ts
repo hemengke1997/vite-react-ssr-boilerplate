@@ -126,7 +126,7 @@ async function startServer() {
 
       let html = httpResponse.body
 
-      if (!NODE_ENV && NODE_ENV !== 'development') {
+      if (NODE_ENV && NODE_ENV !== 'development') {
         html = await legacyHtml(pageContext, html)
       }
 
