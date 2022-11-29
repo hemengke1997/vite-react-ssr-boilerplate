@@ -11,6 +11,9 @@ import { loadEnv } from 'vite'
 import { Env } from '@root/shared/env'
 import { getBase } from '@root/shared'
 import { injectEnv } from '@root/config/vite/utils/helper'
+import i18nextMiddleware from 'i18next-http-middleware'
+import { getI18next } from '@root/locales'
+import cookieParser from 'cookie-parser'
 import { log } from '../scripts/utils'
 import { legacyHtml } from './legacy'
 
@@ -50,7 +53,7 @@ async function startServer() {
     })
     app.set('etag', false)
     app.use((_, res, next) => {
-      res.setHeader('Cache-Control', 'no-store')
+      res.setHeader('Cache-Control', ['no-store', 'no-cache'])
       next()
     })
   } else {
@@ -95,6 +98,12 @@ async function startServer() {
     next()
   })
 
+  app.use(cookieParser())
+
+  // i18next
+  const i18next = getI18next(true).use(i18nextMiddleware.LanguageDetector)
+  app.use(i18nextMiddleware.handle(i18next))
+
   app.get('*', async (req, res, next) => {
     try {
       const url = req.originalUrl
@@ -102,7 +111,11 @@ async function startServer() {
       const pageContextInit = {
         urlOriginal: url,
       }
-      const pageContext = await renderPage(pageContextInit)
+      const pageContext = await renderPage<PageType.PageContext, {}>(pageContextInit)
+
+      if (pageContext.redirectTo) {
+        return res.redirect(307, pageContext.redirectTo)
+      }
 
       const { NODE_ENV } = process.env
 
@@ -147,6 +160,7 @@ function listen(app: Application) {
     log.error(`❌ ${error}\n`)
     port = port + 1
     log.info(`🔥 open port ${port} ...\n`)
+    listen(app)
   })
 
   if (!isDev) {

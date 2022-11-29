@@ -31,6 +31,7 @@ declare namespace PageType {
        */
       value: string
     }
+    redirectTo?: string
   }
 
   type onBeforeRender = Promise<{

@@ -22,7 +22,7 @@ export function Page() {
               navigate('/')
             }}
           >
-            {t('home:hello')}
+            {t('home.hello')}
           </div>
         </div>
       </div>

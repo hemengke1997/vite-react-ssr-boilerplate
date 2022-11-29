@@ -60,7 +60,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
       noExternal: isBuild ? ['react-vant'] : [],
     },
     optimizeDeps: {
-      include: ['antd/locale/zh_CN'],
+      include: ['antd/locale/en_US'],
     },
     build: {
       emptyOutDir: true,

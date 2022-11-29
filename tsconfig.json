@@ -8,6 +8,5 @@
       "@/*": ["./src/*"],
       "@root/*": ["./*"]
     }
-  },
-  "exclude": ["node_modules", "dist", "**/*.js"]
+  }
 }

@@ -1,7 +1,9 @@
+import { getBase } from '@root/shared'
+import normalizePath from 'normalize-path'
 import { localesMap } from './locales'
 
 export function extractLocale(url: string) {
-  const urlPaths = url.replace(import.meta.env.VITE_BASEURL!, '').split('/')
+  const urlPaths = url.replace(getBase(), '').split('/')
 
   const locales = Object.keys(localesMap)
 
@@ -17,11 +19,16 @@ export function extractLocale(url: string) {
     urlWithoutLocale = `/${urlPaths.slice(1).join('/')}`
   } else {
     // fallback
-    locale = localesMap.zh
+    locale = localesMap.en
     urlWithoutLocale = url
   }
 
-  return { locale, urlWithoutLocale }
+  return {
+    locale,
+    urlWithoutLocale,
+    redirectTo:
+      normalizePath(url, true) === normalizePath(getBase(), true) ? normalizePath(`${getBase()}/${locale.key}`) : '',
+  }
 }
 
 export function loadLocaleJson(localesJson: Record<string, unknown>) {
@@ -31,8 +38,6 @@ export function loadLocaleJson(localesJson: Record<string, unknown>) {
     const dir = /\.\/(.+)\.json/.exec(k)![1]
     locales[dir] = localesJson[k]
   })
-
-  console.log(locales, 'locales')
 
   return locales
 }

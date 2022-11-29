@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { I18nextProvider } from 'react-i18next'
-import { i18next } from '@root/locales'
+import { getI18next, localesMap } from '@root/locales'
 import { PageContextProvider } from './usePageContext'
 import '@/assets/style/global.css'
 
@@ -26,7 +26,7 @@ let transitionKey = 0
 async function createApp(pageContext: PageType.PageContext & { transitionKey?: number }) {
   const { Page, pageProps, locale } = pageContext
 
-  i18next.changeLanguage(locale.key)
+  getI18next().changeLanguage(locale?.key || localesMap.en.key)
 
   transitionKey = transitionKey ^ 1
 
@@ -43,7 +43,7 @@ async function createApp(pageContext: PageType.PageContext & { transitionKey?: n
   return (
     <AnimatePresence mode='wait' initial={false}>
       <AnimateRouteWrapper key={transitionKey}>
-        <I18nextProvider i18n={i18next}>
+        <I18nextProvider i18n={getI18next()}>
           <PageContextProvider pageContext={pageContext}>
             <Tpl>
               <Page {...pageProps} />
