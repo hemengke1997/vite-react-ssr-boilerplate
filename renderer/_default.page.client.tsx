@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import { navigate } from 'vite-plugin-ssr/client/router'
+import { isDev } from '@root/shared/env'
 import { createApp } from './createApp'
 import { onClientInit } from './client'
 
@@ -33,6 +34,8 @@ async function render(pageContext: PageContextBuiltInClient & PageType.PageConte
   document.title = pageContext.pageProps.title || (pageContext.exports?.pageProps as PageType.PageProps)?.title || ''
 }
 
-export const prefetchStaticAssets = window.matchMedia('(any-hover: none)').matches
+export const prefetchStaticAssets = isDev()
+  ? false
+  : window.matchMedia('(any-hover: none)').matches
   ? { when: 'VIEWPORT' }
   : { when: 'HOVER' }
