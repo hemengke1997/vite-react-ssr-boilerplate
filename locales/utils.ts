@@ -17,7 +17,7 @@ export function extractLocale(url: string, reqLocale?: string) {
     // remove locale
     urlWithoutLocale = `/${urlPaths.slice(1).join('/')}`
   } else {
-    locale = reqLocale?.split('-')[0] || ''
+    locale = reqLocale?.split('-')[0] || localesMap.en || ''
     urlWithoutLocale = url
   }
 

@@ -1,4 +1,6 @@
-import React, { useContext } from 'react'
+import { getI18next } from '@root/locales'
+import { useAsyncEffect } from 'ahooks'
+import React, { useContext, useState } from 'react'
 
 export { PageContextProvider }
 export { usePageContext }
@@ -12,7 +14,16 @@ function PageContextProvider({
   pageContext: PageType.PageContext
   children: React.ReactNode
 }) {
-  return <Context.Provider value={pageContext}>{children}</Context.Provider>
+  const [locale, setLocale] = useState(pageContext.locale)
+
+  useAsyncEffect(async () => {
+    const i18next = await getI18next()
+    i18next.on('languageChanged', (e) => {
+      setLocale(e)
+    })
+  }, [])
+
+  return <Context.Provider value={{ ...pageContext, locale }}>{children}</Context.Provider>
 }
 
 function usePageContext() {

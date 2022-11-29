@@ -32,7 +32,7 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
   const keywords = pageProps?.keywords || 'keywords'
 
   const documentHtml = escapeInject/* html */ `<!DOCTYPE html>
-  <html lang="fr" is-mobile="${String(isMobile)}" check-platform='${String(checkPlatform)}'>
+  <html lang="${locale}" is-mobile="${String(isMobile)}" check-platform='${String(checkPlatform)}'>
     <head>
       <meta charset="UTF-8" />
       <meta http-equiv="Cache-Control" content="no-store">
