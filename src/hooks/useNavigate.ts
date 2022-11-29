@@ -8,7 +8,7 @@ function useNavigate() {
   const baseUrl = getBase()
 
   const navigate: typeof ssrNavigate = (url, ...args) => {
-    return ssrNavigate(normalizePath(`${baseUrl}/${locale.key}/${url}`, true), ...args)
+    return ssrNavigate(normalizePath(`${baseUrl}/${locale}/${url}`, true), ...args)
   }
 
   return navigate
