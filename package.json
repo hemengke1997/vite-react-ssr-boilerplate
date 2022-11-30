@@ -15,6 +15,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx scripts/dev.ts",
+    "tsc": "tsc",
     "ssr": "cross-env NODE_ENV=development tsx server/index.ts",
     "start:prod": "cross-env NODE_ENV=production tsx server/index.ts",
     "start:test": "cross-env NODE_ENV=test tsx watch server/index.ts",
@@ -138,7 +139,7 @@
     }
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm exec lint-staged --concurrent false",
+    "pre-commit": "tsc && pnpm exec lint-staged --concurrent false",
     "commit-msg": "pnpm exec tsx scripts/verifyCommit.ts $1"
   },
   "lint-staged": {
