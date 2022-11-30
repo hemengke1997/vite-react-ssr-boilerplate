@@ -1,4 +1,4 @@
-import { getI18next, localesMap } from '@root/locales'
+import { getI18next, localesMap, urlLocaleRegExp } from '@root/locales'
 import { getBase } from '@root/shared'
 import { useAsyncEffect } from 'ahooks'
 import type { i18n } from 'i18next'
@@ -19,8 +19,8 @@ export function useI18next() {
     const maybeLang = urlPath.split('/')[0]
 
     if (Object.keys(localesMap).includes(maybeLang) && maybeLang !== target) {
-      const url = window.location.href.replace(RegExp(`(?<=/)${maybeLang}(?=[/|\s])`), target)
-      history.pushState(null, '', url)
+      const url = window.location.href.replace(urlLocaleRegExp(maybeLang), target)
+      history.replaceState(null, '', url)
     }
   }
 

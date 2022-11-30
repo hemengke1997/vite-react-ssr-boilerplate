@@ -5,13 +5,15 @@ import React, { useContext, useState } from 'react'
 export { PageContextProvider }
 export { usePageContext }
 
-const Context = React.createContext<PageType.PageContext>(undefined as any)
+type PageContextProviderType = PageType.PageContext & { token: Record<string, string> }
+
+const Context = React.createContext<PageContextProviderType>(undefined as any)
 
 function PageContextProvider({
   pageContext,
   children,
 }: {
-  pageContext: PageType.PageContext
+  pageContext: PageContextProviderType
   children: React.ReactNode
 }) {
   const [locale, setLocale] = useState(pageContext.locale)

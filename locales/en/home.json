@@ -1,4 +1,9 @@
 {
   "hello": "hello, world",
-  "name": "english name"
+  "name": "english name",
+  "complex": {
+    "fisrt": "ffff",
+    "second": "sssss",
+    "something": "{{ x }}"
+  }
 }

@@ -20,11 +20,16 @@ export function Page() {
         open modal
       </Button>
 
-      <Button onClick={() => changeLang('zh')}>切换语言</Button>
+      <Button onClick={() => changeLang('zh')}>切换中文</Button>
+      <Button onClick={() => changeLang('en')}>切换english</Button>
 
       <div>
         {t('home.hello')}
         {t('home.name')}
+        <div>
+          <span className='text-[red]'>{t('home.complex.fisrt')}</span>
+          <span>{t('home.complex.something', { x: '123213' })}</span>
+        </div>
       </div>
 
       <Link href='/a'>to A</Link>

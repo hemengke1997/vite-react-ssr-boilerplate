@@ -10,7 +10,7 @@ const createI18nextInstance = () => {
   return i18next.createInstance({
     debug: false,
     nsSeparator: '.',
-    keySeparator: false,
+    keySeparator: '.',
     interpolation: {
       escapeValue: false,
     },
