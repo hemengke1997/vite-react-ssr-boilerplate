@@ -14,9 +14,7 @@
   ],
   "type": "module",
   "scripts": {
-    "dev": "tsx scripts/dev.ts",
-    "tsc": "tsc",
-    "ssr": "cross-env NODE_ENV=development tsx server/index.ts",
+    "dev": "cross-env NODE_ENV=development tsx server/index.ts",
     "start:prod": "cross-env NODE_ENV=production tsx server/index.ts",
     "start:test": "cross-env NODE_ENV=test tsx watch server/index.ts",
     "build": "cross-env NODE_ENV=production vite build --mode production && vite build --ssr --mode production",
@@ -29,6 +27,7 @@
     "bump:deps": "pnpm update --i --L",
     "init": "simple-git-hooks",
     "lint": "eslint . --fix",
+    "tsc": "tsc",
     "以下Docker部署相关": "//",
     "bundle:server": "tsx scripts/bundleServer",
     "bundle:pm2": "tsx scripts/bundlePm2",
