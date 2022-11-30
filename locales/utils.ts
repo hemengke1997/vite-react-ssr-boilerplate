@@ -1,5 +1,6 @@
 import { getBase } from '@root/shared'
 import normalizePath from 'normalize-path'
+import { fallbackLng } from './init'
 import { localesMap } from './locales'
 
 export function extractLocale(url: string, reqLocale?: string) {
@@ -7,7 +8,7 @@ export function extractLocale(url: string, reqLocale?: string) {
 
   const locales = Object.keys(localesMap)
 
-  let locale: string
+  let locale = ''
   let urlWithoutLocale
   const firstPath = urlPaths[0]
 
@@ -16,8 +17,15 @@ export function extractLocale(url: string, reqLocale?: string) {
     locale = localesMap[firstPath]
     // remove locale
     urlWithoutLocale = `/${urlPaths.slice(1).join('/')}`
-  } else {
-    locale = reqLocale?.split('-')[0] || localesMap.en || ''
+  } else if (reqLocale) {
+    if (locales.includes(reqLocale)) {
+      locale = reqLocale
+    } else if (locales.includes(reqLocale?.split('-')[0])) {
+      // backward compatible
+      locale = reqLocale?.split('-')[0]
+    } else {
+      locale = fallbackLng
+    }
     urlWithoutLocale = url
   }
 

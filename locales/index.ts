@@ -1,4 +1,4 @@
-export { getI18next, lookupTarget } from './init'
+export { getI18next, lookupTarget, fallbackLng } from './init'
 
 export { extractLocale } from './utils'
 

@@ -4,6 +4,8 @@ import { getBase } from '@root/shared'
 
 export const lookupTarget = 'i18next'
 
+export const fallbackLng = 'en'
+
 const createI18nextInstance = () => {
   return i18next.createInstance({
     debug: false,
@@ -12,6 +14,7 @@ const createI18nextInstance = () => {
     interpolation: {
       escapeValue: false,
     },
+    fallbackLng,
   })
 }
 
@@ -42,8 +45,6 @@ export async function getI18next(server?: boolean) {
         resources[dir] = resourcesOrigin[k]
       })
 
-      const { localesMap } = await import('./locales')
-
       const LanguageDetector = (await import('i18next-browser-languagedetector')).default
 
       const { initReactI18next } = await import('react-i18next')
@@ -53,9 +54,9 @@ export async function getI18next(server?: boolean) {
       clientI18next.init({
         debug: false,
         resources,
-        ns: Object.keys(resources[localesMap.en]),
-        defaultNS: Object.keys(resources[localesMap.en])[0],
-        fallbackLng: [localesMap.en],
+        ns: Object.keys(resources[fallbackLng]),
+        defaultNS: Object.keys(resources[fallbackLng])[0],
+        fallbackLng,
         detection: {
           order: [
             'querystring',
