@@ -18,9 +18,10 @@ function disableAnimation() {
     ;(() => window.getComputedStyle(document.body))()
 
     if (injected) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         document.head.removeChild(css)
         injected = false
+        clearTimeout(timer)
       }, 1)
     }
   }
