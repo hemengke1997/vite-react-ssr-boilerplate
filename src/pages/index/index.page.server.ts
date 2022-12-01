@@ -5,8 +5,6 @@ async function onBeforeRender(): PageType.onBeforeRender {
         title: 'index',
         description: 'this is index',
         keywords: 'kw',
-        isMobile: false,
-        checkPlatform: true,
       },
     },
   }

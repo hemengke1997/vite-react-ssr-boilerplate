@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ['./renderer/**/*.{jsx,tsx}', './src/**/*.{jsx,tsx}'],
   prefix: '',
   theme: {
@@ -20,6 +21,11 @@ module.exports = {
 
       'sm': { max: '639px' },
       // => @media (max-width: 639px) { ... }
+    },
+    extend: {
+      colors: {
+        primaryColor: 'var(--color-primary)',
+      },
     },
   },
   corePlugins: {

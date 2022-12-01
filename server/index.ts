@@ -155,7 +155,7 @@ function listen(app: Application) {
 
     const pathUrl = normalizeUrl(`http:\/\/${HOST}:${port}${getBase()}${page}`, { normalizeProtocol: false })
 
-    log.info(`\n🚀 [前端服务${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
+    log.info(`\n🚀 [${process.env.NODE_ENV}]: Server running at ${colors.underline(colors.blue(pathUrl))}\n`)
   })
 
   server.on('error', (error) => {

@@ -57,7 +57,6 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
       optimizeDeps: {
         disabled: 'build',
       },
-      noExternal: isBuild ? ['react-vant'] : [],
     },
     optimizeDeps: {
       include: ['antd/locale/en_US'],

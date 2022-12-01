@@ -1,8 +1,11 @@
-const __APP_INFO__: {
-  lastBuildTime: string
-}
+import { Theme } from '@root/renderer/theme'
 
-interface Window {
-  isMobile: boolean
-  checkPlatform: boolean
+declare global {
+  const __APP_INFO__: {
+    lastBuildTime: string
+  }
+
+  interface Window {
+    theme: keyof typeof Theme
+  }
 }

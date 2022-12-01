@@ -56,13 +56,16 @@ export async function legacyHtml(pageContext: any, html: string) {
     const entryJs = pageContext._pageAssets
       ?.filter((t) => t.mediaType === 'text/javascript')
       .map((s) => {
-        return {
-          ...s,
-          src: s.src.replace(new RegExp(getBase()), ''),
+        if (s) {
+          return {
+            ...s,
+            src: s?.src?.replace(new RegExp(getBase()), ''),
+          }
         }
+        return s
       })
-      .find((entry) => entry.src.includes('.entry.js') && entry.preloadType === null) as {
-      src: string
+      .find((entry) => entry?.src.includes('.entry.js') && entry?.preloadType === null) as {
+      src?: string
     }
 
     // 3. inject legacy polyfills
@@ -88,7 +91,7 @@ export async function legacyHtml(pageContext: any, html: string) {
     // 4. inject legacy entry
     for (let i = 0; i < ks.length; i++) {
       const k = ks[i]
-      const parsed = path.parse(entryJs.src)
+      const parsed = path.parse(entryJs?.src || '')
 
       const entryJsName = parsed.name.slice(0, parsed.name.indexOf('.'))
 

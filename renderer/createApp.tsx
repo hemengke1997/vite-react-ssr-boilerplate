@@ -1,27 +1,13 @@
+import { StyleProvider } from '@ant-design/cssinjs'
 import type { PropsWithChildren } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { AnimatePresence, motion } from 'framer-motion'
-import { camelCase } from 'lodash-es'
 import { getI18next } from '@root/locales'
 import { PageContextProvider } from './usePageContext'
+import type { Theme } from './theme'
+import { getVarsToken } from './theme'
+import { Layout } from '@/components/Layout'
 import '@/assets/style/global.css'
-import cssVars from '@/assets/style/vars.css'
-
-let token: Record<string, string>
-const getVarsToken = () => {
-  if (token) return token
-  token = {}
-  const varsList = cssVars.match(/--[\w|-]+:[^;]+/g) || []
-
-  varsList.forEach((item) => {
-    const k = camelCase(item.split(':')[0]?.trim())
-
-    const v = item.split(':')[1]?.trim()
-    token[k] = v
-  })
-
-  return token
-}
 
 const AnimateRouteWrapper = ({ children }: PropsWithChildren) => {
   return (
@@ -39,6 +25,18 @@ const AnimateRouteWrapper = ({ children }: PropsWithChildren) => {
   )
 }
 
+export const cssVarsMap: Record<Theme, ReturnType<typeof getVarsToken>> = { dark: {}, light: {} }
+const vars = import.meta.glob('@/assets/style/vars/*.css', {
+  as: 'raw',
+  eager: true,
+})
+
+Object.keys(vars).forEach((css) => {
+  const cssFileName = /(?<=\/)[^\/]*(?=\.css)/.exec(css)![0]
+  const token = getVarsToken(vars[css])
+  cssVarsMap[cssFileName] = token
+})
+
 let transitionKey = 0
 
 async function createApp(pageContext: PageType.PageContext) {
@@ -46,34 +44,24 @@ async function createApp(pageContext: PageType.PageContext) {
 
   transitionKey = transitionKey ^ 1
 
-  let Layout
-
-  if (pageProps?.isMobile) {
-    Layout = (await import('@/components/mobile/MobileLayout')).MobileLayout
-  } else {
-    Layout = (await import('@/components/pc/PCLayout')).PCLayout
-  }
-
-  const Tpl = Layout
-
   const i18n = await getI18next()
 
   i18n.changeLanguage(locale)
 
-  const token = getVarsToken()
-
   return (
-    <AnimatePresence mode='wait' initial={false}>
-      <AnimateRouteWrapper key={transitionKey}>
-        <I18nextProvider i18n={i18n}>
-          <PageContextProvider pageContext={{ ...pageContext, token }}>
-            <Tpl>
-              <Page {...pageProps} />
-            </Tpl>
-          </PageContextProvider>
-        </I18nextProvider>
-      </AnimateRouteWrapper>
-    </AnimatePresence>
+    <StyleProvider hashPriority='high'>
+      <AnimatePresence mode='wait' initial={false}>
+        <AnimateRouteWrapper key={transitionKey}>
+          <I18nextProvider i18n={i18n}>
+            <PageContextProvider pageContext={{ ...pageContext, cssVarsMap }}>
+              <Layout>
+                <Page {...pageProps} />
+              </Layout>
+            </PageContextProvider>
+          </I18nextProvider>
+        </AnimateRouteWrapper>
+      </AnimatePresence>
+    </StyleProvider>
   )
 }
 

@@ -1,11 +1,12 @@
 import { getI18next } from '@root/locales'
 import { useAsyncEffect } from 'ahooks'
 import React, { useContext, useState } from 'react'
+import type { cssVarsMap } from './createApp'
 
 export { PageContextProvider }
 export { usePageContext }
 
-type PageContextProviderType = PageType.PageContext & { token: Record<string, string> }
+type PageContextProviderType = PageType.PageContext & { cssVarsMap?: typeof cssVarsMap }
 
 const Context = React.createContext<PageContextProviderType>(undefined as any)
 

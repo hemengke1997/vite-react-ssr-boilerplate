@@ -4,6 +4,7 @@ import { navigate } from 'vite-plugin-ssr/client/router'
 import { isDev } from '@root/shared/env'
 import { createApp } from './createApp'
 import { onClientInit } from './client'
+import 'vite/modulepreload-polyfill'
 
 export { render }
 export const clientRouting = true

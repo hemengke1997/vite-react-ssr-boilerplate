@@ -3,11 +3,6 @@ declare namespace PageType {
     title: string
     description: string
     keywords: string
-    isMobile: boolean
-    /**
-     * @description 是否检查平台（移动端/pc）
-     */
-    checkPlatform: boolean
     /**
      * 是否强制开启 vconsole
      */

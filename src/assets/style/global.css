@@ -1,5 +1,4 @@
 @import '~antd/dist/reset.css';
-@import './vars.css';
 @import './animation.css';
 @import './tailwind.css';
 
@@ -7,23 +6,6 @@
 *::before,
 *::after {
   border: 0 solid;
-}
-
-/* aviod fouc */
-/* -------------------- pc -------------------- */
-html[is-mobile='false'] {
-  #app {
-    min-width: 1300px;
-    max-width: 1920px;
-  }
-}
-
-/* ------------------ mobile ------------------ */
-html[is-mobile='true'] {
-  #app {
-    min-width: 0px;
-    max-width: 750px;
-  }
 }
 
 #app {
@@ -41,4 +23,16 @@ i {
 a {
   color: inherit;
   text-decoration: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+ul,
+li,
+p {
+  padding: 0;
+  margin: 0;
 }

@@ -33,6 +33,7 @@ export function setupVitePlugins({
       outputDir: 'lib',
       esbuildOptions: {
         target: 'es2015',
+        splitting: false,
       },
     }),
     timeReporter(),

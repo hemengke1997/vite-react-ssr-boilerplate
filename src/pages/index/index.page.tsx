@@ -2,8 +2,8 @@ import classnames from 'classnames'
 import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Link } from '@/components/Link'
-import { useLoginModalStore } from '@/components/pc/LoginModal/hooks/useLoginModalStore'
 import { useI18next } from '@/hooks/useI18next'
+import { useLoginModalStore } from '@/components/LoginModal/hooks/useLoginModalStore'
 
 export function Page() {
   const { setVisible } = useLoginModalStore((state) => ({
@@ -27,7 +27,7 @@ export function Page() {
         {t('home.hello')}
         {t('home.name')}
         <div>
-          <span className='text-[red]'>{t('home.complex.fisrt')}</span>
+          <span className='text-primaryColor'>{t('home.complex.fisrt')}</span>
           <span>{t('home.complex.something', { x: '123213' })}</span>
         </div>
       </div>
