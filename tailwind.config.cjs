@@ -1,3 +1,25 @@
+const path = require('node:path')
+const fs = require('fs-extra')
+const { camelCase } = require('change-case')
+
+const vars = fs.readFileSync(path.resolve(__dirname, './src/assets/style/vars/light.css'), 'utf8')
+
+const getVarsToken = (cssVars) => {
+  const token = {}
+  const varsList = cssVars?.match(/--[\w|-]+:[^;]+/g) || []
+
+  varsList.forEach((item) => {
+    const k = camelCase(item.split(':')[0]?.trim())
+
+    const v = `var(${item.split(':')[0]?.trim()})`
+    token[k] = v
+  })
+
+  return token
+}
+
+const token = getVarsToken(vars)
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
@@ -23,9 +45,7 @@ module.exports = {
       // => @media (max-width: 639px) { ... }
     },
     extend: {
-      colors: {
-        primaryColor: 'var(--color-primary)',
-      },
+      colors: token,
     },
   },
   corePlugins: {

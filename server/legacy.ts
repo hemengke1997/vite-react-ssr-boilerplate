@@ -19,7 +19,7 @@ const safari10NoModuleFix = `!function(){var e=document,t=e.createElement("scrip
 // cache
 const tags: HtmlTagDescriptor[] = []
 
-export async function legacyHtml(pageContext: any, html: string) {
+export async function legacyHtml(pageContext: Record<string, any> | undefined, html: string) {
   if (!tags.length) {
     // lookup modern polyfills
     const files = fg.sync(`dist/client/assets/js/polyfills.*.entry.js`, {
@@ -50,10 +50,10 @@ export async function legacyHtml(pageContext: any, html: string) {
     })
 
     // lookup legacy
-    const manifest = pageContext._manifestClient
-    const ks = Object.keys(pageContext._manifestClient)
+    const manifest = pageContext?._manifestClient
+    const ks = Object.keys(pageContext?._manifestClient)
 
-    const entryJs = pageContext._pageAssets
+    const entryJs = pageContext?._pageAssets
       ?.filter((t) => t.mediaType === 'text/javascript')
       .map((s) => {
         if (s) {

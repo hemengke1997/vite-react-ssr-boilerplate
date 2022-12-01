@@ -23,24 +23,31 @@ export const getVarsToken = (cssVars: string) => {
 
 export function isDark() {
   return (
-    localStorage[localStorageThemeKey] === 'dark' ||
+    localStorage[localStorageThemeKey] === Theme.dark ||
     (!(localStorageThemeKey in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
   )
 }
 
-export function setTheme() {
+export function initTheme() {
   if (isDark()) {
-    setHtmlTheme('dark')
+    setHtmlAndLocalStorageTheme(Theme.dark)
   } else {
-    setHtmlTheme('light')
+    setHtmlAndLocalStorageTheme(Theme.light)
   }
+}
 
-  function setHtmlTheme(t: keyof typeof Theme) {
-    try {
-      document.documentElement.classList.add(t)
-      localStorage.setItem(localStorageThemeKey, t)
-    } catch {}
-  }
+export function setHtmlAndLocalStorageTheme(t: Theme) {
+  try {
+    let removeClass: Theme = Theme.light
+    if (t === Theme.dark) {
+      removeClass = Theme.light
+    } else {
+      removeClass = Theme.dark
+    }
+    document.documentElement.classList.remove(removeClass)
+    document.documentElement.classList.add(t)
+    localStorage.setItem(localStorageThemeKey, t)
+  } catch {}
 }
 
 export function getTheme() {

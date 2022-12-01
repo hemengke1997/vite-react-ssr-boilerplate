@@ -1,4 +1,4 @@
-import { usePageContext } from '@root/renderer/usePageContext'
+import { useGlobalContext } from '@root/renderer/useGlobalContext'
 import { getBase } from '@root/shared'
 import normalizePath from 'normalize-path'
 import type { FC, ReactNode } from 'react'
@@ -13,7 +13,7 @@ const Link: FC<
   if (!href?.startsWith('/')) throw new Error('Link href should start with /')
   href = href.slice(1)
 
-  const { locale } = usePageContext()
+  const { locale } = useGlobalContext()
 
   href = normalizePath(`${base}/${locale}/${href}`, false)
 

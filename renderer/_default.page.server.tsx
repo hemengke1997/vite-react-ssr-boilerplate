@@ -49,6 +49,7 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
       <meta property="page_title" content="${title}" />
       <meta name="og:title" content="${title}" />
       <meta property="og:title" content="${title}" />
+      <script src="${getLibAssets(manifest.disableAnimation)}"></script>
       <script src="${getLibAssets(manifest.theme)}"></script>
       ${dangerouslySkipEscape(styleText)}
       <title>${title}</title>

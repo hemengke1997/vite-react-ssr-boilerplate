@@ -1,10 +1,10 @@
-import { usePageContext } from '@root/renderer/usePageContext'
+import { useGlobalContext } from '@root/renderer/useGlobalContext'
 import { getBase } from '@root/shared'
 import normalizePath from 'normalize-path'
 import { navigate as ssrNavigate } from 'vite-plugin-ssr/client/router'
 
 function useNavigate() {
-  const { locale } = usePageContext()
+  const { locale } = useGlobalContext()
   const baseUrl = getBase()
 
   const navigate: typeof ssrNavigate = (url, ...args) => {

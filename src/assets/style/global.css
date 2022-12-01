@@ -36,3 +36,8 @@ p {
   padding: 0;
   margin: 0;
 }
+
+html,
+body {
+  @apply dark:bg-black dark:text-white bg-white text-black transition-colors duration-200;
+}

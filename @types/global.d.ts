@@ -7,5 +7,6 @@ declare global {
 
   interface Window {
     theme: keyof typeof Theme
+    disableAnimation(): () => void
   }
 }

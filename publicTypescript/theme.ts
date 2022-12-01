@@ -1,6 +1,6 @@
-import { setTheme } from '@root/renderer/theme'
+import { initTheme } from '@root/renderer/theme'
 ;(function () {
-  setTheme()
+  initTheme()
 })()
 
 export {}
