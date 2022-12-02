@@ -50,8 +50,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
       },
     },
     define: {
-      'process.env': process.env,
-      '__APP_INFO__': JSON.stringify(__APP_INFO__),
+      __APP_INFO__: JSON.stringify(__APP_INFO__),
     },
     ssr: {
       optimizeDeps: {

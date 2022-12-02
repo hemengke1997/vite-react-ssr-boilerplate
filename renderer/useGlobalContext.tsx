@@ -1,13 +1,14 @@
-import { getI18next } from '@root/locales'
 import type { ThemeConfig } from 'antd/es/config-provider/context'
 import type { i18n } from 'i18next'
 import React, { useContext, useEffect, useState } from 'react'
 import { theme as antdTheme } from 'antd'
 import { Theme, getTheme, getVarsToken, setHtmlAndLocalStorageTheme } from './theme'
+import { useControlledState } from '@/hooks/useControlledState'
 
-type PageContext = PageType.PageContext
+type GlobalContextProps = PageType.PageContext & { i18n: i18n }
 
-type GlobalContextProviderType = PageContext & {
+type GlobalContextProviderType = GlobalContextProps & {
+  setLocale: (value: string) => void
   theme: Theme | undefined
   setTheme: (value: Theme) => void
   themeConfig:
@@ -32,29 +33,17 @@ Object.keys(vars).forEach((css) => {
 
 const Context = React.createContext<GlobalContextProviderType>(undefined as any)
 
-export function GlobalContextProvider({
-  pageContext,
-  children,
-}: {
-  pageContext: PageContext
-  children: React.ReactNode
-}) {
-  const [locale, setLocale] = useState(pageContext.locale)
+export function GlobalContextProvider({ props, children }: { props: GlobalContextProps; children: React.ReactNode }) {
+  const { locale: localeProp, i18n } = props
+
+  const [locale, setLocale] = useControlledState({
+    defaultValue: localeProp,
+  })
 
   useEffect(() => {
-    let i18next: i18n | undefined
-    getI18next().then((res) => {
-      i18next = res
-      i18next.on('languageChanged', (l) => {
-        setLocale(l)
-        // html
-        document.documentElement.lang = l
-      })
-    })
-    return () => {
-      i18next?.off('languageChanged')
-    }
-  }, [])
+    i18n.changeLanguage(locale)
+    document.documentElement.lang = locale
+  }, [locale])
 
   const [theme, setTheme] = useState<Theme>()
 
@@ -78,7 +67,9 @@ export function GlobalContextProvider({
   }, [theme])
 
   return (
-    <Context.Provider value={{ ...pageContext, locale, theme, setTheme, themeConfig }}>{children}</Context.Provider>
+    <Context.Provider value={{ ...props, locale, setLocale, theme, setTheme, themeConfig }}>
+      {children}
+    </Context.Provider>
   )
 }
 

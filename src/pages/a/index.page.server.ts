@@ -5,6 +5,7 @@ async function onBeforeRender(): PageType.onBeforeRender {
         title: '标题',
         description: '描述',
         keywords: '关键词',
+        vconsole: false,
       },
     },
   }

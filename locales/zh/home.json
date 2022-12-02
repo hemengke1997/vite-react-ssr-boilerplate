@@ -1,4 +1,9 @@
 {
   "hello": "你好，世界",
-  "name": "中文名"
+  "name": "中文名",
+  "complex": {
+    "fisrt": "复杂的",
+    "second": "翻译",
+    "something": "{{ x }}"
+  }
 }

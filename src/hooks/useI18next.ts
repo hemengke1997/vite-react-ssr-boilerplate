@@ -1,18 +1,12 @@
-import { getI18next, localesMap, urlLocaleRegExp } from '@root/locales'
+import { localesMap, urlLocaleRegExp } from '@root/locales'
+import { useGlobalContext } from '@root/renderer/useGlobalContext'
 import { getBase } from '@root/shared'
-import { useAsyncEffect } from 'ahooks'
-import type { i18n } from 'i18next'
-import { useState } from 'react'
 
 export function useI18next() {
-  const [i18next, setI18next] = useState<i18n>()
-
-  useAsyncEffect(async () => {
-    setI18next(await getI18next())
-  }, [])
+  const { i18n, setLocale } = useGlobalContext()
 
   function changeLang(target: string) {
-    i18next?.changeLanguage(target)
+    setLocale(target)
     const base = getBase()
     const urlPath = window.location.pathname.replace(RegExp(`^${base}`), '')
 
@@ -24,5 +18,5 @@ export function useI18next() {
     }
   }
 
-  return [i18next, changeLang] as const
+  return [i18n, changeLang] as const
 }

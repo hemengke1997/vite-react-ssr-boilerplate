@@ -7,17 +7,17 @@
     ),
   )
   var t = !1
-  function e() {
+  function o() {
     return (
       t || (document.head.appendChild(n), (t = !0)),
       () => {
-        window.getComputedStyle(document.body),
-          t &&
-            setTimeout(() => {
-              document.head.removeChild(n), (t = !1)
-            }, 1)
+        if ((window.getComputedStyle(document.body), t)) {
+          let e = setTimeout(() => {
+            document.head.removeChild(n), (t = !1), clearTimeout(e)
+          }, 1)
+        }
       }
     )
   }
-  window.disableAnimation = e
+  window.disableAnimation = o
 })()

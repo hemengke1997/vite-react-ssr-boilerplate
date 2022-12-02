@@ -3,18 +3,17 @@ import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import { navigate } from 'vite-plugin-ssr/client/router'
 import { isDev } from '@root/shared/env'
 import { createApp } from './createApp'
-import { onClientInit } from './client'
+// import { onClientInit } from './client'
 import 'vite/modulepreload-polyfill'
 
-export { render }
 export const clientRouting = true
 export const hydrationCanBeAborted = true
 
 let root: ReactDOM.Root
 
-onClientInit()
+// onClientInit()
 
-async function render(pageContext: PageContextBuiltInClient & PageType.PageContext) {
+export async function render(pageContext: PageContextBuiltInClient & PageType.PageContext) {
   const { redirectTo } = pageContext
   if (redirectTo) {
     navigate(redirectTo)

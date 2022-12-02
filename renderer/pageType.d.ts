@@ -4,7 +4,7 @@ declare namespace PageType {
     description: string
     keywords: string
     /**
-     * 是否强制开启 vconsole
+     * 强制开启或关闭 vconsole
      */
     vconsole?: boolean
     /**

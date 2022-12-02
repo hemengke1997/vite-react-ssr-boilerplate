@@ -1,13 +1,15 @@
+import { isNode, isVite } from '@root/shared'
+
 const localesMap: Record<string, string> = {}
 
 ;(async function () {
-  if (typeof import.meta.env !== 'undefined') {
+  if (isVite()) {
     const resourcesOrigin = import.meta.glob('./*/index.ts', {})
     Object.keys(resourcesOrigin).forEach((k) => {
       const dir = /\.\/(.+)\//.exec(k)![1]
       localesMap[dir] = dir
     })
-  } else if (typeof process !== 'undefined') {
+  } else if (isNode()) {
     const { fileURLToPath } = await import('node:url')
     const { default: path } = await import('node:path')
     const { default: fg } = await import('fast-glob')

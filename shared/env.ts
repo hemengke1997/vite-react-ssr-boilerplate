@@ -1,11 +1,18 @@
+import { isNode, isVite } from '.'
+
 export enum Env {
   development = 'development',
   test = 'test',
   production = 'production',
 }
 
-export function getEnv(): string {
-  return import.meta.env.MODE
+export function getEnv() {
+  if (isVite()) {
+    return import.meta.env.MODE
+  }
+  if (isNode()) {
+    return process.env.NODE_ENV
+  }
 }
 
 export function isDev(): boolean {

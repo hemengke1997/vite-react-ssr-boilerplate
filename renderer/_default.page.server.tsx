@@ -8,6 +8,7 @@ import { isProd } from '@root/shared/env'
 import { createApp } from './createApp'
 
 function setupVconsole(force?: boolean) {
+  if (force === false) return escapeInject``
   if (!isProd() || force) {
     return escapeInject/* html */ `
     <script src="https://cdn.jsdelivr.net/npm/vconsole@latest/dist/vconsole.min.js"></script>

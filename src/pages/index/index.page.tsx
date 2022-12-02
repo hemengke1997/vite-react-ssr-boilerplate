@@ -34,6 +34,7 @@ export function Page() {
         {t('home.name')}
         <div>
           <span className='text-colorPrimary'>{t('home.complex.fisrt')}</span>
+          <p>{t('home.complex.second')}</p>
           <span>{t('home.complex.something', { x: '123213' })}</span>
         </div>
       </div>
