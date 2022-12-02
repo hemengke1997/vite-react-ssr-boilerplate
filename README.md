@@ -2,7 +2,32 @@
 
 ## Intro
 
-ssr boilerplate based on vite/vite-plugin-ssr/react
+一个基于 vite + react + vite-plugin-ssr 的前端项目模板
+
+## Features
+
+- 首屏 SSR
+- 路由动画
+- 国际化
+- React18
+- antd5
+- tailwindcss
+- docerk 部署
+- vite 驱动
+
+## Branches
+
+### master
+
+自适应布局 + 客户端路由，纯 tailwindcss
+
+### mobilepc
+
+mobile/pc 区分布局，使用 pxtorem
+
+### ssg
+
+ssg 渲染
 
 ## development
 
@@ -80,6 +105,7 @@ pnpm run pm2:prod
 
 ```
 vite-react-ssr-boilerplate
+├─ @types                                                 全局类型
 ├─ config                                                 关于项目的build/node相关配置
 ├─ public                                                 公共目录（build会直接copy）
 ├─ publicTypescript                                       typescript公共目录（build会编译后copy）
@@ -88,10 +114,8 @@ vite-react-ssr-boilerplate
 ├─ server                                                 node服务
 ├─ shared                                                 client & server 共享功能目录
 ├─ src                                                    业务源码
-├─ template                                               页面模板
-├─ typings                                                全局类型
-├─ postcss.config.js                                      postcss配置
+├─ postcss.config.cjs                                     postcss配置
 ├─ README.md                                              开发前阅读
-├─ tailwind.config.js                                     tw配置
+├─ tailwind.config.cjs                                    tw配置
 ├─ TODO.md                                                待开发list
 ```
