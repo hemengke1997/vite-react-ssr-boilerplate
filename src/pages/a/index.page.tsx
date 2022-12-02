@@ -1,7 +1,6 @@
 import classnames from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { Button } from 'antd'
-import styles from './index.module.css'
 import { Link } from '@/components/Link'
 import { useNavigate } from '@/hooks/useNavigate'
 import { useI18next } from '@/hooks/useI18next'
@@ -13,7 +12,7 @@ export function Page() {
 
   return (
     <>
-      <div className={classnames('tw-italic', styles.pageA)}>
+      <div className={classnames('tw-italic')}>
         <Button onClick={() => changeLang('zh')} type='default'>
           切换中文
         </Button>
