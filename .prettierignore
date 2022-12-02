@@ -12,3 +12,4 @@ LICENSE
 server/*.js
 dist
 publicTypescript/manifest.json
+public
