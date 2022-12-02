@@ -10,7 +10,7 @@ async function run(bin: string, args: string[], opts: Options<string> = {}) {
 }
 
 enum BranchEnum {
-  test = 'testing',
+  test = 'test',
   prod = 'master',
 }
 

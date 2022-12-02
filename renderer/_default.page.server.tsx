@@ -24,7 +24,7 @@ export const passToClient = ['pageProps', 'redirectTo', 'locale']
 export async function render(pageContext: PageContextBuiltIn & PageType.PageContext) {
   const { pageProps, locale, redirectTo } = pageContext
   const cache = createCache()
-  const pageHtml = renderToString(<StyleProvider cache={cache}>{await createApp(pageContext)}</StyleProvider>)
+  const pageHtml = renderToString(<StyleProvider cache={cache}>{await createApp(pageContext, 0)}</StyleProvider>)
   const styleText = extractStyle(cache)
 
   const { vconsole } = pageProps

@@ -9,7 +9,7 @@ import { useI18next } from '@/hooks/useI18next'
 export function Page() {
   const { t } = useTranslation()
   const [navigate] = useNavigate()
-  const [, changeLang] = useI18next()
+  const [changeLang] = useI18next()
 
   return (
     <>

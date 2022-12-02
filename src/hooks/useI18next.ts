@@ -3,7 +3,7 @@ import { useGlobalContext } from '@root/renderer/useGlobalContext'
 import { getBase } from '@root/shared'
 
 export function useI18next() {
-  const { i18n, setLocale } = useGlobalContext()
+  const { setLocale } = useGlobalContext()
 
   function changeLang(target: string) {
     setLocale(target)
@@ -18,5 +18,5 @@ export function useI18next() {
     }
   }
 
-  return [i18n, changeLang] as const
+  return [changeLang] as const
 }

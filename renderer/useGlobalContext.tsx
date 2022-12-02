@@ -5,7 +5,7 @@ import { theme as antdTheme } from 'antd'
 import { Theme, getTheme, getVarsToken, setHtmlAndLocalStorageTheme } from './theme'
 import { useControlledState } from '@/hooks/useControlledState'
 
-type GlobalContextProps = PageType.PageContext & { i18n: i18n }
+type GlobalContextProps = PageType.PageContext & { i18n: i18n; key: number }
 
 type GlobalContextProviderType = GlobalContextProps & {
   setLocale: (value: string) => void
@@ -36,9 +36,20 @@ const Context = React.createContext<GlobalContextProviderType>(undefined as any)
 export function GlobalContextProvider({ props, children }: { props: GlobalContextProps; children: React.ReactNode }) {
   const { locale: localeProp, i18n } = props
 
+  useEffect(() => {
+    setLocale(localeProp)
+  }, [localeProp])
+
   const [locale, setLocale] = useControlledState({
     defaultValue: localeProp,
   })
+
+  useEffect(() => {
+    i18n.on('languageChanged', (lang) => {
+      setLocale(lang)
+      document.documentElement.lang = locale
+    })
+  }, [i18n])
 
   useEffect(() => {
     i18n.changeLanguage(locale)

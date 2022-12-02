@@ -9,7 +9,7 @@ import { useI18next } from '@/hooks/useI18next'
 export function Page() {
   const { setTheme } = useGlobalContext()
 
-  const [, changeLang] = useI18next()
+  const [changeLang] = useI18next()
 
   const { t } = useTranslation()
 
@@ -21,6 +21,7 @@ export function Page() {
       <Button onClick={() => changeLang('en')} type='primary'>
         change to english
       </Button>
+      <Button onClick={() => changeLang('zh-TW')}>切换繁体</Button>
 
       <Button onClick={() => setTheme(Theme.light)} type='ghost'>
         light主题

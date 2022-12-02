@@ -1,32 +1,34 @@
-import { StyleProvider } from '@ant-design/cssinjs'
+import type { FC } from 'react'
 import { I18nextProvider } from 'react-i18next'
+import { StyleProvider } from '@ant-design/cssinjs'
 import { getI18next } from '@root/locales'
-import { isNode } from '@root/shared'
-import { GlobalContextProvider } from './useGlobalContext'
+import { GlobalContextProvider, useGlobalContext } from './useGlobalContext'
 import { Layout } from '@/components/Layout'
 import '@/assets/style/global.css'
 
-let key = 0
+const I18nextContainer: FC = () => {
+  const { i18n, pageProps, Page } = useGlobalContext()
 
-async function createApp(pageContext: PageType.PageContext) {
-  const { Page, pageProps, locale } = pageContext
+  return (
+    <I18nextProvider i18n={i18n}>
+      <Layout>
+        <Page {...pageProps} />
+      </Layout>
+    </I18nextProvider>
+  )
+}
 
-  key = key ^ 1
+async function createApp(pageContext: PageType.PageContext, transitionKey: number) {
+  const { locale } = pageContext
 
   const i18n = await getI18next()
 
-  if (isNode()) {
-    i18n.changeLanguage(locale)
-  }
+  i18n.changeLanguage(locale)
 
   return (
-    <StyleProvider hashPriority='high' key={key}>
-      <GlobalContextProvider props={{ ...pageContext, i18n }}>
-        <I18nextProvider i18n={i18n}>
-          <Layout>
-            <Page {...pageProps} />
-          </Layout>
-        </I18nextProvider>
+    <StyleProvider hashPriority='high'>
+      <GlobalContextProvider props={{ ...pageContext, locale, i18n, key: transitionKey }}>
+        <I18nextContainer />
       </GlobalContextProvider>
     </StyleProvider>
   )

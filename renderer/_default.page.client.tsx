@@ -3,7 +3,7 @@ import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import { navigate } from 'vite-plugin-ssr/client/router'
 import { isDev } from '@root/shared/env'
 import { createApp } from './createApp'
-// import { onClientInit } from './client'
+import { onClientInit } from './client'
 import 'vite/modulepreload-polyfill'
 
 export const clientRouting = true
@@ -11,7 +11,9 @@ export const hydrationCanBeAborted = true
 
 let root: ReactDOM.Root
 
-// onClientInit()
+onClientInit()
+
+let transitionKey = 0
 
 export async function render(pageContext: PageContextBuiltInClient & PageType.PageContext) {
   const { redirectTo } = pageContext
@@ -23,12 +25,13 @@ export async function render(pageContext: PageContextBuiltInClient & PageType.Pa
   const container = document.getElementById('app')!
 
   if (pageContext.isHydration) {
-    root = ReactDOM.hydrateRoot(container, await createApp(pageContext))
+    root = ReactDOM.hydrateRoot(container, await createApp(pageContext, 0))
   } else {
     if (!root) {
       root = ReactDOM.createRoot(container)
     }
-    root.render(await createApp(pageContext))
+    transitionKey++
+    root.render(await createApp(pageContext, transitionKey))
   }
 
   document.title = pageContext.pageProps.title || (pageContext.exports?.pageProps as PageType.PageProps)?.title || ''
