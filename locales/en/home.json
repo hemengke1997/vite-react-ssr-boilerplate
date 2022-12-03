@@ -5,5 +5,11 @@
     "fisrt": "complex",
     "second": "transilation",
     "something": "{{ x }}"
-  }
+  },
+  "changeLocale": "change locale",
+  "changeTheme": "change theme",
+  "changeDirection": "change direction",
+  "openModal": "open modal",
+  "confirm": "Click to confirm",
+  "toPageA": "to PageA"
 }

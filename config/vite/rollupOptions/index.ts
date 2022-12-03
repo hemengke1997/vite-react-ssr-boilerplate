@@ -25,9 +25,6 @@ export function setupRollupOptions(root: string, ssrBuild: boolean | undefined):
         const chunkName = chunkInfo.name
         const server = chunkName?.endsWith('server') ? 'server.' : ''
         const name = ssrBuild ? chunkInfo.facadeModuleId?.match(/src\/pages\/(.*?)\//)?.[1] || chunkName : chunkName
-        // if (chunkInfo.isDynamicEntry) {
-        //   return `assets/js/${name}.${server}[hash].js`
-        // }
         return `assets/js/${name}.${server}[hash].js`
       },
       entryFileNames: (chunkInfo) => {

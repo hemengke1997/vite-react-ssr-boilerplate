@@ -1,4 +1,4 @@
-import { useGlobalContext } from '@root/renderer/useGlobalContext'
+import { useGlobalContext } from '@root/renderer/global/useGlobalContext'
 import { getBase } from '@root/shared'
 import normalizePath from 'normalize-path'
 import type { FC, ReactNode } from 'react'

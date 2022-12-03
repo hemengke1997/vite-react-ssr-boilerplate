@@ -1,25 +1,37 @@
-import { isNode, isVite } from '@root/shared'
+import type { DirectionType } from '@root/renderer/global/useGlobalContext'
 
-const localesMap: Record<string, string> = {}
+export interface LocaleMapType {
+  antd: string
+  dayjs: string
+  direction: DirectionType
+}
 
-;(async function () {
-  if (isVite()) {
-    const resourcesOrigin = import.meta.glob('./*/index.ts', {})
-    Object.keys(resourcesOrigin).forEach((k) => {
-      const dir = /\.\/(.+)\//.exec(k)![1]
-      localesMap[dir] = dir
-    })
-  } else if (isNode()) {
-    const { fileURLToPath } = await import('node:url')
-    const { default: path } = await import('node:path')
-    const { default: fg } = await import('fast-glob')
-    const dir = path.dirname(fileURLToPath(import.meta.url))
-    const dirs = fg.sync('./**', { onlyDirectories: true, cwd: dir, deep: 1 })
+const localesMap: Record<
+  string,
+  | ({
+      locale: string
+    } & LocaleMapType)
+  | undefined
+> = {}
 
-    dirs.forEach((d) => {
-      localesMap[d] = d
-    })
+async function initLocalesMap() {
+  const resourcesOrigin = import.meta.glob<LocaleMapType>('./*/localeMap.ts', {
+    import: 'localeMap',
+  })
+
+  const resourcesKeys = Object.keys(resourcesOrigin)
+  for (let i = 0; i < resourcesKeys.length; i++) {
+    const k = resourcesKeys[i]
+    const localeMap = await resourcesOrigin[k]()
+
+    const dir = /\.\/(.+)\//.exec(k)![1]
+    localesMap[dir] = {
+      locale: dir,
+      ...localeMap,
+    }
   }
-})()
+}
+
+await initLocalesMap()
 
 export { localesMap }

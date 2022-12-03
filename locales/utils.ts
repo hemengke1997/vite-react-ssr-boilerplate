@@ -1,4 +1,6 @@
+import type { DirectionType } from '@root/renderer/global/useGlobalContext'
 import { getBase } from '@root/shared'
+import type { Locale } from 'antd/es/locale-provider'
 import normalizePath from 'normalize-path'
 import { fallbackLng } from './init'
 import { localesMap } from './locales'
@@ -17,7 +19,7 @@ export function extractLocale(url: string, reqLocale?: string) {
 
   // path first
   if (locales.includes(maybeLang)) {
-    locale = localesMap[maybeLang]
+    locale = localesMap[maybeLang]?.locale ?? ''
     // remove locale
     urlWithoutLocale = url.replace(urlLocaleRegExp(maybeLang), '')
   } else if (reqLocale) {
@@ -54,4 +56,29 @@ export function loadLocaleJson(localesJson: Record<string, unknown>) {
   })
 
   return locales
+}
+
+export async function getLibLocale(locale: string) {
+  const localesInfo: Record<
+    string,
+    { locale?: string | undefined; antd: Locale; dayjs: any; direction?: DirectionType }
+  > = {
+    'zh': {
+      ...localesMap.zh,
+      dayjs: (await import('dayjs/locale/zh-cn')).default,
+      antd: (await import('antd/locale/zh_CN')).default,
+    },
+    'en': {
+      ...localesMap.en,
+      dayjs: (await import('dayjs/locale/en')).default,
+      antd: (await import('antd/locale/en_US')).default,
+    },
+    'zh-TW': {
+      ...localesMap.en,
+      dayjs: (await import('dayjs/locale/zh-tw')).default,
+      antd: (await import('antd/locale/zh_TW')).default,
+    },
+  }
+
+  return localesInfo[locale]
 }

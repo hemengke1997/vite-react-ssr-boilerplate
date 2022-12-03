@@ -1,32 +1,8 @@
-const css = document.createElement('style')
+import { disableAnimation } from '@root/renderer/global/disableAnimation'
+;(function () {
+  const enable = disableAnimation()
 
-css.appendChild(
-  document.createTextNode(
-    `*{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`,
-  ),
-)
-
-let injected = false
-
-function disableAnimation() {
-  if (!injected) {
-    document.head.appendChild(css)
-    injected = true
-  }
-
-  return () => {
-    ;(() => window.getComputedStyle(document.body))()
-
-    if (injected) {
-      const timer = setTimeout(() => {
-        document.head.removeChild(css)
-        injected = false
-        clearTimeout(timer)
-      }, 1)
-    }
-  }
-}
-
-window.disableAnimation = disableAnimation
-
-export {}
+  window.addEventListener('load', () => {
+    enable?.()
+  })
+})()

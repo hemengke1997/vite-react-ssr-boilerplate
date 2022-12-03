@@ -2,9 +2,8 @@ import type { FC } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { StyleProvider } from '@ant-design/cssinjs'
 import { getI18next } from '@root/locales'
-import { GlobalContextProvider, useGlobalContext } from './useGlobalContext'
+import { GlobalContextProvider, useGlobalContext } from './global/useGlobalContext'
 import { Layout } from '@/components/Layout'
-import '@/assets/style/global.css'
 
 const I18nextContainer: FC = () => {
   const { i18n, pageProps, Page } = useGlobalContext()
@@ -18,7 +17,7 @@ const I18nextContainer: FC = () => {
   )
 }
 
-async function createApp(pageContext: PageType.PageContext, transitionKey: number) {
+async function createApp(pageContext: PageType.PageContext, transitionKey = 0) {
   const { locale } = pageContext
 
   const i18n = await getI18next()

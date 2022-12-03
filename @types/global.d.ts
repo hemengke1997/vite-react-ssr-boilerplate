@@ -1,4 +1,4 @@
-import { Theme } from '@root/renderer/theme'
+import { Theme } from '@root/publicTypescript/theme'
 
 declare global {
   const __APP_INFO__: {
@@ -7,6 +7,6 @@ declare global {
 
   interface Window {
     theme: keyof typeof Theme
-    disableAnimation(): () => void
+    disableAnimation(): (() => void) | undefined
   }
 }

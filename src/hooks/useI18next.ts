@@ -1,11 +1,11 @@
 import { localesMap, urlLocaleRegExp } from '@root/locales'
-import { useGlobalContext } from '@root/renderer/useGlobalContext'
+import { useGlobalContext } from '@root/renderer/global/useGlobalContext'
 import { getBase } from '@root/shared'
 
 export function useI18next() {
   const { setLocale } = useGlobalContext()
 
-  function changeLang(target: string) {
+  function changeLocale(target: string) {
     setLocale(target)
     const base = getBase()
     const urlPath = window.location.pathname.replace(RegExp(`^${base}`), '')
@@ -18,5 +18,5 @@ export function useI18next() {
     }
   }
 
-  return [changeLang] as const
+  return { changeLocale }
 }

@@ -5,5 +5,11 @@
     "fisrt": "复杂的",
     "second": "翻译",
     "something": "{{ x }}"
-  }
+  },
+  "changeLocale": "切换语言",
+  "changeTheme": "切换主题",
+  "changeDirection": "切换方向",
+  "openModal": "打开模态框",
+  "confirm": "点击确认",
+  "toPageA": "跳转PageA"
 }

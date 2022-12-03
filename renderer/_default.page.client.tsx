@@ -5,6 +5,7 @@ import { isDev } from '@root/shared/env'
 import { createApp } from './createApp'
 import { onClientInit } from './client'
 import 'vite/modulepreload-polyfill'
+import '@/assets/style/global.css'
 
 export const clientRouting = true
 export const hydrationCanBeAborted = true
@@ -25,7 +26,7 @@ export async function render(pageContext: PageContextBuiltInClient & PageType.Pa
   const container = document.getElementById('app')!
 
   if (pageContext.isHydration) {
-    root = ReactDOM.hydrateRoot(container, await createApp(pageContext, 0))
+    root = ReactDOM.hydrateRoot(container, await createApp(pageContext))
   } else {
     if (!root) {
       root = ReactDOM.createRoot(container)

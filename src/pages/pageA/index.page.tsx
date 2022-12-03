@@ -8,15 +8,15 @@ import { useI18next } from '@/hooks/useI18next'
 export function Page() {
   const { t } = useTranslation()
   const [navigate] = useNavigate()
-  const [changeLang] = useI18next()
+  const { changeLocale } = useI18next()
 
   return (
     <>
       <div className={classnames('tw-italic')}>
-        <Button onClick={() => changeLang('zh')} type='default'>
+        <Button onClick={() => changeLocale('zh')} type='default'>
           切换中文
         </Button>
-        <Button onClick={() => changeLang('en')} type='primary'>
+        <Button onClick={() => changeLocale('en')} type='primary'>
           change to english
         </Button>
         <div>

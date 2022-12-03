@@ -11,6 +11,8 @@
 - 国际化
 - React18
 - antd5
+- 动态暗黑主题
+- rtl/ltr
 - tailwindcss
 - docerk 部署
 - vite 驱动

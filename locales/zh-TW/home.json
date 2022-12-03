@@ -1,4 +1,15 @@
 {
-  "hello": "你好，世界（繁体）",
-  "name": "中文名（繁体）"
+  "hello": "你好，世界（繁體）",
+  "name": "中文名（繁體）",
+  "complex": {
+    "fisrt": "複雜的",
+    "second": "翻譯",
+    "something": "{{ x }}"
+  },
+  "changeLocale": "切換語言",
+  "changeTheme": "切換主題",
+  "changeDirection": "切換方向",
+  "openModal": "打開模態框",
+  "confirm": "點擊確認",
+  "toPageA": "跳轉PageA"
 }

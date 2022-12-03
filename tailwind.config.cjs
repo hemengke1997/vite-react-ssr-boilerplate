@@ -26,8 +26,7 @@ module.exports = {
   content: ['./renderer/**/*.{jsx,tsx}', './src/**/*.{jsx,tsx}'],
   prefix: '',
   theme: {
-    // 如果开发以pc优先，否则使用默认screens即可
-    // pc first
+    // 如果开发以pc优先，则自定义以下screens。否则使用默认screens即可
     screens: {
       '2xl': { max: '1535px' },
       // => @media (max-width: 1535px) { ... }

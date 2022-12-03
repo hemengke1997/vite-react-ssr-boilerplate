@@ -7,7 +7,7 @@ import manifest from '@root/publicTypescript/manifest.json'
 import { isProd } from '@root/shared/env'
 import { createApp } from './createApp'
 
-function setupVconsole(force?: boolean) {
+function setupVconsole(force?: boolean): ReturnType<typeof escapeInject> {
   if (force === false) return escapeInject``
   if (!isProd() || force) {
     return escapeInject/* html */ `
@@ -24,8 +24,8 @@ export const passToClient = ['pageProps', 'redirectTo', 'locale']
 export async function render(pageContext: PageContextBuiltIn & PageType.PageContext) {
   const { pageProps, locale, redirectTo } = pageContext
   const cache = createCache()
-  const pageHtml = renderToString(<StyleProvider cache={cache}>{await createApp(pageContext, 0)}</StyleProvider>)
-  const styleText = extractStyle(cache)
+  const pageHtml = renderToString(<StyleProvider cache={cache}>{await createApp(pageContext)}</StyleProvider>)
+  const styleText = `${extractStyle(cache)}`
 
   const { vconsole } = pageProps
   const title = pageProps?.title || 'vite-react-ssr-boilerplate'
@@ -36,7 +36,6 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
   <html lang="${locale}">
     <head>
       <meta charset="UTF-8" />
-      <meta http-equiv="Cache-Control" content="no-store">
       <meta name="renderer" content="webkit" />
       <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
       <link rel="icon" href="${getBase()}favicon.ico" />
@@ -50,9 +49,12 @@ export async function render(pageContext: PageContextBuiltIn & PageType.PageCont
       <meta property="page_title" content="${title}" />
       <meta name="og:title" content="${title}" />
       <meta property="og:title" content="${title}" />
+      ${dangerouslySkipEscape(styleText)}
+      
       <script src="${getLibAssets(manifest.disableAnimation)}"></script>
       <script src="${getLibAssets(manifest.theme)}"></script>
-      ${dangerouslySkipEscape(styleText)}
+      <script src="${getLibAssets(manifest.direction)}"></script>
+
       <title>${title}</title>
     </head>
     <body>

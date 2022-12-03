@@ -1,60 +1,101 @@
-import { useGlobalContext } from '@root/renderer/useGlobalContext'
+import { disableAnimation } from '@root/renderer/global/disableAnimation'
+import { useGlobalContext } from '@root/renderer/global/useGlobalContext'
 import { ConfigProvider } from 'antd'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion'
 import type { FC, PropsWithChildren } from 'react'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const AnimateRoute: FC<PropsWithChildren> = ({ children }) => {
+const AnimateRoute: FC<PropsWithChildren & { localeInited: boolean }> = ({ children, localeInited }) => {
   const { key } = useGlobalContext()
 
-  const init = key <= 0
+  // const init = key <= 0
+  const init = !localeInited
+
+  const controls = useAnimationControls()
+
+  useEffect(() => {
+    if (localeInited) {
+      controls.start({ opacity: 1 })
+    }
+  }, [localeInited])
 
   return (
     <motion.div
-      initial={{ opacity: 0.01, pointerEvents: 'none', x: init ? 0 : 8 }}
-      animate={{ opacity: 1, pointerEvents: 'initial', x: 0 }}
-      exit={{ opacity: 0, pointerEvents: 'none', x: init ? 0 : -8 }}
+      initial={{ opacity: 0 }}
       transition={{
         duration: 0.15,
-        delay: init ? 0.1 : 0,
       }}
-      key={key}
-      onAnimationStart={() => {
-        document.body.style.overflowX = 'hidden'
-      }}
-      onAnimationComplete={() => {
-        document.body.style.overflowX = ''
-      }}
+      animate={controls}
     >
-      {children}
+      <motion.div
+        // TODO: SEO?
+        initial={{ opacity: 0, pointerEvents: 'none', x: init ? 0 : 8 }}
+        animate={{ opacity: 1, pointerEvents: 'initial', x: 0 }}
+        exit={{ opacity: 0, pointerEvents: 'none', x: init ? 0 : -8 }}
+        transition={{
+          duration: 0.15,
+        }}
+        style={{ opacity: init ? 0 : 1 }}
+        key={key}
+        onAnimationStart={() => {
+          document.body.style.overflowX = 'hidden'
+        }}
+        onAnimationComplete={() => {
+          document.body.style.overflowX = ''
+        }}
+      >
+        {children}
+      </motion.div>
     </motion.div>
   )
 }
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
-  const { themeConfig } = useGlobalContext()
+  const { themeConfig, direction, antdLocale } = useGlobalContext()
 
+  const enable = useRef<() => void>()
+
+  const [mounted, setMounted] = useState(false)
   useEffect(() => {
-    const enable = window.disableAnimation()
-    enable()
+    enable.current = disableAnimation()
+    setMounted(true)
 
     return () => {
-      window.disableAnimation()
+      enable.current?.()
     }
-  }, [])
+  }, [antdLocale])
+
+  useEffect(() => {
+    if (mounted) {
+      enable.current?.()
+    }
+  }, [mounted])
+
+  const [localeInited, setLocaleInited] = useState(false)
+  const initLocaleRef = useRef(false)
+
+  useEffect(() => {
+    if (antdLocale && !initLocaleRef.current) {
+      setLocaleInited(true)
+    }
+  }, [antdLocale])
 
   return (
-    <ConfigProvider
-      autoInsertSpaceInButton={false}
-      theme={{
-        algorithm: themeConfig?.algorithm,
-        token: themeConfig?.token,
-      }}
-    >
-      <AnimatePresence initial mode='wait'>
-        <AnimateRoute>{children}</AnimateRoute>
-      </AnimatePresence>
-    </ConfigProvider>
+    <AnimatePresence initial mode='wait'>
+      <AnimateRoute localeInited={localeInited}>
+        <ConfigProvider
+          autoInsertSpaceInButton={false}
+          direction={direction}
+          theme={{
+            algorithm: themeConfig?.algorithm,
+            token: themeConfig?.token,
+          }}
+          locale={antdLocale}
+        >
+          {children}
+        </ConfigProvider>
+      </AnimateRoute>
+    </AnimatePresence>
   )
 }
 

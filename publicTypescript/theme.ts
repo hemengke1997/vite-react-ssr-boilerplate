@@ -1,6 +1,8 @@
-import { initTheme } from '@root/renderer/theme'
+import { initTheme } from '@root/renderer/global/theme'
 ;(function () {
-  initTheme()
+  try {
+    initTheme()
+  } catch {}
 })()
 
 export {}
