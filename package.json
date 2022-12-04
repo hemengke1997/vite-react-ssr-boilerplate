@@ -111,6 +111,7 @@
     "minimist": "^1.2.7",
     "modern-normalize": "^1.1.0",
     "ora": "^6.1.2",
+    "pnpm": "^7.18.0",
     "postcss": "^8.4.19",
     "prettier": "^2.8.0",
     "rollup": "2.79.1",
