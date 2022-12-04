@@ -34,6 +34,27 @@ export function setupVitePlugins({
       esbuildOptions: {
         target: 'es2015',
         splitting: false,
+        minify: true,
+        treeShaking: true,
+        logLevel: 'error',
+        plugins: [
+          {
+            name: 'no-side-effects',
+            setup(build) {
+              // https://github.com/evanw/esbuild/issues/1895#issuecomment-1003404929
+              build.onResolve({ filter: /.*/ }, async (args) => {
+                if (args.pluginData) return
+
+                const { path, ...rest } = args
+                rest.pluginData = true
+                const result = await build.resolve(path, rest)
+
+                result.sideEffects = false
+                return result
+              })
+            },
+          },
+        ],
       },
     }),
     timeReporter(),

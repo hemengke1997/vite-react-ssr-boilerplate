@@ -29,13 +29,14 @@
     "lint": "eslint . --fix",
     "tsc": "tsc",
     "以下Docker部署相关": "//",
-    "bundle:server": "tsx scripts/bundleServer",
-    "bundle:pm2": "tsx scripts/bundlePm2",
+    "bundle:server": "cross-env BUNDLE_DIR=server FILE_NAME=index tsx scripts/IIFEBundleScript",
+    "bundle:pm2": "cross-env BUNDLE_DIR=server FILE_NAME=pm2 tsx scripts/IIFEBundleScript",
+    "bundle:vercelapi": "cross-env BUNDLE_DIR=api FILE_NAME=index tsx scripts/IIFEBundleScript",
     "以下传统部署相关": "//",
     "release": "tsx scripts/release",
     "pm2:dev": "npx --yes --ignore-scripts pnpm i && cross-env NODE_ENV=development tsx server/pm2 --tsconfig tsconfig.pm2.json",
-    "pm2:test": "npx --yes --ignore-scripts pnpm i -P && cross-env NODE_ENV=test tsx server/pm2 --tsconfig tsconfig.pm2.json",
-    "pm2:prod": "npx --yes --ignore-scripts pnpm i -P && cross-env NODE_ENV=production tsx server/pm2 --tsconfig tsconfig.pm2.json"
+    "pm2:test": "npx --yes --ignore-scripts && cross-env NODE_ENV=test tsx server/pm2 --tsconfig tsconfig.pm2.json",
+    "pm2:prod": "npx --yes --ignore-scripts && cross-env NODE_ENV=production tsx server/pm2 --tsconfig tsconfig.pm2.json"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.1.0",
@@ -96,6 +97,7 @@
     "@types/react-dom": "18.0.9",
     "@types/react-helmet": "^6.1.6",
     "@types/shelljs": "^0.8.11",
+    "@vercel/node": "^2.7.1",
     "@vitejs/plugin-legacy": "2.3.1",
     "@vitejs/plugin-react": "2.2.0",
     "autoprefixer": "^10.4.12",

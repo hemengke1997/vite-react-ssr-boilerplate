@@ -88,3 +88,9 @@ async function bundle(entry: string, out: string) {
 }
 
 export { bundle }
+
+export function bundleScript(targetDir?: string, fileName?: string) {
+  if (!targetDir) return
+  targetDir = path.resolve(`${dir}/../`, targetDir)
+  bundle(path.join(targetDir, `${fileName}.ts`), path.join(targetDir, `${fileName}.js`))
+}

@@ -1,0 +1,13 @@
+{
+  "extends": ["config:base", "schedule:weekly", "group:allNonMajor", ":semanticCommits"],
+  "labels": ["dependencies"],
+  "pin": false,
+  "rangeStrategy": "bump",
+  "node": false,
+  "packageRules": [
+    {
+      "matchDepTypes": ["peerDependencies", "engines"],
+      "enabled": false
+    }
+  ]
+}

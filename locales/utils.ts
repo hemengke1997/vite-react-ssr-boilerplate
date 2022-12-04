@@ -13,7 +13,7 @@ export function extractLocale(url: string, reqLocale?: string) {
   const locales = Object.keys(localesMap)
 
   let locale = ''
-  let urlWithoutLocale
+  let urlWithoutLocale = url
 
   const maybeLang = url.replace(getBase(), '').split('/')[0]
 
@@ -36,12 +36,15 @@ export function extractLocale(url: string, reqLocale?: string) {
         locale = fallbackLng
       }
     }
-    urlWithoutLocale = url
+  } else {
+    // no req locale
+    // use default `en`
+    locale = fallbackLng
   }
 
   return {
     locale,
-    urlWithoutLocale,
+    urlWithoutLocale: normalizePath(urlWithoutLocale, false),
     redirectTo:
       normalizePath(url, true) === normalizePath(getBase(), true) ? normalizePath(`${getBase()}/${locale}`) : '',
   }
