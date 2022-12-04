@@ -44,8 +44,10 @@ export function Page() {
 
   const { t } = useTranslation()
 
+  const [modal, contextHolder] = Modal.useModal()
+
   const info = () => {
-    Modal.info({
+    modal.info({
       title: t('home.hello'),
       content: t('home.name'),
     })
@@ -152,6 +154,7 @@ export function Page() {
           <Table dataSource={[]} columns={columns} />
         </div>
       </div>
+      {contextHolder}
     </>
   )
 }
