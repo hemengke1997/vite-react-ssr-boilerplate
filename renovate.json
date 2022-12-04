@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", "schedule:weekly", "group:allNonMajor", ":semanticCommits"],
+  "extends": ["config:base", ":automergeAll", "group:allNonMajor", ":semanticCommits"],
   "labels": ["dependencies"],
   "pin": false,
   "rangeStrategy": "bump",

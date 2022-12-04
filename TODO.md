@@ -5,5 +5,5 @@
 - [] i18n ssr backend
 - [] antd/dayjs locale auto lazyload
 - [] antd locale blink when page jumps
-- [] renovate
+- [x] renovate
 - [] vercel deployment locale

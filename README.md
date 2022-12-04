@@ -2,7 +2,7 @@
 
 ## Intro
 
-一个基于 vite + react + vite-plugin-ssr 的前端项目模板
+一个基于 vite + react + vite-plugin-ssr 的 SSR 项目模板
 
 ## Features
 
@@ -14,6 +14,7 @@
 - 动态暗黑主题
 - rtl/ltr
 - tailwindcss
+- vercel 部署
 - docerk 部署
 - vite 驱动
 
@@ -117,7 +118,5 @@ vite-react-ssr-boilerplate
 ├─ shared                                                 client & server 共享功能目录
 ├─ src                                                    业务源码
 ├─ postcss.config.cjs                                     postcss配置
-├─ README.md                                              开发前阅读
-├─ tailwind.config.cjs                                    tw配置
-├─ TODO.md                                                待开发list
+├─ tailwind.config.cjs                                    tailwindcss配置
 ```
