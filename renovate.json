@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", ":automergeAll", "group:allNonMajor", ":semanticCommits"],
+  "extends": ["config:base", "schedule:weekly", "group:allNonMajor", ":semanticCommits"],
   "labels": ["dependencies"],
   "pin": false,
   "rangeStrategy": "bump",
@@ -9,5 +9,6 @@
       "matchDepTypes": ["peerDependencies", "engines"],
       "enabled": false
     }
-  ]
+  ],
+  "ignoreDeps": ["pnpm", "rollup"]
 }
