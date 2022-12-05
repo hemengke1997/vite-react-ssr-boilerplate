@@ -4,9 +4,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { theme as antdTheme } from 'antd'
 import dayjs from 'dayjs'
 import { useIsomorphicLayoutEffect } from 'ahooks'
-import { getLocalesMap } from '@root/locales'
 import type { Locale } from 'antd/es/locale-provider'
-import { getLibLocale } from '@root/locales/utils'
+import { localesMap } from '@root/locales'
 import { Theme, getTheme, getVarsToken, setHtmlAndLocalStorageTheme } from './theme'
 import { setHtmlDirDirection } from './direction'
 import { useControlledState } from '@/hooks/useControlledState'
@@ -64,11 +63,9 @@ export function GlobalContextProvider({ props, children }: { props: GlobalContex
   const setLocaleAllAtOnce = async (l: string) => {
     document.documentElement.lang = l
 
-    const localeInfo = await getLibLocale(l)
+    setAntdLocale((await localesMap[l].antd()).default)
 
-    setAntdLocale(localeInfo.antd)
-
-    dayjs.locale((await getLocalesMap())?.[l]?.dayjs)
+    dayjs.locale((await localesMap[l]?.dayjs()).default)
   }
 
   useEffect(() => {
@@ -109,16 +106,12 @@ export function GlobalContextProvider({ props, children }: { props: GlobalContex
   /* ----------------- theme end ---------------- */
 
   /* -------------- direction begin ------------- */
-  const [direction, _setDirection] = useState<DirectionType>(getLocalesMap()?.[localeProp]?.direction)
+  const [direction, _setDirection] = useState<DirectionType>(localesMap[localeProp]?.direction)
 
   const setDirection = (dir: DirectionType) => {
     setHtmlDirDirection(dir)
     _setDirection(dir)
   }
-
-  useEffect(() => {
-    _setDirection(document.documentElement.getAttribute('dir') as DirectionType)
-  }, [])
   /* --------------- direction end -------------- */
 
   return (

@@ -18,7 +18,7 @@ export function setupVitePlugins({
 }: {
   isBuild: boolean
   ssrBuild: boolean
-  mode: keyof typeof Env
+  mode: Env
 }) {
   const vitePlugins: PluginOption[] = [
     react(),
@@ -36,7 +36,6 @@ export function setupVitePlugins({
         splitting: false,
         minify: true,
         treeShaking: true,
-        logLevel: 'error',
         plugins: [
           {
             name: 'no-side-effects',
@@ -48,7 +47,6 @@ export function setupVitePlugins({
                 const { path, ...rest } = args
                 rest.pluginData = true
                 const result = await build.resolve(path, rest)
-
                 result.sideEffects = false
                 return result
               })

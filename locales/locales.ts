@@ -1,53 +1,47 @@
 import type { DirectionType } from '@root/renderer/global/useGlobalContext'
-// import { isNode, isVite } from '@root/shared'
+import type { Locale } from 'antd/es/locale-provider'
+import { localesDirectionMap } from './localesDirectionMap'
 
 export interface LocaleMapType {
-  antd: string
-  dayjs: string
+  locale: string
+  /**
+   * @see https://ant.design/docs/react/i18n-cn
+   */
+  antd: () => Promise<{
+    default: Locale
+  }>
+  /**
+   * @see https://github.com/iamkun/dayjs/tree/dev/src/locale
+   */
+  dayjs: () => Promise<{
+    default: any
+  }>
+  /**
+   * @see https://ant.design/components/config-provider#components-config-provider-demo-direction
+   * @see https://tailwindcss.com/docs/hover-focus-and-other-states#rtl-support
+   */
   direction: DirectionType
 }
 
-const localesMap: Record<
-  string,
-  | ({
-      locale: string
-    } & Partial<LocaleMapType>)
-  | undefined
-> = {}
-
-export function getLocalesMap() {
-  if (Object.keys(localesMap).length) return localesMap!
-  const resourcesOrigin = import.meta.glob<LocaleMapType>('./*/localeMap.ts', {
-    import: 'localeMap',
-  })
-
-  const resourcesKeys = Object.keys(resourcesOrigin)
-  for (let i = 0; i < resourcesKeys.length; i++) {
-    const k = resourcesKeys[i]
-    const localeMap = resourcesOrigin[k]()
-
-    const dir = /\.\/(.+)\//.exec(k)![1]
-    localesMap[dir] = {
-      locale: dir,
-      ...localeMap,
-    }
-  }
-  return localesMap
-}
-
-const localesMapNode: typeof localesMap = {}
-export async function getLocalesMapNode() {
-  if (Object.keys(localesMapNode).length) return localesMapNode
-
-  const { fileURLToPath } = await import('node:url')
-  const { default: path } = await import('node:path')
-  const { default: fg } = await import('fast-glob')
-  const dir = path.dirname(fileURLToPath(import.meta.url))
-  const dirs = fg.sync('./**', { onlyDirectories: true, cwd: dir, deep: 1 })
-
-  dirs.forEach((d) => {
-    localesMapNode[d] = {
-      locale: d,
-    }
-  })
+export const localesMap: Record<string, LocaleMapType> = {
+  'zh': {
+    dayjs: () => import('dayjs/locale/zh-cn'),
+    antd: () => import('antd/locale/zh_CN'),
+    ...localesDirectionMap.zh,
+  },
+  'en': {
+    dayjs: () => import('dayjs/locale/en'),
+    antd: () => import('antd/locale/en_US'),
+    ...localesDirectionMap.en,
+  },
+  'zh-TW': {
+    dayjs: () => import('dayjs/locale/zh-tw'),
+    antd: () => import('antd/locale/zh_TW'),
+    ...localesDirectionMap['zh-TW'],
+  },
+  'ar': {
+    dayjs: () => import('dayjs/locale/ar'),
+    antd: () => import('antd/locale/ar_EG'),
+    ...localesDirectionMap.ar,
+  },
 }

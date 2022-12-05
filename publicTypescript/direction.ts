@@ -1,9 +1,9 @@
-import { directionMap } from '@root/renderer/global/direction'
-;(function () {
+import * as lib from '@root/locales/localesDirectionMap'
+;(async function () {
   try {
     const lang = document.documentElement.lang
 
-    document.documentElement.setAttribute('dir', directionMap[lang] || 'ltr')
+    document.documentElement.setAttribute('dir', lib.localesDirectionMap[lang].direction || 'ltr')
   } catch {}
 })()
 
