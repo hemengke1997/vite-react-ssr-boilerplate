@@ -1,7 +1,7 @@
 # edit nextjs Dockerfile
 # see https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 
-FROM node:18-alpine3.16 AS deps
+FROM node:19-alpine3.16 AS deps
 
 # node_env: test | production
 ARG node_env
@@ -22,7 +22,7 @@ RUN \
 
 
 
-FROM node:18-alpine3.16 AS builder
+FROM node:19-alpine3.16 AS builder
 
 ARG node_env
 ENV NODE_ENV=${node_env}
@@ -45,7 +45,7 @@ RUN \
 
 
 
-FROM node:18-alpine3.16 AS runner
+FROM node:19-alpine3.16 AS runner
 
 WORKDIR /app
 
