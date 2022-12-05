@@ -1,4 +1,3 @@
-import classnames from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { Button } from 'antd'
 import { Link } from '@/components/Link'
@@ -12,7 +11,7 @@ export function Page() {
 
   return (
     <>
-      <div className={classnames('tw-italic')}>
+      <div className='italic text-[20px]'>
         <Button onClick={() => changeLocale('zh')} type='default'>
           切换中文
         </Button>
