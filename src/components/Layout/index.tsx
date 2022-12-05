@@ -5,19 +5,19 @@ import { AnimatePresence, motion, useAnimationControls } from 'framer-motion'
 import type { FC, PropsWithChildren } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-const AnimateRoute: FC<PropsWithChildren & { localeInited: boolean }> = ({ children, localeInited }) => {
+const AnimateRoute: FC<PropsWithChildren & { startAnimation: boolean }> = ({ children, startAnimation }) => {
   const { key } = useGlobalContext()
 
   // const init = key <= 0
-  const init = !localeInited
+  const init = !startAnimation
 
   const controls = useAnimationControls()
 
   useEffect(() => {
-    if (localeInited) {
+    if (startAnimation) {
       controls.start({ opacity: 1 })
     }
-  }, [localeInited])
+  }, [startAnimation])
 
   return (
     <motion.div
@@ -71,18 +71,18 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
     }
   }, [mounted])
 
-  const [localeInited, setLocaleInited] = useState(false)
-  const initLocaleRef = useRef(false)
+  // const [localeInited, setLocaleInited] = useState(false)
+  // const initLocaleRef = useRef(false)
 
-  useEffect(() => {
-    if (antdLocale && !initLocaleRef.current) {
-      setLocaleInited(true)
-    }
-  }, [antdLocale])
+  // useEffect(() => {
+  //   if (antdLocale && !initLocaleRef.current) {
+  //     setLocaleInited(true)
+  //   }
+  // }, [antdLocale])
 
   return (
     <AnimatePresence initial mode='wait'>
-      <AnimateRoute localeInited={localeInited}>
+      <AnimateRoute startAnimation={mounted}>
         <ConfigProvider
           autoInsertSpaceInButton={false}
           direction={direction}

@@ -18,6 +18,10 @@
 - docerk 部署
 - vite 驱动
 
+## screenshot
+
+<img src="./screenshots/ts.gif" />
+
 ## Branches
 
 ### master
