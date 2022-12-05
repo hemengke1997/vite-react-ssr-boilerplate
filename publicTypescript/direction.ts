@@ -6,5 +6,3 @@ import * as lib from '@root/locales/localesDirectionMap'
     document.documentElement.setAttribute('dir', lib.localesDirectionMap[lang].direction || 'ltr')
   } catch {}
 })()
-
-export {}

@@ -71,15 +71,6 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
     }
   }, [mounted])
 
-  // const [localeInited, setLocaleInited] = useState(false)
-  // const initLocaleRef = useRef(false)
-
-  // useEffect(() => {
-  //   if (antdLocale && !initLocaleRef.current) {
-  //     setLocaleInited(true)
-  //   }
-  // }, [antdLocale])
-
   return (
     <AnimatePresence initial mode='wait'>
       <AnimateRoute startAnimation={mounted}>

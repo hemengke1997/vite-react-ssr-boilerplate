@@ -3,9 +3,10 @@ import type { i18n } from 'i18next'
 import React, { useContext, useEffect, useState } from 'react'
 import { theme as antdTheme } from 'antd'
 import dayjs from 'dayjs'
-import { useIsomorphicLayoutEffect } from 'ahooks'
+import { useIsomorphicLayoutEffect, useSetState } from 'ahooks'
 import type { Locale } from 'antd/es/locale-provider'
 import { localesMap } from '@root/locales'
+import type { SetState } from 'ahooks/lib/useSetState'
 import { Theme, getTheme, getVarsToken, setHtmlAndLocalStorageTheme } from './theme'
 import { setHtmlDirDirection } from './direction'
 import { useControlledState } from '@/hooks/useControlledState'
@@ -16,12 +17,11 @@ type GlobalContextProviderType = GlobalContextProps & {
   setLocale: (value: string) => void
   theme: Theme | undefined
   setTheme: (value: Theme) => void
-  themeConfig:
-    | {
-        token: ThemeConfig['token']
-        algorithm: ThemeConfig['algorithm']
-      }
-    | undefined
+  themeConfig: {
+    token: ThemeConfig['token']
+    algorithm: ThemeConfig['algorithm']
+  }
+  setThemeConfig: SetState<GlobalContextProviderType['themeConfig']>
   direction: DirectionType
   setDirection: (value: DirectionType) => void
   antdLocale: Locale | undefined
@@ -89,7 +89,7 @@ export function GlobalContextProvider({ props, children }: { props: GlobalContex
     setTheme(getTheme())
   }, [])
 
-  const [themeConfig, setThemeConfig] = useState<GlobalContextProviderType['themeConfig']>({
+  const [themeConfig, setThemeConfig] = useSetState<GlobalContextProviderType['themeConfig']>({
     algorithm: antdTheme.defaultAlgorithm,
     token: {},
   })
@@ -103,6 +103,7 @@ export function GlobalContextProvider({ props, children }: { props: GlobalContex
       setHtmlAndLocalStorageTheme(theme)
     }
   }, [theme])
+
   /* ----------------- theme end ---------------- */
 
   /* -------------- direction begin ------------- */
@@ -116,7 +117,18 @@ export function GlobalContextProvider({ props, children }: { props: GlobalContex
 
   return (
     <Context.Provider
-      value={{ ...props, locale, setLocale, theme, setTheme, themeConfig, direction, setDirection, antdLocale }}
+      value={{
+        ...props,
+        locale,
+        setLocale,
+        theme,
+        setTheme,
+        themeConfig,
+        setThemeConfig,
+        direction,
+        setDirection,
+        antdLocale,
+      }}
     >
       {children}
     </Context.Provider>

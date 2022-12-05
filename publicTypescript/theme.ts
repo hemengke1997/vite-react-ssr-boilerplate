@@ -4,5 +4,3 @@ import { initTheme } from '@root/renderer/global/theme'
     initTheme()
   } catch {}
 })()
-
-export {}
