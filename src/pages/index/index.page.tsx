@@ -53,6 +53,8 @@ export function Page() {
     })
   }
 
+  // console.log(direction, ';direction', locale)
+
   return (
     <>
       <div className='flex flex-col space-y-6'>

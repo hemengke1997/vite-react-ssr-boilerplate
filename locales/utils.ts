@@ -3,13 +3,14 @@ import { getBase } from '@root/shared'
 import type { Locale } from 'antd/es/locale-provider'
 import normalizePath from 'normalize-path'
 import { fallbackLng } from './init'
-import { localesMap } from './locales'
+import { getLocalesMap } from './locales'
 
 export function urlLocaleRegExp(maybeLang: string) {
   return RegExp(`(?<=/)${maybeLang}(?=[\/|\s]?)`)
 }
 
 export function extractLocale(url: string, reqLocale?: string) {
+  const localesMap = getLocalesMap()
   const locales = Object.keys(localesMap)
 
   let locale = ''
@@ -62,6 +63,8 @@ export function loadLocaleJson(localesJson: Record<string, unknown>) {
 }
 
 export async function getLibLocale(locale: string) {
+  const localesMap = getLocalesMap()
+
   const localesInfo: Record<
     string,
     { locale?: string | undefined; antd: Locale; dayjs: any; direction?: DirectionType }

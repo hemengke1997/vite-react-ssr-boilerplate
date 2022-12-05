@@ -1,9 +1,11 @@
-import { localesMap, urlLocaleRegExp } from '@root/locales'
+import { getLocalesMap, urlLocaleRegExp } from '@root/locales'
 import { useGlobalContext } from '@root/renderer/global/useGlobalContext'
 import { getBase } from '@root/shared'
 
 export function useI18next() {
   const { setLocale } = useGlobalContext()
+
+  const localesMap = getLocalesMap()
 
   function changeLocale(target: string) {
     setLocale(target)

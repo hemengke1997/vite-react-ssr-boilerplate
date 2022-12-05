@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { theme as antdTheme } from 'antd'
 import dayjs from 'dayjs'
 import { useIsomorphicLayoutEffect } from 'ahooks'
-import { localesMap } from '@root/locales'
+import { getLocalesMap } from '@root/locales'
 import type { Locale } from 'antd/es/locale-provider'
 import { getLibLocale } from '@root/locales/utils'
 import { Theme, getTheme, getVarsToken, setHtmlAndLocalStorageTheme } from './theme'
@@ -62,23 +62,25 @@ export function GlobalContextProvider({ props, children }: { props: GlobalContex
   })
 
   const setLocaleAllAtOnce = async (l: string) => {
-    document.documentElement.lang = locale
+    document.documentElement.lang = l
 
     const localeInfo = await getLibLocale(l)
 
     setAntdLocale(localeInfo.antd)
 
-    dayjs.locale(localesMap[l]?.dayjs)
+    dayjs.locale((await getLocalesMap())?.[l]?.dayjs)
   }
 
-  useIsomorphicLayoutEffect(() => {
-    i18n.on('languageChanged', async (lang) => {
-      setLocale(lang)
-      setLocaleAllAtOnce(lang)
-    })
+  useEffect(() => {
+    if (i18n) {
+      i18n.on('languageChanged', async (lang) => {
+        setLocale(lang)
+        setLocaleAllAtOnce(lang)
+      })
+    }
   }, [i18n])
 
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     i18n.changeLanguage(locale)
   }, [locale])
   /* ---------------- locale end ---------------- */
@@ -95,7 +97,7 @@ export function GlobalContextProvider({ props, children }: { props: GlobalContex
     token: {},
   })
 
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     if (theme) {
       setThemeConfig({
         token: cssVarsMap?.[theme],
@@ -107,14 +109,14 @@ export function GlobalContextProvider({ props, children }: { props: GlobalContex
   /* ----------------- theme end ---------------- */
 
   /* -------------- direction begin ------------- */
-  const [direction, _setDirection] = useState<DirectionType>(localesMap[localeProp]?.direction)
+  const [direction, _setDirection] = useState<DirectionType>(getLocalesMap()?.[localeProp]?.direction)
 
   const setDirection = (dir: DirectionType) => {
     setHtmlDirDirection(dir)
     _setDirection(dir)
   }
 
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     _setDirection(document.documentElement.getAttribute('dir') as DirectionType)
   }, [])
   /* --------------- direction end -------------- */
