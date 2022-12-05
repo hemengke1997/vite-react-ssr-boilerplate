@@ -73,7 +73,7 @@ specifiers:
   react-helmet: ^6.1.0
   react-i18next: ^12.0.0
   react-use: ^17.4.0
-  rollup: 3.5.1
+  rollup: 2.79.1
   rollup-plugin-visualizer: ^5.8.3
   simple-git-hooks: ^2.8.1
   sirv: ^2.0.2
@@ -165,8 +165,8 @@ devDependencies:
   pnpm: 7.18.0
   postcss: 8.4.19
   prettier: 2.8.0
-  rollup: 3.5.1
-  rollup-plugin-visualizer: 5.8.3_rollup@3.5.1
+  rollup: 2.79.1
+  rollup-plugin-visualizer: 5.8.3_rollup@2.79.1
   simple-git-hooks: 2.8.1
   tailwindcss: 3.2.4_postcss@8.4.19
   terser: 5.16.1
@@ -6485,7 +6485,7 @@ packages:
     dependencies:
       glob: 7.2.3
 
-  /rollup-plugin-visualizer/5.8.3_rollup@3.5.1:
+  /rollup-plugin-visualizer/5.8.3_rollup@2.79.1:
     resolution: {integrity: sha512-QGJk4Bqe4AOat5AjipOh8esZH1nck5X2KFpf4VytUdSUuuuSwvIQZjMGgjcxe/zXexltqaXp5Vx1V3LmnQH15Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/rollup-plugin-visualizer/-/rollup-plugin-visualizer-5.8.3.tgz}
     engines: {node: '>=14'}
     hasBin: true
@@ -6496,25 +6496,17 @@ packages:
         optional: true
     dependencies:
       open: 8.4.0
-      rollup: 3.5.1
+      rollup: 2.79.1
       source-map: 0.7.4
       yargs: 17.5.1
     dev: true
 
   /rollup/2.79.1:
-    resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==}
+    resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/rollup/-/rollup-2.79.1.tgz}
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
-
-  /rollup/3.5.1:
-    resolution: {integrity: sha512-hdQWTvPeiAbM6SUkxV70HdGUVxsgsc+CLy5fuh4KdgUBJ0SowXiix8gANgXoG3wEuLwfoJhCT2V+WwxfWq9Ikw==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
 
   /rtl-css-js/1.16.0:
     resolution: {integrity: sha512-Oc7PnzwIEU4M0K1J4h/7qUUaljXhQ0kCObRsZjxs2HjkpKsnoTMvSmvJ4sqgJZd0zBoEfAyTdnK/jMIYvrjySQ==}

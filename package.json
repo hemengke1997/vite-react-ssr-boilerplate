@@ -114,7 +114,7 @@
     "pnpm": "^7.18.0",
     "postcss": "^8.4.19",
     "prettier": "^2.8.0",
-    "rollup": "3.5.1",
+    "rollup": "2.79.1",
     "rollup-plugin-visualizer": "^5.8.3",
     "simple-git-hooks": "^2.8.1",
     "tailwindcss": "^3.2.4",
