@@ -4,6 +4,10 @@
 
 一个基于 vite + react + vite-plugin-ssr 的 SSR 项目模板
 
+## Example
+
+[online vercel](https://vite-react-ssr-boilerplate-hemengke1997.vercel.app/)
+
 ## Features
 
 - 首屏 SSR

@@ -7,6 +7,7 @@ import { useIsomorphicLayoutEffect, useSetState } from 'ahooks'
 import type { Locale } from 'antd/es/locale-provider'
 import { localesMap } from '@root/locales'
 import type { SetState } from 'ahooks/lib/useSetState'
+import { isProd } from '@root/shared/env'
 import { Theme, getTheme, getVarsToken, setHtmlAndLocalStorageTheme } from './theme'
 import { setHtmlDirDirection } from './direction'
 import { useControlledState } from '@/hooks/useControlledState'
@@ -63,9 +64,15 @@ export function GlobalContextProvider({ props, children }: { props: GlobalContex
   const setLocaleAllAtOnce = async (l: string) => {
     document.documentElement.lang = l
 
-    setAntdLocale((await localesMap[l].antd()).default)
+    const t = (await localesMap[l].antd()).default
+    const antdLocale = isProd() ? (t as any).default : t
 
-    dayjs.locale((await localesMap[l]?.dayjs()).default)
+    const d = (await localesMap[l]?.dayjs()).default
+    const dayjsLocale = isProd() ? (d as any).default : d
+
+    setAntdLocale(antdLocale)
+
+    dayjs.locale(dayjsLocale)
   }
 
   useEffect(() => {

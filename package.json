@@ -73,7 +73,7 @@
     "react-use": "^17.4.0",
     "sirv": "^2.0.2",
     "tsx": "^3.12.1",
-    "vite": "3.2.4",
+    "vite": "^3.2.5",
     "vite-plugin-ssr": "^0.4.54",
     "zustand": "^4.1.4"
   },
@@ -131,7 +131,7 @@
   },
   "pnpm": {
     "overrides": {
-      "vite": "npm:@minko-fe/vite"
+      "vite-temp": "npm:@minko-fe/vite"
     }
   },
   "simple-git-hooks": {

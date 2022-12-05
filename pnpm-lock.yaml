@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 overrides:
-  vite: npm:@minko-fe/vite
+  vite-temp: npm:@minko-fe/vite
 
 specifiers:
   '@ant-design/cssinjs': ^1.1.0
@@ -83,7 +83,7 @@ specifiers:
   terser: 5.16.1
   tsx: ^3.12.1
   typescript: ^4.9.3
-  vite: npm:@minko-fe/vite
+  vite: ^3.2.5
   vite-plugin-i18next-loader: ^2.0.2
   vite-plugin-public-typescript: 1.0.3
   vite-plugin-ssr: ^0.4.54
@@ -126,8 +126,8 @@ dependencies:
   react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
   sirv: 2.0.2
   tsx: 3.12.1
-  vite: /@minko-fe/vite/3.2.1_terser@5.16.1
-  vite-plugin-ssr: 0.4.54_@minko-fe+vite@3.2.1
+  vite: 3.2.5_x2obgkbwv6erivwzrfqty4udd4
+  vite-plugin-ssr: 0.4.54_vite@3.2.5
   zustand: 4.1.4_react@18.2.0
 
 devDependencies:
@@ -151,8 +151,8 @@ devDependencies:
   '@types/react-helmet': 6.1.6
   '@types/shelljs': 0.8.11
   '@vercel/node': 2.7.1
-  '@vitejs/plugin-legacy': 2.3.1_yktq4igo5dsbws4sc3hebrgi3a
-  '@vitejs/plugin-react': 2.2.0_@minko-fe+vite@3.2.1
+  '@vitejs/plugin-legacy': 2.3.1_terser@5.16.1+vite@3.2.5
+  '@vitejs/plugin-react': 2.2.0_vite@3.2.5
   autoprefixer: 10.4.13_postcss@8.4.19
   browserslist: 4.21.4
   esbuild: 0.15.18
@@ -175,9 +175,9 @@ devDependencies:
   tailwindcss: 3.2.4_postcss@8.4.19
   terser: 5.16.1
   typescript: 4.9.3
-  vite-plugin-i18next-loader: 2.0.2_@minko-fe+vite@3.2.1
-  vite-plugin-public-typescript: 1.0.3_@minko-fe+vite@3.2.1
-  vite-plugin-time-reporter: 2.0.0_@minko-fe+vite@3.2.1
+  vite-plugin-i18next-loader: 2.0.2_vite@3.2.5
+  vite-plugin-public-typescript: 1.0.3_vite@3.2.5
+  vite-plugin-time-reporter: 2.0.0_vite@3.2.5
 
 packages:
 
@@ -848,36 +848,6 @@ packages:
     resolution: {integrity: sha512-RjfBHjUTNWOXKH/3QCDBh9JIusBoSVATOFdl9bwrKo+J9BH3ZS7fsB2Q/8kZcl21ffP/VF4Xm9C3Ayy3KL0fmA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@minko-fe/tsconfig/-/tsconfig-1.2.3.tgz}
     dev: false
 
-  /@minko-fe/vite/3.2.1_terser@5.16.1:
-    resolution: {integrity: sha512-ffqA7ymovSwK05m+a5xBRyzyNIIclB32FzzykXFD/H9VQayEf7fkuMgdHsNG78wr9mHeJZVByPEzPKM+9abDfQ==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.15.18
-      postcss: 8.4.19
-      resolve: 1.22.1
-      rollup: 2.79.1
-      terser: 5.16.1
-    optionalDependencies:
-      fsevents: 2.3.2
-
   /@motionone/animation/10.14.0:
     resolution: {integrity: sha512-h+1sdyBP8vbxEBW5gPFDnj+m2DCqdlAuf2g6Iafb1lcMnqjsRXWlPw1AXgvUMXmreyhqmPbJqoNfIKdytampRQ==}
     dependencies:
@@ -1472,7 +1442,7 @@ packages:
       ts-morph: 12.0.0
     dev: true
 
-  /@vitejs/plugin-legacy/2.3.1_yktq4igo5dsbws4sc3hebrgi3a:
+  /@vitejs/plugin-legacy/2.3.1_terser@5.16.1+vite@3.2.5:
     resolution: {integrity: sha512-J5KaGBlSt2tEYPVjM/C8dA6DkRzkFkbPe+Xb4IX5G+XOV5OGbVAfkMjKywdrkO3gGynO8S98i71Lmsff4cWkCQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@vitejs/plugin-legacy/-/plugin-legacy-2.3.1.tgz}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -1485,10 +1455,10 @@ packages:
       regenerator-runtime: 0.13.10
       systemjs: 6.13.0
       terser: 5.16.1
-      vite: /@minko-fe/vite/3.2.1_terser@5.16.1
+      vite: 3.2.5_x2obgkbwv6erivwzrfqty4udd4
     dev: true
 
-  /@vitejs/plugin-react/2.2.0_@minko-fe+vite@3.2.1:
+  /@vitejs/plugin-react/2.2.0_vite@3.2.5:
     resolution: {integrity: sha512-FFpefhvExd1toVRlokZgxgy2JtnBOdp4ZDsq7ldCWaqGSGn9UhWMAVm/1lxPL14JfNS5yGz+s9yFrQY6shoStA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@vitejs/plugin-react/-/plugin-react-2.2.0.tgz}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -1501,7 +1471,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.19.6
       magic-string: 0.26.7
       react-refresh: 0.14.0
-      vite: /@minko-fe/vite/3.2.1_terser@5.16.1
+      vite: 3.2.5_x2obgkbwv6erivwzrfqty4udd4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7360,7 +7330,7 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
-  /vite-plugin-i18next-loader/2.0.2_@minko-fe+vite@3.2.1:
+  /vite-plugin-i18next-loader/2.0.2_vite@3.2.5:
     resolution: {integrity: sha512-z5mkrUmg5AiDttn/W19y4086QbEu5nE12bNUclKnkmFhgP5icStdDZb3LJJDbvenjkA5fC6rTaDwU3sT6BFXXg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/vite-plugin-i18next-loader/-/vite-plugin-i18next-loader-2.0.2.tgz}
     peerDependencies:
       vite: '>=3.1.6'
@@ -7370,10 +7340,10 @@ packages:
       lodash-es: 4.17.21
       marked: 4.2.3
       marked-terminal: 5.1.1_marked@4.2.3
-      vite: /@minko-fe/vite/3.2.1_terser@5.16.1
+      vite: 3.2.5_x2obgkbwv6erivwzrfqty4udd4
     dev: true
 
-  /vite-plugin-public-typescript/1.0.3_@minko-fe+vite@3.2.1:
+  /vite-plugin-public-typescript/1.0.3_vite@3.2.5:
     resolution: {integrity: sha512-1bZXbouzXR4XuYgue9Zn6mvbSEIPlEXkGTFzd1EVyNl2PWF5T4PPeHhlRatPVkVbz7boEfZX47NAmbWmsuUnrQ==}
     requiresBuild: true
     peerDependencies:
@@ -7382,10 +7352,10 @@ packages:
       esbuild: 0.15.18
       fast-glob: 3.2.12
       fs-extra: 10.1.0
-      vite: /@minko-fe/vite/3.2.1_terser@5.16.1
+      vite: 3.2.5_x2obgkbwv6erivwzrfqty4udd4
     dev: true
 
-  /vite-plugin-ssr/0.4.54_@minko-fe+vite@3.2.1:
+  /vite-plugin-ssr/0.4.54_vite@3.2.5:
     resolution: {integrity: sha512-6OQSIRPqREc/z6NJyVCm0zHp58370/3O585nYgJQSOhEWwkY5JBR50hilucsUoQJU3Z2U3X83w6pFn9SKc7lpA==}
     engines: {node: '>=12.19.0'}
     hasBin: true
@@ -7405,16 +7375,50 @@ packages:
       picocolors: 1.0.0
       resolve: 1.22.1
       symlink-dir: 5.1.0
-      vite: /@minko-fe/vite/3.2.1_terser@5.16.1
+      vite: 3.2.5_x2obgkbwv6erivwzrfqty4udd4
     dev: false
 
-  /vite-plugin-time-reporter/2.0.0_@minko-fe+vite@3.2.1:
+  /vite-plugin-time-reporter/2.0.0_vite@3.2.5:
     resolution: {integrity: sha512-/QX7KBWi5Ae8t0TxZxPmHE8l8Tvf34uVnK40G9ZJdYrXi1ddffTi1Ax1rdcv3F7ATRroaNcRdW0VZJwOQaX3Ug==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/vite-plugin-time-reporter/-/vite-plugin-time-reporter-2.0.0.tgz}
     peerDependencies:
       vite: ^2.0.0 || ^3.0.0
     dependencies:
-      vite: /@minko-fe/vite/3.2.1_terser@5.16.1
+      vite: 3.2.5_x2obgkbwv6erivwzrfqty4udd4
     dev: true
+
+  /vite/3.2.5_x2obgkbwv6erivwzrfqty4udd4:
+    resolution: {integrity: sha512-4mVEpXpSOgrssFZAOmGIr85wPHKvaDAcXqxVxVRZhljkJOMZi1ibLibzjLHzJvcok8BMguLc7g1W6W/GqZbLdQ==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': '>= 14'
+      less: '*'
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      '@types/node': 18.11.10
+      esbuild: 0.15.18
+      postcss: 8.4.19
+      resolve: 1.22.1
+      rollup: 2.79.1
+      terser: 5.16.1
+    optionalDependencies:
+      fsevents: 2.3.2
 
   /vizion/2.2.1:
     resolution: {integrity: sha512-sfAcO2yeSU0CSPFI/DmZp3FsFE9T+8913nv1xWBOyzODv13fwkn6Vl7HqxGpkr9F608M+8SuFId3s+BlZqfXww==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/vizion/-/vizion-2.2.1.tgz}
