@@ -15,7 +15,7 @@
 - rtl/ltr
 - tailwindcss
 - vercel 部署
-- docerk 部署
+- docker 部署
 - vite 驱动
 
 ## screenshot
