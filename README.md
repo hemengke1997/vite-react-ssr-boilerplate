@@ -128,3 +128,21 @@ vite-react-ssr-boilerplate
 ├─ postcss.config.cjs                                     postcss配置
 ├─ tailwind.config.cjs                                    tailwindcss配置
 ```
+
+#### commitlint
+
+##### @commitlint/cli
+
+```json
+{
+  "commit-msg": "pnpm exec commitlint --edit $1"
+}
+```
+
+##### vue commitlint
+
+```json
+{
+  "commit-msg": "pnpm exec tsx scripts/verifyCommit.ts $1"
+}
+```

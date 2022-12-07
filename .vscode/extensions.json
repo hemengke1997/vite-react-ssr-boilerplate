@@ -1,3 +1,8 @@
 {
-  "recommendations": ["bradlc.vscode-tailwindcss", "vunguyentuan.vscode-postcss"]
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "vunguyentuan.vscode-postcss",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
 }

@@ -2,8 +2,8 @@ import { extractLocale } from '@root/locales'
 import type { i18n as i18nType } from 'i18next'
 
 export async function onBeforeRoute(pageContext: { i18n?: i18nType; urlOriginal: string }): PageType.onBeforeRoute {
-  const { i18n } = pageContext
-  let urlMod = pageContext.urlOriginal
+  const { i18n, urlOriginal } = pageContext
+  let urlMod = urlOriginal
 
   const { urlWithoutLocale, locale, redirectTo } = extractLocale(urlMod, i18n?.language)
   urlMod = urlWithoutLocale

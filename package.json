@@ -25,7 +25,6 @@
     "preinstall": "npx only-allow pnpm",
     "postinstall": "simple-git-hooks",
     "bump:deps": "pnpm update --i --L",
-    "init": "simple-git-hooks",
     "lint": "eslint . --fix",
     "tsc": "tsc",
     "// 以下Docker部署相关": "//",
@@ -73,11 +72,12 @@
     "react-use": "^17.4.0",
     "sirv": "^2.0.2",
     "tsx": "^3.12.1",
-    "vite": "^3.2.5",
+    "vite": "^4.0.0-beta.1",
     "vite-plugin-ssr": "^0.4.54",
     "zustand": "^4.1.4"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
     "@minko-fe/commitlint-config": "^1.2.3",
     "@minko-fe/eslint-config": "^1.2.3",
     "@minko-fe/postcss-pxtorem": "^1.0.3",
@@ -123,16 +123,11 @@
     "terser": "5.16.1",
     "typescript": "^4.9.3",
     "vite-plugin-i18next-loader": "^2.0.2",
-    "vite-plugin-public-typescript": "1.0.3",
+    "vite-plugin-public-typescript": "^1.0.4",
     "vite-plugin-time-reporter": "^2.0.0"
   },
   "engines": {
     "node": ">=16.14.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "vite-temp": "npm:@minko-fe/vite"
-    }
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged --concurrent false",

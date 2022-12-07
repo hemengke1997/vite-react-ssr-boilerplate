@@ -55,6 +55,21 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
     ssr: {
       optimizeDeps: {
         disabled: 'build',
+        include: [
+          'antd',
+          'ahooks',
+          'axios',
+          '@ant-design/cssinjs',
+          'react-i18next',
+          'i18next',
+          'framer-motion',
+          'dayjs',
+          'react',
+          'react-dom',
+          'react-helmet',
+          'lodash-es',
+          'classnames',
+        ], // make ssr dev faster. No need to put all deps here, but some the heavy deps
       },
     },
     optimizeDeps: {
