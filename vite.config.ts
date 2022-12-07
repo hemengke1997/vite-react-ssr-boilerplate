@@ -7,6 +7,7 @@ import { setupRollupOptions } from './config/vite/rollupOptions'
 import { injectEnv } from './config/vite/utils/helper'
 import type { Env } from './shared/env'
 import { getBase } from './shared'
+import { dependencies } from './package.json'
 
 const __APP_INFO__ = {
   lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
@@ -38,10 +39,6 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
           find: '@root',
           replacement: path.resolve(__dirname),
         },
-        {
-          find: /^~/,
-          replacement: `${path.resolve(__dirname, './node_modules')}/`,
-        },
       ],
     },
     css: {
@@ -54,22 +51,7 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
     },
     ssr: {
       optimizeDeps: {
-        disabled: 'build',
-        include: [
-          'antd',
-          'ahooks',
-          'axios',
-          '@ant-design/cssinjs',
-          'react-i18next',
-          'i18next',
-          'framer-motion',
-          'dayjs',
-          'react',
-          'react-dom',
-          'react-helmet',
-          'lodash-es',
-          'classnames',
-        ], // make ssr dev faster. No need to put all deps here, but some the heavy deps
+        include: Object.keys(dependencies),
       },
     },
     optimizeDeps: {

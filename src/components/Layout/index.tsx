@@ -23,7 +23,7 @@ const AnimateRoute: FC<PropsWithChildren & { startAnimation: boolean }> = ({ chi
     <motion.div
       initial={{ opacity: 0 }}
       transition={{
-        duration: 0.15,
+        duration: 0.3,
       }}
       animate={controls}
     >
@@ -31,11 +31,10 @@ const AnimateRoute: FC<PropsWithChildren & { startAnimation: boolean }> = ({ chi
         // TODO: SEO?
         initial={{ opacity: 0, pointerEvents: 'none', x: init ? 0 : 8 }}
         animate={{ opacity: 1, pointerEvents: 'initial', x: 0 }}
-        exit={{ opacity: 0, pointerEvents: 'none', x: init ? 0 : -8 }}
+        exit={{ opacity: 0, pointerEvents: 'none', x: 0 }}
         transition={{
-          duration: 0.15,
+          duration: 0.3,
         }}
-        style={{ opacity: init ? 0 : 1 }}
         key={key}
         onAnimationStart={() => {
           document.body.style.overflowX = 'hidden'

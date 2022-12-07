@@ -3,6 +3,7 @@
     "bradlc.vscode-tailwindcss",
     "vunguyentuan.vscode-postcss",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "lokalise.i18n-ally"
   ]
 }

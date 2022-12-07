@@ -35,7 +35,7 @@ export async function render(pageContext: PageContextBuiltInClient & PageType.Pa
     root.render(await createApp(pageContext, transitionKey))
   }
 
-  document.title = pageContext.pageProps.title || (pageContext.exports?.pageProps as PageType.PageProps)?.title || ''
+  document.title = pageContext.pageProps?.title || (pageContext.exports?.pageProps as PageType.PageProps)?.title || ''
 }
 
 export const prefetchStaticAssets = isDev()
