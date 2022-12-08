@@ -52,14 +52,19 @@ export default ({ command, ssrBuild, mode }: ConfigEnv): UserConfig => {
     ssr: {
       optimizeDeps: {
         include: Object.keys(dependencies),
+        disabled: 'build',
       },
     },
     optimizeDeps: {
-      include: ['antd/locale/en_US'],
+      include: ['antd/locale/en_US'], // default locale
+      disabled: false, // https://github.com/vitejs/vite/issues/5499#issuecomment-1342253301
     },
     build: {
       emptyOutDir: true,
       cssCodeSplit: true,
+      commonjsOptions: {
+        include: [],
+      },
       minify: 'esbuild',
       reportCompressedSize: false,
       chunkSizeWarningLimit: 2048,
