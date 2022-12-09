@@ -3,12 +3,6 @@
 
 FROM node:18-alpine3.16 AS deps
 
-# node_env: test | production
-ARG node_env
-ENV NODE_ENV=${node_env}
-
-RUN apk add --no-cache libc6-compat
-
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml* ./
@@ -16,10 +10,9 @@ COPY package.json pnpm-lock.yaml* ./
 RUN \
   npm i pnpm --global; \
   if [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then pnpm i --frozen-lockfile; \
+  elif [ -f pnpm-lock.yaml ]; then pnpm i --frozen-lockfile --ignore-scripts; \
   else echo "Lockfile not found." && pnpm i; \
   fi
-
 
 
 FROM node:18-alpine3.16 AS builder
@@ -41,8 +34,6 @@ RUN \
   if [ "${NODE_ENV}" == "test" ]; then npm run build:test;\
   else npm run build; \
   fi
-
-
 
 
 FROM node:18-alpine3.16 AS runner
