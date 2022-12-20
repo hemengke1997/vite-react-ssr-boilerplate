@@ -26,11 +26,11 @@ declare namespace PageType {
     }
   }>
 
-  type onBeforeRoute = Promise<{
+  type onBeforeRoute = {
     pageContext: {
       urlOriginal: string
       locale: string
       redirectTo?: string
     }
-  }>
+  }
 }
