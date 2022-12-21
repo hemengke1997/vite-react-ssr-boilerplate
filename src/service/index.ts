@@ -34,7 +34,7 @@ export * from './axiosType.d'
 export { ContentTypeEnum, RequestEnum }
 
 const transform: AxiosTransform = {
-  transformRequestHook: (res: AxiosResponse<OriginResult>, options: RequestOptions) => {
+  transformResponseHook: (res: AxiosResponse<OriginResult>, options: RequestOptions) => {
     const { isTransformResponse, isReturnNativeResponse } = options
     if (isReturnNativeResponse) {
       return res

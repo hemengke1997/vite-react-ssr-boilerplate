@@ -3,7 +3,7 @@ import axios from 'axios'
 import { cloneDeep, isFunction } from 'lodash-es'
 import querystring from 'query-string'
 import { AxiosCanceler } from './axiosCancel'
-import type { CreateAxiosOptions, RequestOptions, ResponseErrorType, Result } from './axiosType'
+import type { CreateAxiosOptions, RequestOptions, ResponseErrorType, ResultType, StandardResult } from './axiosType'
 
 export * from './axiosType.d'
 
@@ -91,7 +91,7 @@ export class AxiosPro {
       this.axiosInstance.interceptors.response.use(undefined, responseInterceptorsCatch)
   }
 
-  uploadFile<T = Result>(config: AxiosRequestConfig) {
+  uploadFile<T extends ResultType = StandardResult>(config: AxiosRequestConfig) {
     const formData = new window.FormData()
 
     if (config.data) {
@@ -134,23 +134,23 @@ export class AxiosPro {
     }
   }
 
-  get<T = Result>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+  get<T extends ResultType = StandardResult>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     return this.request({ ...config, method: 'GET' }, options)
   }
 
-  post<T = Result>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+  post<T extends ResultType = StandardResult>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     return this.request({ ...config, method: 'POST' }, options)
   }
 
-  put<T = Result>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+  put<T extends ResultType = StandardResult>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     return this.request({ ...config, method: 'PUT' }, options)
   }
 
-  delete<T = Result>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+  delete<T extends ResultType = StandardResult>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     return this.request({ ...config, method: 'DELETE' }, options)
   }
 
-  request<T = Result>(config: AxiosRequestConfig, options?: RequestOptions) {
+  request<T extends ResultType = StandardResult>(config: AxiosRequestConfig, options?: RequestOptions) {
     let conf: CreateAxiosOptions = cloneDeep(config)
     const transform = this.getTransform()
 
@@ -158,7 +158,7 @@ export class AxiosPro {
 
     const opt: RequestOptions = Object.assign({}, requestOptions, options)
 
-    const { beforeRequestHook, requestCatchHook, transformRequestHook } = transform || {}
+    const { beforeRequestHook, requestCatchHook, transformResponseHook } = transform || {}
     if (beforeRequestHook && isFunction(beforeRequestHook)) {
       conf = beforeRequestHook(conf, opt)
     }
@@ -169,11 +169,11 @@ export class AxiosPro {
 
     return new Promise<T>((resolve, reject) => {
       this.axiosInstance
-        .request<any, AxiosResponse<Result>>(conf)
-        .then((res: AxiosResponse<Result>) => {
-          if (transformRequestHook && isFunction(transformRequestHook)) {
+        .request<any, AxiosResponse<StandardResult>>(conf)
+        .then((res: AxiosResponse<StandardResult>) => {
+          if (transformResponseHook && isFunction(transformResponseHook)) {
             try {
-              const ret = transformRequestHook(res, opt) as unknown as T
+              const ret = transformResponseHook(res, opt) as unknown as T
               resolve(ret)
             } catch (err) {
               reject(err || new Error('request error!'))

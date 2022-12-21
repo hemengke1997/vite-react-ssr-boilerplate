@@ -16,13 +16,12 @@ export interface OriginResult {
   [key: string]: any
 }
 
-export type Result<T extends any = any> =
-  | OriginResult
-  | AxiosResponse<OriginResult, any>
-  | {
-      success: boolean
-      result: T
-    }
+export interface StandardResult<T extends any = any> {
+  success: boolean
+  result: T
+}
+
+export type ResultType<T extends any = any> = OriginResult | AxiosResponse<OriginResult, T> | StandardResult<T>
 
 export interface UploadFileParams {
   data?: Record<string, any>
@@ -44,9 +43,9 @@ export interface ResponseErrorType extends AxiosError {
 export abstract class AxiosTransform<T extends any = any> {
   beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig
 
-  transformRequestHook?: (res: AxiosResponse<OriginResult>, options: RequestOptions) => Result<T>
+  transformResponseHook?: (res: AxiosResponse<OriginResult>, options: RequestOptions) => ResultType<T>
 
-  requestCatchHook?: (e: ResponseErrorType, options: RequestOptions) => Result<T>
+  requestCatchHook?: (e: ResponseErrorType, options: RequestOptions) => ResultType<T>
 
   requestInterceptors?: (config: AxiosRequestConfig, options: CreateAxiosOptions) => AxiosRequestConfig
 
