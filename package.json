@@ -44,7 +44,7 @@
     "change-case": "^4.1.2",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.7",
-    "framer-motion": "^7.8.1",
+    "framer-motion": "^8.0.2",
     "i18next": "^22.4.5",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-middleware": "^3.2.1",
