@@ -44,7 +44,7 @@ specifiers:
   execa: ^6.1.0
   express: ^4.18.2
   fast-glob: ^3.2.12
-  framer-motion: ^7.8.1
+  framer-motion: ^8.0.2
   fs-extra: ^11.1.0
   get-tsconfig: ^4.2.0
   http-proxy-middleware: ^2.0.6
@@ -91,7 +91,7 @@ dependencies:
   change-case: 4.1.2
   classnames: 2.3.2
   dayjs: 1.11.7
-  framer-motion: 7.8.1_biqbaboplfbrettd7655fr4n2y
+  framer-motion: 8.0.2_biqbaboplfbrettd7655fr4n2y
   i18next: 22.4.5
   i18next-browser-languagedetector: 7.0.1
   i18next-http-middleware: 3.2.1
@@ -4217,8 +4217,8 @@ packages:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
 
-  /framer-motion/7.8.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-ujUbAaV7e6tElfez3OmttE000ZWLrGgETTQZRjoq+p+w4gHG97hRpzVfUhR6gshWO869UgvvI1Cn+/4euWQg+Q==}
+  /framer-motion/8.0.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-xuIiQchVh/cLqUzzu5/8ok4o0nkwYPyIRtkDl8wDvrQUNRhSfRaZu1MMdzN0TjpBtG66oP03PSLO7Qtu1YqPrA==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
