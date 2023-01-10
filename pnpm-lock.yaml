@@ -13,7 +13,7 @@ specifiers:
   '@types/compression': ^1.7.2
   '@types/cross-spawn': ^6.0.2
   '@types/express': ^4.17.15
-  '@types/fs-extra': ^9.0.13
+  '@types/fs-extra': ^11.0.1
   '@types/headroom.js': ^0.12.2
   '@types/inquirer': ^9.0.3
   '@types/lodash-es': ^4.17.6
@@ -119,7 +119,7 @@ devDependencies:
   '@types/compression': 1.7.2
   '@types/cross-spawn': 6.0.2
   '@types/express': 4.17.15
-  '@types/fs-extra': 9.0.13
+  '@types/fs-extra': 11.0.1
   '@types/headroom.js': 0.12.2
   '@types/inquirer': 9.0.3
   '@types/lodash-es': 4.17.6
@@ -1412,9 +1412,10 @@ packages:
       '@types/serve-static': 1.15.0
     dev: true
 
-  /@types/fs-extra/9.0.13:
-    resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@types/fs-extra/-/fs-extra-9.0.13.tgz}
+  /@types/fs-extra/11.0.1:
+    resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
     dependencies:
+      '@types/jsonfile': 6.1.1
       '@types/node': 18.11.18
     dev: true
 
@@ -1452,6 +1453,12 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/jsonfile/6.1.1:
+    resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
+    dependencies:
+      '@types/node': 18.11.18
     dev: true
 
   /@types/lodash-es/4.17.6:
