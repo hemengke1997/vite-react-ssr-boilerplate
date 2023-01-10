@@ -72,7 +72,7 @@
     "@types/compression": "^1.7.2",
     "@types/cross-spawn": "^6.0.2",
     "@types/express": "^4.17.15",
-    "@types/fs-extra": "^9.0.13",
+    "@types/fs-extra": "^11.0.1",
     "@types/headroom.js": "^0.12.2",
     "@types/inquirer": "^9.0.3",
     "@types/lodash-es": "^4.17.6",
